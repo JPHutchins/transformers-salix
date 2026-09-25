@@ -1,3 +1,4 @@
+from salix import Struct
 # MIT License
 #
 # Copyright (c) 2020  The Google AI Language Team Authors, The HuggingFace Inc. team and github/lonePatient
@@ -561,8 +562,7 @@ class MobileBertPreTrainedModel(PreTrainedModel):
     Output type of [`MobileBertForPreTraining`].
     """
 )
-@dataclass
-class MobileBertForPreTrainingOutput(ModelOutput):
+class MobileBertForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the masked language modeling loss and the next sequence prediction

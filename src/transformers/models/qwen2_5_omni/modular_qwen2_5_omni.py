@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The Qwen team, Alibaba Group and the HuggingFace Inc. team. All rights reserved.
 #
 #
@@ -1138,8 +1139,7 @@ class Qwen2_5OmniPreTrainedModelForConditionalGeneration(Qwen2_5OmniPreTrainedMo
 
 
 @auto_docstring
-@dataclass
-class Qwen2_5OmniThinkerCausalLMOutputWithPast(CausalLMOutputWithPast):
+class Qwen2_5OmniThinkerCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -2121,8 +2121,7 @@ class Qwen2_5OmniThinkerForConditionalGeneration(Qwen2_5OmniPreTrainedModelForCo
 
 
 @auto_docstring
-@dataclass
-class Qwen2_5OmniTalkerCausalLMOutputWithPast(CausalLMOutputWithPast):
+class Qwen2_5OmniTalkerCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,8 +37,7 @@ logger = logging.get_logger(__name__)
     and optional hidden states.
     """
 )
-@dataclass
-class TimmWrapperModelOutput(ModelOutput):
+class TimmWrapperModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor`):
         The last hidden state of the model, output before applying the classification head.

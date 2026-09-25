@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 Meta Platforms, Inc. and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -92,8 +93,7 @@ def prepare_img():
     return image
 
 
-@dataclass
-class Args:
+class Args(Struct, frozen=False):
     """Fake command line arguments needed by mask2former/detectron implementation"""
 
     config_file: str

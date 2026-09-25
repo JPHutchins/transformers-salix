@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,8 +41,7 @@ from .configuration_pe_video import PeVideoConfig, PeVideoEncoderConfig
     Class for outputs of [`PeVideoModel`].
     """
 )
-@dataclass
-class PeVideoOutput(ModelOutput):
+class PeVideoOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*):
         Contrastive loss computed between video and text representations.

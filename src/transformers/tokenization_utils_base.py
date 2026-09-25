@@ -19,6 +19,7 @@ of output with special method for the Fast tokenizers)
 """
 
 from __future__ import annotations
+from salix import Struct
 
 import copy
 import json
@@ -98,8 +99,7 @@ if is_tokenizers_available():
     from tokenizers import AddedToken
 else:
 
-    @dataclass(frozen=False, eq=True)
-    class AddedToken:
+    class AddedToken(Struct, frozen=False):
         """
         AddedToken represents a token to be added to a Tokenizer An AddedToken can have special options defining the
         way it should behave.

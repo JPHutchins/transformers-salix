@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2021 The OpenAI Team Authors and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -70,8 +71,7 @@ def _get_vector_norm(tensor: torch.Tensor) -> torch.Tensor:
     Base class for vision model's outputs that also contains image embeddings of the pooling of the last hidden states.
     """
 )
-@dataclass
-class CLIPVisionModelOutput(ModelOutput):
+class CLIPVisionModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     image_embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)` *optional* returned when model is initialized with `with_projection=True`):
         The image embeddings obtained by applying the projection layer to the pooler_output.
@@ -88,8 +88,7 @@ class CLIPVisionModelOutput(ModelOutput):
     Base class for text model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
-class CLIPTextModelOutput(ModelOutput):
+class CLIPTextModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     text_embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)` *optional* returned when model is initialized with `with_projection=True`):
         The text embeddings obtained by applying the projection layer to the pooler_output.
@@ -102,8 +101,7 @@ class CLIPTextModelOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class CLIPOutput(ModelOutput):
+class CLIPOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for image-text similarity.

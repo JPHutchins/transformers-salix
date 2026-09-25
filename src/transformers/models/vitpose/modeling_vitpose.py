@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 University of Sydney and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,8 +39,7 @@ logger = logging.get_logger(__name__)
     Class for outputs of pose estimation models.
     """
 )
-@dataclass
-class VitPoseEstimatorOutput(ModelOutput):
+class VitPoseEstimatorOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Loss is not supported at this moment. See https://github.com/ViTAE-Transformer/ViTPose/tree/main/mmpose/models/losses for further detail.

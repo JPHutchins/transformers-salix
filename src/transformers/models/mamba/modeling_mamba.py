@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 state-spaces/mamba org and HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -570,8 +571,7 @@ class MambaPreTrainedModel(PreTrainedModel):
     Class for the MAMBA model outputs.
     """
 )
-@dataclass
-class MambaOutput(ModelOutput):
+class MambaOutput(ModelOutput, Struct, frozen=False):
     r"""
     cache_params (`Cache`):
         The state of the model at the last time step. Can be used in a forward method with the next `input_ids` to
@@ -590,8 +590,7 @@ class MambaOutput(ModelOutput):
     Base class for causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class MambaCausalLMOutput(ModelOutput):
+class MambaCausalLMOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from __future__ import annotations
+from salix import Struct
 
 import functools
 from collections.abc import Callable
@@ -37,8 +38,7 @@ if is_torch_available():
 SF_VEC_SIZE = 16
 
 
-@dataclass(frozen=True)
-class NVFP4Kernel:
+class NVFP4Kernel(Struct, frozen=True):
     """Entry points exposed by the NVFP4 Hub kernel."""
 
     PackedWeight: type

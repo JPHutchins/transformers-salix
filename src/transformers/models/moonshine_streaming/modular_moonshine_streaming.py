@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 the HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -64,8 +65,7 @@ class MoonshineStreamingProcessor(Wav2Vec2Processor): ...
     Extends [~modeling_outputs.BaseModelOutput] to include the output attention mask since sequence length is not preserved in the model's forward.
     """
 )
-@dataclass
-class MoonshineStreamingEncoderModelOutput(BaseModelOutput):
+class MoonshineStreamingEncoderModelOutput(BaseModelOutput, Struct, frozen=False):
     r"""
     attention_mask (`torch.Tensor` of shape `(batch_size, sequence_length)`, *optional*):
         Mask to avoid performing attention on padding token indices after sequence compression. Returned because the

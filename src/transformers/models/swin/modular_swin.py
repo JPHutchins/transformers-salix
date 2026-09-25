@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 Microsoft Research and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -74,8 +75,7 @@ class SwinDropPath(nn.Module):
     Swin encoder's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class SwinEncoderOutput(ModelOutput):
+class SwinEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     reshaped_hidden_states (`tuple(torch.FloatTensor)`, *optional*, returned when `output_hidden_states=True` is passed or when `config.output_hidden_states=True`):
         Tuple of `torch.FloatTensor` (one for the output of the embeddings + one for the output of each stage) of
@@ -96,8 +96,7 @@ class SwinEncoderOutput(ModelOutput):
     Swin model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
-class SwinModelOutput(ModelOutput):
+class SwinModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, hidden_size)`, *optional*, returned when `add_pooling_layer=True` is passed):
         Average pooling of the last layer hidden-state.
@@ -121,8 +120,7 @@ class SwinModelOutput(ModelOutput):
     Swin masked image model outputs.
     """
 )
-@dataclass
-class SwinMaskedImageModelingOutput(ModelOutput):
+class SwinMaskedImageModelingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `bool_masked_pos` is provided):
         Masked image modeling (MLM) loss.
@@ -148,8 +146,7 @@ class SwinMaskedImageModelingOutput(ModelOutput):
     Swin outputs for image classification.
     """
 )
-@dataclass
-class SwinImageClassifierOutput(ModelOutput):
+class SwinImageClassifierOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification (or regression if config.num_labels==1) loss.

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 HuggingFace Inc. team. All rights reserved.
 #
 #
@@ -43,8 +44,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class Emu3VQVAEModelOutput(BaseModelOutputWithPooling):
+class Emu3VQVAEModelOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     image_tokens (`torch.LongTensor` of shape `(batch_size, config.vocab_size`):
         Indices of the image tokens predicted by the VQ-VAE model.

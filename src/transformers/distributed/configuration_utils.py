@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,8 +19,7 @@ from dataclasses import asdict, dataclass
 from typing import Literal
 
 
-@dataclass
-class DistributedConfig:
+class DistributedConfig(Struct, frozen=False):
     """
     Configuration for native distributed inference and training with tensor, pipeline, or FSDP2 parallelism.
 

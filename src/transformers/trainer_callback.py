@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2020-present the HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,8 +32,7 @@ from .utils import logging
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class TrainerState:
+class TrainerState(Struct, frozen=False):
     """
     A class containing the [`Trainer`] inner state that will be saved along the model and optimizer when checkpointing
     and passed to the [`TrainerCallback`].
@@ -230,8 +230,7 @@ class ExportableState:
         return instance
 
 
-@dataclass
-class TrainerControl(ExportableState):
+class TrainerControl(ExportableState, Struct, frozen=False):
     """
     A class that handles the [`Trainer`] control flow. This class is used by the [`TrainerCallback`] to activate some
     switches in the training loop.

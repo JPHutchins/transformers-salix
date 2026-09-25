@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 Deepseek AI and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -214,8 +215,7 @@ class JanusPreTrainedModel(PreTrainedModel):
     Base class for Janus VQ-VAE mode model outputs.
     """
 )
-@dataclass
-class JanusVQVAEOutput(ModelOutput):
+class JanusVQVAEOutput(ModelOutput, Struct, frozen=False):
     r"""
     decoded_pixel_values (`torch.FloatTensor` of shape `(batch_size, num_channels, image_size, image_size)`):
         Reconstructed pixel values after encoding and decoding the input.

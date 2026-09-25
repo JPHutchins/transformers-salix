@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 SenseTime and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -219,8 +220,7 @@ class DeformableDetrDecoderOutput(DetrDecoderOutput):
     Base class for outputs of the Deformable DETR encoder-decoder model.
     """
 )
-@dataclass
-class DeformableDetrModelOutput(ModelOutput):
+class DeformableDetrModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     init_reference_points (`torch.FloatTensor` of shape  `(batch_size, num_queries, 4)`):
         Initial reference points sent through the Transformer decoder.

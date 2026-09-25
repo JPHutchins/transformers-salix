@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 Meta Platforms, Inc. and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,8 +40,7 @@ logger = logging.get_logger(__name__)
     Output type of [`LevitForImageClassificationWithTeacher`].
     """
 )
-@dataclass
-class LevitForImageClassificationWithTeacherOutput(ModelOutput):
+class LevitForImageClassificationWithTeacherOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, config.num_labels)`):
         Prediction scores as the average of the `cls_logits` and `distillation_logits`.

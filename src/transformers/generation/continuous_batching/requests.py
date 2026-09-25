@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The HuggingFace Inc. team
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -90,8 +91,7 @@ class RequestStatus(IntEnum):
     FAILED = 4
 
 
-@dataclass
-class GenerationOutput:
+class GenerationOutput(Struct, frozen=False):
     """Tracks the output of a generation request.
 
     Attributes:
@@ -106,12 +106,12 @@ class GenerationOutput:
     """
 
     request_id: str
-    prompt_ids: list[int] = field(default_factory=list)
-    generated_tokens: list[int] = field(default_factory=list)
-    logprobs: list[float] = field(default_factory=list)
+    prompt_ids: list[int] = []
+    generated_tokens: list[int] = []
+    logprobs: list[float] = []
     error: str | None = None
     status: RequestStatus = RequestStatus.PENDING
-    created_time: float = field(default_factory=time.perf_counter)
+    created_time: float = None
     lifespan: tuple[float, float] = (-1, -1)  # (time request was no longer pending, time request finished)
     timestamps: list[float] | None = None  # Timestamps of the generated tokens
 
@@ -120,8 +120,7 @@ class GenerationOutput:
         return self.status >= RequestStatus.FINISHED
 
 
-@dataclass
-class RequestState:
+class RequestState(Struct, frozen=False):
     """Tracks the state of a generation request through its lifecycle.
 
     Attributes:
@@ -156,29 +155,29 @@ class RequestState:
     max_new_tokens: int | None = 20  # Maximum number of new tokens to generate. None means no limit. Default to 20.
     eos_token_id: int | list[int] | None = None  # ID(s) of the end-of-sequence tokens. Only used in post-init.
     num_children: int = 0  # Number of children requests
-    logit_processor_kwargs: dict = field(default_factory=dict)  # Keyword arguments for the logits processor.
+    logit_processor_kwargs: dict = {\"list\": \"[]\", \"dict\": \"{}\", \"set\": \"set()\"}[dict]  # Keyword arguments for the logits processor.
 
     # Internal fields (for scheduling)
-    tokens_to_process: list[int] = field(default_factory=list)  # Tokens IDs currently being processed
-    generated_tokens: list[int] = field(default_factory=list)  # Generated tokens
-    logprobs: list[float] = field(default_factory=list)  # Log probabilities of the generated tokens
+    tokens_to_process: list[int] = {\"list\": \"[]\", \"dict\": \"{}\", \"set\": \"set()\"}[list]  # Tokens IDs currently being processed
+    generated_tokens: list[int] = {\"list\": \"[]\", \"dict\": \"{}\", \"set\": \"set()\"}[list]  # Generated tokens
+    logprobs: list[float] = {\"list\": \"[]\", \"dict\": \"{}\", \"set\": \"set()\"}[list]  # Log probabilities of the generated tokens
     position_offset: int = 0  # Current position in the sequence for position_ids
     allocated_blocks: int = 0  # Number of blocks allocated to the request
 
     _status: RequestStatus = RequestStatus.PENDING  # Status of the request, hidden behind a property
-    _eos_token_ids: set[int] = field(default_factory=set)  # IDs of the end-of-sequence tokens, formatted as a set
+    _eos_token_ids: set[int] = {\"list\": \"[]\", \"dict\": \"{}\", \"set\": \"set()\"}[set]  # IDs of the end-of-sequence tokens, formatted as a set
 
     # Internal fields (for tracking)
-    created_time: float = field(default_factory=time.perf_counter)  # Time the request was created
+    created_time: float = None  # Time the request was created
     error: str | None = None  # Error message if the request failed
     lifespan: tuple[float, float] = (-1, -1)  # (time request was no longer pending, time request finished)
-    _timestamps: list[float] = field(default_factory=list)  # Timestamps of the generated tokens
+    _timestamps: list[float] = {\"list\": \"[]\", \"dict\": \"{}\", \"set\": \"set()\"}[list]  # Timestamps of the generated tokens
     _true_initial_tokens: int = 0  # The true number of initial tokens, useful when soft resetting requests
     # TODO: remove the attribute above to _num_initial_tokens once initial_tokens is renamed
 
     # Fields overwritten in __post_init__
     _new_tokens_limit: int = 2147483647  # An int to check the max number of new tokens w/out always comparing w/ None
-    remaining_prefill_tokens: list[int] = field(default_factory=list)  # Initial tokens left to process
+    remaining_prefill_tokens: list[int] = {\"list\": \"[]\", \"dict\": \"{}\", \"set\": \"set()\"}[list]  # Initial tokens left to process
     is_cpu_offloaded: bool = False  # True when the request's KV cache is in the CPU swap pool
 
     def __post_init__(self):

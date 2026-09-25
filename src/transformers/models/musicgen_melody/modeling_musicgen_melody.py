@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 Meta AI and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -62,8 +63,7 @@ logger = logging.get_logger(__name__)
     Base class for Musicgen Melody autoregressive outputs.
     """
 )
-@dataclass
-class MusicgenMelodyOutputWithPast(ModelOutput):
+class MusicgenMelodyOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

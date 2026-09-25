@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -154,8 +155,7 @@ def _pad_extra_bos_eos_tokens(
     output (a linear layer on top of the pooled output).
     """
 )
-@dataclass
-class ClvpEncoderOutput(ModelOutput):
+class ClvpEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)`, *optional*, returned when model is initialized with `with_projection=True`):
         The embeddings obtained by applying the projection layer to the pooler_output.
@@ -173,8 +173,7 @@ class ClvpEncoderOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class ClvpOutput(ModelOutput):
+class ClvpOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for speech-text similarity.

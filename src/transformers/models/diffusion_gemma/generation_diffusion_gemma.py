@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 the HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -243,8 +244,7 @@ class DiffusionGemmaGenerationConfig(GenerationConfig):
         raise NotImplementedError("DiffusionGemmaGenerationConfig does not support `from_model_config`")
 
 
-@dataclass
-class DiffusionGemmaGenerationOutput(ModelOutput):
+class DiffusionGemmaGenerationOutput(ModelOutput, Struct, frozen=False):
     """
     Output class for DiffusionGemma generation.
 
@@ -316,8 +316,7 @@ class LinearTemperatureScheduleLogitsProcessor(LogitsProcessor):
         return scores / temperature
 
 
-@dataclass
-class EntropyBoundSamplerConfig:
+class EntropyBoundSamplerConfig(Struct, frozen=False):
     """
     Configuration class for the entropy bound sampler.
 

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,8 +38,7 @@ if TYPE_CHECKING:
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class CsmGenerateOutput(GenerateDecoderOnlyOutput):
+class CsmGenerateOutput(GenerateDecoderOnlyOutput, Struct, frozen=False):
     """
     Outputs of CsmForConditionalGeneration.generate.
 

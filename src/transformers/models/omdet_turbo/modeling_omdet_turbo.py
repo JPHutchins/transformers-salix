@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 Om Research Lab and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,8 +51,7 @@ logger = logging.get_logger(__name__)
     Base class for outputs of the OmDetTurboHybridEncoder.
     """
 )
-@dataclass
-class OmDetTurboEncoderOutput(ModelOutput):
+class OmDetTurboEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor`):
         Last hidden states of the encoder.
@@ -70,8 +70,7 @@ class OmDetTurboEncoderOutput(ModelOutput):
     Base class for outputs of the OmDetTurboDecoder.
     """
 )
-@dataclass
-class OmDetTurboDecoderOutput(ModelOutput):
+class OmDetTurboDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the decoder.
@@ -105,8 +104,7 @@ class OmDetTurboDecoderOutput(ModelOutput):
     Output type of [`OmDetTurboObjectDetectionOutput`].
     """
 )
-@dataclass
-class OmDetTurboObjectDetectionOutput(ModelOutput):
+class OmDetTurboObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor`):
         The loss value.

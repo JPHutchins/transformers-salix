@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2020 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -74,8 +75,7 @@ def HfArg(
 
     Example comparing the use of `HfArg` and `dataclasses.field`:
     ```
-    @dataclass
-    class Args:
+    class Args(Struct, frozen=False):
         regular_arg: str = dataclasses.field(default="Huggingface", metadata={"aliases": ["--example", "-e"], "help": "This syntax could be better!"})
         hf_arg: str = HfArg(default="Huggingface", aliases=["--example", "-e"], help="What a nice syntax!")
     ```

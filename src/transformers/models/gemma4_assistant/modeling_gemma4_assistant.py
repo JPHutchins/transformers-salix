@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 the HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,8 +30,7 @@ from .configuration_gemma4_assistant import Gemma4AssistantConfig
 
 
 @auto_docstring
-@dataclass
-class Gemma4AssistantOutput(BaseModelOutput):
+class Gemma4AssistantOutput(BaseModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, sequence_length, config.vocab_size)`):
         Prediction scores of the language modeling head (scores for each vocabulary token before SoftMax).

@@ -1,3 +1,4 @@
+from salix import Struct
 #!/usr/bin/env python
 
 # Copyright 2023 The HuggingFace Inc. team. All rights reserved.
@@ -91,8 +92,7 @@ class AwqBackend(str, Enum):
     TORCH_FUSED_AWQ = "torch_fused_awq"
 
 
-@dataclass
-class QuantizationConfigMixin:
+class QuantizationConfigMixin(Struct, frozen=False):
     """
     Mixin class for quantization config
     """
@@ -206,8 +206,7 @@ class QuantizationConfigMixin:
         return unused_kwargs
 
 
-@dataclass
-class AutoRoundConfig(QuantizationConfigMixin):
+class AutoRoundConfig(QuantizationConfigMixin, Struct, frozen=False):
     """This is a wrapper class about all possible attributes and features that you can play with a model that has been
     loaded AutoRound quantization.
 
@@ -275,8 +274,7 @@ class AutoRoundConfig(QuantizationConfigMixin):
         return super().from_dict(config_dict, return_unused_kwargs=return_unused_kwargs, **kwargs)
 
 
-@dataclass
-class HqqConfig(QuantizationConfigMixin):
+class HqqConfig(QuantizationConfigMixin, Struct, frozen=False):
     """
     This is wrapper around hqq's BaseQuantizeConfig.
 
@@ -388,8 +386,7 @@ class HqqConfig(QuantizationConfigMixin):
         return serializable_config_dict
 
 
-@dataclass
-class BitsAndBytesConfig(QuantizationConfigMixin):
+class BitsAndBytesConfig(QuantizationConfigMixin, Struct, frozen=False):
     """
     This is a wrapper class about all possible attributes and features that you can play with a model that has been
     loaded using `bitsandbytes`.
@@ -615,8 +612,7 @@ class ExllamaVersion(int, Enum):
     TWO = 2
 
 
-@dataclass
-class GPTQConfig(QuantizationConfigMixin):
+class GPTQConfig(QuantizationConfigMixin, Struct, frozen=False):
     """
     This is a wrapper class about all possible attributes and features that you can play with a model that has been
     loaded using `optimum` api for GPTQ quantization relying on the gptqmodel backend.
@@ -797,8 +793,7 @@ class GPTQConfig(QuantizationConfigMixin):
         return config
 
 
-@dataclass
-class AwqConfig(GPTQConfig):
+class AwqConfig(GPTQConfig, Struct, frozen=False):
     """
     This is a wrapper class about all possible attributes and features that you can play with a model that has been
     loaded using `auto-awq` library awq quantization relying on auto_awq backend.
@@ -863,8 +858,7 @@ class AwqConfig(GPTQConfig):
         return config_dict
 
 
-@dataclass
-class AqlmConfig(QuantizationConfigMixin):
+class AqlmConfig(QuantizationConfigMixin, Struct, frozen=False):
     """
     This is a wrapper class about `aqlm` parameters.
 
@@ -923,8 +917,7 @@ class AqlmConfig(QuantizationConfigMixin):
             self.linear_weights_not_to_quantize = []
 
 
-@dataclass
-class VptqLayerConfig(QuantizationConfigMixin):
+class VptqLayerConfig(QuantizationConfigMixin, Struct, frozen=False):
     """
     This is used to explain vptq config params for each layer
     Args:
@@ -978,8 +971,7 @@ class VptqLayerConfig(QuantizationConfigMixin):
             raise ValueError("is_indice_packed should always be True")
 
 
-@dataclass
-class VptqConfig(QuantizationConfigMixin):
+class VptqConfig(QuantizationConfigMixin, Struct, frozen=False):
     """
     This is a wrapper class about `vptq` parameters.
 
@@ -1019,8 +1011,7 @@ class VptqConfig(QuantizationConfigMixin):
             raise ValueError("enable_proxy_error should always be False until we support training")
 
 
-@dataclass
-class QuantoConfig(QuantizationConfigMixin):
+class QuantoConfig(QuantizationConfigMixin, Struct, frozen=False):
     """
     This is a wrapper class about all possible attributes and features that you can play with a model that has been
     loaded using `quanto`.
@@ -1060,8 +1051,7 @@ class QuantoConfig(QuantizationConfigMixin):
             raise ValueError(f"Only support weights in {accepted_activations} but found {self.activations}")
 
 
-@dataclass
-class EetqConfig(QuantizationConfigMixin):
+class EetqConfig(QuantizationConfigMixin, Struct, frozen=False):
     """
     This is a wrapper class about all possible attributes and features that you can play with a model that has been
     loaded using `eetq`.
@@ -1290,8 +1280,7 @@ class CompressedTensorsConfig(QuantizationConfigMixin):
         return self.is_quantized and (qc is not None and qc.quantization_status == QuantizationStatus.COMPRESSED)
 
 
-@dataclass
-class FbgemmFp8Config(QuantizationConfigMixin):
+class FbgemmFp8Config(QuantizationConfigMixin, Struct, frozen=False):
     """
     This is a wrapper class about all possible attributes and features that you can play with a model that has been
     loaded using fbgemm fp8 quantization.
@@ -1321,8 +1310,7 @@ class FbgemmFp8Config(QuantizationConfigMixin):
         return loading_attributes_dict
 
 
-@dataclass
-class HiggsConfig(QuantizationConfigMixin):
+class HiggsConfig(QuantizationConfigMixin, Struct, frozen=False):
     """
     HiggsConfig is a configuration class for quantization using the HIGGS method.
 
@@ -1377,8 +1365,7 @@ class HiggsConfig(QuantizationConfigMixin):
             raise ValueError("hadamard_size must be divisible by group_size")
 
 
-@dataclass
-class FPQuantConfig(QuantizationConfigMixin):
+class FPQuantConfig(QuantizationConfigMixin, Struct, frozen=False):
     """
     FPQuantConfig is a configuration class for quantization using the FPQuant method.
 
@@ -1466,8 +1453,7 @@ class FPQuantConfig(QuantizationConfigMixin):
             self.modules_to_not_convert = ["lm_head"]
 
 
-@dataclass
-class TorchAoConfig(QuantizationConfigMixin):
+class TorchAoConfig(QuantizationConfigMixin, Struct, frozen=False):
     """Config class for torchao quantization/sparsity techniques.
 
     Args:
@@ -1569,8 +1555,7 @@ class TorchAoConfig(QuantizationConfigMixin):
         return cls(quant_type=quant_type, **config_dict)
 
 
-@dataclass
-class BitNetQuantConfig(QuantizationConfigMixin):
+class BitNetQuantConfig(QuantizationConfigMixin, Struct, frozen=False):
     """
     Configuration class for applying BitNet quantization.
 
@@ -1625,8 +1610,7 @@ class BitNetQuantConfig(QuantizationConfigMixin):
         """
 
 
-@dataclass
-class SpQRConfig(QuantizationConfigMixin):
+class SpQRConfig(QuantizationConfigMixin, Struct, frozen=False):
     """
     This is a wrapper class about `spqr` parameters. Refer to the original publication for more details.
 
@@ -1688,8 +1672,7 @@ class SpQRConfig(QuantizationConfigMixin):
             raise TypeError("shapes must be a dict")
 
 
-@dataclass
-class FineGrainedFP8Config(QuantizationConfigMixin):
+class FineGrainedFP8Config(QuantizationConfigMixin, Struct, frozen=False):
     """
     FineGrainedFP8Config is a configuration class for fine-grained FP8 quantization used mainly for deepseek models.
 
@@ -1786,8 +1769,7 @@ class QuarkConfig(QuantizationConfigMixin):
         self.quant_method = QuantizationMethod.QUARK
 
 
-@dataclass
-class Mxfp4Config(QuantizationConfigMixin):
+class Mxfp4Config(QuantizationConfigMixin, Struct, frozen=False):
     """
     This is a wrapper class about all possible attributes and features that you can play with a model that has been
     loaded using mxfp4 quantization.
@@ -1864,8 +1846,7 @@ class MetalConfig(QuantizationConfigMixin):
         }
 
 
-@dataclass
-class FourOverSixConfig(QuantizationConfigMixin):
+class FourOverSixConfig(QuantizationConfigMixin, Struct, frozen=False):
     """
     This is a wrapper class containing all options for quantization with `fouroversix`. In brief,
     Four Over Six is a modification to NVFP4 quantization which adaptively scales the largest value
@@ -2028,8 +2009,7 @@ class SinqConfig(QuantizationConfigMixin):
             )
 
 
-@dataclass
-class GemmaQuantizationConfig(QuantizationConfigMixin):
+class GemmaQuantizationConfig(QuantizationConfigMixin, Struct, frozen=False):
     """Quantization config for pre-quantized Gemma checkpoints.
 
     Args:

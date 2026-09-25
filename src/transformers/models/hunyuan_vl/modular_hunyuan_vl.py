@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright (C) 2026 THL A29 Limited, a Tencent company and the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -66,8 +67,7 @@ from ..siglip.modeling_siglip import SiglipEncoderLayer, SiglipMLP
 
 
 @auto_docstring
-@dataclass
-class HunYuanVLModelOutputWithPast(BaseModelOutputWithPast):
+class HunYuanVLModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     image_hidden_states (`torch.FloatTensor`, *optional*):
         Last image features produced by the vision tower and scattered into the language-model token stream.

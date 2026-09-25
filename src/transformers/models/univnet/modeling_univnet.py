@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,8 +34,7 @@ logger = logging.get_logger(__name__)
     lengths of those waveforms (so that the padding can be removed by [`UnivNetModel.batch_decode`]).
     """
 )
-@dataclass
-class UnivNetModelOutput(ModelOutput):
+class UnivNetModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     waveforms (`torch.FloatTensor` of shape `(batch_size, sequence_length)`):
         Batched 1D (mono-channel) output audio waveforms.

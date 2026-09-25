@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The PaddlePaddle Team and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -614,8 +615,7 @@ def mask_to_box_coordinate(mask, dtype):
     return torch.stack([center_x, center_y, box_width, box_height], dim=-1)
 
 
-@dataclass
-class PPDocLayoutV3DecoderOutput(RTDetrDecoderOutput):
+class PPDocLayoutV3DecoderOutput(RTDetrDecoderOutput, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(batch_size, config.decoder_layers, num_queries, hidden_size)`):
         Stacked intermediate hidden states (output of each layer of the decoder).
@@ -646,8 +646,7 @@ class PPDocLayoutV3DecoderOutput(RTDetrDecoderOutput):
     Base class for outputs of the PP-DocLayoutV3 model.
     """
 )
-@dataclass
-class PPDocLayoutV3ModelOutput(RTDetrModelOutput):
+class PPDocLayoutV3ModelOutput(RTDetrModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_queries, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the decoder of the model.
@@ -1227,8 +1226,7 @@ class PPDocLayoutV3Model(RTDetrModel):
 
 
 @auto_docstring
-@dataclass
-class PPDocLayoutV3HybridEncoderOutput(BaseModelOutput):
+class PPDocLayoutV3HybridEncoderOutput(BaseModelOutput, Struct, frozen=False):
     r"""
     mask_feat (`torch.FloatTensor` of shape `(batch_size, config.num_queries, 200, 200)`):
         Mask features for each query in the batch.
@@ -1238,8 +1236,7 @@ class PPDocLayoutV3HybridEncoderOutput(BaseModelOutput):
 
 
 @auto_docstring
-@dataclass
-class PPDocLayoutV3ForObjectDetectionOutput(ModelOutput):
+class PPDocLayoutV3ForObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, num_queries, num_classes + 1)`):
         Classification logits (including no-object) for all queries.

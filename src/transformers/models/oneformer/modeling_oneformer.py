@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 SHI Labs and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -737,8 +738,7 @@ class OneFormerLoss(nn.Module):
     predictions and contrastive logits to BaseModelOutputWithCrossAttentions.
     """
 )
-@dataclass
-class OneFormerTransformerDecoderOutput(BaseModelOutput):
+class OneFormerTransformerDecoderOutput(BaseModelOutput, Struct, frozen=False):
     r"""
     object_queries (`torch.FloatTensor` of shape `(batch_size, num_queries, hidden_dim)`):
         Queries representation for the region proposals.
@@ -793,8 +793,7 @@ class OneFormerPixelDecoderOutput(ModelOutput):
     Deformable Attention based decoder.
     """
 )
-@dataclass
-class OneFormerPixelLevelModuleOutput(ModelOutput):
+class OneFormerPixelLevelModuleOutput(ModelOutput, Struct, frozen=False):
     r"""
     encoder_features (List of `(torch.FloatTensor)`):
         List of `torch.FloatTensor` of shape `(batch_size, num_channels, height, width)`. Hidden-states (also
@@ -816,8 +815,7 @@ class OneFormerPixelLevelModuleOutput(ModelOutput):
     Class for outputs of [`OneFormerModel`]. This class returns all the needed hidden states to compute the logits.
     """
 )
-@dataclass
-class OneFormerModelOutput(ModelOutput):
+class OneFormerModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     encoder_hidden_states (`tuple(torch.FloatTensor)`, *optional*, returned when `output_hidden_states=True` is passed or when `config.output_hidden_states=True`):
         Tuple of `torch.FloatTensor` (one for the output of the embeddings + one for the output of each stage) of
@@ -873,8 +871,7 @@ class OneFormerModelOutput(ModelOutput):
     [`~OneFormerImageProcessor] for details regarding usage.
     """
 )
-@dataclass
-class OneFormerForUniversalSegmentationOutput(ModelOutput):
+class OneFormerForUniversalSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.Tensor`, *optional*):
         The computed loss, returned when labels are present.

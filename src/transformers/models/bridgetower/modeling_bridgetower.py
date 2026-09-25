@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 The Intel Labs Team Authors, The Microsoft Research Team Authors and HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -52,8 +53,7 @@ _TOKENIZER_FOR_DOC = "RobertaTokenizer"
     Output type of [`BridgeTowerModel`].
     """
 )
-@dataclass
-class BridgeTowerModelOutput(ModelOutput):
+class BridgeTowerModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     text_features (`torch.FloatTensor` of shape `(batch_size, text_sequence_length, hidden_size)`):
         Sequence of hidden-states at the text output of the last layer of the model.
@@ -76,8 +76,7 @@ class BridgeTowerModelOutput(ModelOutput):
     Output type of ['BridgeTowerForContrastiveLearning']
     """
 )
-@dataclass
-class BridgeTowerContrastiveOutput(ModelOutput):
+class BridgeTowerContrastiveOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Image-text contrastive loss.

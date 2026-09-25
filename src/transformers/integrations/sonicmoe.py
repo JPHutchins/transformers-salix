@@ -19,6 +19,7 @@ Requirements: CUDA, `kernels`, `nvidia-cutlass-dsl`, has_gate=True.
 """
 
 from __future__ import annotations
+from salix import Struct
 
 import importlib.metadata
 from collections.abc import Callable
@@ -90,8 +91,7 @@ def is_sonicmoe_loadable(raise_error: bool = False) -> bool:
     return True
 
 
-@dataclass(frozen=True)
-class SonicMoE:
+class SonicMoE(Struct, frozen=True):
     """Entry points exposed by the `kernels-community/sonic-moe` kernel."""
 
     activation_type_enum: type

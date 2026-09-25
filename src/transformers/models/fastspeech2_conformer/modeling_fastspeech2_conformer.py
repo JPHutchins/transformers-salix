@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 The Espnet authors, IMS Toucan authors, and the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,8 +40,7 @@ logger = logging.get_logger(__name__)
     Output type of [`FastSpeech2ConformerModel`].
     """
 )
-@dataclass
-class FastSpeech2ConformerModelOutput(ModelOutput):
+class FastSpeech2ConformerModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Spectrogram generation loss.
@@ -69,8 +69,7 @@ class FastSpeech2ConformerModelOutput(ModelOutput):
     Output type of [`FastSpeech2ConformerWithHifiGan`].
     """
 )
-@dataclass
-class FastSpeech2ConformerWithHifiGanOutput(FastSpeech2ConformerModelOutput):
+class FastSpeech2ConformerWithHifiGanOutput(FastSpeech2ConformerModelOutput, Struct, frozen=False):
     r"""
     waveform (`torch.FloatTensor` of shape `(batch_size, audio_length)`):
         Speech output as a result of passing the predicted mel spectrogram through the vocoder.

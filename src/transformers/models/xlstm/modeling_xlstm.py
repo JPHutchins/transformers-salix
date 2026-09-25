@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 NXAI GmbH. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1380,8 +1381,7 @@ class xLSTMCache:
 
 
 @auto_docstring
-@dataclass
-class xLSTMOutput(ModelOutput):
+class xLSTMOutput(ModelOutput, Struct, frozen=False):
     r"""
     cache_params (`xLSTMCache`):
         The state of the model at the last time step. Can be used in a forward method with the next `input_ids` to
@@ -1498,8 +1498,7 @@ class xLSTMModel(xLSTMPreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class xLSTMCausalLMOutput(ModelOutput):
+class xLSTMCausalLMOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

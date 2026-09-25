@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 the HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -185,8 +186,7 @@ class Sam3LiteTextConfig(PreTrainedConfig):
         self.vision_config.image_size = value
 
 
-@dataclass
-class Sam3LiteTextTextEncoderOutput(BaseModelOutputWithPooling):
+class Sam3LiteTextTextEncoderOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Full sequence of hidden states from the text encoder.

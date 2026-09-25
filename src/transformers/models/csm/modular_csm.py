@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 Sesame and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -51,8 +52,7 @@ logger = logging.get_logger(__name__)
     Base class for the model autoregressive outputs.
     """
 )
-@dataclass
-class CsmOutputWithPast(ModelOutput):
+class CsmOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

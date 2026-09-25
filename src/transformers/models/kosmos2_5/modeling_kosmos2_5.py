@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 Microsoft Research and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -245,8 +246,7 @@ KOSMOS2_5_INPUTS_DOCSTRING = r"""
 """
 
 
-@dataclass
-class Kosmos2_5ModelOutput(ModelOutput):
+class Kosmos2_5ModelOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for text model's outputs that also contains a pooling of the last hidden states.
 
@@ -300,8 +300,7 @@ class Kosmos2_5ModelOutput(ModelOutput):
         return tuple((self[k] if k != "vision_model_output" else getattr(self, k).to_tuple()) for k in self.keys())
 
 
-@dataclass
-class Kosmos2_5ForConditionalGenerationModelOutput(ModelOutput):
+class Kosmos2_5ForConditionalGenerationModelOutput(ModelOutput, Struct, frozen=False):
     """
     Model output class for `Kosmos2_5ForConditionalGeneration`.
 

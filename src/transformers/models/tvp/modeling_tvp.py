@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 The Intel AIA Team Authors, and HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,8 +35,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class TvpVideoGroundingOutput(ModelOutput):
+class TvpVideoGroundingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Temporal-Distance IoU loss for video grounding.

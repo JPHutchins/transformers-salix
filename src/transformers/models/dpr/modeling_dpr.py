@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2018 DPR Authors, The Hugging Face Team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,8 +43,7 @@ logger = logging.get_logger(__name__)
     Class for outputs of [`DPRQuestionEncoder`].
     """
 )
-@dataclass
-class DPRContextEncoderOutput(ModelOutput):
+class DPRContextEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, embeddings_size)`):
         The DPR encoder outputs the *pooler_output* that corresponds to the context representation. Last layer
@@ -61,8 +61,7 @@ class DPRContextEncoderOutput(ModelOutput):
     Class for outputs of [`DPRQuestionEncoder`].
     """
 )
-@dataclass
-class DPRQuestionEncoderOutput(ModelOutput):
+class DPRQuestionEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, embeddings_size)`):
         The DPR encoder outputs the *pooler_output* that corresponds to the question representation. Last layer
@@ -80,8 +79,7 @@ class DPRQuestionEncoderOutput(ModelOutput):
     Class for outputs of [`DPRQuestionEncoder`].
     """
 )
-@dataclass
-class DPRReaderOutput(ModelOutput):
+class DPRReaderOutput(ModelOutput, Struct, frozen=False):
     r"""
     start_logits (`torch.FloatTensor` of shape `(n_passages, sequence_length)`):
         Logits of the start index of the span for each passage.

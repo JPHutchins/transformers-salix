@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 IBM & Hugging Face. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -745,8 +746,7 @@ class PatchTSTEncoder(PatchTSTPreTrainedModel):
     Base class for model's outputs, with potential hidden states.
     """
 )
-@dataclass
-class PatchTSTModelOutput(ModelOutput):
+class PatchTSTModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_channels, num_patches, patch_length)`):
         Sequence of hidden-states at the output of the last layer of the model.
@@ -778,8 +778,7 @@ class PatchTSTModelOutput(ModelOutput):
     Output type of [`PatchTSTForPretraining`].
     """
 )
-@dataclass
-class PatchTSTForPretrainingOutput(ModelOutput):
+class PatchTSTForPretrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         MSE loss.
@@ -798,8 +797,7 @@ class PatchTSTForPretrainingOutput(ModelOutput):
     Output type of [`PatchTSTForRegression`].
     """
 )
-@dataclass
-class PatchTSTForRegressionOutput(ModelOutput):
+class PatchTSTForRegressionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         MSE loss.
@@ -818,8 +816,7 @@ class PatchTSTForRegressionOutput(ModelOutput):
     Output type of [`PatchTSTForPrediction`].
     """
 )
-@dataclass
-class PatchTSTForPredictionOutput(ModelOutput):
+class PatchTSTForPredictionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         MSE loss.
@@ -850,8 +847,7 @@ class PatchTSTForPredictionOutput(ModelOutput):
     Output type of [`PatchTSTForClassification`].
     """
 )
-@dataclass
-class PatchTSTForClassificationOutput(ModelOutput):
+class PatchTSTForClassificationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the masked language modeling loss and the next sequence prediction
@@ -872,8 +868,7 @@ class PatchTSTForClassificationOutput(ModelOutput):
     distribution.
     """
 )
-@dataclass
-class SamplePatchTSTOutput(ModelOutput):
+class SamplePatchTSTOutput(ModelOutput, Struct, frozen=False):
     r"""
     sequences (`torch.FloatTensor` of shape `(batch_size, num_samples, prediction_length, num_targets)`):
         Sampled values from the chosen distribution.

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +18,7 @@ import copy
 import json
 import os
 import warnings
-from abc import ABC, abstractmethod
+from abc import ABC, ABCMeta, abstractmethod
 from collections.abc import Callable
 from dataclasses import dataclass, is_dataclass
 from typing import TYPE_CHECKING, Any, Optional, Union
@@ -1349,8 +1350,10 @@ class GenerationConfig(PushToHubMixin):
         return unused_kwargs
 
 
-@dataclass
-class BaseWatermarkingConfig(ABC):
+_StructABCMeta = type("_StructABCMeta", (type(Struct), ABCMeta), {})
+
+
+class BaseWatermarkingConfig(ABC, Struct, frozen=False, metaclass=_StructABCMeta):
     """Generic watermarking config"""
 
     @classmethod
@@ -1431,8 +1434,7 @@ class BaseWatermarkingConfig(ABC):
     def construct_processor(self, vocab_size): ...
 
 
-@dataclass
-class WatermarkingConfig(BaseWatermarkingConfig):
+class WatermarkingConfig(BaseWatermarkingConfig, Struct, frozen=False, metaclass=_StructABCMeta):
     """
     Class that holds arguments for watermark generation and should be passed into `GenerationConfig` during `generate`.
     See [this paper](https://huggingface.co/papers/2306.04634) for more details on the arguments.
@@ -1509,8 +1511,7 @@ class WatermarkingConfig(BaseWatermarkingConfig):
         )
 
 
-@dataclass
-class SynthIDTextWatermarkingConfig(BaseWatermarkingConfig):
+class SynthIDTextWatermarkingConfig(BaseWatermarkingConfig, Struct, frozen=False, metaclass=_StructABCMeta):
     """
     Class that holds arguments for watermark generation and should be passed into `GenerationConfig` during `generate`.
     See [this paper](https://www.nature.com/articles/s41586-024-08025-4) for more details on the arguments.
@@ -1599,8 +1600,7 @@ class SynthIDTextWatermarkingConfig(BaseWatermarkingConfig):
         )
 
 
-@dataclass
-class CompileConfig:
+class CompileConfig(Struct, frozen=False):
     """
     Class that holds arguments relative to `torch.compile` behavior, when using automatic compilation in `generate`.
     See [`torch.compile`](https://pytorch.org/docs/stable/generated/torch.compile.html) for more details on the arguments.
@@ -1652,8 +1652,7 @@ class CompileConfig:
 
 
 # TODO: add the @strict decorator to prevent attributes passed as args rather than kwargs
-@dataclass
-class ContinuousBatchingConfig:
+class ContinuousBatchingConfig(Struct, frozen=False):
     """
     Class that holds arguments relative to continuous batching, when using continuous batching through the
     `generate_batch` method or the `continuous_batching_context_manager` context manager.

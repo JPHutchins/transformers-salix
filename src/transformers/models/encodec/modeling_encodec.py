@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 Meta Platforms, Inc. and affiliates, and the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,8 +37,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class EncodecOutput(ModelOutput):
+class EncodecOutput(ModelOutput, Struct, frozen=False):
     r"""
     audio_codes (`torch.LongTensor`  of shape `(nb_frames, batch_size, nb_quantizers, frame_len)`, *optional*):
         Discrete code embeddings computed using `model.encode`.
@@ -50,8 +50,7 @@ class EncodecOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class EncodecEncoderOutput(ModelOutput):
+class EncodecEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     audio_codes (`torch.LongTensor`  of shape `(nb_frames, batch_size, nb_quantizers, frame_len)`, *optional*):
         Discrete code embeddings computed using `model.encode`.
@@ -69,8 +68,7 @@ class EncodecEncoderOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class EncodecDecoderOutput(ModelOutput):
+class EncodecDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     audio_values (`torch.FloatTensor`  of shape `(batch_size, segment_length)`, *optional*):
         Decoded audio values, obtained using the decoder part of Encodec.

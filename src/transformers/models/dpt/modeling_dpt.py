@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 Intel Labs, OpenMMLab and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,8 +49,7 @@ logger = logging.get_logger(__name__)
     in the context of Vision models.:
     """
 )
-@dataclass
-class BaseModelOutputWithIntermediateActivations(ModelOutput):
+class BaseModelOutputWithIntermediateActivations(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_states (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.
@@ -67,8 +67,7 @@ class BaseModelOutputWithIntermediateActivations(ModelOutput):
     activations that can be used by the model at later stages.
     """
 )
-@dataclass
-class BaseModelOutputWithPoolingAndIntermediateActivations(ModelOutput):
+class BaseModelOutputWithPoolingAndIntermediateActivations(ModelOutput, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, hidden_size)`):
         Last layer hidden-state of the first token of the sequence (classification token) after further processing

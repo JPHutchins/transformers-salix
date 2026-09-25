@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,8 +48,7 @@ class ColPaliPreTrainedModel(PreTrainedModel):
     Base class for ColPali embeddings output.
     """
 )
-@dataclass
-class ColPaliForRetrievalOutput(ModelOutput):
+class ColPaliForRetrievalOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

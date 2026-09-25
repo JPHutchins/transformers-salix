@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 the HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -525,8 +526,7 @@ class Gemma4UnifiedConfig(Gemma4Config):
 
 
 @auto_docstring
-@dataclass
-class Gemma4UnifiedAudioModelOutput(ModelOutput):
+class Gemma4UnifiedAudioModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, ..., hidden_size)`):
         Last hidden state that went through the audio specific multimodal projectors.

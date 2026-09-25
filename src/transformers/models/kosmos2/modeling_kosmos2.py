@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 Microsoft Research and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -142,8 +143,7 @@ def _make_causal_mask(
 
 
 @auto_docstring
-@dataclass
-class BaseModelOutputWithProjectionAttentions(BaseModelOutputWithPooling):
+class BaseModelOutputWithProjectionAttentions(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     projection_attentions (`tuple(torch.FloatTensor)`):
         Tuple of `torch.FloatTensor` (one for each layer) of shape `(batch_size, num_heads, sequence_length,
@@ -161,8 +161,7 @@ class BaseModelOutputWithProjectionAttentions(BaseModelOutputWithPooling):
     Base class for text model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
-class Kosmos2ModelOutput(ModelOutput):
+class Kosmos2ModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     image_embeds (`torch.FloatTensor` of shape `(batch_size, latent_query_num, hidden_size)`, *optional*):
         Sequence of hidden-states at the output of `Kosmos2ImageToTextProjection`.
@@ -196,8 +195,7 @@ class Kosmos2ModelOutput(ModelOutput):
     Model output class for `Kosmos2ForConditionalGeneration`.
     """
 )
-@dataclass
-class Kosmos2ForConditionalGenerationModelOutput(ModelOutput):
+class Kosmos2ForConditionalGenerationModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

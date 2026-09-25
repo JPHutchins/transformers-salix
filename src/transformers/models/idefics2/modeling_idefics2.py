@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,8 +45,7 @@ logger = logging.get_logger(__name__)
     Base class for Idefics2 model's outputs that may also contain a past key/values (to speed up sequential decoding).
     """
 )
-@dataclass
-class Idefics2BaseModelOutputWithPast(ModelOutput):
+class Idefics2BaseModelOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.

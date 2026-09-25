@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The Meta AI Authors and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -893,8 +894,7 @@ class Sam2VideoImageSegmentationOutput(Sam2ImageSegmentationOutput):
 
 
 @auto_docstring(custom_intro="Base class for the Sam2 model's output.")
-@dataclass
-class Sam2VideoSegmentationOutput(ModelOutput):
+class Sam2VideoSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     object_ids (`list[int]`, *optional*):
         List of object IDs being tracked in the current frame.

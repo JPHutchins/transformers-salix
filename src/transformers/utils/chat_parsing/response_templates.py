@@ -14,6 +14,7 @@
 """Template loading and validation for response_template dicts."""
 
 from __future__ import annotations
+from salix import Struct
 
 from dataclasses import dataclass
 from typing import Any
@@ -27,8 +28,7 @@ from .content_parsers import CONTENT_PARSERS, validate_transform_strings
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class ResponseTemplateField:
+class ResponseTemplateField(Struct, frozen=False):
     name: str
     open_re: Any
     open_literals: list[str] | None
@@ -45,8 +45,7 @@ class ResponseTemplateField:
     transform_each: bool
 
 
-@dataclass
-class ResponseTemplate:
+class ResponseTemplate(Struct, frozen=False):
     defaults: dict
     fields: dict[str, ResponseTemplateField]
     start_anchor_re: Any

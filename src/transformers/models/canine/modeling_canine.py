@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2021 Google AI The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -53,8 +54,7 @@ _PRIMES = [31, 43, 59, 61, 73, 97, 103, 113, 137, 149, 157, 173, 181, 193, 211, 
     Transformer encoders.
     """
 )
-@dataclass
-class CanineModelOutputWithPooling(ModelOutput):
+class CanineModelOutputWithPooling(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model (i.e. the output of the final

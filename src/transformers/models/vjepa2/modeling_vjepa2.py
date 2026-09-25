@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,8 +38,7 @@ logger = logging.get_logger(__name__)
     VJEPA Predictor outputs that also contains the masked encoder outputs
     """
 )
-@dataclass
-class VJEPA2WithMaskedInputPredictorOutput(ModelOutput):
+class VJEPA2WithMaskedInputPredictorOutput(ModelOutput, Struct, frozen=False):
     r"""
     masked_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`, *optional*, returned when `context_mask` is provided which is applied on VJEPA2Encoder outputs):
         The masked hidden state of the model.
@@ -59,8 +59,7 @@ class VJEPA2WithMaskedInputPredictorOutput(ModelOutput):
     Optionally contains the predictor outputs
     """
 )
-@dataclass
-class VJEPA2WithMaskedInputModelOutput(ModelOutput):
+class VJEPA2WithMaskedInputModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     masked_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`, *optional*, returned when `context_mask` is provided which is applied on VJEPA2Encoder outputs):
         The masked hidden state of the model.

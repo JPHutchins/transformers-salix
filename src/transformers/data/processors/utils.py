@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2018 The Google AI Language Team Authors and The HuggingFace Inc. team.
 # Copyright (c) 2018, NVIDIA CORPORATION.  All rights reserved.
 #
@@ -24,8 +25,7 @@ from ...utils import is_torch_available, logging
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class InputExample:
+class InputExample(Struct, frozen=False):
     """
     A single training/test example for simple sequence classification.
 
@@ -49,8 +49,7 @@ class InputExample:
         return json.dumps(dataclasses.asdict(self), indent=2) + "\n"
 
 
-@dataclass(frozen=True)
-class InputFeatures:
+class InputFeatures(Struct, frozen=True):
     """
     A single set of features of data. Property names are the same names as the corresponding inputs to a model.
 

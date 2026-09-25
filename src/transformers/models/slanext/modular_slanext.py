@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The PaddlePaddle Team and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -268,8 +269,7 @@ class SLANeXtSLAHead(SLANeXtPreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class SLANeXtForTableRecognitionOutput(BaseModelOutput):
+class SLANeXtForTableRecognitionOutput(BaseModelOutput, Struct, frozen=False):
     r"""
     head_hidden_states (`tuple(torch.FloatTensor)`, *optional*, returned when `output_hidden_states=True` is passed or when `config.output_hidden_states=True`):
         Hidden-states of the SLANeXtSLAHead at each prediction step, varies up to max `self.config.max_text_length` states (depending on early exits).

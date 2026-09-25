@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 Microsoft Research and HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -93,8 +94,7 @@ def eager_attention_forward(
     an additional attention mask.
     """
 )
-@dataclass
-class BaseModelOutputWithAttentionMask(ModelOutput):
+class BaseModelOutputWithAttentionMask(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model. If `past_key_values` is used only

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2021 The OpenAI Team Authors and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,8 +37,7 @@ from .configuration_idefics import IdeficsVisionConfig
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class IdeficsVisionModelOutput(ModelOutput):
+class IdeficsVisionModelOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for vision model's outputs that also contains image embeddings of the pooling of the last hidden states.
 

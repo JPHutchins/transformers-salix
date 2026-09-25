@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The HuggingFace Inc. team. All rights reserved.
 # Modifications Copyright (C) 2025, Advanced Micro Devices, Inc. All rights reserved.
 #
@@ -32,8 +33,7 @@ class ExportFormat(Enum):
     ONNX = "onnx"
 
 
-@dataclass
-class ExportConfigMixin:
+class ExportConfigMixin(Struct, frozen=False):
     """
     Base class for all export configuration dataclasses.
 
@@ -72,8 +72,7 @@ class ExportConfigMixin:
         yield from self.__dict__.items()
 
 
-@dataclass
-class DynamoConfig(ExportConfigMixin):
+class DynamoConfig(ExportConfigMixin, Struct, frozen=False):
     """
     Configuration class for exporting models via `torch.export`.
 
@@ -106,8 +105,7 @@ class DynamoConfig(ExportConfigMixin):
     prefer_deferred_runtime_asserts_over_guards: bool = False
 
 
-@dataclass
-class OnnxConfig(DynamoConfig):
+class OnnxConfig(DynamoConfig, Struct, frozen=False):
     """
     Configuration class for exporting models to ONNX via `torch.onnx.export`.
 
@@ -149,8 +147,7 @@ class OnnxConfig(DynamoConfig):
     keep_initializers_as_inputs: bool = False
 
 
-@dataclass
-class ExecutorchConfig(DynamoConfig):
+class ExecutorchConfig(DynamoConfig, Struct, frozen=False):
     """
     Configuration class for exporting models to ExecuTorch format.
 

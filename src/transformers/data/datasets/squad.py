@@ -1,3 +1,5 @@
+from typing import Annotated
+from salix import Struct
 # Copyright 2020 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,71 +35,31 @@ MODEL_CONFIG_CLASSES = list(MODEL_FOR_QUESTION_ANSWERING_MAPPING.keys())
 MODEL_TYPES = tuple(conf.model_type for conf in MODEL_CONFIG_CLASSES)
 
 
-@dataclass
-class SquadDataTrainingArguments:
+class SquadDataTrainingArguments(Struct, frozen=False):
     """
     Arguments pertaining to what data we are going to input our model for training and eval.
     """
 
-    model_type: str = field(
-        default=None, metadata={"help": "Model type selected in the list: " + ", ".join(MODEL_TYPES)}
-    )
-    data_dir: str = field(
-        default=None, metadata={"help": "The input data dir. Should contain the .json files for the SQuAD task."}
-    )
-    max_seq_length: int = field(
-        default=128,
-        metadata={
-            "help": (
-                "The maximum total input sequence length after tokenization. Sequences longer "
-                "than this will be truncated, sequences shorter will be padded."
-            )
+    model_type: Annotated[str, {"help": "Model type selected in the list: " + "] = None
+    data_dir: Annotated[str, {"help": "The input data dir. Should contain the .json files for the SQuAD task."} ] = None
+    max_seq_length: Annotated[int, { "help": ( "The maximum total input sequence length after tokenization. Sequences longer " "than this will be truncated] = 128
         },
     )
-    doc_stride: int = field(
-        default=128,
-        metadata={"help": "When splitting up a long document into chunks, how much stride to take between chunks."},
-    )
-    max_query_length: int = field(
-        default=64,
-        metadata={
-            "help": (
-                "The maximum number of tokens for the question. Questions longer than this will "
-                "be truncated to this length."
-            )
+    doc_stride: Annotated[int, {"help": "When splitting up a long document into chunks] = 128
+    max_query_length: Annotated[int, { "help": ( "The maximum number of tokens for the question. Questions longer than this will " "be truncated to this length." ] = 64
         },
     )
-    max_answer_length: int = field(
-        default=30,
-        metadata={
-            "help": (
-                "The maximum length of an answer that can be generated. This is needed because the start "
-                "and end predictions are not conditioned on one another."
-            )
+    max_answer_length: Annotated[int, { "help": ( "The maximum length of an answer that can be generated. This is needed because the start " "and end predictions are not conditioned on one another." ] = 30
         },
     )
-    overwrite_cache: bool = field(
-        default=False, metadata={"help": "Overwrite the cached training and evaluation sets"}
-    )
-    version_2_with_negative: bool = field(
-        default=False, metadata={"help": "If true, the SQuAD examples contain some that do not have an answer."}
-    )
-    null_score_diff_threshold: float = field(
-        default=0.0, metadata={"help": "If null_score - best_non_null is greater than the threshold predict null."}
-    )
-    n_best_size: int = field(
-        default=20, metadata={"help": "If null_score - best_non_null is greater than the threshold predict null."}
-    )
-    lang_id: int = field(
-        default=0,
-        metadata={
-            "help": (
-                "language id of input for language-specific xlm models (see"
-                " tokenization_xlm.PRETRAINED_INIT_CONFIGURATION)"
-            )
+    overwrite_cache: Annotated[bool, {"help": "Overwrite the cached training and evaluation sets"} ] = False
+    version_2_with_negative: Annotated[bool, {"help": "If true] = False
+    null_score_diff_threshold: Annotated[float, {"help": "If null_score - best_non_null is greater than the threshold predict null."} ] = 0.0
+    n_best_size: Annotated[int, {"help": "If null_score - best_non_null is greater than the threshold predict null."} ] = 20
+    lang_id: Annotated[int, { "help": ( "language id of input for language-specific xlm models (see" " tokenization_xlm.PRETRAINED_INIT_CONFIGURATION)" ] = 0
         },
     )
-    threads: int = field(default=1, metadata={"help": "multiple threads for converting example to features"})
+    threads: Annotated[int, {"help": "multiple threads for converting example to features"}] = 1
 
 
 class Split(Enum):

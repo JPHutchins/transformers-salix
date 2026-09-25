@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 NVIDIA and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -261,8 +262,7 @@ class GroupViTTokenAssign(nn.Module):
 
 
 @auto_docstring
-@dataclass
-class GroupViTModelOutput(ModelOutput):
+class GroupViTModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for image-text similarity.

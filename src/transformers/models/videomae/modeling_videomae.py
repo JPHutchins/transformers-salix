@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 Multimedia Computing Group, Nanjing University and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,8 +44,7 @@ logger = logging.get_logger(__name__)
     Class for VideoMAEDecoder's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class VideoMAEDecoderOutput(ModelOutput):
+class VideoMAEDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, patch_size ** 2 * num_channels)`):
         Pixel reconstruction logits.
@@ -60,8 +60,7 @@ class VideoMAEDecoderOutput(ModelOutput):
     Class for VideoMAEForPreTraining's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class VideoMAEForPreTrainingOutput(ModelOutput):
+class VideoMAEForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`):
         Pixel reconstruction loss.

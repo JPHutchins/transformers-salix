@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The PaddlePaddle Team and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -292,8 +293,7 @@ class PPFormulaNetPreTrainedModel(SLANeXtPreTrainedModel):
 
 
 # overrider for PPFormulaNetModel's encoder output
-@dataclass
-class PPFormulaNetVisionEncoderOutput(BaseModelOutputWithPooling):
+class PPFormulaNetVisionEncoderOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     pass
 
 

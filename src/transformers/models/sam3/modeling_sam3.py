@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The Meta AI Authors and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -66,8 +67,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class Sam3VisionEncoderOutput(BaseModelOutputWithPooling):
+class Sam3VisionEncoderOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     fpn_hidden_states (`tuple[torch.FloatTensor]`):
         Tuple of multi-level FPN feature maps.
@@ -80,8 +80,7 @@ class Sam3VisionEncoderOutput(BaseModelOutputWithPooling):
 
 
 @auto_docstring
-@dataclass
-class Sam3GeometryEncoderOutput(ModelOutput):
+class Sam3GeometryEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_prompts, hidden_size)`):
         Encoded geometry prompt features (boxes).
@@ -94,8 +93,7 @@ class Sam3GeometryEncoderOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class Sam3DETREncoderOutput(ModelOutput):
+class Sam3DETREncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Encoded vision features (flattened from multi-level features).
@@ -120,8 +118,7 @@ class Sam3DETREncoderOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class Sam3DETRDecoderOutput(ModelOutput):
+class Sam3DETRDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(num_layers, batch_size, num_queries, hidden_size)`):
         Decoder hidden states from all layers.
@@ -143,8 +140,7 @@ class Sam3DETRDecoderOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class Sam3MaskDecoderOutput(ModelOutput):
+class Sam3MaskDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     pred_masks (`torch.FloatTensor` of shape `(batch_size, num_queries, height, width)`):
         Predicted segmentation masks for each query.
@@ -160,8 +156,7 @@ class Sam3MaskDecoderOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class Sam3ImageSegmentationOutput(ModelOutput):
+class Sam3ImageSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     pred_masks (`torch.FloatTensor` of shape `(batch_size, num_queries, height, width)`):
         Predicted segmentation masks for each query.

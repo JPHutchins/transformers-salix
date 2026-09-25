@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 The Kakao Enterprise Authors and the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,8 +42,7 @@ logger = logging.get_logger(__name__)
     Describes the outputs for the VITS model, with potential hidden states and attentions.
     """
 )
-@dataclass
-class VitsModelOutput(ModelOutput):
+class VitsModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     waveform (`torch.FloatTensor` of shape `(batch_size, sequence_length)`):
         The final audio waveform predicted by the model.
@@ -65,8 +65,7 @@ class VitsModelOutput(ModelOutput):
     Describes the outputs for the VITS text encoder model, with potential hidden states and attentions.
     """
 )
-@dataclass
-class VitsTextEncoderOutput(ModelOutput):
+class VitsTextEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     prior_means (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         The predicted mean values of the prior distribution for the latent text variables.

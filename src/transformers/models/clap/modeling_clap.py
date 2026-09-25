@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 The LAION-AI Team and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -132,8 +133,7 @@ class ClapTextModelOutput(ModelOutput):
     ClapAudio model output to mimic the output of the original implementation.
     """
 )
-@dataclass
-class ClapAudioModelOutput(ModelOutput):
+class ClapAudioModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     audio_embeds (`torch.FloatTensor` of shape `(batch_size, hidden_size)`):
         The Audio embeddings obtained by applying the projection layer to the pooler_output.

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,8 +33,7 @@ DEPRECATION_MESSAGE = (
 )
 
 
-@dataclass
-class AttentionMaskConverter:
+class AttentionMaskConverter(Struct, frozen=False):
     """
     A utility attention mask class that allows one to:
         - Create a causal 4d mask

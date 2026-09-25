@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 The OpenAI Team Authors and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -142,8 +143,7 @@ class CLIPSegOutput(CLIPOutput):
 
 
 @auto_docstring
-@dataclass
-class CLIPSegDecoderOutput(ModelOutput):
+class CLIPSegDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, height, width)`):
         Classification scores for each pixel.
@@ -162,8 +162,7 @@ class CLIPSegDecoderOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class CLIPSegImageSegmentationOutput(ModelOutput):
+class CLIPSegImageSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Binary cross entropy loss for segmentation.

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023-present NAVER Corp, The Microsoft Research Asia LayoutLM Team Authors and the HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,8 +47,7 @@ logger = logging.get_logger(__name__)
     Base class for outputs of token classification models.
     """
 )
-@dataclass
-class BrosSpadeOutput(ModelOutput):
+class BrosSpadeOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification loss.

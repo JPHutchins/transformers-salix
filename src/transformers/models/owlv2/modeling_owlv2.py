@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 Google AI and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -63,8 +64,7 @@ def image_text_contrastive_loss(similarity: torch.Tensor) -> torch.Tensor:
 
 
 @auto_docstring
-@dataclass
-class Owlv2Output(ModelOutput):
+class Owlv2Output(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for image-text similarity.
@@ -173,8 +173,7 @@ def generalized_box_iou(boxes1, boxes2):
     Output type of [`Owlv2ForObjectDetection`].
     """
 )
-@dataclass
-class Owlv2ObjectDetectionOutput(ModelOutput):
+class Owlv2ObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

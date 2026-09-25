@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 Microsoft Research and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,8 +38,7 @@ logger = logging.get_logger(__name__)
     Swin2SR encoder's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class Swin2SREncoderOutput(ModelOutput):
+class Swin2SREncoderOutput(ModelOutput, Struct, frozen=False):
     last_hidden_state: torch.FloatTensor | None = None
     hidden_states: tuple[torch.FloatTensor] | None = None
     attentions: tuple[torch.FloatTensor] | None = None

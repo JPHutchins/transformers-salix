@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2021 Google Research and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -378,8 +379,7 @@ class FNetPreTrainedModel(PreTrainedModel):
     Output type of [`FNetForPreTraining`].
     """
 )
-@dataclass
-class FNetForPreTrainingOutput(ModelOutput):
+class FNetForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the masked language modeling loss and the next sequence prediction

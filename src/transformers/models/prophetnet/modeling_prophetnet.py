@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2020 The Microsoft Authors and The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -118,8 +119,7 @@ def compute_all_stream_relative_buckets(num_buckets, max_distance, position_ids)
     Base class for sequence-to-sequence language models outputs.
     """
 )
-@dataclass
-class ProphetNetSeq2SeqLMOutput(ModelOutput):
+class ProphetNetSeq2SeqLMOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss.
@@ -170,8 +170,7 @@ class ProphetNetSeq2SeqLMOutput(ModelOutput):
     decoding.
     """
 )
-@dataclass
-class ProphetNetSeq2SeqModelOutput(ModelOutput):
+class ProphetNetSeq2SeqModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, decoder_sequence_length, hidden_size)`):
         Sequence of main stream hidden-states at the output of the last layer of the decoder of the model.
@@ -219,8 +218,7 @@ class ProphetNetSeq2SeqModelOutput(ModelOutput):
     Base class for model's outputs that may also contain a past key/values (to speed up sequential decoding).
     """
 )
-@dataclass
-class ProphetNetDecoderModelOutput(ModelOutput):
+class ProphetNetDecoderModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, decoder_sequence_length, hidden_size)`):
         Sequence of main stream hidden-states at the output of the last layer of the decoder of the model.
@@ -263,8 +261,7 @@ class ProphetNetDecoderModelOutput(ModelOutput):
     Base class for model's outputs that may also contain a past key/values (to speed up sequential decoding).
     """
 )
-@dataclass
-class ProphetNetDecoderLMOutput(ModelOutput):
+class ProphetNetDecoderLMOutput(ModelOutput, Struct, frozen=False):
     r"""
     ngram_hidden_states (`tuple(torch.FloatTensor)`, *optional*, returned when `output_hidden_states=True` is passed or when `config.output_hidden_states=True`):
         Tuple of `torch.FloatTensor` (one for the output of the embeddings + one for the output of each layer) of

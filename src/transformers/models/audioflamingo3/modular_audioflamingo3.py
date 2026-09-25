@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 NVIDIA CORPORATION and the HuggingFace Inc. team. All rights
 # reserved.
 #
@@ -55,8 +56,7 @@ class AudioFlamingo3PreTrainedModel(Qwen2AudioPreTrainedModel):
     _supports_attention_backend = True
 
 
-@dataclass
-class AudioFlamingo3ModelOutputWithPast(VoxtralModelOutputWithPast):
+class AudioFlamingo3ModelOutputWithPast(VoxtralModelOutputWithPast, Struct, frozen=False):
     pass
 
 
@@ -65,8 +65,7 @@ class AudioFlamingo3ModelOutputWithPast(VoxtralModelOutputWithPast):
     Base class for AudioFlamingo3 causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class AudioFlamingo3CausalLMOutputWithPast(ModelOutput):
+class AudioFlamingo3CausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

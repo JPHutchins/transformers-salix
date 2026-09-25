@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2020 The Trax Authors and The HuggingFace Inc. team.
 # Copyright (c) 2018, NVIDIA CORPORATION.  All rights reserved.
 #
@@ -1873,8 +1874,7 @@ class ReformerPreTrainedModel(PreTrainedModel):
     Output type of [`ReformerModel`].
     """
 )
-@dataclass
-class ReformerModelOutput(ModelOutput):
+class ReformerModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_predict, hidden_size)`):
         Sequence of hidden-states at the last layer of the model.
@@ -1901,8 +1901,7 @@ class ReformerModelOutput(ModelOutput):
     Output type of [`ReformerModelWithLMHead`].
     """
 )
-@dataclass
-class ReformerModelWithLMHeadOutput(ModelOutput):
+class ReformerModelWithLMHeadOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape *(1,)*, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

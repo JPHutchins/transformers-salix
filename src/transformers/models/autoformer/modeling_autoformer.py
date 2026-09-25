@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright (c) 2021 THUML @ Tsinghua University
 # Copyright 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # Copyright 2023 The HuggingFace Inc. team. All rights reserved.
@@ -45,8 +46,7 @@ logger = logging.get_logger(__name__)
     Base class for model's outputs that may also contain a past key/values (to speed up sequential decoding).
     """
 )
-@dataclass
-class AutoFormerDecoderOutput(ModelOutput):
+class AutoFormerDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.
@@ -70,8 +70,7 @@ class AutoFormerDecoderOutput(ModelOutput):
     Autoformer model output that contains the additional trend output.
     """
 )
-@dataclass
-class AutoformerModelOutput(ModelOutput):
+class AutoformerModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the decoder of the model.

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -563,8 +564,7 @@ class AllKwargsForChatTemplate(TypedDict, total=False):
     template_kwargs: ProcessorChatTemplateKwargs
 
 
-@dataclass
-class MultiModalData:
+class MultiModalData(Struct, frozen=False):
     """
     Dataclass that holds extra useful data for processing
     multimodal data. Processors currently cannot return keys,

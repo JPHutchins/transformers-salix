@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2021 Facebook AI Research The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -54,8 +55,7 @@ logger = logging.get_logger(__name__)
     gone through a layernorm. This is useful when training the model with auxiliary decoding losses.
     """
 )
-@dataclass
-class DetrDecoderOutput(BaseModelOutputWithCrossAttentions):
+class DetrDecoderOutput(BaseModelOutputWithCrossAttentions, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(config.decoder_layers, batch_size, num_queries, hidden_size)`, *optional*, returned when `config.auxiliary_loss=True`):
         Intermediate decoder activations, i.e. the output of each decoder layer, each of them gone through a
@@ -72,8 +72,7 @@ class DetrDecoderOutput(BaseModelOutputWithCrossAttentions):
     gone through a layernorm. This is useful when training the model with auxiliary decoding losses.
     """
 )
-@dataclass
-class DetrModelOutput(Seq2SeqModelOutput):
+class DetrModelOutput(Seq2SeqModelOutput, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(config.decoder_layers, batch_size, sequence_length, hidden_size)`, *optional*, returned when `config.auxiliary_loss=True`):
         Intermediate decoder activations, i.e. the output of each decoder layer, each of them gone through a
@@ -88,8 +87,7 @@ class DetrModelOutput(Seq2SeqModelOutput):
     Output type of [`DetrForObjectDetection`].
     """
 )
-@dataclass
-class DetrObjectDetectionOutput(ModelOutput):
+class DetrObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a
@@ -131,8 +129,7 @@ class DetrObjectDetectionOutput(ModelOutput):
     Output type of [`DetrForSegmentation`].
     """
 )
-@dataclass
-class DetrSegmentationOutput(ModelOutput):
+class DetrSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

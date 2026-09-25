@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 The HuggingFace Team The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -462,8 +463,7 @@ class DecisionTransformerGPT2Model(DecisionTransformerGPT2PreTrainedModel):
     Base class for model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
-class DecisionTransformerOutput(ModelOutput):
+class DecisionTransformerOutput(ModelOutput, Struct, frozen=False):
     r"""
     state_preds (`torch.FloatTensor` of shape `(batch_size, sequence_length, state_dim)`):
         Environment state predictions

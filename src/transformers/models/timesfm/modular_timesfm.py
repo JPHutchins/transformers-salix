@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 Google LLC and HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,8 +39,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class TimesFmOutput(BaseModelOutput):
+class TimesFmOutput(BaseModelOutput, Struct, frozen=False):
     r"""
     loc (`torch.Tensor` of shape `(batch_size, )`):
         The mean of the time series inputs.
@@ -52,8 +52,7 @@ class TimesFmOutput(BaseModelOutput):
 
 
 @auto_docstring
-@dataclass
-class TimesFmOutputForPrediction(BaseModelOutput):
+class TimesFmOutputForPrediction(BaseModelOutput, Struct, frozen=False):
     r"""
     mean_predictions (`torch.Tensor` of shape `(batch_size, sequence_length)`):
         The mean predictions of the time series.

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The LLAMA4 and HuggingFace Inc. team. All rights reserved.
 #
 #
@@ -658,8 +659,7 @@ class Llama4ForCausalLM(Llama4PreTrainedModel, GenerationMixin):
     Base class for Llava causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class Llama4CausalLMOutputWithPast(ModelOutput):
+class Llama4CausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

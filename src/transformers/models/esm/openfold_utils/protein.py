@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2021 AlQuraishi Laboratory
 # Copyright 2021 DeepMind Technologies Limited
 #
@@ -31,8 +32,7 @@ ModelOutput = Mapping[str, Any]  # Is a nested dict.
 PICO_TO_ANGSTROM = 0.01
 
 
-@dataclasses.dataclass(frozen=True)
-class Protein:
+class Protein(Struct, frozen=True):
     """Protein structure representation."""
 
     # Cartesian coordinates of atoms in angstroms. The atom types correspond to

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -152,8 +153,7 @@ def _pp_report_key_owners(
     return owned, skipped
 
 
-@dataclass
-class LoadStateDictInfo:
+class LoadStateDictInfo(Struct, frozen=False):
     """
     Mutable container for state-dict loading results and diagnostics. Each entry in this structure is mutable,
     and will usually be mutated in-place during the loading pipeline.

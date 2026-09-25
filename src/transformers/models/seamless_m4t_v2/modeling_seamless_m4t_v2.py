@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -146,8 +147,7 @@ class SeamlessM4Tv2GenerationOutput(ModelOutput):
     Class defining the outputs from [`SeamlessM4Tv2TextToUnitDecoder`].
     """
 )
-@dataclass
-class SeamlessM4Tv2TextToUnitDecoderOutput(ModelOutput):
+class SeamlessM4Tv2TextToUnitDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     padding_mask (`torch.Tensor` of shape `(batch_size, sequence_length)`, *optional*):
         Indicates which inputs are to be ignored due to padding, where elements are either 1 for *not masked* or 0
@@ -166,8 +166,7 @@ class SeamlessM4Tv2TextToUnitDecoderOutput(ModelOutput):
         [`SeamlessM4Tv2TextToUnitModel`].
     """
 )
-@dataclass
-class SeamlessM4Tv2TextToUnitOutput(ModelOutput):
+class SeamlessM4Tv2TextToUnitOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the decoder of the model.

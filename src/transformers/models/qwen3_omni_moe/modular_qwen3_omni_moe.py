@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The Qwen team, Alibaba Group and the HuggingFace Inc. team. All rights reserved.
 #
 #
@@ -214,8 +215,7 @@ def get_audio_cu_seqlens(
 
 
 @auto_docstring
-@dataclass
-class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling):
+class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     deepstack_features (`List[torch.FloatTensor]`, *optional*):
         List of hidden-states (feature maps) from deepstack layers.
@@ -1182,8 +1182,7 @@ class Qwen3OmniMoeThinkerTextModel(Qwen3VLMoeTextModel):
 
 
 @auto_docstring
-@dataclass
-class Qwen3OmniMoeThinkerCausalLMOutputWithPast(MoeCausalLMOutputWithPast):
+class Qwen3OmniMoeThinkerCausalLMOutputWithPast(MoeCausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -1426,8 +1425,7 @@ class Qwen3OmniMoeTalkerResizeMLP(nn.Module):
         return self.linear_fc2(self.act_fn(self.linear_fc1(hidden_state)))
 
 
-@dataclass
-class Qwen3OmniMoeTalkerCodePredictorOutputWithPast(CausalLMOutputWithPast):
+class Qwen3OmniMoeTalkerCodePredictorOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     generation_steps (`int`, *optional*)
         Current generation step of code predictor model.
@@ -1613,8 +1611,7 @@ class Qwen3OmniMoeTalkerCodePredictorModelForConditionalGeneration(Qwen3ForCausa
         return model_kwargs
 
 
-@dataclass
-class Qwen3OmniMoeTalkerOutputWithPast(MoeCausalLMOutputWithPast):
+class Qwen3OmniMoeTalkerOutputWithPast(MoeCausalLMOutputWithPast, Struct, frozen=False):
     r"""
     generation_step (`int`, *optional*):
         Current generation step, used to track which `trailing_text_hidden` should be used.

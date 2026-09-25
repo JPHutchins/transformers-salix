@@ -16,6 +16,7 @@ Optimizer utilities for the Trainer class.
 """
 
 from __future__ import annotations
+from salix import Struct
 
 import importlib.metadata
 import logging
@@ -51,8 +52,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-@dataclass
-class OptimizerContext:
+class OptimizerContext(Struct, frozen=False):
     """Context object passed to all optimizer handlers."""
 
     args: TrainingArguments

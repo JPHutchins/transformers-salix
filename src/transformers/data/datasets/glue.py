@@ -1,3 +1,5 @@
+from typing import Annotated
+from salix import Struct
 # Copyright 2020 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,8 +33,7 @@ from ..processors.utils import InputFeatures
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class GlueDataTrainingArguments:
+class GlueDataTrainingArguments(Struct, frozen=False):
     """
     Arguments pertaining to what data we are going to input our model for training and eval.
 
@@ -44,18 +45,10 @@ class GlueDataTrainingArguments:
     data_dir: str = field(
         metadata={"help": "The input data dir. Should contain the .tsv files (or other data files) for the task."}
     )
-    max_seq_length: int = field(
-        default=128,
-        metadata={
-            "help": (
-                "The maximum total input sequence length after tokenization. Sequences longer "
-                "than this will be truncated, sequences shorter will be padded."
-            )
+    max_seq_length: Annotated[int, { "help": ( "The maximum total input sequence length after tokenization. Sequences longer " "than this will be truncated] = 128
         },
     )
-    overwrite_cache: bool = field(
-        default=False, metadata={"help": "Overwrite the cached training and evaluation sets"}
-    )
+    overwrite_cache: Annotated[bool, {"help": "Overwrite the cached training and evaluation sets"} ] = False
 
     def __post_init__(self):
         self.task_name = self.task_name.lower()

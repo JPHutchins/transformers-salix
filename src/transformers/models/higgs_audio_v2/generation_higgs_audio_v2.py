@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025, The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -160,8 +161,7 @@ class HiggsAudioV2DelayPatternLogitsProcessor(LogitsProcessor):
         return scores.reshape(-1, self.codebook_size)
 
 
-@dataclass
-class HiggsAudioV2GenerationOutput(GenerateDecoderOnlyOutput):
+class HiggsAudioV2GenerationOutput(GenerateDecoderOnlyOutput, Struct, frozen=False):
     """
     Outputs of HiggsAudioV2 generation models, when using non-beam methods.
 

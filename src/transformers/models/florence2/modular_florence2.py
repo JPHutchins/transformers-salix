@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 Microsoft and the HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1316,8 +1317,7 @@ class Florence2MultiModalProjector(nn.Module):
     decoding.
     """
 )
-@dataclass
-class Florence2Seq2SeqModelOutput(Seq2SeqModelOutput):
+class Florence2Seq2SeqModelOutput(Seq2SeqModelOutput, Struct, frozen=False):
     r"""
     image_hidden_states (`torch.FloatTensor`, *optional*):
         A `torch.FloatTensor` of size `(batch_size, num_image_tokens, hidden_size)`.
@@ -1333,8 +1333,7 @@ class Florence2Seq2SeqModelOutput(Seq2SeqModelOutput):
     decoding.
     """
 )
-@dataclass
-class Florence2Seq2SeqLMOutput(Seq2SeqLMOutput):
+class Florence2Seq2SeqLMOutput(Seq2SeqLMOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

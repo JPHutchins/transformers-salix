@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 Meta Platforms, Inc. and the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Sapiens2 License. You may obtain a copy of the License at
@@ -75,8 +76,7 @@ logger = logging.get_logger(__name__)
     each selected feature stage (used when `config.return_class_token=True`).
     """
 )
-@dataclass
-class Sapiens2BackboneOutput(DINOv3ViTBackboneOutput):
+class Sapiens2BackboneOutput(DINOv3ViTBackboneOutput, Struct, frozen=False):
     pass
 
 
@@ -85,8 +85,7 @@ class Sapiens2BackboneOutput(DINOv3ViTBackboneOutput):
     Class for outputs of pose estimation models.
     """
 )
-@dataclass
-class Sapiens2PoseEstimatorOutput(VitPoseEstimatorOutput):
+class Sapiens2PoseEstimatorOutput(VitPoseEstimatorOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Pose estimation loss.
@@ -104,8 +103,7 @@ class Sapiens2PoseEstimatorOutput(VitPoseEstimatorOutput):
     Class for outputs of normal estimation models.
     """
 )
-@dataclass
-class Sapiens2NormalEstimatorOutput(ModelOutput):
+class Sapiens2NormalEstimatorOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Normal estimation loss.
@@ -131,8 +129,7 @@ class Sapiens2NormalEstimatorOutput(ModelOutput):
     Class for outputs of pointmap estimation models.
     """
 )
-@dataclass
-class Sapiens2PointmapEstimatorOutput(ModelOutput):
+class Sapiens2PointmapEstimatorOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Pointmap estimation loss.
@@ -161,8 +158,7 @@ class Sapiens2PointmapEstimatorOutput(ModelOutput):
     Class for outputs of image matting models.
     """
 )
-@dataclass
-class Sapiens2ImageMattingOutput(ImageMattingOutput):
+class Sapiens2ImageMattingOutput(ImageMattingOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Loss.

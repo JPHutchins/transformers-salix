@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 HUST-VL and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,8 +31,7 @@ from .configuration_vitmatte import VitMatteConfig
     Class for outputs of image matting models.
     """
 )
-@dataclass
-class ImageMattingOutput(ModelOutput):
+class ImageMattingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Loss.

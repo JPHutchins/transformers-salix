@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2021 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,8 +43,7 @@ if TYPE_CHECKING:
 ListOfDict = list[dict[str, int | str]]
 
 
-@dataclass
-class Wav2Vec2DecoderWithLMOutput(ModelOutput):
+class Wav2Vec2DecoderWithLMOutput(ModelOutput, Struct, frozen=False):
     """
     Output type of [`Wav2Vec2DecoderWithLM`], with transcription.
 

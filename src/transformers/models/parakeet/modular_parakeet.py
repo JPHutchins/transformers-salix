@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -57,8 +58,7 @@ logger = logging.get_logger(__name__)
     is not preserved in the model's forward.
     """
 )
-@dataclass
-class ParakeetEncoderModelOutput(BaseModelOutputWithPooling):
+class ParakeetEncoderModelOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     attention_mask (`torch.Tensor` of shape `(batch_size, sequence_length)`, *optional*):
         Mask to avoid performing attention on padding token indices after sequence compression. Returned because the
@@ -490,8 +490,7 @@ class ParakeetEncoder(ParakeetPreTrainedModel):
         )
 
 
-@dataclass
-class ParakeetCTCGenerateOutput(ModelOutput):
+class ParakeetCTCGenerateOutput(ModelOutput, Struct, frozen=False):
     """
     Outputs of Parakeet CTC model generation.
 
@@ -517,8 +516,7 @@ class ParakeetCTCGenerateOutput(ModelOutput):
     hidden_states: tuple[tuple[torch.FloatTensor]] | None = None
 
 
-@dataclass
-class ParakeetGenerateOutput(ParakeetCTCGenerateOutput):
+class ParakeetGenerateOutput(ParakeetCTCGenerateOutput, Struct, frozen=False):
     """
     Deprecated alias for ParakeetCTCGenerateOutput. Use ParakeetCTCGenerateOutput instead.
     """
@@ -748,8 +746,7 @@ class ParakeetRNNTJointNetwork(nn.Module):
         return self.head(joint_output)
 
 
-@dataclass
-class ParakeetRNNTOutput(BaseModelOutputWithPooling):
+class ParakeetRNNTOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     """
     Output of the Parakeet RNN-T forward pass.
 

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright Studio Ousia and The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,8 +40,7 @@ logger = logging.get_logger(__name__)
     Base class for outputs of the LUKE model.
     """
 )
-@dataclass
-class BaseLukeModelOutputWithPooling(BaseModelOutputWithPooling):
+class BaseLukeModelOutputWithPooling(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, hidden_size)`):
         Last layer hidden-state of the first token of the sequence (classification token) further processed by a
@@ -62,8 +62,7 @@ class BaseLukeModelOutputWithPooling(BaseModelOutputWithPooling):
     Base class for model's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class BaseLukeModelOutput(BaseModelOutput):
+class BaseLukeModelOutput(BaseModelOutput, Struct, frozen=False):
     r"""
     entity_last_hidden_state (`torch.FloatTensor` of shape `(batch_size, entity_length, hidden_size)`):
         Sequence of entity hidden-states at the output of the last layer of the model.
@@ -82,8 +81,7 @@ class BaseLukeModelOutput(BaseModelOutput):
     Base class for model's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class LukeMaskedLMOutput(ModelOutput):
+class LukeMaskedLMOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         The sum of masked language modeling (MLM) loss and entity prediction loss.
@@ -116,8 +114,7 @@ class LukeMaskedLMOutput(ModelOutput):
     Outputs of entity classification models.
     """
 )
-@dataclass
-class EntityClassificationOutput(ModelOutput):
+class EntityClassificationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification loss.
@@ -141,8 +138,7 @@ class EntityClassificationOutput(ModelOutput):
     Outputs of entity pair classification models.
     """
 )
-@dataclass
-class EntityPairClassificationOutput(ModelOutput):
+class EntityPairClassificationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification loss.
@@ -166,8 +162,7 @@ class EntityPairClassificationOutput(ModelOutput):
     Outputs of entity span classification models.
     """
 )
-@dataclass
-class EntitySpanClassificationOutput(ModelOutput):
+class EntitySpanClassificationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification loss.
@@ -191,8 +186,7 @@ class EntitySpanClassificationOutput(ModelOutput):
     Outputs of sentence classification models.
     """
 )
-@dataclass
-class LukeSequenceClassifierOutput(ModelOutput):
+class LukeSequenceClassifierOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification (or regression if config.num_labels==1) loss.
@@ -216,8 +210,7 @@ class LukeSequenceClassifierOutput(ModelOutput):
     Base class for outputs of token classification models.
     """
 )
-@dataclass
-class LukeTokenClassifierOutput(ModelOutput):
+class LukeTokenClassifierOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification loss.
@@ -241,8 +234,7 @@ class LukeTokenClassifierOutput(ModelOutput):
     Outputs of question answering models.
     """
 )
-@dataclass
-class LukeQuestionAnsweringModelOutput(ModelOutput):
+class LukeQuestionAnsweringModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Total span extraction loss is the sum of a Cross-Entropy for the start and end positions.
@@ -265,8 +257,7 @@ class LukeQuestionAnsweringModelOutput(ModelOutput):
     Outputs of multiple choice models.
     """
 )
-@dataclass
-class LukeMultipleChoiceModelOutput(ModelOutput):
+class LukeMultipleChoiceModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape *(1,)*, *optional*, returned when `labels` is provided):
         Classification loss.

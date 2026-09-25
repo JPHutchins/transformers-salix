@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 Meta Platforms, Inc. and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -49,8 +50,7 @@ logger = logging.get_logger(__name__)
     the mask features and the multiscale features.
     """
 )
-@dataclass
-class Mask2FormerPixelDecoderOutput(ModelOutput):
+class Mask2FormerPixelDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     multi_scale_features (`tuple(torch.FloatTensor)`):
         Tuple of multi-scale features of scales [1/8, 1/16, 1/32] and shape `(batch_size, num_channels, height,
@@ -76,8 +76,7 @@ class Mask2FormerPixelDecoderOutput(ModelOutput):
     i.e. the output of each decoder layer, each of them gone through a layernorm.
     """
 )
-@dataclass
-class Mask2FormerMaskedAttentionDecoderOutput(BaseModelOutputWithCrossAttentions):
+class Mask2FormerMaskedAttentionDecoderOutput(BaseModelOutputWithCrossAttentions, Struct, frozen=False):
     r"""
     hidden_states (`tuple(torch.FloatTensor)`, *optional*):
         Tuple of `torch.FloatTensor` (one for the output of the embeddings + one for the output of each layer) of
@@ -111,8 +110,7 @@ class Mask2FormerMaskedAttentionDecoderOutput(BaseModelOutputWithCrossAttentions
     feature maps produced using **multi-scaling strategy** defined in the paper.
     """
 )
-@dataclass
-class Mask2FormerPixelLevelModuleOutput(ModelOutput):
+class Mask2FormerPixelLevelModuleOutput(ModelOutput, Struct, frozen=False):
     r"""
     encoder_last_hidden_state (`torch.FloatTensor`):
         Last hidden states (final feature map of shape `(batch_size, num_channels, height, width)`) of the last
@@ -139,8 +137,7 @@ class Mask2FormerPixelLevelModuleOutput(ModelOutput):
     Class for outputs of [`Mask2FormerModel`]. This class returns all the needed hidden states to compute the logits.
     """
 )
-@dataclass
-class Mask2FormerModelOutput(ModelOutput):
+class Mask2FormerModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     encoder_last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_channels, height, width)`, *optional*):
         Last hidden states (final feature map) of the last stage of the encoder model (backbone). Returned when
@@ -192,8 +189,7 @@ class Mask2FormerModelOutput(ModelOutput):
     [`~Mask2FormerImageProcessor] for details regarding usage.
     """
 )
-@dataclass
-class Mask2FormerForUniversalSegmentationOutput(ModelOutput):
+class Mask2FormerForUniversalSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.Tensor`, *optional*):
         The computed loss, returned when labels are present.

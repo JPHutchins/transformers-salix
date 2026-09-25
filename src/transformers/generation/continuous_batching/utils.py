@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The HuggingFace Inc. team
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,8 +43,7 @@ class CudaGraphBuffer:
         self._storage[key] = graph
 
 
-@dataclass
-class WorkloadHints:
+class WorkloadHints(Struct, frozen=False):
     """A tiny dataclass containing hints to help choose good continuous batching defaults"""
 
     max_prompt_length: int = 0

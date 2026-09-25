@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The Microsoft Team and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,8 +44,7 @@ if TYPE_CHECKING:
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class VibeVoiceGenerateOutput(GenerateDecoderOnlyOutput):
+class VibeVoiceGenerateOutput(GenerateDecoderOnlyOutput, Struct, frozen=False):
     """
     Outputs of VibeVoiceForConditionalGeneration.generate.
 

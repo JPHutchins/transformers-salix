@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2019 The Google AI Language Team Authors and The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -526,8 +527,7 @@ class ElectraPreTrainedModel(PreTrainedModel):
     Output type of [`ElectraForPreTraining`].
     """
 )
-@dataclass
-class ElectraForPreTrainingOutput(ModelOutput):
+class ElectraForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss of the ELECTRA objective.

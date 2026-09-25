@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 IBM and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -80,8 +81,7 @@ class Granite4VisionCausalLMOutputWithPast(LlavaNextCausalLMOutputWithPast):
     Base class for Granite4Vision causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class Granite4VisionImageFeaturesOutput(BaseModelOutputWithPooling):
+class Granite4VisionImageFeaturesOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     deepstack_features (`list[tuple[int, list[torch.Tensor]]]`, *optional*):
         List of `(llm_layer_idx, packed_features)` pairs produced by the deepstack

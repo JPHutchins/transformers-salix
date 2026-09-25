@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 The HuggingFace Inc. team and Google DeepMind.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,8 +36,7 @@ if TYPE_CHECKING:
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class WatermarkDetectorOutput:
+class WatermarkDetectorOutput(Struct, frozen=False):
     """
     Outputs of a watermark detector.
 
@@ -269,8 +269,7 @@ class BayesianDetectorConfig(PreTrainedConfig):
         self.watermarking_config = watermarking_config
 
 
-@dataclass
-class BayesianWatermarkDetectorModelOutput(ModelOutput):
+class BayesianWatermarkDetectorModelOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of models predicting if the text is watermarked.
 

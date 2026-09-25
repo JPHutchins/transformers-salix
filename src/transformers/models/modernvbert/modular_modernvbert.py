@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 Illuin Technology and contributors, and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -99,8 +100,7 @@ class ModernVBertConfig(PreTrainedConfig):
         super().__post_init__(**kwargs)
 
 
-@dataclass
-class ModernVBertBaseModelOutput(BaseModelOutput):
+class ModernVBertBaseModelOutput(BaseModelOutput, Struct, frozen=False):
     """
     Base class for ModernVBERT model's outputs.
     Args:
@@ -129,8 +129,7 @@ class ModernVBertBaseModelOutput(BaseModelOutput):
     image_hidden_states: tuple[torch.FloatTensor] | None = None
 
 
-@dataclass
-class ModernVBertMaskedLMOutput(MaskedLMOutput):
+class ModernVBertMaskedLMOutput(MaskedLMOutput, Struct, frozen=False):
     """
     Base class for ModernVBERT model's outputs with masked language modeling loss.
     Args:

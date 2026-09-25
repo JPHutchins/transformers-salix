@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 SHI Labs and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -98,8 +99,7 @@ def prepare_img():
     return image
 
 
-@dataclass
-class Args:
+class Args(Struct, frozen=False):
     """Fake command line arguments needed by oneformer/detectron2 implementation"""
 
     config_file: str

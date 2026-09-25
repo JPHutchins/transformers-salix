@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 Alibaba Research and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,8 +33,7 @@ from .configuration_mgp_str import MgpstrConfig
     Base class for vision model's outputs that also contains image embeddings of the pooling of the last hidden states.
     """
 )
-@dataclass
-class MgpstrModelOutput(ModelOutput):
+class MgpstrModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`tuple(torch.FloatTensor)` of shape `(batch_size, config.num_character_labels)`):
         Tuple of `torch.FloatTensor` (one for the output of character of shape `(batch_size,

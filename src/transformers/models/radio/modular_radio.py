@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright (c) 2026, NVIDIA CORPORATION.  All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,8 +42,7 @@ __all__ = ["RadioModel", "RadioPreTrainedModel"]
 
 
 @auto_docstring(custom_intro="Output of [`RadioModel`].")
-@dataclass
-class RadioModelOutput(ModelOutput):
+class RadioModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     summary (`torch.FloatTensor` of shape `(batch_size, num_summary_idxs * hidden_size)`):
         Flattened summary embedding, gathered from the cls tokens selected by `config.summary_idxs`.

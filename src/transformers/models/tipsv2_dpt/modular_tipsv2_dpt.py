@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 Google LLC and the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,8 +41,7 @@ from ..zoedepth.modeling_zoedepth import (
 
 
 @auto_docstring
-@dataclass
-class Tipsv2DptDensePredictorOutput(ModelOutput):
+class Tipsv2DptDensePredictorOutput(ModelOutput, Struct, frozen=False):
     r"""
     normals (`torch.FloatTensor` of shape `(batch_size, 3, height, width)`):
         Raw normal map predictions (unnormalized).

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2018 Google AI, Google Brain and the HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -313,8 +314,7 @@ class AlbertPreTrainedModel(PreTrainedModel):
     Output type of [`AlbertForPreTraining`].
     """
 )
-@dataclass
-class AlbertForPreTrainingOutput(ModelOutput):
+class AlbertForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the masked language modeling loss and the next sequence prediction

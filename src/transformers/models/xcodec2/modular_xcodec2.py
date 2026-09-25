@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -128,8 +129,7 @@ class Xcodec2Config(LlamaConfig):
 
 
 @auto_docstring
-@dataclass
-class Xcodec2Output(ModelOutput):
+class Xcodec2Output(ModelOutput, Struct, frozen=False):
     r"""
     audio_values (`torch.FloatTensor` of shape `(batch_size, 1, sequence_length)`, *optional*):
         Decoded audio waveform values in the time domain, obtained using the decoder
@@ -150,8 +150,7 @@ class Xcodec2Output(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class Xcodec2EncoderOutput(ModelOutput):
+class Xcodec2EncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     audio_codes (`torch.LongTensor` of shape `(batch_size, 1, codes_length)`, *optional*):
         Discrete code embeddings computed using `model.encode`. These represent
@@ -169,8 +168,7 @@ class Xcodec2EncoderOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class Xcodec2DecoderOutput(ModelOutput):
+class Xcodec2DecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     audio_values (`torch.FloatTensor` of shape `(batch_size, 1, segment_length)`, *optional*):
         Decoded audio waveform values in the time domain, obtained by converting

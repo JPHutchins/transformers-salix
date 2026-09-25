@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2021 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1009,8 +1010,7 @@ def validate_kwargs(valid_processor_keys: list[str], captured_kwargs: list[str])
         logger.warning(f"Unused or unrecognized kwargs: {unused_key_str}.")
 
 
-@dataclass()
-class SizeDict:
+class SizeDict(Struct, frozen=False):
     """
     Hashable dictionary to store image size information.
     """

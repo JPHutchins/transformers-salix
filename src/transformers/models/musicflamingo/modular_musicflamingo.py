@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 NVIDIA CORPORATION and the HuggingFace Inc. team. All rights
 # reserved.
 #
@@ -254,8 +255,7 @@ class MusicFlamingoPreTrainedModel(AudioFlamingo3PreTrainedModel):
             init.copy_(module.position_angles, buffer_value)
 
 
-@dataclass
-class MusicFlamingoModelOutputWithPast(AudioFlamingo3ModelOutputWithPast):
+class MusicFlamingoModelOutputWithPast(AudioFlamingo3ModelOutputWithPast, Struct, frozen=False):
     pass
 
 

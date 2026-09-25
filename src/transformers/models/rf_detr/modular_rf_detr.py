@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -886,8 +887,7 @@ class RfDetrPreTrainedModel(LwDetrPreTrainedModel):
     Base class for outputs of the RfDetr backbone-decoder model.
     """
 )
-@dataclass
-class RfDetrModelOutput(ModelOutput):
+class RfDetrModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     init_reference_points (`torch.FloatTensor` of shape  `(batch_size, num_queries, 4)`):
         Initial reference points sent through the Transformer decoder.
@@ -1274,8 +1274,7 @@ class RfDetrForObjectDetection(LwDetrForObjectDetection):
     Output type of [`RfDetrForInstanceSegmentation`].
     """
 )
-@dataclass
-class RfDetrInstanceSegmentationOutput(ModelOutput):
+class RfDetrInstanceSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

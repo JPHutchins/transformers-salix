@@ -25,6 +25,7 @@ Requirements: CUDA, Hopper (SM90+), CUDA runtime ≥ 12.3, kernels-community/dee
 """
 
 from __future__ import annotations
+from salix import Struct
 
 import functools
 import json
@@ -51,8 +52,7 @@ logger = logging.get_logger(__name__)
 # ── Kernel loading ─────────────────────────────────────────────────────────────
 
 
-@dataclass(frozen=True)
-class DeepGEMM:
+class DeepGEMM(Struct, frozen=True):
     """Curated entry points exposed by `kernels-community/deep-gemm`."""
 
     fp8_fp4_matmul: Callable

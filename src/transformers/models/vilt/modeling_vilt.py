@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 NAVER AI Labs and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,8 +47,7 @@ logger = logging.get_logger(__name__)
     Class for outputs of [`ViltForImagesAndTextClassification`].
     """
 )
-@dataclass
-class ViltForImagesAndTextClassificationOutput(ModelOutput):
+class ViltForImagesAndTextClassificationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification (or regression if config.num_labels==1) loss.

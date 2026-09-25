@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -135,8 +136,7 @@ class VoxtralMultiModalProjector(nn.Module):
     Base class for Voxtral outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class VoxtralModelOutputWithPast(BaseModelOutputWithPast):
+class VoxtralModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     audio_hidden_states (`torch.FloatTensor`, *optional*):
         Projected audio hidden states.

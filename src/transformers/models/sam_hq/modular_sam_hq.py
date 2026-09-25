@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 Google Inc. HuggingFace Inc. team. All rights reserved.
 #
 #
@@ -98,8 +99,7 @@ class SamHQVisionEncoderOutput(SamVisionEncoderOutput):
     intermediate_embeddings: list[torch.FloatTensor] | None = None
 
 
-@dataclass
-class SamHQMMaskDecoderOutputs(ModelOutput):
+class SamHQMMaskDecoderOutputs(ModelOutput, Struct, frozen=False):
     r"""
     masks (`torch.FloatTensor` of shape `(batch_size, num_prompts, num_masks, height, width)`):
         The predicted masks for the input image. The masks are of shape `(batch_size, num_prompts, num_masks, height, width)`.

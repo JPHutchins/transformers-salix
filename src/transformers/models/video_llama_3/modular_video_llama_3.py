@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -428,8 +429,7 @@ class VideoLlama3Projector(nn.Module):
     Base class for VideoLLaMA3 outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class VideoLlama3ModelOutputWithPast(ModelOutput):
+class VideoLlama3ModelOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         Tuple of `tuple(torch.FloatTensor)` of length `config.n_layers`, with each tuple having 2 tensors of shape
@@ -596,8 +596,7 @@ class VideoLlama3Model(Qwen2VLModel):
     Base class for VideoLLaMA3 causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class VideoLlama3CausalLMOutputWithPast(ModelOutput):
+class VideoLlama3CausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

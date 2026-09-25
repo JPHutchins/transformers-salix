@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,8 +48,7 @@ logger = logging.get_logger(__name__)
     Base class for Granite Speech outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class GraniteSpeechModelOutputWithPast(BaseModelOutputWithPast):
+class GraniteSpeechModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     audio_hidden_states (`torch.FloatTensor`, *optional*):
         Projected audio hidden states.
@@ -62,8 +62,7 @@ class GraniteSpeechModelOutputWithPast(BaseModelOutputWithPast):
     Base class for Granite Speech causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class GraniteSpeechCausalLMOutputWithPast(ModelOutput):
+class GraniteSpeechCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

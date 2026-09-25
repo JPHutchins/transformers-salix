@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -194,8 +195,7 @@ _RESPONSE_TEMPLATE_FALLBACKS = {
 }
 
 
-@dataclass
-class ToolCall:
+class ToolCall(Struct, frozen=False):
     """A parsed tool call surfaced through the stream queue when the parser
     closes a `tool_calls` region. ``arguments`` is always a JSON string."""
 

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -315,8 +316,7 @@ class Nemotron3_5AsrProcessor(NemotronAsrStreamingProcessor):
 
 
 @auto_docstring
-@dataclass
-class Nemotron3_5AsrRNNTOutput(BaseModelOutputWithPooling):
+class Nemotron3_5AsrRNNTOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor`, *optional*, returned when `labels` is provided):
         RNN-T transducer loss.

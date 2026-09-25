@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2020 Google Research and The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,8 +46,7 @@ CLOSE_ENOUGH_TO_LOG_ZERO = -10000.0
     Output type of [`TapasForQuestionAnswering`].
     """
 )
-@dataclass
-class TableQuestionAnsweringOutput(ModelOutput):
+class TableQuestionAnsweringOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` (and possibly `answer`, `aggregation_labels`, `numeric_values` and `numeric_values_scale` are provided)):
         Total loss as the sum of the hierarchical cell selection log-likelihood loss and (optionally) the

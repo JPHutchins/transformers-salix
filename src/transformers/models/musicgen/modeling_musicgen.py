@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 Meta AI and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -65,8 +66,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class MusicgenUnconditionalInput(ModelOutput):
+class MusicgenUnconditionalInput(ModelOutput, Struct, frozen=False):
     r"""
     encoder_outputs (`tuple[torch.FloatTensor]` of length 1, with tensor shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the text encoder model.

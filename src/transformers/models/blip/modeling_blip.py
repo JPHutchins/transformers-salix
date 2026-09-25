@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 The Salesforce Team Authors and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -59,8 +60,7 @@ def image_text_contrastive_loss(similarity: torch.Tensor) -> torch.Tensor:
     last hidden states. This class also adds the loss term from the text decoder.
     """
 )
-@dataclass
-class BlipForConditionalGenerationModelOutput(ModelOutput):
+class BlipForConditionalGenerationModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor`, *optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Language modeling loss from the text decoder.
@@ -84,8 +84,7 @@ class BlipForConditionalGenerationModelOutput(ModelOutput):
     last hidden states. This class also adds the loss term from the text decoder.
     """
 )
-@dataclass
-class BlipTextVisionModelOutput(ModelOutput):
+class BlipTextVisionModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss from the text decoder.
@@ -107,8 +106,7 @@ class BlipTextVisionModelOutput(ModelOutput):
     scores.
     """
 )
-@dataclass
-class BlipImageTextMatchingModelOutput(ModelOutput):
+class BlipImageTextMatchingModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     itm_score (`torch.FloatTensor`):
         The image-text similarity scores.
@@ -133,8 +131,7 @@ class BlipImageTextMatchingModelOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class BlipOutput(ModelOutput):
+class BlipOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for image-text similarity.

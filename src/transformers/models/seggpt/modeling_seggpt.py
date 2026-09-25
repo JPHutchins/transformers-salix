@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,8 +37,7 @@ logger = logging.get_logger(__name__)
     Output type of [`SegGptEncoderOutput`].
     """
 )
-@dataclass
-class SegGptEncoderOutput(ModelOutput):
+class SegGptEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, patch_height, patch_width, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.
@@ -64,8 +64,7 @@ class SegGptEncoderOutput(ModelOutput):
     Output type of [`SegGptImageSegmentationOutput`].
     """
 )
-@dataclass
-class SegGptImageSegmentationOutput(ModelOutput):
+class SegGptImageSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor`, *optional*, returned when `labels` is provided):
         The loss value.

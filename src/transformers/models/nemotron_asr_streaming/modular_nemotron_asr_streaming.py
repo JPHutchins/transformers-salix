@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -464,8 +465,7 @@ class NemotronAsrStreamingEncoderCausalConv2D(nn.Conv2d):
     cache-aware models when `use_cache=True`.
     """
 )
-@dataclass
-class NemotronAsrStreamingEncoderModelOutput(BaseModelOutputWithPooling):
+class NemotronAsrStreamingEncoderModelOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     attention_mask (`torch.Tensor` of shape `(batch_size, sequence_length)`, *optional*):
         Mask to avoid performing attention on padding token indices after sequence compression. Returned because the
@@ -945,8 +945,7 @@ class NemotronAsrStreamingEncoder(ParakeetEncoder):
         return left_context, num_lookahead_tokens
 
 
-@dataclass
-class NemotronAsrStreamingRNNTOutput(ParakeetRNNTOutput):
+class NemotronAsrStreamingRNNTOutput(ParakeetRNNTOutput, Struct, frozen=False):
     r"""
     encoder_past_key_values (`Cache`, *optional*):
         Updated encoder attention K/V sliding-window cache, returned when encoding audio with `use_cache=True`

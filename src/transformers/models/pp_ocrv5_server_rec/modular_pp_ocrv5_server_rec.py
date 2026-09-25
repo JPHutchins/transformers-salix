@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The PaddlePaddle Team and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -421,8 +422,7 @@ class PPOCRV5ServerRecModel(PPOCRV5ServerRecPreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class PPOCRV5ServerRecForTextRecognitionOutput(BaseModelOutputWithNoAttention):
+class PPOCRV5ServerRecForTextRecognitionOutput(BaseModelOutputWithNoAttention, Struct, frozen=False):
     r"""
     head_hidden_states (`tuple(torch.FloatTensor)`, *optional*, returned when `output_hidden_states=True` is passed or when `config.output_hidden_states=True`):
         Hidden-states of the PPOCRV5ServerRecHead at the output of each layer plus the optional initial embedding outputs.

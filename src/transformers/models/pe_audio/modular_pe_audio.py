@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -97,8 +98,7 @@ class PeAudioPreTrainedModel(PeAudioVideoPreTrainedModel):
     Class for outputs of [`PeAudioEncoder`].
     """
 )
-@dataclass
-class PeAudioEncoderOutput(BaseModelOutputWithPooling):
+class PeAudioEncoderOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     codec_features (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`, *optional*):
         Features extracted from the codec encoder, used as intermediate representations before the main encoder
@@ -175,8 +175,7 @@ class PeAudioEncoder(PeAudioVideoEncoder):
     Class for outputs of [`PeAudioModel`] and [`PeAudioFrameLevelModel`].
     """
 )
-@dataclass
-class PeAudioOutput(ModelOutput):
+class PeAudioOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*):
         Contrastive loss computed between audio and text representations.

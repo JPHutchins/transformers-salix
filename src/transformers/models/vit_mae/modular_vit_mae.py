@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 Facebook AI and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -96,8 +97,7 @@ def build_2d_sinusoidal_position_embedding(
     Class for ViTMAEModel's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class ViTMAEModelOutput(ModelOutput):
+class ViTMAEModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     mask (`torch.FloatTensor` of shape `(batch_size, sequence_length)`):
         Tensor indicating which patches are masked (1) and which are not (0).
@@ -117,8 +117,7 @@ class ViTMAEModelOutput(ModelOutput):
     Class for ViTMAEDecoder's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class ViTMAEDecoderOutput(ModelOutput):
+class ViTMAEDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, sequence_length, patch_size ** 2 * num_channels)`):
         Pixel reconstruction logits.
@@ -134,8 +133,7 @@ class ViTMAEDecoderOutput(ModelOutput):
     Class for ViTMAEForPreTraining's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class ViTMAEForPreTrainingOutput(ModelOutput):
+class ViTMAEForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`):
         Pixel reconstruction loss.

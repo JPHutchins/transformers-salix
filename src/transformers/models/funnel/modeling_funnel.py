@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2020-present Google Brain and Carnegie Mellon University Authors and the HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -717,8 +718,7 @@ class FunnelClassificationHead(nn.Module):
     Output type of [`FunnelForPreTraining`].
     """
 )
-@dataclass
-class FunnelForPreTrainingOutput(ModelOutput):
+class FunnelForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss of the ELECTRA-style objective.

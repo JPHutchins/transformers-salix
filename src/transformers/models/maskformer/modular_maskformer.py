@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 Meta Platforms, Inc. and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -175,8 +176,7 @@ class DetrDecoderOutput(DetrDecoderOutput):
     as **pixel embeddings**
     """
 )
-@dataclass
-class MaskFormerPixelLevelModuleOutput(ModelOutput):
+class MaskFormerPixelLevelModuleOutput(ModelOutput, Struct, frozen=False):
     r"""
     encoder_last_hidden_state (`torch.FloatTensor` of shape`(batch_size, num_channels, height, width)`):
         Last hidden states (final feature map) of the last stage of the encoder.
@@ -204,8 +204,7 @@ class MaskFormerPixelLevelModuleOutput(ModelOutput):
     and (optionally) the hidden states.
     """
 )
-@dataclass
-class MaskFormerPixelDecoderOutput(ModelOutput):
+class MaskFormerPixelDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_channels, height, width)`):
         Last hidden states (final feature map) of the last stage of the model.
@@ -221,8 +220,7 @@ class MaskFormerPixelDecoderOutput(ModelOutput):
     Class for outputs of [`MaskFormerModel`]. This class returns all the needed hidden states to compute the logits.
     """
 )
-@dataclass
-class MaskFormerModelOutput(ModelOutput):
+class MaskFormerModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     encoder_last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_channels, height, width)`):
         Last hidden states (final feature map) of the last stage of the encoder model (backbone).
@@ -267,8 +265,7 @@ class MaskFormerModelOutput(ModelOutput):
     [`~MaskFormerImageProcessor] for details regarding usage.
     """
 )
-@dataclass
-class MaskFormerForInstanceSegmentationOutput(ModelOutput):
+class MaskFormerForInstanceSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.Tensor`, *optional*):
         The computed loss, returned when labels are present.

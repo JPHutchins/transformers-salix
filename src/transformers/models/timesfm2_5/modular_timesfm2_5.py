@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 the HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -110,8 +111,7 @@ class TimesFm2_5Config(TimesFmConfig):
 
 
 @auto_docstring
-@dataclass
-class TimesFm2_5Output(TimesFmOutput):
+class TimesFm2_5Output(TimesFmOutput, Struct, frozen=False):
     r"""
     context_mu (`torch.Tensor` of shape `(batch_size, num_patches)`):
         Running means computed per input patch during normalization.
@@ -124,8 +124,7 @@ class TimesFm2_5Output(TimesFmOutput):
 
 
 @auto_docstring
-@dataclass
-class TimesFm2_5OutputForPrediction(TimesFmOutputForPrediction):
+class TimesFm2_5OutputForPrediction(TimesFmOutputForPrediction, Struct, frozen=False):
     r"""
     mean_predictions (`torch.Tensor` of shape `(batch_size, horizon_length)`):
         Deterministic forecasts after denormalization.

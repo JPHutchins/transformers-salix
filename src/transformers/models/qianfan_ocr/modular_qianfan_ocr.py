@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -242,8 +243,7 @@ class QianfanOCRPreTrainedModel(InternVLPreTrainedModel):
     Base class for QianfanOCR outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class QianfanOCRModelOutputWithPast(InternVLModelOutputWithPast):
+class QianfanOCRModelOutputWithPast(InternVLModelOutputWithPast, Struct, frozen=False):
     r"""
     image_hidden_states (`torch.FloatTensor`, *optional*):
         A `torch.FloatTensor` of size `(batch_size, num_images, sequence_length, hidden_size)`.

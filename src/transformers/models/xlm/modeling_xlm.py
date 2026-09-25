@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2019-present, Facebook, Inc and the HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -84,8 +85,7 @@ def get_masks(slen, lengths, causal, padding_mask=None):
     Base class for outputs of question answering models using a [`~modeling_utils.XLMSQuADHead`].
     """
 )
-@dataclass
-class XLMSquadHeadOutput(ModelOutput):
+class XLMSquadHeadOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned if both `start_positions` and `end_positions` are provided):
         Classification loss as the sum of start token, end token (and is_impossible if provided) classification
@@ -636,8 +636,7 @@ class XLMPreTrainedModel(PreTrainedModel):
     Base class for outputs of question answering models using a `XLMSQuADHead`.
     """
 )
-@dataclass
-class XLMForQuestionAnsweringOutput(ModelOutput):
+class XLMForQuestionAnsweringOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned if both `start_positions` and `end_positions` are provided):
         Classification loss as the sum of start token, end token (and is_impossible if provided) classification

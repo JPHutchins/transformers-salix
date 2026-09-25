@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2021 The Facebook Inc. and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,8 +51,7 @@ VOCAB_FILES_NAMES = {
 ListOfDict = list[dict[str, int | str]]
 
 
-@dataclass
-class Wav2Vec2PhonemeCTCTokenizerOutput(ModelOutput):
+class Wav2Vec2PhonemeCTCTokenizerOutput(ModelOutput, Struct, frozen=False):
     """
     Output type of [` Wav2Vec2PhonemeCTCTokenizer`], with transcription.
 

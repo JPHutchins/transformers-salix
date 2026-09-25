@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -818,8 +819,7 @@ def refine_bboxes(reference_points, deltas):
     - a stacked tensor of intermediate reference points.
     """
 )
-@dataclass
-class LwDetrDecoderOutput(DeformableDetrDecoderOutput):
+class LwDetrDecoderOutput(DeformableDetrDecoderOutput, Struct, frozen=False):
     pass
 
 
@@ -924,8 +924,7 @@ class LwDetrDecoder(LwDetrPreTrainedModel):
     Base class for outputs of the LwDetr backbone-decoder model.
     """
 )
-@dataclass
-class LwDetrModelOutput(ModelOutput):
+class LwDetrModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     init_reference_points (`torch.FloatTensor` of shape  `(batch_size, num_queries, 4)`):
         Initial reference points sent through the Transformer decoder.
@@ -1207,8 +1206,7 @@ class LwDetrMLPPredictionHead(DeformableDetrMLPPredictionHead):
     Output type of [`LwDetrForObjectDetection`].
     """
 )
-@dataclass
-class LwDetrObjectDetectionOutput(ModelOutput):
+class LwDetrObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

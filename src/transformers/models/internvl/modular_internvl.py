@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -132,8 +133,7 @@ class InternVLVisionAttention(JanusVisionAttention):
     Class for outputs of [`InternVLVisionModel`].
     """
 )
-@dataclass
-class InternVLVisionModelOutputWithPooling(BaseModelOutputWithPooling):
+class InternVLVisionModelOutputWithPooling(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, hidden_size)`):
         Average of the last layer hidden states of the patch tokens (excluding the *[CLS]* token) if

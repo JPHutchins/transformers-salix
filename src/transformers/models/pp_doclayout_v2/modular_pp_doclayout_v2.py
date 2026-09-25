@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The PaddlePaddle Team and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -728,8 +729,7 @@ class PPDocLayoutV2ReadingOrder(PPDocLayoutV2PreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class PPDocLayoutV2ForObjectDetectionOutput(ModelOutput):
+class PPDocLayoutV2ForObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, num_queries, num_classes + 1)`):
         Classification logits (including no-object) for all queries.
@@ -796,8 +796,7 @@ class PPDocLayoutV2ForObjectDetectionOutput(ModelOutput):
     Base class for outputs of the PP-DocLayoutV2 encoder-decoder model.
     """
 )
-@dataclass
-class PPDocLayoutV2ModelOutput(RTDetrModelOutput):
+class PPDocLayoutV2ModelOutput(RTDetrModelOutput, Struct, frozen=False):
     pass
 
 

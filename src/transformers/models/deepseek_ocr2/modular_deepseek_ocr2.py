@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -649,8 +650,7 @@ class DeepseekOcr2Config(PreTrainedConfig):
         super().__post_init__(**kwargs)
 
 
-@dataclass
-class DeepseekOcr2ModelOutputWithPooling(BaseModelOutputWithPooling):
+class DeepseekOcr2ModelOutputWithPooling(BaseModelOutputWithPooling, Struct, frozen=False):
     """
     local_last_hidden_state (`torch.FloatTensor` of shape `(total_local_patches, sequence_length, hidden_size)`, *optional*):
         Last hidden state from the vision encoder for local (cropped) patches.

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 School of EIC, Huazhong University of Science & Technology and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,8 +40,7 @@ logger = logging.get_logger(__name__)
     Output type of [`YolosForObjectDetection`].
     """
 )
-@dataclass
-class YolosObjectDetectionOutput(ModelOutput):
+class YolosObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

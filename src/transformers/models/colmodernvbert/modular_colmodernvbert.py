@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 Illuin Technology and contributors, and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -321,8 +322,7 @@ class ColModernVBertPreTrainedModel(ColPaliPreTrainedModel):
     Base class for ColModernVBert embeddings output.
     """
 )
-@dataclass
-class ColModernVBertForRetrievalOutput(ModelOutput):
+class ColModernVBertForRetrievalOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

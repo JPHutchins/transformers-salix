@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2018 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -169,8 +170,7 @@ def _get_mapping_values(mapping):
     return result
 
 
-@dataclass
-class TrainingSummary:
+class TrainingSummary(Struct, frozen=False):
     model_name: str
     language: str | list[str] | None = None
     license: str | None = None

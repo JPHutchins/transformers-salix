@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 the HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -115,8 +116,7 @@ class VideomtLayerScale(EomtLayerScale):
     [`~VideomtVideoProcessor`] for details regarding usage.
     """
 )
-@dataclass
-class VideomtForUniversalSegmentationOutput(ModelOutput):
+class VideomtForUniversalSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.Tensor`, *optional*):
         The computed loss, returned when labels are present.

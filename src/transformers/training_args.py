@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2020 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +22,7 @@ from dataclasses import asdict, dataclass, field, fields
 from datetime import timedelta
 from enum import Enum
 from functools import cached_property
-from typing import Any, Literal
+from typing import Annotated, Any, Literal
 
 from .debug_utils import DebugOption
 from .distributed.utils import _is_torch_distributed_initialized
@@ -176,8 +177,7 @@ def _convert_str_dict(passed_value: dict):
     return passed_value
 
 
-@dataclass
-class TrainingArguments:
+class TrainingArguments(Struct, frozen=False):
     """
     Configuration class for controlling all aspects of model training with the Trainer.
     TrainingArguments centralizes all hyperparameters, optimization settings, logging preferences, and infrastructure choices needed for training.
@@ -760,39 +760,18 @@ class TrainingArguments:
     ]
 
     # --- Output ---
-    output_dir: str | None = field(
-        default=None,
-        metadata={"help": "The output directory where the model predictions and checkpoints will be written."},
-    )
+    output_dir: Annotated[str | None, {"help": "The output directory where the model predictions and checkpoints will be written."}] = None
 
     # --- Training Duration and Batch Size ---
-    per_device_train_batch_size: int = field(default=8, metadata={"help": "The batch size per device for training."})
-    num_train_epochs: float = field(default=3.0, metadata={"help": "Total number of training epochs to perform."})
-    max_steps: int = field(
-        default=-1,
-        metadata={
-            "help": "Overrides `num_train_epochs`. If set to a positive number, the total number of training steps to perform. Must be set when the training dataset does not implement `__len__` (e.g. a streaming dataset)."
-        },
-    )
+    per_device_train_batch_size: Annotated[int, {"help": "The batch size per device for training."}] = 8
+    num_train_epochs: Annotated[float, {"help": "Total number of training epochs to perform."}] = 3.0
+    max_steps: Annotated[int, { "help": "Overrides `num_train_epochs`. If set to a positive number] = -1
 
     # --- Learning Rate & Scheduler ---
-    learning_rate: float = field(default=5e-5, metadata={"help": "The initial learning rate for the optimizer."})
-    lr_scheduler_type: SchedulerType | str = field(
-        default="linear",
-        metadata={"help": "The learning rate scheduler type to use. See `SchedulerType` for all possible values."},
-    )
-    lr_scheduler_kwargs: dict | str | None = field(
-        default=None,
-        metadata={
-            "help": "The extra arguments for the lr_scheduler. See the documentation of each scheduler for possible values."
-        },
-    )
-    warmup_steps: float = field(
-        default=0,
-        metadata={
-            "help": "Number of steps for a linear warmup from 0 to `learning_rate`. Can be an integer (exact steps) or a float in [0, 1) (ratio of total steps)."
-        },
-    )
+    learning_rate: Annotated[float, {"help": "The initial learning rate for the optimizer."}] = 5e-5
+    lr_scheduler_type: Annotated[SchedulerType | str, {"help": "The learning rate scheduler type to use. See `SchedulerType` for all possible values."}] = "linear"
+    lr_scheduler_kwargs: Annotated[dict | str | None, { "help": "The extra arguments for the lr_scheduler. See the documentation of each scheduler for possible values." }] = None
+    warmup_steps: Annotated[float, { "help": "Number of steps for a linear warmup from 0 to `learning_rate`. Can be an integer (exact steps) or a float in [0] = 0
 
     # --- Optimizer ---
     default_optim = "adamw_torch"
@@ -801,691 +780,200 @@ class TrainingArguments:
 
         if is_torch_greater_or_equal_than_2_8:
             default_optim = "adamw_torch_fused"
-    optim: OptimizerNames | str = field(
-        default=default_optim,
-        metadata={"help": "The optimizer to use. See `OptimizerNames` for the complete list."},
-    )
-    optim_args: str | None = field(
-        default=None,
-        metadata={
-            "help": "Optional arguments supplied to optimizers such as AnyPrecisionAdamW, AdEMAMix, and GaLore."
-        },
-    )
-    weight_decay: float = field(
-        default=0.0,
-        metadata={
-            "help": "Weight decay coefficient applied by the optimizer. Automatically excluded from bias and LayerNorm parameters."
-        },
-    )
-    adam_beta1: float = field(
-        default=0.9,
-        metadata={
-            "help": "The exponential decay rate for the first moment estimates (momentum) in Adam-based optimizers."
-        },
-    )
-    adam_beta2: float = field(
-        default=0.999,
-        metadata={
-            "help": "The exponential decay rate for the second moment estimates (variance) in Adam-based optimizers."
-        },
-    )
-    adam_epsilon: float = field(
-        default=1e-8, metadata={"help": "Epsilon value for numerical stability in Adam-based optimizers."}
-    )
-    optim_target_modules: None | str | list[str] = field(
-        default=None,
-        metadata={"help": "The target modules to optimize. Currently used for the GaLore and APOLLO algorithms."},
-    )
+    optim: Annotated[OptimizerNames | str, {"help": "The optimizer to use. See `OptimizerNames` for the complete list."}] = default_optim
+    optim_args: Annotated[str | None, { "help": "Optional arguments supplied to optimizers such as AnyPrecisionAdamW] = None
+    weight_decay: Annotated[float, { "help": "Weight decay coefficient applied by the optimizer. Automatically excluded from bias and LayerNorm parameters." }] = 0.0
+    adam_beta1: Annotated[float, { "help": "The exponential decay rate for the first moment estimates (momentum) in Adam-based optimizers." }] = 0.9
+    adam_beta2: Annotated[float, { "help": "The exponential decay rate for the second moment estimates (variance) in Adam-based optimizers." }] = 0.999
+    adam_epsilon: Annotated[float, {"help": "Epsilon value for numerical stability in Adam-based optimizers."} ] = 1e-8
+    optim_target_modules: Annotated[None | str | list[str], {"help": "The target modules to optimize. Currently used for the GaLore and APOLLO algorithms."}] = None
 
     # --- Regularization & Training Stability ---
-    gradient_accumulation_steps: int = field(
-        default=1,
-        metadata={
-            "help": (
-                "Number of update steps to accumulate gradients before performing a backward/update pass."
-                " Effective batch size = per_device_train_batch_size * num_devices * gradient_accumulation_steps."
-            )
+    gradient_accumulation_steps: Annotated[int, { "help": ( "Number of update steps to accumulate gradients before performing a backward/update pass." " Effective batch size = per_device_train_batch_size * num_devices * gradient_accumulation_steps." ] = 1
         },
     )
-    average_tokens_across_devices: bool = field(
-        default=True,
-        metadata={
-            "help": "Whether or not to average tokens across devices. If enabled, will use all_reduce to "
-            "synchronize num_tokens_in_batch for precise loss calculation. Reference: "
-            "https://github.com/huggingface/transformers/issues/34242"
-        },
-    )
-    max_grad_norm: float = field(
-        default=1.0, metadata={"help": "Maximum gradient norm for gradient clipping. Set to 0 to disable."}
-    )
-    label_smoothing_factor: float = field(
-        default=0.0, metadata={"help": "Label smoothing factor to prevent overconfidence. Zero means no smoothing."}
-    )
+    average_tokens_across_devices: Annotated[bool, { "help": "Whether or not to average tokens across devices. If enabled] = True
+    max_grad_norm: Annotated[float, {"help": "Maximum gradient norm for gradient clipping. Set to 0 to disable."} ] = 1.0
+    label_smoothing_factor: Annotated[float, {"help": "Label smoothing factor to prevent overconfidence. Zero means no smoothing."} ] = 0.0
 
     # --- Mixed Precision ---
-    bf16: bool = field(
-        default=False,
-        metadata={
-            "help": "Enable bfloat16 (BF16) mixed precision training. Generally preferred over FP16 due to better numerical stability."
-        },
-    )
-    fp16: bool = field(
-        default=False,
-        metadata={
-            "help": "Enable float16 (FP16) mixed precision training. Consider using BF16 instead if your hardware supports it."
-        },
-    )
-    bf16_full_eval: bool = field(
-        default=False,
-        metadata={
-            "help": "Use full BF16 precision for evaluation (not just mixed precision). Faster and saves memory."
-        },
-    )
-    fp16_full_eval: bool = field(
-        default=False,
-        metadata={
-            "help": "Use full FP16 precision for evaluation (not just mixed precision). Faster and saves memory."
-        },
-    )
-    tf32: bool | None = field(
-        default=None,
-        metadata={
-            "help": "Enable TF32 mode on Ampere and newer GPUs. Provides up to 8x speedup with negligible accuracy loss."
-        },
-    )
+    bf16: Annotated[bool, { "help": "Enable bfloat16 (BF16) mixed precision training. Generally preferred over FP16 due to better numerical stability." }] = False
+    fp16: Annotated[bool, { "help": "Enable float16 (FP16) mixed precision training. Consider using BF16 instead if your hardware supports it." }] = False
+    bf16_full_eval: Annotated[bool, { "help": "Use full BF16 precision for evaluation (not just mixed precision). Faster and saves memory." }] = False
+    fp16_full_eval: Annotated[bool, { "help": "Use full FP16 precision for evaluation (not just mixed precision). Faster and saves memory." }] = False
+    tf32: Annotated[bool | None, { "help": "Enable TF32 mode on Ampere and newer GPUs. Provides up to 8x speedup with negligible accuracy loss." }] = None
 
     # --- Gradient Checkpointing ---
-    gradient_checkpointing: bool = field(
-        default=False,
-        metadata={
-            "help": "Enable gradient checkpointing to trade compute for memory. Reduces memory at the cost of ~20%% slower training."
-        },
-    )
-    gradient_checkpointing_kwargs: dict[str, Any] | str | None = field(
-        default=None,
-        metadata={
-            "help": "Keyword arguments passed to `gradient_checkpointing_enable()`. `every_n_layers` checkpoints "
-            "only every n-th decoder layer instead of all of them; `1` is the usual all-or-nothing behavior, and "
-            "larger values give some memory back to speed. Any other key is forwarded to "
-            "`torch.utils.checkpoint.checkpoint`."
-        },
-    )
+    gradient_checkpointing: Annotated[bool, { "help": "Enable gradient checkpointing to trade compute for memory. Reduces memory at the cost of ~20%% slower training." }] = False
+    gradient_checkpointing_kwargs: Annotated[dict[str, Any] | str | None, { "help": "Keyword arguments passed to `gradient_checkpointing_enable()`. `every_n_layers` checkpoints " "only every n-th decoder layer instead of all of them; `1` is the usual all-or-nothing behavior] = None
 
     # --- Compilation ---
-    torch_compile: bool = field(
-        default=False, metadata={"help": "Compile the model using `torch.compile()` for faster training."}
-    )
-    torch_compile_backend: str | None = field(
-        default=None,
-        metadata={
-            "help": "Backend for `torch.compile()`. If set, automatically enables `torch_compile`.",
-        },
-    )
-    torch_compile_mode: str | None = field(
-        default=None,
-        metadata={
-            "help": "Compilation mode for `torch.compile()`. If set, automatically enables `torch_compile`.",
-        },
-    )
+    torch_compile: Annotated[bool, {"help": "Compile the model using `torch.compile()` for faster training."} ] = False
+    torch_compile_backend: Annotated[str | None, { "help": "Backend for `torch.compile()`. If set] = None
+    torch_compile_mode: Annotated[str | None, { "help": "Compilation mode for `torch.compile()`. If set] = None
 
     # --- Kernels ---
-    use_liger_kernel: bool = field(
-        default=False,
-        metadata={
-            "help": "Enable Liger Kernel optimizations. Increases throughput by ~20%% and reduces memory by ~60%%."
-        },
-    )
-    liger_kernel_config: dict[str, bool] | None = field(
-        default=None,
-        metadata={
-            "help": "Configuration for Liger Kernel. Passed as kwargs to `_apply_liger_kernel_to_instance()`. If None, uses default configuration."
-        },
-    )
+    use_liger_kernel: Annotated[bool, { "help": "Enable Liger Kernel optimizations. Increases throughput by ~20%% and reduces memory by ~60%%." }] = False
+    liger_kernel_config: Annotated[dict[str, bool] | None, { "help": "Configuration for Liger Kernel. Passed as kwargs to `_apply_liger_kernel_to_instance()`. If None] = None
 
     # --- Additional Optimizations ---
-    use_cache: bool = field(
-        default=False,
-        metadata={
-            "help": "Whether or not to use cache for the model For training, this is usually not needed apart from some PEFT methods that uses `past_key_values`."
-        },
-    )
-    neftune_noise_alpha: float | None = field(
-        default=None,
-        metadata={
-            "help": "If not None, activates NEFTune noise embeddings. Can drastically improve performance for instruction fine-tuning. Typical range: [5.0, 15.0]."
-        },
-    )
-    torch_empty_cache_steps: int | None = field(
-        default=None,
-        metadata={
-            "help": "Number of steps to wait before calling `torch.<device>.empty_cache()`. Helps avoid CUDA OOM at a cost of ~10%% slower performance. If None, cache will not be emptied."
-        },
-    )
-    auto_find_batch_size: bool = field(
-        default=False,
-        metadata={
-            "help": "Whether to find a batch size that will fit into memory automatically through exponential decay, avoiding CUDA Out-of-Memory errors."
-        },
-    )
+    use_cache: Annotated[bool, { "help": "Whether or not to use cache for the model For training] = False
+    neftune_noise_alpha: Annotated[float | None, { "help": "If not None] = None
+    torch_empty_cache_steps: Annotated[int | None, { "help": "Number of steps to wait before calling `torch.<device>.empty_cache()`. Helps avoid CUDA OOM at a cost of ~10%% slower performance. If None] = None
+    auto_find_batch_size: Annotated[bool, { "help": "Whether to find a batch size that will fit into memory automatically through exponential decay] = False
 
     # --- Logging & Monitoring ---
-    logging_strategy: IntervalStrategy | str = field(
-        default="steps",
-        metadata={"help": "The logging strategy to adopt during training. Options: 'no', 'epoch', 'steps'."},
-    )
-    logging_steps: float = field(
-        default=500,
-        metadata={
-            "help": (
-                "Log every X updates steps. Should be an integer or a float in range `[0,1)`. "
-                "If smaller than 1, will be interpreted as ratio of total training steps."
-            )
+    logging_strategy: Annotated[IntervalStrategy | str, {"help": "The logging strategy to adopt during training. Options: 'no'] = "steps"
+    logging_steps: Annotated[float, { "help": ( "Log every X updates steps. Should be an integer or a float in range `[0] = 500
         },
     )
-    logging_first_step: bool = field(
-        default=False, metadata={"help": "Whether to log the first `global_step` or not."}
-    )
-    log_on_each_node: bool = field(
-        default=True,
-        metadata={
-            "help": (
-                "When doing a multinode distributed training, whether to log once per node or just once on the main"
-                " node."
-            )
+    logging_first_step: Annotated[bool, {"help": "Whether to log the first `global_step` or not."} ] = False
+    log_on_each_node: Annotated[bool, { "help": ( "When doing a multinode distributed training] = True
         },
     )
-    logging_nan_inf_filter: bool = field(
-        default=True,
-        metadata={
-            "help": "Filter out NaN and Inf losses when logging. Does not affect gradient computation, only logging."
-        },
-    )
-    include_num_input_tokens_seen: str | bool = field(
-        default="no",
-        metadata={
-            "help": (
-                "Whether to track the number of input tokens seen. "
-                "Must be one of [`all`, `non_padding`, `no`] or a boolean value which map to `all` or `no`"
-            )
+    logging_nan_inf_filter: Annotated[bool, { "help": "Filter out NaN and Inf losses when logging. Does not affect gradient computation] = True
+    include_num_input_tokens_seen: Annotated[str | bool, { "help": ( "Whether to track the number of input tokens seen. " "Must be one of [`all`] = "no"
         },
     )
 
     # --- Log Levels ---
-    log_level: str = field(
-        default="passive",
-        metadata={
-            "help": "Logging level for the main process. Options: 'debug', 'info', 'warning', 'error', 'critical', 'passive'.",
-            "choices": trainer_log_levels.keys(),
-        },
-    )
-    log_level_replica: str = field(
-        default="warning",
-        metadata={
-            "help": "Logging level for replica processes in distributed training. Same options as `log_level`.",
-            "choices": trainer_log_levels.keys(),
-        },
-    )
-    disable_tqdm: bool | None = field(
-        default=None,
-        metadata={"help": "Disable tqdm progress bars. Defaults to True if log_level is warning or lower."},
-    )
+    log_level: Annotated[str, { "help": "Logging level for the main process. Options: 'debug'] = "passive"
+    log_level_replica: Annotated[str, { "help": "Logging level for replica processes in distributed training. Same options as `log_level`."] = "warning"
+    disable_tqdm: Annotated[bool | None, {"help": "Disable tqdm progress bars. Defaults to True if log_level is warning or lower."}] = None
 
     # --- Experiment Tracking ---
-    report_to: None | str | list[str] = field(
-        default="none",
-        metadata={
-            "help": "The list of integrations to report the results and logs to. Use 'all' for all installed integrations, 'none' for no integrations."
+    report_to: Annotated[None | str | list[str], { "help": "The list of integrations to report the results and logs to. Use 'all' for all installed integrations] = "none"
+    run_name: Annotated[str | None, { "help": ( "An optional descriptor for the run. Notably used for trackio] = None
         },
     )
-    run_name: str | None = field(
-        default=None,
-        metadata={
-            "help": (
-                "An optional descriptor for the run. Notably used for trackio, wandb, mlflow comet and swanlab "
-                "logging."
-            )
+    project: Annotated[str, {"help": "The name of the project to use for logging. Currently] = "huggingface"
+    trackio_space_id: Annotated[str | None, { "help": ( "Hugging Face Space id for live Gradio-based Trackio logging (read/write Bucket access). Use " "'username/reponame'] = None
         },
     )
-    project: str = field(
-        default="huggingface",
-        metadata={"help": "The name of the project to use for logging. Currently, only used by Trackio."},
-    )
-    trackio_space_id: str | None = field(
-        default=None,
-        metadata={
-            "help": (
-                "Hugging Face Space id for live Gradio-based Trackio logging (read/write Bucket access). Use "
-                "'username/reponame', 'orgname/reponame', or 'reponame' (current user's namespace). None: log only "
-                "locally, no Space. Prefer trackio_static_space_id for stable post-training dashboard links. Public "
-                "unless hub_private_repo=True or org default."
-            )
-        },
-    )
-    trackio_bucket_id: str | None = field(
-        default=None,
-        metadata={"help": "Optional HF Bucket id when using a Trackio Space; if unset, Trackio picks a default."},
-    )
-    trackio_static_space_id: str | None | Literal[False] = field(
-        default=None,
-        metadata={
-            "help": (
-                "Static read-only Trackio Space over the Bucket (stable model-card links). False: no static sync on Hub "
-                "push and no freeze after training. None/str: allow static Space; for local-only logging, Hub push runs "
-                "sync(static); after training, freeze runs only if trackio_space_id was set (Gradio Space). str sets "
-                "explicit static Space id. Public unless hub_private_repo=True or org default."
-            )
+    trackio_bucket_id: Annotated[str | None, {"help": "Optional HF Bucket id when using a Trackio Space; if unset] = None
+    trackio_static_space_id: Annotated[str | None | Literal[False], { "help": ( "Static read-only Trackio Space over the Bucket (stable model-card links). False: no static sync on Hub " "push and no freeze after training. None/str: allow static Space; for local-only logging] = None
         },
     )
 
     # --- Evaluation ---
-    eval_strategy: IntervalStrategy | str = field(
-        default="no",
-        metadata={"help": "When to run evaluation. Options: 'no', 'steps', 'epoch'."},
-    )
-    eval_steps: float | None = field(
-        default=None,
-        metadata={
-            "help": (
-                "Number of update steps between evaluations if `eval_strategy='steps'`. Defaults to `logging_steps` if not set."
-                " Should be an integer or a float in range `[0,1)`. If smaller than 1, will be interpreted as ratio of total training steps."
-            )
+    eval_strategy: Annotated[IntervalStrategy | str, {"help": "When to run evaluation. Options: 'no'] = "no"
+    eval_steps: Annotated[float | None, { "help": ( "Number of update steps between evaluations if `eval_strategy='steps'`. Defaults to `logging_steps` if not set." " Should be an integer or a float in range `[0] = None
         },
     )
-    eval_delay: float = field(
-        default=0,
-        metadata={
-            "help": (
-                "Number of epochs or steps to wait for before the first evaluation can be performed, depending on the"
-                " eval_strategy."
-            )
+    eval_delay: Annotated[float, { "help": ( "Number of epochs or steps to wait for before the first evaluation can be performed] = 0
         },
     )
-    per_device_eval_batch_size: int = field(
-        default=8, metadata={"help": "The batch size per device (GPU/TPU core/CPU) for evaluation."}
-    )
-    prediction_loss_only: bool = field(
-        default=False,
-        metadata={"help": "When performing evaluation and generating predictions, only returns the loss."},
-    )
-    eval_on_start: bool = field(
-        default=False,
-        metadata={
-            "help": "Whether to run through the entire `evaluation` step at the very beginning of training as a sanity check."
-        },
-    )
-    eval_do_concat_batches: bool = field(
-        default=True,
-        metadata={
-            "help": "Whether to recursively concat inputs/losses/labels/predictions across batches. If `False`, will instead store them as lists, with each batch kept separate."
-        },
-    )
-    eval_use_gather_object: bool = field(
-        default=False,
-        metadata={
-            "help": "Whether to run recursively gather object in a nested list/tuple/dictionary of objects from all devices."
-        },
-    )
-    eval_accumulation_steps: int | None = field(
-        default=None,
-        metadata={
-            "help": "Number of predictions steps to accumulate the output tensors for, before moving the results to the CPU. If unset, predictions are accumulated on the accelerator before being moved to the CPU."
-        },
-    )
+    per_device_eval_batch_size: Annotated[int, {"help": "The batch size per device (GPU/TPU core/CPU) for evaluation."} ] = 8
+    prediction_loss_only: Annotated[bool, {"help": "When performing evaluation and generating predictions] = False
+    eval_on_start: Annotated[bool, { "help": "Whether to run through the entire `evaluation` step at the very beginning of training as a sanity check." }] = False
+    eval_do_concat_batches: Annotated[bool, { "help": "Whether to recursively concat inputs/losses/labels/predictions across batches. If `False`] = True
+    eval_use_gather_object: Annotated[bool, { "help": "Whether to run recursively gather object in a nested list/tuple/dictionary of objects from all devices." }] = False
+    eval_accumulation_steps: Annotated[int | None, { "help": "Number of predictions steps to accumulate the output tensors for] = None
 
     # --- Metrics ---
-    include_for_metrics: list[str] = field(
-        default_factory=list,
-        metadata={"help": "Include additional data in the `compute_metrics` function. Options: 'inputs', 'loss'."},
-    )
-    batch_eval_metrics: bool = field(
-        default=False,
-        metadata={"help": "Break eval metrics calculation into batches to save memory."},
-    )
+    include_for_metrics: Annotated[list[str], {"help": "Include additional data in the `compute_metrics` function. Options: 'inputs'] = []
+    batch_eval_metrics: Annotated[bool, {"help": "Break eval metrics calculation into batches to save memory."}] = False
 
     # --- Checkpointing & Saving ---
-    save_only_model: bool = field(
-        default=False,
-        metadata={
-            "help": "Save only model weights, not optimizer/scheduler/RNG state. Prevents resuming training from checkpoint."
+    save_only_model: Annotated[bool, { "help": "Save only model weights] = False
+    save_strategy: Annotated[SaveStrategy | str, { "help": "The checkpoint save strategy to adopt during training. Options: 'no'] = "steps"
+    save_steps: Annotated[float, { "help": ( "Save checkpoint every X updates steps. Should be an integer or a float in range `[0] = 500
         },
     )
-    save_strategy: SaveStrategy | str = field(
-        default="steps",
-        metadata={
-            "help": "The checkpoint save strategy to adopt during training. Options: 'no', 'epoch', 'steps', 'best'."
+    save_on_each_node: Annotated[bool, { "help": ( "When doing multi-node distributed training] = False
         },
     )
-    save_steps: float = field(
-        default=500,
-        metadata={
-            "help": (
-                "Save checkpoint every X updates steps. Should be an integer or a float in range `[0,1)`. "
-                "If smaller than 1, will be interpreted as ratio of total training steps."
-            )
-        },
-    )
-    save_on_each_node: bool = field(
-        default=False,
-        metadata={
-            "help": (
-                "When doing multi-node distributed training, whether to save models and checkpoints on each node, or"
-                " only on the main one"
-            )
-        },
-    )
-    save_total_limit: int | None = field(
-        default=None,
-        metadata={
-            "help": "Maximum number of checkpoints to keep. Deletes older checkpoints in `output_dir`. The best checkpoint is always retained when `load_best_model_at_end=True`."
-        },
-    )
-    enable_jit_checkpoint: bool = field(
-        default=False,
-        metadata={
-            "help": "Enable JIT checkpointing on SIGTERM signal for graceful termination on preemptible workloads. Configure your orchestrator's graceful shutdown period accordingly."
-        },
-    )
+    save_total_limit: Annotated[int | None, { "help": "Maximum number of checkpoints to keep. Deletes older checkpoints in `output_dir`. The best checkpoint is always retained when `load_best_model_at_end=True`." }] = None
+    enable_jit_checkpoint: Annotated[bool, { "help": "Enable JIT checkpointing on SIGTERM signal for graceful termination on preemptible workloads. Configure your orchestrator's graceful shutdown period accordingly." }] = False
 
     # --- Hub Integration ---
-    push_to_hub: bool = field(
-        default=False, metadata={"help": "Whether or not to push the model to the Hub every time the model is saved."}
-    )
-    hub_token: str | None = field(
-        default=None,
-        metadata={
-            "help": "The token to use to push the model to the Hub. Defaults to the token from `hf auth login`."
-        },
-    )
-    hub_private_repo: bool | None = field(
-        default=None,
-        metadata={
-            "help": "Whether to make the repo private. If `None` (default), the repo will be public unless the "
-            "organization's default is private. This value is ignored if the repo already exists. If reporting to "
-            "Trackio Spaces created or synced (including on Hub push when `trackio_space_id` is None) use the same "
-            "logic for whether the Space is private."
-        },
-    )
-    hub_model_id: str | None = field(
-        default=None, metadata={"help": "The name of the repository to keep in sync with the local `output_dir`."}
-    )
-    hub_strategy: HubStrategy | str = field(
-        default="every_save",
-        metadata={
-            "help": "Defines what and when to push to Hub. Options: 'end', 'every_save', 'checkpoint', 'all_checkpoints'."
-        },
-    )
-    hub_always_push: bool = field(
-        default=False,
-        metadata={"help": "Unless `True`, the Trainer will skip pushes if the previous one wasn't finished yet."},
-    )
-    hub_revision: str | None = field(
-        default=None,
-        metadata={
-            "help": "The revision to use when pushing to the Hub. Can be a branch name, a tag, or a commit hash."
-        },
-    )
+    push_to_hub: Annotated[bool, {"help": "Whether or not to push the model to the Hub every time the model is saved."} ] = False
+    hub_token: Annotated[str | None, { "help": "The token to use to push the model to the Hub. Defaults to the token from `hf auth login`." }] = None
+    hub_private_repo: Annotated[bool | None, { "help": "Whether to make the repo private. If `None` (default] = None
+    hub_model_id: Annotated[str | None, {"help": "The name of the repository to keep in sync with the local `output_dir`."} ] = None
+    hub_strategy: Annotated[HubStrategy | str, { "help": "Defines what and when to push to Hub. Options: 'end'] = "every_save"
+    hub_always_push: Annotated[bool, {"help": "Unless `True`] = False
+    hub_revision: Annotated[str | None, { "help": "The revision to use when pushing to the Hub. Can be a branch name] = None
 
     # --- Best Model Tracking ---
-    load_best_model_at_end: bool = field(
-        default=False,
-        metadata={"help": "Load the best checkpoint at the end of training. Requires `eval_strategy` to be set."},
-    )
-    metric_for_best_model: str | None = field(
-        default=None,
-        metadata={
-            "help": "Metric to use for comparing models when `load_best_model_at_end=True`. Defaults to 'loss'."
-        },
-    )
-    greater_is_better: bool | None = field(
-        default=None,
-        metadata={"help": "Whether higher metric values are better. Defaults based on `metric_for_best_model`."},
-    )
+    load_best_model_at_end: Annotated[bool, {"help": "Load the best checkpoint at the end of training. Requires `eval_strategy` to be set."}] = False
+    metric_for_best_model: Annotated[str | None, { "help": "Metric to use for comparing models when `load_best_model_at_end=True`. Defaults to 'loss'." }] = None
+    greater_is_better: Annotated[bool | None, {"help": "Whether higher metric values are better. Defaults based on `metric_for_best_model`."}] = None
 
     # --- Resuming Training ---
-    ignore_data_skip: bool = field(
-        default=False,
-        metadata={
-            "help": "When resuming training, skip fast-forwarding through the dataset to reach the previous state. If True, training starts from the beginning of the dataset."
-        },
-    )
-    restore_callback_states_from_checkpoint: bool = field(
-        default=False,
-        metadata={
-            "help": "Whether to restore the callback states from the checkpoint. If `True`, will override callbacks passed to the `Trainer` if they exist in the checkpoint."
-        },
-    )
+    ignore_data_skip: Annotated[bool, { "help": "When resuming training] = False
+    restore_callback_states_from_checkpoint: Annotated[bool, { "help": "Whether to restore the callback states from the checkpoint. If `True`] = False
 
     # --- Reproducibility ---
-    full_determinism: bool = field(
-        default=False,
-        metadata={
-            "help": (
-                "Whether to call enable_full_determinism instead of set_seed for reproducibility in distributed"
-                " training. Important: this will negatively impact the performance, so only use it for debugging."
-            )
+    full_determinism: Annotated[bool, { "help": ( "Whether to call enable_full_determinism instead of set_seed for reproducibility in distributed" " training. Important: this will negatively impact the performance] = False
         },
     )
-    seed: int = field(default=42, metadata={"help": "Random seed that will be set at the beginning of training."})
-    data_seed: int | None = field(
-        default=None,
-        metadata={"help": "Random seed to be used with data samplers. If not set, uses the same seed as `seed`."},
-    )
+    seed: Annotated[int, {"help": "Random seed that will be set at the beginning of training."}] = 42
+    data_seed: Annotated[int | None, {"help": "Random seed to be used with data samplers. If not set] = None
 
     # --- Hardware ---
-    use_cpu: bool = field(
-        default=False,
-        metadata={
-            "help": "Whether or not to use cpu. If set to False, we will use the available torch device/backend."
-        },
-    )
+    use_cpu: Annotated[bool, { "help": "Whether or not to use cpu. If set to False] = False
 
     # --- Accelerate ---
-    accelerator_config: dict | str | None = field(
-        default=None,
-        metadata={
-            "help": "Configuration for the internal Accelerate integration. Can be a path to a JSON config file or a dict."
-        },
-    )
-    parallelism_config: ParallelismConfig | None = field(
-        default=None,
-        metadata={"help": "Parallelism configuration for the training run. Requires Accelerate `1.10.1`."},
-    )
+    accelerator_config: Annotated[dict | str | None, { "help": "Configuration for the internal Accelerate integration. Can be a path to a JSON config file or a dict." }] = None
+    parallelism_config: Annotated[ParallelismConfig | None, {"help": "Parallelism configuration for the training run. Requires Accelerate `1.10.1`."}] = None
 
     # --- Dataloader ---
-    dataloader_drop_last: bool = field(
-        default=False, metadata={"help": "Drop the last incomplete batch if it is not divisible by the batch size."}
-    )
-    dataloader_num_workers: int = field(
-        default=0,
-        metadata={
-            "help": (
-                "Number of subprocesses to use for data loading (PyTorch only). 0 means that the data will be loaded"
-                " in the main process."
-            )
+    dataloader_drop_last: Annotated[bool, {"help": "Drop the last incomplete batch if it is not divisible by the batch size."} ] = False
+    dataloader_num_workers: Annotated[int, { "help": ( "Number of subprocesses to use for data loading (PyTorch only). 0 means that the data will be loaded" " in the main process." ] = 0
         },
     )
-    dataloader_pin_memory: bool = field(
-        default=True, metadata={"help": "Whether or not to pin memory for DataLoader."}
-    )
-    dataloader_persistent_workers: bool = field(
-        default=False,
-        metadata={
-            "help": "If True, the data loader will not shut down the worker processes after a dataset has been consumed once. This allows to maintain the workers Dataset instances alive. Can potentially speed up training, but will increase RAM usage."
+    dataloader_pin_memory: Annotated[bool, {"help": "Whether or not to pin memory for DataLoader."} ] = True
+    dataloader_persistent_workers: Annotated[bool, { "help": "If True] = False
+    dataloader_prefetch_factor: Annotated[int | None, { "help": ( "Number of batches loaded in advance by each worker. " "2 means there will be a total of 2 * num_workers batches prefetched across all workers. " ] = None
         },
     )
-    dataloader_prefetch_factor: int | None = field(
-        default=None,
-        metadata={
-            "help": (
-                "Number of batches loaded in advance by each worker. "
-                "2 means there will be a total of 2 * num_workers batches prefetched across all workers. "
-            )
+    dataloader_multiprocessing_context: Annotated[str | None, { "help": ( "The multiprocessing start method to use for data loading workers ('fork'] = None
+    dataloader_in_order: Annotated[bool, { "help": ( "If True (default] = True
         },
     )
-    dataloader_multiprocessing_context: str | None = field(
-        default=None,
-        metadata={
-            "help": (
-                "The multiprocessing start method to use for data loading workers ('fork', 'spawn', or "
-                "'forkserver'). Defaults to PyTorch's default, except on MPS with dataloader_num_workers > 1, where "
-                "it defaults to 'fork'. Use 'spawn' when streaming from sources whose objects are not fork-safe "
-                "(e.g. HDFS via pyarrow). Under 'spawn', any custom collate_fn / dataset code must be importable at "
-                "module level (no lambdas/closures)."
-            ),
-            "choices": ["fork", "spawn", "forkserver"],
-        },
-    )
-    dataloader_in_order: bool = field(
-        default=True,
-        metadata={
-            "help": (
-                "If True (default), the data loader yields batches in the order workers were dispatched. Set to "
-                "False to yield batches as soon as they are ready, reducing tail latency for IterableDataset "
-                "streaming workloads. Requires PyTorch >= 2.6."
-            )
-        },
-    )
-    remove_unused_columns: bool = field(
-        default=True,
-        metadata={"help": "Whether or not to automatically remove the columns unused by the model forward method."},
-    )
-    label_names: list[str] | None = field(
-        default=None, metadata={"help": "The list of keys in your dictionary of inputs that correspond to the labels."}
-    )
-    train_sampling_strategy: str = field(
-        default="random",
-        metadata={
-            "help": "Sampler for training: 'random' (default), 'sequential', or 'group_by_length'.",
-            "choices": ["random", "sequential", "group_by_length"],
-        },
-    )
-    length_column_name: str = field(
-        default="length",
-        metadata={
-            "help": "Column name for precomputed lengths. Ignored unless `train_sampling_strategy` is 'group_by_length'."
-        },
-    )
+    remove_unused_columns: Annotated[bool, {"help": "Whether or not to automatically remove the columns unused by the model forward method."}] = True
+    label_names: Annotated[list[str] | None, {"help": "The list of keys in your dictionary of inputs that correspond to the labels."} ] = None
+    train_sampling_strategy: Annotated[str, { "help": "Sampler for training: 'random' (default] = "random"
+    length_column_name: Annotated[str, { "help": "Column name for precomputed lengths. Ignored unless `train_sampling_strategy` is 'group_by_length'." }] = "length"
 
     # --- DDP ---
-    ddp_find_unused_parameters: bool | None = field(
-        default=None,
-        metadata={
-            "help": (
-                "When using distributed training, the value of the flag `find_unused_parameters` passed to "
-                "`DistributedDataParallel`."
-            )
+    ddp_find_unused_parameters: Annotated[bool | None, { "help": ( "When using distributed training] = None
         },
     )
-    ddp_bucket_cap_mb: int | None = field(
-        default=None,
-        metadata={
-            "help": (
-                "When using distributed training, the value of the flag `bucket_cap_mb` passed to "
-                "`DistributedDataParallel`."
-            )
+    ddp_bucket_cap_mb: Annotated[int | None, { "help": ( "When using distributed training] = None
         },
     )
-    ddp_broadcast_buffers: bool | None = field(
-        default=None,
-        metadata={
-            "help": (
-                "When using distributed training, the value of the flag `broadcast_buffers` passed to "
-                "`DistributedDataParallel`."
-            )
+    ddp_broadcast_buffers: Annotated[bool | None, { "help": ( "When using distributed training] = None
         },
     )
-    ddp_static_graph: bool | None = field(
-        default=None,
-        metadata={
-            "help": (
-                "When using distributed training, the value of the flag `static_graph` passed to "
-                "`DistributedDataParallel`."
-            )
+    ddp_static_graph: Annotated[bool | None, { "help": ( "When using distributed training] = None
         },
     )
-    ddp_backend: str | None = field(
-        default=None,
-        metadata={
-            "help": "The backend to use for distributed training. Must be one of 'nccl', 'mpi', 'xccl', 'gloo', 'hccl'.",
-            "choices": ["nccl", "gloo", "mpi", "xccl", "hccl", "cncl", "mccl"],
-        },
-    )
-    ddp_timeout: int = field(
-        default=1800,
-        metadata={"help": "The timeout for `torch.distributed.init_process_group` calls (in seconds)."},
-    )
+    ddp_backend: Annotated[str | None, { "help": "The backend to use for distributed training. Must be one of 'nccl'] = None
+    ddp_timeout: Annotated[int, {"help": "The timeout for `torch.distributed.init_process_group` calls (in seconds)."}] = 1800
 
     # --- FSDP ---
     # `str | None` + `nargs="?"` / `const=True` so bare `--fsdp` → True while
     # legacy `--fsdp full_shard` still parses. Switch to `bool | None` once
     # legacy string support is dropped (v5.20).
-    fsdp: str | None = field(
-        default=None,
-        metadata={
-            "help": "Enable PyTorch Fully Sharded Data Parallel (FSDP) for distributed training. Pass `--fsdp` (or `fsdp=True`) to turn FSDP on.",
-            "nargs": "?",
-            "const": True,
-        },
-    )
-    fsdp_config: dict[str, Any] | str | None = field(
-        default=None,
-        metadata={
-            "help": "Tuning for FSDP (used only when `fsdp` is enabled). Either a path to a JSON config file (e.g., `fsdp_config.json`) or an already loaded dict."
-        },
-    )
+    fsdp: Annotated[str | None, { "help": "Enable PyTorch Fully Sharded Data Parallel (FSDP) for distributed training. Pass `--fsdp` (or `fsdp=True`) to turn FSDP on."] = None
+    fsdp_config: Annotated[dict[str, Any] | str | None, { "help": "Tuning for FSDP (used only when `fsdp` is enabled). Either a path to a JSON config file (e.g.] = None
 
     # --- DeepSpeed ---
-    deepspeed: dict | str | None = field(
-        default=None,
-        metadata={"help": "Enable DeepSpeed integration. Value is a path to a JSON config file or a dict."},
-    )
+    deepspeed: Annotated[dict | str | None, {"help": "Enable DeepSpeed integration. Value is a path to a JSON config file or a dict."}] = None
 
     # --- Debugging ---
-    debug: str | list[DebugOption] = field(
-        default="",
-        metadata={
-            "help": "Enable one or more debug features. Options: 'underflow_overflow' (detect overflow in model I/O), 'tpu_metrics_debug' (print TPU metrics)."
-        },
-    )
-    skip_memory_metrics: bool = field(
-        default=True,
-        metadata={
-            "help": "Whether to skip adding memory profiler reports to metrics. Skipped by default because it slows down training."
-        },
-    )
+    debug: Annotated[str | list[DebugOption], { "help": "Enable one or more debug features. Options: 'underflow_overflow' (detect overflow in model I/O] = ""
+    skip_memory_metrics: Annotated[bool, { "help": "Whether to skip adding memory profiler reports to metrics. Skipped by default because it slows down training." }] = True
 
     # --- External Script Flags ---
-    do_train: bool = field(
-        default=False,
-        metadata={
-            "help": "Whether to run training. Not directly used by Trainer; intended for training/evaluation scripts."
-        },
-    )
-    do_eval: bool = field(
-        default=False,
-        metadata={
-            "help": "Whether to run evaluation. Not directly used by Trainer; intended for training/evaluation scripts."
-        },
-    )
-    do_predict: bool = field(
-        default=False,
-        metadata={
-            "help": "Whether to run predictions on the test set. Not directly used by Trainer; intended for training/evaluation scripts."
-        },
-    )
-    resume_from_checkpoint: str | None = field(
-        default=None,
-        metadata={
-            "help": "Path to a folder with a valid checkpoint for your model. Not directly used by Trainer; intended for training/evaluation scripts."
-        },
-    )
+    do_train: Annotated[bool, { "help": "Whether to run training. Not directly used by Trainer; intended for training/evaluation scripts." }] = False
+    do_eval: Annotated[bool, { "help": "Whether to run evaluation. Not directly used by Trainer; intended for training/evaluation scripts." }] = False
+    do_predict: Annotated[bool, { "help": "Whether to run predictions on the test set. Not directly used by Trainer; intended for training/evaluation scripts." }] = False
+    resume_from_checkpoint: Annotated[str | None, { "help": "Path to a folder with a valid checkpoint for your model. Not directly used by Trainer; intended for training/evaluation scripts." }] = None
 
-    local_rank: int = field(
-        default=-1,
-        metadata={
-            "help": "When using torch.distributed.launch (Deprecated), it will pass `local_rank` in the script, so we need this for the parser. To get the local rank, prefer using the property `local_process_index`"
-        },
-    )
+    local_rank: Annotated[int, { "help": "When using torch.distributed.launch (Deprecated] = -1
 
     def __post_init__(self):
         # ── 1. Defaults & Normalization ──

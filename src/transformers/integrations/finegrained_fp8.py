@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from __future__ import annotations
+from salix import Struct
 
 import functools
 import os
@@ -69,8 +70,7 @@ def _first_attr(obj, *names):
     raise AttributeError(f"{type(obj).__name__} has none of: {names}")
 
 
-@dataclass(frozen=True)
-class FineGrainedFP8:
+class FineGrainedFP8(Struct, frozen=True):
     """Entry points exposed by the `kernels-community/finegrained-fp8` Triton kernel."""
 
     matmul: Callable

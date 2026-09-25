@@ -1,3 +1,4 @@
+from salix import Struct
 r"""Utility to convert Gemma models from Orbax to HF Transformers checkpoint.
 
 python -m transformers.models.shieldgemma2.convert_shieldgemma2_weights_orbax_to_hf \
@@ -333,8 +334,7 @@ def transpose_reshape(x: torch.Tensor) -> torch.Tensor:
     return x.reshape(x.shape[0] * x.shape[1], x.shape[2]).contiguous()
 
 
-@dataclasses.dataclass(frozen=True)
-class ConversionResult:
+class ConversionResult(Struct, frozen=True):
     state_tree: dict[str, torch.Tensor]
     config: ShieldGemma2Config
 

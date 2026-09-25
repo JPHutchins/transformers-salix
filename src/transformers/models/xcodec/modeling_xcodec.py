@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,8 +36,7 @@ from ..auto import AutoModel
 from .configuration_xcodec import XcodecConfig
 
 
-@dataclass
-class XcodecOutput(ModelOutput):
+class XcodecOutput(ModelOutput, Struct, frozen=False):
     """
     Args:
         audio_codes (`torch.LongTensor`  of shape `(batch_size, num_quantizers, codes_length)`, *optional*):
@@ -49,8 +49,7 @@ class XcodecOutput(ModelOutput):
     audio_values: torch.FloatTensor | None = None
 
 
-@dataclass
-class XcodecEncoderOutput(ModelOutput):
+class XcodecEncoderOutput(ModelOutput, Struct, frozen=False):
     """
     Args:
         audio_codes (`torch.LongTensor`  of shape `(batch_size, num_quantizers, codes_length)`, *optional*):
@@ -60,8 +59,7 @@ class XcodecEncoderOutput(ModelOutput):
     audio_codes: torch.LongTensor | None = None
 
 
-@dataclass
-class XcodecDecoderOutput(ModelOutput):
+class XcodecDecoderOutput(ModelOutput, Struct, frozen=False):
     """
     Args:
         audio_values (`torch.FloatTensor`  of shape `(batch_size, channels, num_samples)`, *optional*):

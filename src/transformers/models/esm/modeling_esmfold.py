@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 Meta and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -56,8 +57,7 @@ logger = logging.get_logger(__name__)
     Output type of [`EsmForProteinFoldingOutput`].
     """
 )
-@dataclass
-class EsmForProteinFoldingOutput(ModelOutput):
+class EsmForProteinFoldingOutput(ModelOutput, Struct, frozen=False):
     r"""
     frames (`torch.FloatTensor`):
         Output frames.

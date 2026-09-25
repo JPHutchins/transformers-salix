@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2021 Tel AViv University, AllenAI and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -567,8 +568,7 @@ class SplinterForQuestionAnswering(SplinterPreTrainedModel):
     Class for outputs of Splinter as a span selection model.
     """
 )
-@dataclass
-class SplinterForPreTrainingOutput(ModelOutput):
+class SplinterForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when start and end positions are provided):
         Total span extraction loss is the sum of a Cross-Entropy for the start and end positions.

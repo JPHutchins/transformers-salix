@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 The Qwen team, Alibaba Group and the HuggingFace Inc. team. All rights reserved.
 #
 # This code is based on EleutherAI's GPT-NeoX library and the GPT-NeoX
@@ -68,8 +69,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class Qwen2VLModelOutputWithPast(BaseModelOutputWithPast):
+class Qwen2VLModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -80,8 +80,7 @@ class Qwen2VLModelOutputWithPast(BaseModelOutputWithPast):
 
 
 @auto_docstring
-@dataclass
-class Qwen2VLCausalLMOutputWithPast(CausalLMOutputWithPast):
+class Qwen2VLCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.

@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from __future__ import annotations
+from salix import Struct
 
 import inspect
 import os
@@ -4628,8 +4629,7 @@ def auto_docstring(obj=None, *, custom_intro=None, custom_args=None, checkpoint=
         @auto_docstring(
             custom_intro="Custom model outputs with additional fields."
         )
-        @dataclass
-        class MyModelOutput(ImageClassifierOutput):
+        class MyModelOutput(ImageClassifierOutput, Struct, frozen=False):
             r'''
             loss (`torch.FloatTensor`, *optional*):
                 The loss of the model.

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 Kyutai, and the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,8 +40,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class MimiOutput(ModelOutput):
+class MimiOutput(ModelOutput, Struct, frozen=False):
     r"""
     audio_codes (`torch.LongTensor`  of shape `(batch_size, num_quantizers, codes_length)`, *optional*):
         Discrete code embeddings computed using `model.encode`.
@@ -165,8 +165,7 @@ class MimiConv1dPaddingCache:
 
 
 @auto_docstring
-@dataclass
-class MimiEncoderOutput(ModelOutput):
+class MimiEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     audio_codes (`torch.LongTensor`  of shape `(batch_size, num_quantizers, codes_length)`, *optional*):
         Discrete code embeddings computed using `model.encode`.
@@ -188,8 +187,7 @@ class MimiEncoderOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class MimiDecoderOutput(ModelOutput):
+class MimiDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     audio_values (`torch.FloatTensor`  of shape `(batch_size, segment_length)`, *optional*):
         Decoded audio values, obtained using the decoder part of Mimi.

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 Microsoft Research and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,8 +40,7 @@ logger = logging.get_logger(__name__)
     FocalNet encoder's outputs, with potential hidden states.
     """
 )
-@dataclass
-class FocalNetEncoderOutput(ModelOutput):
+class FocalNetEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     reshaped_hidden_states (`tuple(torch.FloatTensor)`, *optional*, returned when `output_hidden_states=True` is passed or when `config.output_hidden_states=True`):
         Tuple of `torch.FloatTensor` (one for the output of the embeddings + one for the output of each stage) of
@@ -60,8 +60,7 @@ class FocalNetEncoderOutput(ModelOutput):
     FocalNet model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
-class FocalNetModelOutput(ModelOutput):
+class FocalNetModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, hidden_size)`, *optional*, returned when `add_pooling_layer=True` is passed):
         Average pooling of the last layer hidden-state.
@@ -84,8 +83,7 @@ class FocalNetModelOutput(ModelOutput):
     FocalNet masked image model outputs.
     """
 )
-@dataclass
-class FocalNetMaskedImageModelingOutput(ModelOutput):
+class FocalNetMaskedImageModelingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `bool_masked_pos` is provided):
         Masked image modeling (MLM) loss.
@@ -110,8 +108,7 @@ class FocalNetMaskedImageModelingOutput(ModelOutput):
     FocalNet outputs for image classification.
     """
 )
-@dataclass
-class FocalNetImageClassifierOutput(ModelOutput):
+class FocalNetImageClassifierOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification (or regression if config.num_labels==1) loss.

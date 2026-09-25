@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022, Google and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,8 +46,7 @@ from .configuration_pegasus_x import PegasusXConfig
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class DimensionInfo:
+class DimensionInfo(Struct, frozen=False):
     """Wrapper for dimension info."""
 
     batch_size: int  # batch size

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 Mobile Perception Systems Lab at TU/e and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -143,8 +144,7 @@ class EomtConfig(ViTConfig):
     [`~EomtImageProcessor] for details regarding usage.
     """
 )
-@dataclass
-class EomtForUniversalSegmentationOutput(ModelOutput):
+class EomtForUniversalSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.Tensor`, *optional*):
         The computed loss, returned when labels are present.

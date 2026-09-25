@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -155,8 +156,7 @@ def arange_like(x, dim: int) -> torch.Tensor:
     information.
     """
 )
-@dataclass
-class SuperGlueKeypointMatchingOutput(ModelOutput):
+class SuperGlueKeypointMatchingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*):
         Loss computed during training.

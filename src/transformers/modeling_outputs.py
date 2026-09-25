@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2020 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +21,7 @@ from .cache_utils import Cache, EncoderDecoderCache
 from .utils import ModelOutput
 
 
-@dataclass
-class BaseModelOutput(ModelOutput):
+class BaseModelOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for model's outputs, with potential hidden states and attentions.
 
@@ -46,8 +46,7 @@ class BaseModelOutput(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class BaseModelOutputWithNoAttention(ModelOutput):
+class BaseModelOutputWithNoAttention(ModelOutput, Struct, frozen=False):
     """
     Base class for model's outputs, with potential hidden states.
 
@@ -65,8 +64,7 @@ class BaseModelOutputWithNoAttention(ModelOutput):
     hidden_states: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class BaseModelOutputWithPooling(ModelOutput):
+class BaseModelOutputWithPooling(ModelOutput, Struct, frozen=False):
     """
     Base class for model's outputs that also contains a pooling of the last hidden states.
 
@@ -97,8 +95,7 @@ class BaseModelOutputWithPooling(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class BaseModelOutputWithPoolingAndNoAttention(ModelOutput):
+class BaseModelOutputWithPoolingAndNoAttention(ModelOutput, Struct, frozen=False):
     """
     Base class for model's outputs that also contains a pooling of the last hidden states.
 
@@ -119,8 +116,7 @@ class BaseModelOutputWithPoolingAndNoAttention(ModelOutput):
     hidden_states: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class BaseModelOutputWithPast(ModelOutput):
+class BaseModelOutputWithPast(ModelOutput, Struct, frozen=False):
     """
     Base class for model's outputs that may also contain a past key/values (to speed up sequential decoding).
 
@@ -155,8 +151,7 @@ class BaseModelOutputWithPast(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class BaseModelOutputWithCrossAttentions(ModelOutput):
+class BaseModelOutputWithCrossAttentions(ModelOutput, Struct, frozen=False):
     """
     Base class for model's outputs, with potential hidden states and attentions.
 
@@ -188,8 +183,7 @@ class BaseModelOutputWithCrossAttentions(ModelOutput):
     cross_attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class BaseModelOutputWithPoolingAndCrossAttentions(ModelOutput):
+class BaseModelOutputWithPoolingAndCrossAttentions(ModelOutput, Struct, frozen=False):
     """
     Base class for model's outputs that also contains a pooling of the last hidden states.
 
@@ -234,8 +228,7 @@ class BaseModelOutputWithPoolingAndCrossAttentions(ModelOutput):
     cross_attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class BaseModelOutputWithPastAndCrossAttentions(ModelOutput):
+class BaseModelOutputWithPastAndCrossAttentions(ModelOutput, Struct, frozen=False):
     """
     Base class for model's outputs that may also contain a past key/values (to speed up sequential decoding).
 
@@ -277,8 +270,7 @@ class BaseModelOutputWithPastAndCrossAttentions(ModelOutput):
     cross_attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class MoEModelOutput(ModelOutput):
+class MoEModelOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for model's outputs, with potential hidden states and attentions.
 
@@ -310,8 +302,7 @@ class MoEModelOutput(ModelOutput):
     router_logits: tuple[torch.FloatTensor] | None = None
 
 
-@dataclass
-class MoeModelOutputWithPast(ModelOutput):
+class MoeModelOutputWithPast(ModelOutput, Struct, frozen=False):
     """
     Base class for model's outputs, with potential hidden states and attentions.
 
@@ -349,8 +340,7 @@ class MoeModelOutputWithPast(ModelOutput):
     router_logits: tuple[torch.FloatTensor] | None = None
 
 
-@dataclass
-class MoeCausalLMOutputWithPast(ModelOutput):
+class MoeCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     """
     Base class for causal language model (or autoregressive) with mixture of experts outputs.
 
@@ -397,8 +387,7 @@ class MoeCausalLMOutputWithPast(ModelOutput):
     router_logits: tuple[torch.FloatTensor] | None = None
 
 
-@dataclass
-class MoEModelOutputWithPastAndCrossAttentions(ModelOutput):
+class MoEModelOutputWithPastAndCrossAttentions(ModelOutput, Struct, frozen=False):
     """
     Base class for model's outputs that may also contain a past key/values (to speed up sequential decoding) as well as
     Mixture of Expert's router hidden states terms, to train a MoE model.
@@ -448,8 +437,7 @@ class MoEModelOutputWithPastAndCrossAttentions(ModelOutput):
     router_logits: tuple[torch.FloatTensor] | None = None
 
 
-@dataclass
-class Seq2SeqModelOutput(ModelOutput):
+class Seq2SeqModelOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for model encoder's outputs that also contains : pre-computed hidden states that can speed up sequential
     decoding.
@@ -507,8 +495,7 @@ class Seq2SeqModelOutput(ModelOutput):
     encoder_attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class Seq2SeqMoEModelOutput(ModelOutput):
+class Seq2SeqMoEModelOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for model encoder's outputs that also contains : pre-computed hidden states that can speed up sequential
     decoding.
@@ -577,8 +564,7 @@ class Seq2SeqMoEModelOutput(ModelOutput):
     encoder_router_logits: tuple[torch.FloatTensor] | None = None
 
 
-@dataclass
-class CausalLMOutput(ModelOutput):
+class CausalLMOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for causal language model (or autoregressive) outputs.
 
@@ -606,8 +592,7 @@ class CausalLMOutput(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class CausalLMOutputWithPast(ModelOutput):
+class CausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     """
     Base class for causal language model (or autoregressive) outputs.
 
@@ -641,8 +626,7 @@ class CausalLMOutputWithPast(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class CausalLMOutputWithCrossAttentions(ModelOutput):
+class CausalLMOutputWithCrossAttentions(ModelOutput, Struct, frozen=False):
     """
     Base class for causal language model (or autoregressive) outputs.
 
@@ -683,8 +667,7 @@ class CausalLMOutputWithCrossAttentions(ModelOutput):
     cross_attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class SequenceClassifierOutputWithPast(ModelOutput):
+class SequenceClassifierOutputWithPast(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of sentence classification models.
 
@@ -718,8 +701,7 @@ class SequenceClassifierOutputWithPast(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class MaskedLMOutput(ModelOutput):
+class MaskedLMOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for masked language models outputs.
 
@@ -747,8 +729,7 @@ class MaskedLMOutput(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class Seq2SeqLMOutput(ModelOutput):
+class Seq2SeqLMOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for sequence-to-sequence language models outputs.
 
@@ -805,8 +786,7 @@ class Seq2SeqLMOutput(ModelOutput):
     encoder_attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class Seq2SeqMoEOutput(ModelOutput):
+class Seq2SeqMoEOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for sequence-to-sequence language models outputs.
 
@@ -878,8 +858,7 @@ class Seq2SeqMoEOutput(ModelOutput):
     encoder_router_logits: tuple[torch.FloatTensor] | None = None
 
 
-@dataclass
-class NextSentencePredictorOutput(ModelOutput):
+class NextSentencePredictorOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of models predicting if two sentences are consecutive or not.
 
@@ -908,8 +887,7 @@ class NextSentencePredictorOutput(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class SequenceClassifierOutput(ModelOutput):
+class SequenceClassifierOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of sentence classification models.
 
@@ -937,8 +915,7 @@ class SequenceClassifierOutput(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class Seq2SeqSequenceClassifierOutput(ModelOutput):
+class Seq2SeqSequenceClassifierOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of sequence-to-sequence sentence classification models.
 
@@ -995,8 +972,7 @@ class Seq2SeqSequenceClassifierOutput(ModelOutput):
     encoder_attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class MultipleChoiceModelOutput(ModelOutput):
+class MultipleChoiceModelOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of multiple choice models.
 
@@ -1026,8 +1002,7 @@ class MultipleChoiceModelOutput(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class TokenClassifierOutput(ModelOutput):
+class TokenClassifierOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of token classification models.
 
@@ -1055,8 +1030,7 @@ class TokenClassifierOutput(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class QuestionAnsweringModelOutput(ModelOutput):
+class QuestionAnsweringModelOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of question answering models.
 
@@ -1087,8 +1061,7 @@ class QuestionAnsweringModelOutput(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class Seq2SeqQuestionAnsweringModelOutput(ModelOutput):
+class Seq2SeqQuestionAnsweringModelOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of sequence-to-sequence question answering models.
 
@@ -1148,8 +1121,7 @@ class Seq2SeqQuestionAnsweringModelOutput(ModelOutput):
     encoder_attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class SemanticSegmenterOutput(ModelOutput):
+class SemanticSegmenterOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of semantic segmentation models.
 
@@ -1186,8 +1158,7 @@ class SemanticSegmenterOutput(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class ImageClassifierOutput(ModelOutput):
+class ImageClassifierOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of image classification models.
 
@@ -1214,8 +1185,7 @@ class ImageClassifierOutput(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class ImageClassifierOutputWithNoAttention(ModelOutput):
+class ImageClassifierOutputWithNoAttention(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of image classification models.
 
@@ -1235,8 +1205,7 @@ class ImageClassifierOutputWithNoAttention(ModelOutput):
     hidden_states: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class DepthEstimatorOutput(ModelOutput):
+class DepthEstimatorOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of depth estimation models.
 
@@ -1265,8 +1234,7 @@ class DepthEstimatorOutput(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class ImageSuperResolutionOutput(ModelOutput):
+class ImageSuperResolutionOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of image super resolution models.
 
@@ -1293,8 +1261,7 @@ class ImageSuperResolutionOutput(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class Wav2Vec2BaseModelOutput(ModelOutput):
+class Wav2Vec2BaseModelOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for models that have been trained with the Wav2Vec2 loss objective.
 
@@ -1322,8 +1289,7 @@ class Wav2Vec2BaseModelOutput(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class XVectorOutput(ModelOutput):
+class XVectorOutput(ModelOutput, Struct, frozen=False):
     """
     Output type of [`Wav2Vec2ForXVector`].
 
@@ -1354,8 +1320,7 @@ class XVectorOutput(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class BackboneOutput(ModelOutput):
+class BackboneOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of backbones.
 
@@ -1381,8 +1346,7 @@ class BackboneOutput(ModelOutput):
     attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class BaseModelOutputWithPoolingAndProjection(ModelOutput):
+class BaseModelOutputWithPoolingAndProjection(ModelOutput, Struct, frozen=False):
     """
     Base class for model's outputs that also contains a pooling of the last hidden states.
 
@@ -1418,8 +1382,7 @@ class BaseModelOutputWithPoolingAndProjection(ModelOutput):
     projection_state: tuple[torch.FloatTensor] | None = None
 
 
-@dataclass
-class Seq2SeqSpectrogramOutput(ModelOutput):
+class Seq2SeqSpectrogramOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for sequence-to-sequence spectrogram outputs.
 
@@ -1476,8 +1439,7 @@ class Seq2SeqSpectrogramOutput(ModelOutput):
     encoder_attentions: tuple[torch.FloatTensor, ...] | None = None
 
 
-@dataclass
-class Seq2SeqTSModelOutput(ModelOutput):
+class Seq2SeqTSModelOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for time series model's encoder outputs that also contains pre-computed hidden states that can speed up
     sequential decoding.
@@ -1546,8 +1508,7 @@ class Seq2SeqTSModelOutput(ModelOutput):
     static_features: torch.FloatTensor | None = None
 
 
-@dataclass
-class Seq2SeqTSPredictionOutput(ModelOutput):
+class Seq2SeqTSPredictionOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for time series model's decoder outputs that also contain the loss as well as the parameters of the
     chosen distribution.
@@ -1616,8 +1577,7 @@ class Seq2SeqTSPredictionOutput(ModelOutput):
     static_features: torch.FloatTensor | None = None
 
 
-@dataclass
-class SampleTSPredictionOutput(ModelOutput):
+class SampleTSPredictionOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for time series model's predictions outputs that contains the sampled values from the chosen
     distribution.
@@ -1630,8 +1590,7 @@ class SampleTSPredictionOutput(ModelOutput):
     sequences: torch.FloatTensor | None = None
 
 
-@dataclass
-class MaskedImageModelingOutput(ModelOutput):
+class MaskedImageModelingOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of masked image completion / in-painting models.
 

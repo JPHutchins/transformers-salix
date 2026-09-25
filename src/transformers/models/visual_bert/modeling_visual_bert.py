@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2021 The UCLA NLP Authors and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -462,8 +463,7 @@ class VisualBertPreTrainedModel(PreTrainedModel):
     Output type of [`VisualBertForPreTraining`].
     """
 )
-@dataclass
-class VisualBertForPreTrainingOutput(ModelOutput):
+class VisualBertForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the masked language modeling loss and the sentence-image prediction

@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 The Salesforce Authors and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -57,8 +58,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class BaseModelOutputWithVisionQformerOutputs(BaseModelOutputWithPooling):
+class BaseModelOutputWithVisionQformerOutputs(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     vision_outputs (`BaseModelOutputWithPooling`):
         Outputs of the vision encoder.
@@ -75,8 +75,7 @@ class BaseModelOutputWithVisionQformerOutputs(BaseModelOutputWithPooling):
     Class defining the outputs of [`Blip2ForConditionalGeneration`].
     """
 )
-@dataclass
-class Blip2ForConditionalGenerationModelOutput(ModelOutput):
+class Blip2ForConditionalGenerationModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor`, *optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Language modeling loss from the language model.
@@ -106,8 +105,7 @@ class Blip2ForConditionalGenerationModelOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class Blip2ImageTextMatchingModelOutput(ModelOutput):
+class Blip2ImageTextMatchingModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for image-text similarity.

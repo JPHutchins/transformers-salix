@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2018 The Google AI Language Team Authors, Facebook AI Research authors and The HuggingFace Inc. team.
 # Copyright (c) 2018, NVIDIA CORPORATION.  All rights reserved.
 #
@@ -166,15 +167,14 @@ _is_quantized = False
 _is_ds_init_called = False
 
 
-@dataclass(frozen=True)
-class LoadStateDictConfig:
+class LoadStateDictConfig(Struct, frozen=True):
     """
     Config for loading weights. This allows bundling arguments that are just
     passed around.
     """
 
     pretrained_model_name_or_path: str | None = None
-    download_kwargs: DownloadKwargs | None = field(default_factory=DownloadKwargs)
+    download_kwargs: DownloadKwargs | None = None
     use_safetensors: bool | None = None
     ignore_mismatched_sizes: bool = False
     sharded_metadata: dict | None = None
@@ -182,7 +182,7 @@ class LoadStateDictConfig:
     disk_offload_folder: str | None = None
     offload_buffers: bool = False
     dtype: torch.dtype | None = None
-    dtype_plan: dict = field(default_factory=dict)
+    dtype_plan: dict = {}
     hf_quantizer: HfQuantizer | None = None
     device_mesh: "DeviceMeshLike | None" = None
     weights_only: bool = True

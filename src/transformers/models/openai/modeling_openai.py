@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2018 The OpenAI Team Authors and HuggingFace Inc. team.
 # Copyright (c) 2018, NVIDIA CORPORATION.  All rights reserved.
 #
@@ -274,8 +275,7 @@ class OpenAIGPTPreTrainedModel(PreTrainedModel):
     Base class for outputs of models predicting if two sentences are consecutive or not.
     """
 )
-@dataclass
-class OpenAIGPTDoubleHeadsModelOutput(ModelOutput):
+class OpenAIGPTDoubleHeadsModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss.

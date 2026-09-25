@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -86,8 +87,7 @@ class ParakeetRNNTDecoderCache:
 class ParakeetTDTDecoderCache(ParakeetRNNTDecoderCache): ...
 
 
-@dataclass
-class ParakeetRNNTGenerateOutput(ModelOutput):
+class ParakeetRNNTGenerateOutput(ModelOutput, Struct, frozen=False):
     """
     Outputs of Parakeet transducer (RNN-T / TDT) generation.
 

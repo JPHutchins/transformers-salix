@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 IDEA Research and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -136,8 +137,7 @@ class MultiScaleDeformableAttention(nn.Module):
     - a stacked tensor of intermediate reference points.
     """
 )
-@dataclass
-class GroundingDinoDecoderOutput(ModelOutput):
+class GroundingDinoDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(batch_size, config.decoder_layers, num_queries, hidden_size)`):
         Stacked intermediate hidden states (output of each layer of the decoder).
@@ -159,8 +159,7 @@ class GroundingDinoDecoderOutput(ModelOutput):
     - vision and text intermediate hidden states
     """
 )
-@dataclass
-class GroundingDinoEncoderOutput(ModelOutput):
+class GroundingDinoEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state_vision (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the vision encoder.
@@ -188,8 +187,7 @@ class GroundingDinoEncoderOutput(ModelOutput):
     Base class for outputs of the Grounding DINO encoder-decoder model.
     """
 )
-@dataclass
-class GroundingDinoModelOutput(ModelOutput):
+class GroundingDinoModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_queries, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the decoder of the model.
@@ -251,8 +249,7 @@ class GroundingDinoModelOutput(ModelOutput):
     Output type of [`GroundingDinoForObjectDetection`].
     """
 )
-@dataclass
-class GroundingDinoObjectDetectionOutput(ModelOutput):
+class GroundingDinoObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

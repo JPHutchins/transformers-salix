@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 EleutherAI and the HuggingFace Inc. team. All rights reserved.
 #
 # This code is based on EleutherAI's GPT-NeoX library and the GPT-NeoX
@@ -51,8 +52,7 @@ logger = logging.get_logger(__name__)
     Base class for Idefics model's outputs that may also contain a past key/values (to speed up sequential decoding).
     """
 )
-@dataclass
-class IdeficsBaseModelOutputWithPast(ModelOutput):
+class IdeficsBaseModelOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.
@@ -78,8 +78,7 @@ class IdeficsBaseModelOutputWithPast(ModelOutput):
     Base class for Idefics causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class IdeficsCausalLMOutputWithPast(ModelOutput):
+class IdeficsCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

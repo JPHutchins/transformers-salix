@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 Westlake Representational Learning Lab (Fajie Yuan Lab) team and the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -338,8 +339,7 @@ class EvollaSequenceCompressorResampler(nn.Module):
 
 
 @auto_docstring
-@dataclass
-class EvollaProteinEncoderModelOutput(ModelOutput):
+class EvollaProteinEncoderModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     sequence_compressor_output (`torch.FloatTensor` of shape `(batch_size, compressed_seq_len, hidden_size)`, *optional*):
         Compressed sequence representation produced by the sequence compressor module. The sequence length is

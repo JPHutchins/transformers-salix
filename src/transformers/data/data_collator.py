@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2020 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -91,8 +92,7 @@ def default_data_collator(features: list[InputDataClass], return_tensors="pt") -
         return numpy_default_data_collator(features)
 
 
-@dataclass
-class DefaultDataCollator(DataCollatorMixin):
+class DefaultDataCollator(DataCollatorMixin, Struct, frozen=False):
     """
     Very simple data collator that simply collates batches of dict-like objects and performs special handling for
     potential keys named:
@@ -187,8 +187,7 @@ def numpy_default_data_collator(features: list[InputDataClass]) -> dict[str, Any
     return batch
 
 
-@dataclass
-class DataCollatorWithPadding:
+class DataCollatorWithPadding(Struct, frozen=False):
     """
     Data collator that will dynamically pad the inputs received.
 
@@ -239,8 +238,7 @@ class DataCollatorWithPadding:
         return batch
 
 
-@dataclass
-class DataCollatorForTokenClassification(DataCollatorMixin):
+class DataCollatorForTokenClassification(DataCollatorMixin, Struct, frozen=False):
     """
     Data collator that will dynamically pad the inputs received, as well as the labels.
 
@@ -418,8 +416,7 @@ def _numpy_collate_batch(examples, tokenizer, pad_to_multiple_of: int | None = N
     return result
 
 
-@dataclass
-class DataCollatorForMultipleChoice(DataCollatorMixin):
+class DataCollatorForMultipleChoice(DataCollatorMixin, Struct, frozen=False):
     """
     Data collator that dynamically pads a batch of nested examples for multiple choice, so that all choices
     of all examples have the same length.
@@ -485,8 +482,7 @@ class DataCollatorForMultipleChoice(DataCollatorMixin):
         return batch
 
 
-@dataclass
-class DataCollatorForSeq2Seq:
+class DataCollatorForSeq2Seq(Struct, frozen=False):
     """
     Data collator that will dynamically pad the inputs received, as well as the labels.
 
@@ -617,8 +613,7 @@ class DataCollatorForSeq2Seq:
         return batch
 
 
-@dataclass
-class DataCollatorForLanguageModeling(DataCollatorMixin):
+class DataCollatorForLanguageModeling(DataCollatorMixin, Struct, frozen=False):
     """
     Data collator used for language modeling. Inputs are dynamically padded to the maximum length of a batch if they
     are not all of the same length.
@@ -1017,8 +1012,7 @@ class DataCollatorForLanguageModeling(DataCollatorMixin):
         return np.any(same_word & mask[:, None, :], axis=2)
 
 
-@dataclass
-class DataCollatorForWholeWordMask(DataCollatorForLanguageModeling):
+class DataCollatorForWholeWordMask(DataCollatorForLanguageModeling, Struct, frozen=False):
     """
     Data collator used for language modeling that masks entire words.
 
@@ -1054,8 +1048,7 @@ def to_numpy(x) -> np.ndarray[Any]:
         return np.array(x)
 
 
-@dataclass
-class DataCollatorForSOP(DataCollatorForLanguageModeling):
+class DataCollatorForSOP(DataCollatorForLanguageModeling, Struct, frozen=False):
     """
     Data collator used for sentence order prediction task.
 
@@ -1137,8 +1130,7 @@ class DataCollatorForSOP(DataCollatorForLanguageModeling):
         return inputs, labels, attention_mask
 
 
-@dataclass
-class DataCollatorForPermutationLanguageModeling(DataCollatorMixin):
+class DataCollatorForPermutationLanguageModeling(DataCollatorMixin, Struct, frozen=False):
     """
     Data collator used for permutation language modeling.
 
@@ -1362,8 +1354,7 @@ class DataCollatorForPermutationLanguageModeling(DataCollatorMixin):
         return inputs.astype(np.int64), perm_mask, target_mapping, labels.astype(np.int64)
 
 
-@dataclass
-class DataCollatorWithFlattening(DefaultDataCollator):
+class DataCollatorWithFlattening(DefaultDataCollator, Struct, frozen=False):
     """
     Data collator used for padding free approach. Does the following:
 

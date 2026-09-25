@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -109,13 +110,11 @@ class VoxtralRealtimeConv1dPaddingCache:
         return padded_hidden_states
 
 
-@dataclass
-class VoxtralRealtimeEncoderOutput(BaseModelOutputWithPast):
+class VoxtralRealtimeEncoderOutput(BaseModelOutputWithPast, Struct, frozen=False):
     padding_cache: VoxtralRealtimeConv1dPaddingCache | None = None
 
 
-@dataclass
-class VoxtralRealtimeModelOutputWithPast(BaseModelOutputWithPast):
+class VoxtralRealtimeModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     Args:
         encoder_past_key_values (`Cache`, *optional*):
@@ -132,8 +131,7 @@ class VoxtralRealtimeModelOutputWithPast(BaseModelOutputWithPast):
     audio_hidden_states: torch.FloatTensor | None = None
 
 
-@dataclass
-class VoxtralRealtimeCausalLMOutputWithPast(CausalLMOutputWithPast):
+class VoxtralRealtimeCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     Args:
         encoder_past_key_values (`Cache`, *optional*):

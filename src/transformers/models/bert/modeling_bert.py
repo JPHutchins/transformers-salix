@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2018 The Google AI Language Team Authors and The HuggingFace Inc. team.
 # Copyright (c) 2018, NVIDIA CORPORATION.  All rights reserved.
 #
@@ -559,8 +560,7 @@ class BertPreTrainedModel(PreTrainedModel):
     Output type of [`BertForPreTraining`].
     """
 )
-@dataclass
-class BertForPreTrainingOutput(ModelOutput):
+class BertForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the masked language modeling loss and the next sequence prediction

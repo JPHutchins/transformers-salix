@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 Kyutai and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,8 +48,7 @@ logger = logging.get_logger(__name__)
     Outputs of [`MoshiForConditionalConditionalGeneration.generate`].
     """
 )
-@dataclass
-class MoshiConditionalGenerationGenerateOutput(ModelOutput):
+class MoshiConditionalGenerationGenerateOutput(ModelOutput, Struct, frozen=False):
     r"""
     audio_sequences (`torch.LongTensor` of shape `(batch_size*num_return_sequences, 1, sequence_length)`, *optional*):
         The generated audio waveforms.
@@ -99,8 +99,7 @@ class MoshiConditionalGenerationGenerateOutput(ModelOutput):
     `MoshiForCausalLM` outputs.
     """
 )
-@dataclass
-class MoshiCausalLMOutputWithPast(ModelOutput):
+class MoshiCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).
@@ -126,8 +125,7 @@ class MoshiCausalLMOutputWithPast(ModelOutput):
     `MoshiForConditionalGeneration` outputs.
     """
 )
-@dataclass
-class MoshiConditionalGenerationOutputWithPast(ModelOutput):
+class MoshiConditionalGenerationOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `text_labels` is provided):
         Text language modeling loss (for next-token prediction).
@@ -165,8 +163,7 @@ class MoshiConditionalGenerationOutputWithPast(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class MoshiUnconditionalInput(ModelOutput):
+class MoshiUnconditionalInput(ModelOutput, Struct, frozen=False):
     r"""
     input_ids (`torch.Tensor `of shape `(batch_size, sequence_length), *optional*):
         The sequence used as a text prompt for the generation.

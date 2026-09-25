@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,8 +47,7 @@ logger = logging.get_logger(__name__)
     Base class for Paligemma outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class PaligemmaModelOutputWithPast(BaseModelOutputWithPast):
+class PaligemmaModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     image_hidden_states (`torch.FloatTensor`, *optional*):
         A `torch.FloatTensor` of size `(batch_size, num_images, sequence_length, hidden_size)`.
@@ -62,8 +62,7 @@ class PaligemmaModelOutputWithPast(BaseModelOutputWithPast):
     Base class for PaliGemma causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class PaliGemmaCausalLMOutputWithPast(ModelOutput):
+class PaliGemmaCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

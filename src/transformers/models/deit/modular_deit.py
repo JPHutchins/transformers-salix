@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2021 Facebook AI Research & The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -237,8 +238,7 @@ class DeiTForImageClassification(ViTForImageClassification):
     Output type of [`DeiTForImageClassificationWithTeacher`].
     """
 )
-@dataclass
-class DeiTForImageClassificationWithTeacherOutput(ModelOutput):
+class DeiTForImageClassificationWithTeacherOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, config.num_labels)`):
         Prediction scores as the average of the cls_logits and distillation logits.

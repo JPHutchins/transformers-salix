@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2024 Descript and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,8 +30,7 @@ from .configuration_dac import DacConfig
 
 
 @auto_docstring
-@dataclass
-class DacOutput(ModelOutput):
+class DacOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.Tensor`):
         Loss from the encoder model, comprising the weighted combination of the commitment and codebook losses.
@@ -52,8 +52,7 @@ class DacOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class DacEncoderOutput(ModelOutput):
+class DacEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.Tensor`):
         Loss from the encoder model, comprising the weighted combination of the commitment and codebook losses.

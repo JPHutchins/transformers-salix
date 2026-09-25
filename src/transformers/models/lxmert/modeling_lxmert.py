@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2018 Hao Tan, Mohit Bansal, and the HuggingFace team
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,8 +46,7 @@ class GeLU(nn.Module):
     encoder")
     """
 )
-@dataclass
-class LxmertModelOutput(ModelOutput):
+class LxmertModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     language_output (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the language encoder.
@@ -90,8 +90,7 @@ class LxmertModelOutput(ModelOutput):
     Output type of [`LxmertForQuestionAnswering`].
     """
 )
-@dataclass
-class LxmertForQuestionAnsweringOutput(ModelOutput):
+class LxmertForQuestionAnsweringOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the masked language modeling loss and the next sequence prediction
@@ -132,8 +131,7 @@ class LxmertForQuestionAnsweringOutput(ModelOutput):
     Output type of [`LxmertForPreTraining`].
     """
 )
-@dataclass
-class LxmertForPreTrainingOutput(ModelOutput):
+class LxmertForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the masked language modeling loss and the next sequence prediction

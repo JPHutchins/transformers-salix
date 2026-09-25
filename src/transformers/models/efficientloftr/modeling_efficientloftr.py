@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,8 +46,7 @@ from .configuration_efficientloftr import EfficientLoFTRConfig
     images, the maximum number of matches is set as the dimension of the matches and matching scores.
     """
 )
-@dataclass
-class EfficientLoFTRKeypointMatchingOutput(ModelOutput):
+class EfficientLoFTRKeypointMatchingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*):
         Loss computed during training.

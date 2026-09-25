@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 Google Inc. HuggingFace Inc. team. All rights reserved.
 #
 #
@@ -440,8 +441,7 @@ class Gemma3nConfig(PreTrainedConfig):
 
 
 @auto_docstring
-@dataclass
-class Gemma3nAudioEncoderModelOutput(BaseModelOutputWithPooling):
+class Gemma3nAudioEncoderModelOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     audio_mel_mask (`torch.BoolTensor`, *optional*):
         A torch.BoolTensor of shape `(batch_size, num_frames)`

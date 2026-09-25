@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2021 Iz Beltagy, Matthew E. Peters, Arman Cohan and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1118,8 +1119,7 @@ class LEDEncoderBaseModelOutput(ModelOutput):
     decoding.
     """
 )
-@dataclass
-class LEDSeq2SeqModelOutput(ModelOutput):
+class LEDSeq2SeqModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the decoder of the model.
@@ -1156,8 +1156,7 @@ class LEDSeq2SeqModelOutput(ModelOutput):
     Base class for sequence-to-sequence language models outputs.
     """
 )
-@dataclass
-class LEDSeq2SeqLMOutput(ModelOutput):
+class LEDSeq2SeqLMOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss.
@@ -1194,8 +1193,7 @@ class LEDSeq2SeqLMOutput(ModelOutput):
     Base class for outputs of sequence-to-sequence sentence classification models.
     """
 )
-@dataclass
-class LEDSeq2SeqSequenceClassifierOutput(ModelOutput):
+class LEDSeq2SeqSequenceClassifierOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `label` is provided):
         Classification (or regression if config.num_labels==1) loss.
@@ -1232,8 +1230,7 @@ class LEDSeq2SeqSequenceClassifierOutput(ModelOutput):
     Base class for outputs of sequence-to-sequence question answering models.
     """
 )
-@dataclass
-class LEDSeq2SeqQuestionAnsweringModelOutput(ModelOutput):
+class LEDSeq2SeqQuestionAnsweringModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Total span extraction loss is the sum of a Cross-Entropy for the start and end positions.

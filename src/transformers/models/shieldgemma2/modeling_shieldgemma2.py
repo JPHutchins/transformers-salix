@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 Google Inc. HuggingFace Inc. team. All rights reserved.
 #
 #
@@ -31,8 +32,7 @@ from .configuration_shieldgemma2 import ShieldGemma2Config
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class ShieldGemma2ImageClassifierOutputWithNoAttention(ImageClassifierOutputWithNoAttention):
+class ShieldGemma2ImageClassifierOutputWithNoAttention(ImageClassifierOutputWithNoAttention, Struct, frozen=False):
     """ShieldGemma2 classifies images as violative or not relative to a specific policy
     Args:
     """

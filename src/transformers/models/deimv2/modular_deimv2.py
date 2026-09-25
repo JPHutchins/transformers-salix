@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2026 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -206,8 +207,7 @@ class Deimv2ModelOutput(DFineModelOutput):
     Attentions are only available for HybridEncoder variants with AIFI layers.
     """
 )
-@dataclass
-class Deimv2EncoderOutput(ModelOutput):
+class Deimv2EncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     feature_maps (`list[torch.FloatTensor]`):
         List of multi-scale feature maps from the encoder, one per feature level.

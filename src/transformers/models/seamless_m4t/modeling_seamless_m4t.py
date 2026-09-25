@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -117,8 +118,7 @@ SEAMLESS_M4T_COMMON_CUSTOM_ARGS = r"""
     [`SeamlessM4TForTextToSpeech`], [`SeamlessM4TForSpeechToSpeech`] and [`SeamlessM4TForTextToSpeech`].
     """
 )
-@dataclass
-class SeamlessM4TGenerationOutput(ModelOutput):
+class SeamlessM4TGenerationOutput(ModelOutput, Struct, frozen=False):
     r"""
     waveform (`torch.FloatTensor` of shape `(batch_size, sequence_length)`):
         The final audio waveform predicted by the model.

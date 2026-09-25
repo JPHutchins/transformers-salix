@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2023 The Google Research Team Authors and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,8 +49,7 @@ logger = logging.get_logger(__name__)
     Base class for vision model's outputs that also contains image embeddings of the pooling of the last hidden states.
     """
 )
-@dataclass
-class AlignVisionModelOutput(ModelOutput):
+class AlignVisionModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     image_embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)` *optional* returned when model is initialized with `with_projection=True`):
         The image embeddings obtained by applying the projection layer to the pooler_output.
@@ -65,8 +65,7 @@ class AlignVisionModelOutput(ModelOutput):
     Base class for text model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
-class AlignTextModelOutput(ModelOutput):
+class AlignTextModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     text_embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)` *optional* returned when model is initialized with `with_projection=True`):
         The text embeddings obtained by applying the projection layer to the pooler_output.
@@ -79,8 +78,7 @@ class AlignTextModelOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class AlignOutput(ModelOutput):
+class AlignOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for image-text similarity.

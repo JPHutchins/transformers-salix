@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The Meta AI Authors and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -264,8 +265,7 @@ class Sam2ImageProcessor(SamImageProcessor):
 
 
 @auto_docstring(custom_intro="Base class for the vision encoder's outputs.")
-@dataclass
-class Sam2VisionEncoderOutput(BaseModelOutputWithPooling):
+class Sam2VisionEncoderOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, height, width, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.
@@ -282,8 +282,7 @@ class Sam2VisionEncoderOutput(BaseModelOutputWithPooling):
 
 
 @auto_docstring(custom_intro="Base class for the Sam2 model's output.")
-@dataclass
-class Sam2ImageSegmentationOutput(ModelOutput):
+class Sam2ImageSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     iou_scores (`torch.FloatTensor` of shape `(batch_size, point_batch_size, num_masks)`):
         The Intersection over Union (IoU) scores of the predicted masks.
@@ -608,8 +607,7 @@ class Sam2MultiScaleBlock(GradientCheckpointingLayer):
     Hiera model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
-class Sam2HieraDetModelOutput(ModelOutput):
+class Sam2HieraDetModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, height, width, hidden_size)`):
         hidden-states at the output of the last layer of the model.

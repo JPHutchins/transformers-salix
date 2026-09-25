@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2022 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,12 +42,11 @@ logging.set_verbosity_info()
 logger = logging.get_logger()
 
 
-@dataclass
-class Tracker:
+class Tracker(Struct, frozen=False):
     module: nn.Module
-    traced: list[nn.Module] = field(default_factory=list)
-    handles: list = field(default_factory=list)
-    name2module: dict[str, nn.Module] = field(default_factory=OrderedDict)
+    traced: list[nn.Module] = []
+    handles: list = []
+    name2module: dict[str, nn.Module] = None
 
     def _forward_hook(self, m, inputs: Tensor, outputs: Tensor, name: str):
         has_not_submodules = len(list(m.modules())) == 1 or isinstance(m, (nn.Conv2d, nn.BatchNorm2d))

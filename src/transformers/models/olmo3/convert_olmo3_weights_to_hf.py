@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from __future__ import annotations
+from salix import Struct
 
 import argparse
 import gc
@@ -106,8 +107,7 @@ def _narrow_tensor_by_index(tensor: torch.Tensor, offsets: Sequence[int], sizes:
     return narrowed_tensor
 
 
-@dataclass
-class _StorageInfo:
+class _StorageInfo(Struct, frozen=False):
     """This is the per entry storage info."""
 
     relative_path: str
@@ -115,8 +115,7 @@ class _StorageInfo:
     length: int
 
 
-@dataclass
-class _StoragePrefix:
+class _StoragePrefix(Struct, frozen=False):
     prefix: str
 
 

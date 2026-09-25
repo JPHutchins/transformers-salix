@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2021 Google Research and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1419,8 +1420,7 @@ class BigBirdPreTrainedModel(PreTrainedModel):
     Output type of [`BigBirdForPreTraining`].
     """
 )
-@dataclass
-class BigBirdForPreTrainingOutput(ModelOutput):
+class BigBirdForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the masked language modeling loss and the next sequence prediction
@@ -1444,8 +1444,7 @@ class BigBirdForPreTrainingOutput(ModelOutput):
     Base class for outputs of question answering models.
     """
 )
-@dataclass
-class BigBirdForQuestionAnsweringModelOutput(ModelOutput):
+class BigBirdForQuestionAnsweringModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Total span extraction loss is the sum of a Cross-Entropy for the start and end positions.

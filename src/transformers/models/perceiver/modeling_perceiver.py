@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2021 Deepmind and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -49,8 +50,7 @@ logger = logging.get_logger(__name__)
     Base class for Perceiver base model's outputs, with potential hidden states, attentions and cross-attentions.
     """
 )
-@dataclass
-class PerceiverModelOutput(ModelOutput):
+class PerceiverModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, num_labels)`):
         Classification (or regression if config.num_labels==1) scores (before SoftMax).
@@ -68,8 +68,7 @@ class PerceiverModelOutput(ModelOutput):
     Base class for Perceiver decoder outputs, with potential cross-attentions.
     """
 )
-@dataclass
-class PerceiverDecoderOutput(ModelOutput):
+class PerceiverDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, num_labels)`):
         Output of the basic decoder.
@@ -84,8 +83,7 @@ class PerceiverDecoderOutput(ModelOutput):
     Base class for Perceiver's masked language model outputs.
     """
 )
-@dataclass
-class PerceiverMaskedLMOutput(ModelOutput):
+class PerceiverMaskedLMOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Masked language modeling (MLM) loss.
@@ -106,8 +104,7 @@ class PerceiverMaskedLMOutput(ModelOutput):
     autoencoding.
     """
 )
-@dataclass
-class PerceiverClassifierOutput(ModelOutput):
+class PerceiverClassifierOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification (or regression if config.num_labels==1) loss.

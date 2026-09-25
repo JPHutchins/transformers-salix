@@ -1,3 +1,4 @@
+from salix import Struct
 # Copyright 2025 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -76,8 +77,7 @@ VideoInput = Union[
 ]
 
 
-@dataclass
-class VideoMetadata(Mapping):
+class VideoMetadata(Mapping, Struct, frozen=False):
     total_num_frames: int
     fps: float | None = None
     width: int | None = None
