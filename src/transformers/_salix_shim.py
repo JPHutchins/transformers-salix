@@ -32,6 +32,7 @@ _stock_dataclass = dataclasses.dataclass
 _combined_metaclasses: dict[type[Any], type[Any]] = {}
 _PY_TPFLAGS_HEAPTYPE = 1 << 9
 _excluded_prefixes: list[str] = []
+_included_prefixes: list[str] = []
 _field_doc_required = "doc" in inspect.signature(dataclasses.Field.__init__).parameters
 
 
@@ -40,6 +41,13 @@ def _caller_excluded() -> bool:
     while frame is not None and frame.f_globals.get("__name__", "") == __name__:
         frame = frame.f_back
     caller_module = frame.f_globals.get("__name__", "") if frame is not None else ""
+
+    if _included_prefixes:
+        return not any(
+            caller_module == prefix or caller_module.startswith(prefix + ".")
+            for prefix in _included_prefixes
+        )
+
     return any(
         caller_module == prefix or caller_module.startswith(prefix + ".")
         for prefix in _excluded_prefixes
@@ -1053,8 +1061,9 @@ def dataclass(
     return wrap(_cls)
 
 
-def install(exclude_prefixes: tuple[str, ...] = ()) -> None:
+def install(exclude_prefixes: tuple[str, ...] = (), include_prefixes: tuple[str, ...] = ()) -> None:
     _excluded_prefixes[:] = exclude_prefixes
+    _included_prefixes[:] = include_prefixes
     dataclasses.dataclass = cast(Any, dataclass)
     dataclasses.fields = cast(Any, fields)
     dataclasses.asdict = cast(Any, asdict)
