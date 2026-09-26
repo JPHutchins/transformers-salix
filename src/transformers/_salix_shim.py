@@ -37,7 +37,7 @@ _field_doc_required = "doc" in inspect.signature(dataclasses.Field.__init__).par
 
 def _caller_excluded() -> bool:
     frame: FrameType | None = sys._getframe(1)
-    while frame is not None and frame.f_globals.get("__name__", "") == "_shim":
+    while frame is not None and frame.f_globals.get("__name__", "") == __name__:
         frame = frame.f_back
     caller_module = frame.f_globals.get("__name__", "") if frame is not None else ""
     return any(
