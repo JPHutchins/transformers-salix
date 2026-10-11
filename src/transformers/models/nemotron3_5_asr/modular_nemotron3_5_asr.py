@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2026 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +12,8 @@ from salix import Struct
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
+
+from salix import Struct
 
 from ...audio_utils import AudioInput, make_list_of_audio
 from ...cache_utils import Cache

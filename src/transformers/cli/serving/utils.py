@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2026 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,9 +23,10 @@ import threading
 from abc import ABC, abstractmethod
 from collections.abc import Callable
 from concurrent.futures import Future
-from dataclasses import dataclass
 from queue import Queue
 from typing import TYPE_CHECKING
+
+from salix import Struct
 
 from transformers.utils import logging
 from transformers.utils.chat_parsing import ResponseParser

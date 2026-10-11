@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2024 The Qwen team, Alibaba Group and the HuggingFace Inc. team. All rights reserved.
 #
 # This code is based on EleutherAI's GPT-NeoX library and the GPT-NeoX
@@ -22,11 +21,11 @@ from salix import Struct
 import itertools
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
+from salix import Struct
 from torch.nn import LayerNorm
 
 from ... import initialization as init

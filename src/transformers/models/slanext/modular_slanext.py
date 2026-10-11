@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2026 The PaddlePaddle Team and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,13 +14,13 @@ from salix import Struct
 
 
 import math
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision.transforms.v2.functional as tvF
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2CLS

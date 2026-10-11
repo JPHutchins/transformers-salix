@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from __future__ import annotations
-from salix import Struct
 
 import functools
 from collections.abc import Callable
-from dataclasses import dataclass
+
+from salix import Struct
 
 from ..core_model_loading import ConversionOps
 from ..quantizers.quantizers_utils import should_convert_module

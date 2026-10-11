@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright (C) 2026 THL A29 Limited, a Tencent company and the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +14,11 @@ from salix import Struct
 
 import itertools
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 from torchvision.transforms.v2 import functional as tvF
 

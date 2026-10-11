@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2024 Meta AI and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,11 +17,11 @@ import inspect
 import math
 import random
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Optional
 
 import torch
 import torch.nn as nn
+from salix import Struct
 from torch.nn import CrossEntropyLoss
 
 from ... import initialization as init

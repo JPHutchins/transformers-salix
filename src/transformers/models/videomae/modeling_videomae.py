@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2022 Multimedia Computing Group, Nanjing University and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,10 +16,10 @@ from salix import Struct
 import collections.abc
 from collections.abc import Callable
 from copy import deepcopy
-from dataclasses import dataclass
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import MSELoss
 

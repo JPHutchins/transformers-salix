@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2021 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +15,12 @@ from salix import Struct
 import base64
 import os
 from collections.abc import Iterable
-from dataclasses import dataclass, fields
 from io import BytesIO
 from typing import Any, Union
 
 import httpx
 import numpy as np
+from salix import Struct, fields
 
 from .utils import (
     ExplicitEnum,

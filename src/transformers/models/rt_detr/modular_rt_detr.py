@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2024 Baidu Inc and The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,11 +13,11 @@ from salix import Struct
 # limitations under the License.
 import math
 import pathlib
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init

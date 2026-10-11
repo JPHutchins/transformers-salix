@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2026 The HuggingFace Inc. team
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,11 +13,11 @@ from salix import Struct
 # limitations under the License.
 import queue
 from contextlib import contextmanager
-from dataclasses import dataclass
 from math import ceil, log2
 from typing import Any
 
 import torch
+from salix import Struct
 
 from transformers.configuration_utils import PretrainedConfig
 

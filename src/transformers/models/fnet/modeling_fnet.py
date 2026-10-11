@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2021 Google Research and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +13,10 @@ from salix import Struct
 # limitations under the License.
 """PyTorch FNet model."""
 
-from dataclasses import dataclass
 from functools import partial
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 

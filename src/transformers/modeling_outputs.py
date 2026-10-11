@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2020 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,9 +12,9 @@ from salix import Struct
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 
 from .cache_utils import Cache, EncoderDecoderCache
 from .utils import ModelOutput

@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2020 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,11 +15,11 @@ from salix import Struct
 import multiprocessing as mp
 import warnings
 from collections.abc import Callable, Mapping
-from dataclasses import dataclass
 from random import randint
 from typing import Any
 
 import numpy as np
+from salix import Struct
 
 from ..tokenization_utils_base import PreTrainedTokenizerBase
 from ..utils import PaddingStrategy

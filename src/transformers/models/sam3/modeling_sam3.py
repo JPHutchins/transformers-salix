@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 The Meta AI Authors and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,12 +14,12 @@ from salix import Struct
 
 import math
 from collections.abc import Callable, Iterable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor
 
 from ...utils import is_torchvision_available

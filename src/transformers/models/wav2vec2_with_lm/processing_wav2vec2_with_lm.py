@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2021 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,12 +18,12 @@ Speech processor class for Wav2Vec2
 import os
 from collections.abc import Iterable
 from contextlib import nullcontext
-from dataclasses import dataclass
 from multiprocessing import get_context, get_start_method
 from multiprocessing.pool import Pool
 from typing import TYPE_CHECKING
 
 import numpy as np
+from salix import Struct
 
 from ...processing_utils import ProcessorMixin
 from ...utils import ModelOutput, auto_docstring, logging, requires_backends

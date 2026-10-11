@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 The Qwen Team and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,13 +15,13 @@ from salix import Struct
 
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
 import torch
 import torch.nn as nn
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN

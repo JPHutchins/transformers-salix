@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2026 Illuin Technology and contributors, and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +13,12 @@ from salix import Struct
 # limitations under the License.
 
 import math
-from dataclasses import dataclass
 from typing import Literal
 
 import torch
 import torch.nn as nn
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
 from ... import initialization as init

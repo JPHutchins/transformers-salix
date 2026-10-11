@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2024 HuggingFace Inc. team. All rights reserved.
 #
 #
@@ -15,12 +14,12 @@ from salix import Struct
 # limitations under the License.
 
 import math
-from dataclasses import dataclass
 from functools import cached_property
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...cache_utils import Cache

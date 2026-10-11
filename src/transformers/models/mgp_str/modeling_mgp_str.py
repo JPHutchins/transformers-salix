@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2023 Alibaba Research and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,10 +14,10 @@ from salix import Struct
 """PyTorch MGP-STR model."""
 
 import collections.abc
-from dataclasses import dataclass
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init

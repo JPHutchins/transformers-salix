@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 Google Inc. HuggingFace Inc. team. All rights reserved.
 #
 #
@@ -13,10 +12,10 @@ from salix import Struct
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from dataclasses import dataclass
 
 import torch
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 
 from ...processing_utils import Unpack

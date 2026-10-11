@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2018 Hao Tan, Mohit Bansal, and the HuggingFace team
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,9 +14,9 @@ from salix import Struct
 """PyTorch LXMERT model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import CrossEntropyLoss, SmoothL1Loss
 

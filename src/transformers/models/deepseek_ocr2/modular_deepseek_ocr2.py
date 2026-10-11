@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2026 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,11 +13,11 @@ from salix import Struct
 # limitations under the License.
 
 import math
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 from torchvision.transforms.v2 import functional as tvF
 

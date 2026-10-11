@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2026 Illuin Technology and contributors, and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +12,11 @@ from salix import Struct
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 from typing import Optional, Union
 
 import torch
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ...configuration_utils import PreTrainedConfig
 from ...feature_extraction_utils import BatchFeature

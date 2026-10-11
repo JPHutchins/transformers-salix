@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2024 The HuggingFace Inc. team and Google DeepMind.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +13,12 @@ from salix import Struct
 # limitations under the License.
 
 import collections
-from dataclasses import dataclass
 from functools import lru_cache
 from typing import TYPE_CHECKING, Any, Union
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCELoss
 

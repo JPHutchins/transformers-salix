@@ -11,10 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from salix import replace
 import inspect
 import json
 import os
-from dataclasses import replace
 from typing import TYPE_CHECKING, Any, Literal, Optional
 
 from safetensors import safe_open

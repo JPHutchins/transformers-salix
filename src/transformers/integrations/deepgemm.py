@@ -25,7 +25,6 @@ Requirements: CUDA, Hopper (SM90+), CUDA runtime ≥ 12.3, kernels-community/dee
 """
 
 from __future__ import annotations
-from salix import Struct
 
 import functools
 import json
@@ -33,9 +32,9 @@ import os
 import re
 import shutil
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 
 from ..utils import logging
 from ..utils.deprecation import deprecate_kwarg

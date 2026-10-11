@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2020 Google Research and The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,10 +22,10 @@ import os
 import re
 import unicodedata
 from collections.abc import Callable, Generator
-from dataclasses import dataclass
 from typing import Union
 
 import numpy as np
+from salix import Struct
 
 from ...tokenization_python import PreTrainedTokenizer, Trie, _is_control, _is_punctuation, _is_whitespace
 from ...tokenization_utils_base import (

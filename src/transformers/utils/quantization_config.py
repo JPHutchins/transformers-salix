@@ -1,4 +1,3 @@
-from salix import Struct
 #!/usr/bin/env python
 
 # Copyright 2023 The HuggingFace Inc. team. All rights reserved.
@@ -19,11 +18,11 @@ import copy
 import importlib.metadata
 import json
 import os
-from dataclasses import dataclass
 from enum import Enum
 from typing import Any, Optional, Union
 
 from packaging import version
+from salix import Struct
 
 from ..utils import (
     is_compressed_tensors_available,

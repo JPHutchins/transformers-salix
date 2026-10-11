@@ -15,10 +15,10 @@
 
 import collections.abc
 import math
-from dataclasses import dataclass
 from typing import Optional
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import CrossEntropyLoss
 
@@ -45,9 +45,8 @@ logger = logging.get_logger(__name__)
     Class for outputs of [`Data2VecVisionModel`].
     """
 )
-@dataclass
 # Copied from transformers.models.beit.modeling_beit.BeitModelOutputWithPooling with Beit->Data2VecVision
-class Data2VecVisionModelOutputWithPooling(BaseModelOutputWithPooling):
+class Data2VecVisionModelOutputWithPooling(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, hidden_size)`):
         Average of the last layer hidden states of the patch tokens (excluding the *[CLS]* token) if

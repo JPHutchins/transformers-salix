@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2026 The Microsoft Team and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +13,10 @@ from salix import Struct
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Optional
 
 import torch
+from salix import Struct
 
 from ...cache_utils import DynamicCache, StaticCache
 from ...generation import (

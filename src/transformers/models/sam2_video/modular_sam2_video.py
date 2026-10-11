@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 The Meta AI Authors and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +16,6 @@ from salix import Struct
 import math
 from collections import OrderedDict
 from collections.abc import Callable, Iterator
-from dataclasses import dataclass
 from typing import Any, Union
 
 import numpy as np
@@ -25,6 +23,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import Tensor
 from tqdm import tqdm
 

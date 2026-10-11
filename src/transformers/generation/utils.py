@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2020 The Google AI Language Team Authors, Facebook AI Research authors and The HuggingFace Inc. team.
 # Copyright (c) 2020, NVIDIA CORPORATION.  All rights reserved.
 #
@@ -20,11 +19,11 @@ import os
 import warnings
 from collections.abc import Callable
 from contextlib import contextmanager
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Optional, cast
 
 import torch
 import torch.distributed as dist
+from salix import Struct
 from torch import nn
 
 from ..cache_utils import (

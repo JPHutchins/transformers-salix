@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2018 The Google AI Language Team Authors and The HuggingFace Inc. team.
 # Copyright (c) 2018, NVIDIA CORPORATION.  All rights reserved.
 #
@@ -15,11 +14,12 @@ from salix import Struct
 # limitations under the License.
 
 import csv
-import dataclasses
 import json
-from dataclasses import dataclass
+
+from salix import Struct
 
 from ...utils import is_torch_available, logging
+from ...utils.generic import asdict
 
 
 logger = logging.get_logger(__name__)
@@ -46,7 +46,7 @@ class InputExample(Struct, frozen=False):
 
     def to_json_string(self):
         """Serializes this instance to a JSON string."""
-        return json.dumps(dataclasses.asdict(self), indent=2) + "\n"
+        return json.dumps(asdict(self), indent=2) + "\n"
 
 
 class InputFeatures(Struct, frozen=True):
@@ -71,7 +71,7 @@ class InputFeatures(Struct, frozen=True):
 
     def to_json_string(self):
         """Serializes this instance to a JSON string."""
-        return json.dumps(dataclasses.asdict(self)) + "\n"
+        return json.dumps(asdict(self)) + "\n"
 
 
 class DataProcessor:

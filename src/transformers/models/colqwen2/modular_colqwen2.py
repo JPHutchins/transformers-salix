@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +12,8 @@ from salix import Struct
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
+
+from salix import Struct
 
 from ...cache_utils import Cache
 from ...feature_extraction_utils import BatchFeature

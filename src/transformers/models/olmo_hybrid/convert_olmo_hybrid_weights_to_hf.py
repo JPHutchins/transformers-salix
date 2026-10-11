@@ -43,7 +43,6 @@ Important note: you need to be able to host the whole model in RAM to execute th
 """
 
 from __future__ import annotations
-from salix import Struct
 
 import argparse
 import gc
@@ -55,12 +54,12 @@ import traceback
 import uuid
 from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, cast
 
 import torch
 import torch.distributed.checkpoint as dist_cp
+from salix import Struct
 from torch.distributed.checkpoint.metadata import Metadata, MetadataIndex, StorageMeta
 from torch.distributed.checkpoint.planner import LoadItemType, ReadItem
 from torch.futures import Future

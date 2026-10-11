@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 NXAI GmbH. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +13,10 @@ from salix import Struct
 # limitations under the License.
 """PyTorch xLSTM Model."""
 
-from dataclasses import dataclass
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 from torch.nn import CrossEntropyLoss
 

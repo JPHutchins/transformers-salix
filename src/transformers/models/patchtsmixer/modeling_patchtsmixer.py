@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2023 IBM and HuggingFace Inc. team. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,10 +15,10 @@ from salix import Struct
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from transformers.modeling_utils import PreTrainedModel
 from transformers.utils import ModelOutput

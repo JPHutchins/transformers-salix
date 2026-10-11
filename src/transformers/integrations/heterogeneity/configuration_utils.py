@@ -14,12 +14,12 @@
 # limitations under the License.
 
 from __future__ import annotations
-from salix import Struct
 
 import copy
 from collections.abc import Iterable, Sequence
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
+
+from salix import Struct
 
 from transformers.utils import logging
 

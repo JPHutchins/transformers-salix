@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2021 The Facebook Inc. and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,11 +15,11 @@ from salix import Struct
 
 import json
 import os
-from dataclasses import dataclass
 from itertools import groupby
 from typing import TYPE_CHECKING, Any, Union
 
 import numpy as np
+from salix import Struct
 
 from ...tokenization_python import PreTrainedTokenizer
 from ...tokenization_utils_base import AddedToken

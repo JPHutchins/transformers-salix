@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2020-present the HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,17 +15,17 @@ from salix import Struct
 Callbacks to use with the Trainer class and customize the training loop.
 """
 
-import dataclasses
 import json
 import math
-from dataclasses import dataclass
 
 import numpy as np
+from salix import Struct
 from tqdm.auto import tqdm
 
 from .trainer_utils import IntervalStrategy, SaveStrategy, has_length
 from .training_args import TrainingArguments
 from .utils import logging
+from .utils.generic import asdict
 
 
 logger = logging.get_logger(__name__)
@@ -142,7 +141,7 @@ class TrainerState(Struct, frozen=False):
 
     def save_to_json(self, json_path: str):
         """Save the content of this instance in JSON format inside `json_path`."""
-        json_string = json.dumps(dataclasses.asdict(self), indent=2, sort_keys=True) + "\n"
+        json_string = json.dumps(asdict(self), indent=2, sort_keys=True) + "\n"
         with open(json_path, "w", encoding="utf-8") as f:
             f.write(json_string)
 

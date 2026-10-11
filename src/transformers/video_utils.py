@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,13 +16,13 @@ import os
 import warnings
 from collections.abc import Callable, Iterable, Mapping
 from contextlib import redirect_stdout
-from dataclasses import dataclass, fields
 from io import BytesIO
 from typing import NewType, Union
 from urllib.parse import urlparse
 
 import httpx
 import numpy as np
+from salix import Struct, fields
 
 from .image_transforms import PaddingMode, to_channel_dimension_format
 from .image_utils import ChannelDimension, infer_channel_dimension_format, is_valid_image

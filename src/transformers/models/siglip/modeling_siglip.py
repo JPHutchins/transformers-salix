@@ -14,11 +14,11 @@
 """PyTorch Siglip model."""
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -45,9 +45,8 @@ from .configuration_siglip import SiglipConfig, SiglipTextConfig, SiglipVisionCo
     Base class for vision model's outputs that also contains image embeddings of the pooling of the last hidden states.
     """
 )
-@dataclass
 # Copied from transformers.models.clip.modeling_clip.CLIPVisionModelOutput with CLIP->Siglip
-class SiglipVisionModelOutput(ModelOutput):
+class SiglipVisionModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     image_embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)` *optional* returned when model is initialized with `with_projection=True`):
         The image embeddings obtained by applying the projection layer to the pooler_output.
@@ -64,9 +63,8 @@ class SiglipVisionModelOutput(ModelOutput):
     Base class for text model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
 # Copied from transformers.models.clip.modeling_clip.CLIPTextModelOutput with CLIP->Siglip
-class SiglipTextModelOutput(ModelOutput):
+class SiglipTextModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     text_embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)` *optional* returned when model is initialized with `with_projection=True`):
         The text embeddings obtained by applying the projection layer to the pooler_output.
@@ -79,9 +77,8 @@ class SiglipTextModelOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
 # Copied from transformers.models.clip.modeling_clip.CLIPOutput with CLIP->Siglip
-class SiglipOutput(ModelOutput):
+class SiglipOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for image-text similarity.

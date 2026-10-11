@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2022 SHI Labs and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,10 +16,10 @@ from salix import Struct
 import copy
 import math
 import warnings
-from dataclasses import dataclass
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -765,9 +764,8 @@ class OneFormerTransformerDecoderOutput(BaseModelOutput, Struct, frozen=False):
     the mask features and the multiscale features.
     """
 )
-@dataclass
 # Copied from transformers.models.mask2former.modeling_mask2former.Mask2FormerPixelDecoderOutput with Mask2->One
-class OneFormerPixelDecoderOutput(ModelOutput):
+class OneFormerPixelDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     multi_scale_features (`tuple(torch.FloatTensor)`):
         Tuple of multi-scale features of scales [1/8, 1/16, 1/32] and shape `(batch_size, num_channels, height,

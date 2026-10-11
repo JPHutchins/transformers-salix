@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2022 Google AI and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,10 +14,10 @@ from salix import Struct
 """PyTorch OWL-ViT model."""
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init

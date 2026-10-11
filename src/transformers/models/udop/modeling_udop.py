@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2024 Microsoft Research and HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,10 +20,10 @@ import random
 from abc import ABC, abstractmethod
 from collections.abc import Callable, Sequence
 from copy import deepcopy
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 from torch import Tensor, nn
 from torch.nn import CrossEntropyLoss
 

@@ -19,14 +19,13 @@ Requirements: CUDA, `kernels`, `nvidia-cutlass-dsl`, has_gate=True.
 """
 
 from __future__ import annotations
-from salix import Struct
 
 import importlib.metadata
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 from packaging import version
+from salix import Struct
 
 from ..utils import logging
 from ..utils.import_utils import is_kernels_available, maybe_import_error

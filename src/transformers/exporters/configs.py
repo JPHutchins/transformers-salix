@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2026 The HuggingFace Inc. team. All rights reserved.
 # Modifications Copyright (C) 2025, Advanced Micro Devices, Inc. All rights reserved.
 #
@@ -14,10 +13,11 @@ from salix import Struct
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import copy
-from dataclasses import dataclass
 from enum import Enum
 from os import PathLike
 from typing import Any
+
+from salix import Struct
 
 from ..utils import logging
 

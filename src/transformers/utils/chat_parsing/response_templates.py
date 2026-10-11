@@ -14,12 +14,11 @@
 """Template loading and validation for response_template dicts."""
 
 from __future__ import annotations
-from salix import Struct
 
-from dataclasses import dataclass
 from typing import Any
 
 import regex as re
+from salix import Struct
 
 from ...utils import logging
 from .content_parsers import CONTENT_PARSERS, validate_transform_strings

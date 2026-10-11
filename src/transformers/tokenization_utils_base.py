@@ -19,7 +19,6 @@ of output with special method for the Fast tokenizers)
 """
 
 from __future__ import annotations
-from salix import Struct
 
 import copy
 import json
@@ -28,13 +27,13 @@ import re
 import warnings
 from collections import OrderedDict, UserDict
 from collections.abc import Callable, Collection, Mapping, Sequence, Sized
-from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Generic, NamedTuple, Union, overload
 
 import numpy as np
 from huggingface_hub import is_offline_mode
 from packaging import version
+from salix import Struct
 from typing_extensions import TypeVar
 
 from . import __version__

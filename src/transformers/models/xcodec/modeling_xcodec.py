@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,12 +14,12 @@ from salix import Struct
 """Transformers Xcodec model."""
 
 import math
-from dataclasses import dataclass
 from functools import lru_cache
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...audio_utils import conv1d_output_length

@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2020 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,20 +12,20 @@ from salix import Struct
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import dataclasses
 import json
 import os
 import sys
 import types
 from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser, ArgumentTypeError
 from collections.abc import Callable, Iterable
-from copy import copy
+from copy import copy, deepcopy
 from enum import Enum
 from inspect import isclass
 from pathlib import Path
 from typing import Any, Literal, NewType, Union, get_type_hints
 
 import yaml
+from salix import MISSING, Field, Struct, fields
 
 
 DataClass = NewType("DataClass", Any)
@@ -62,22 +61,13 @@ def make_choice_type_function(choices: list) -> Callable[[str], Any]:
     return lambda arg: str_to_choice.get(arg, arg)
 
 
-def HfArg(
-    *,
-    aliases: str | list[str] | None = None,
-    help: str | None = None,
-    default: Any = dataclasses.MISSING,
-    default_factory: Callable[[], Any] = dataclasses.MISSING,
-    metadata: dict | None = None,
-    **kwargs,
-) -> dataclasses.Field:
-    """Argument helper enabling a concise syntax to create dataclass fields for parsing with `HfArgumentParser`.
+def HfArg(*, aliases: str | list[str] | None = None, help: str | None = None, metadata: dict | None = None, **kwargs) -> dict:
+    """Argument helper enabling a concise syntax to annotate struct fields for parsing with `HfArgumentParser`.
 
-    Example comparing the use of `HfArg` and `dataclasses.field`:
+    Example:
     ```
     class Args(Struct, frozen=False):
-        regular_arg: str = dataclasses.field(default="Huggingface", metadata={"aliases": ["--example", "-e"], "help": "This syntax could be better!"})
-        hf_arg: str = HfArg(default="Huggingface", aliases=["--example", "-e"], help="What a nice syntax!")
+        hf_arg: Annotated[str, HfArg(aliases=["--example", "-e"], help="What a nice syntax!")] = "Huggingface"
     ```
 
     Args:
@@ -85,27 +75,21 @@ def HfArg(
             Single string or list of strings of aliases to pass on to argparse, e.g. `aliases=["--example", "-e"]`.
             Defaults to None.
         help (str, optional): Help string to pass on to argparse that can be displayed with --help. Defaults to None.
-        default (Any, optional):
-            Default value for the argument. If not default or default_factory is specified, the argument is required.
-            Defaults to dataclasses.MISSING.
-        default_factory (Callable[[], Any], optional):
-            The default_factory is a 0-argument function called to initialize a field's value. It is useful to provide
-            default values for mutable types, e.g. lists: `default_factory=list`. Mutually exclusive with `default=`.
-            Defaults to dataclasses.MISSING.
-        metadata (dict, optional): Further metadata to pass on to `dataclasses.field`. Defaults to None.
+        metadata (dict, optional): Further metadata to pass on to argparse. Defaults to None.
 
     Returns:
-        Field: A `dataclasses.Field` with the desired properties.
+        dict: The metadata to place in the `Annotated` extras of the field's type annotation.
     """
-    if metadata is None:
-        # Important, don't use as default param in function signature because dict is mutable and shared across function calls
-        metadata = {}
-    if aliases is not None:
-        metadata["aliases"] = aliases
-    if help is not None:
-        metadata["help"] = help
+    return {
+        **(metadata or {}),
+        **({"aliases": aliases} if aliases is not None else {}),
+        **({"help": help} if help is not None else {}),
+        **kwargs,
+    }
 
-    return dataclasses.field(metadata=metadata, default=default, default_factory=default_factory, **kwargs)
+
+def _field_metadata(field: Field) -> dict:
+    return {key: value for extra in field.annotated_metadata if isinstance(extra, dict) for key, value in extra.items()}
 
 
 class HfArgumentParser(ArgumentParser):
@@ -136,14 +120,14 @@ class HfArgumentParser(ArgumentParser):
         if "formatter_class" not in kwargs:
             kwargs["formatter_class"] = ArgumentDefaultsHelpFormatter
         super().__init__(**kwargs)
-        if dataclasses.is_dataclass(dataclass_types):
+        if isinstance(dataclass_types, type(Struct)):
             dataclass_types = [dataclass_types]
         self.dataclass_types = list(dataclass_types)
         for dtype in self.dataclass_types:
             self._add_dataclass_arguments(dtype)
 
     @staticmethod
-    def _parse_dataclass_field(parser: ArgumentParser, field: dataclasses.Field):
+    def _parse_dataclass_field(parser: ArgumentParser, field: Field, field_type: Any):
         # Long-option strings are conventionlly separated by hyphens rather
         # than underscores, e.g., "--long-format" rather than "--long_format".
         # Argparse converts hyphens to underscores so that the destination
@@ -152,10 +136,8 @@ class HfArgumentParser(ArgumentParser):
         if "_" in field.name:
             long_options.append(f"--{field.name.replace('_', '-')}")
 
-        kwargs = field.metadata.copy()
-        # field.metadata is not used at all by Data Classes,
-        # it is provided as a third-party extension mechanism.
-        if isinstance(field.type, str):
+        kwargs = _field_metadata(field)
+        if isinstance(field_type, str):
             raise RuntimeError(
                 "Unresolved type detected, which should have been done with the help of "
                 "`typing.get_type_hints` method by default"
@@ -165,52 +147,52 @@ class HfArgumentParser(ArgumentParser):
         if isinstance(aliases, str):
             aliases = [aliases]
 
-        origin_type = getattr(field.type, "__origin__", field.type)
+        origin_type = getattr(field_type, "__origin__", field_type)
         if origin_type is Union or (hasattr(types, "UnionType") and isinstance(origin_type, types.UnionType)):
-            if str not in field.type.__args__ and (
-                len(field.type.__args__) != 2 or type(None) not in field.type.__args__
+            if str not in field_type.__args__ and (
+                len(field_type.__args__) != 2 or type(None) not in field_type.__args__
             ):
                 raise ValueError(
                     "Only `Union[X, NoneType]` (i.e., `Optional[X]`) is allowed for `Union` because"
                     " the argument parser only supports one type per argument."
                     f" Problem encountered in field '{field.name}'."
                 )
-            if type(None) not in field.type.__args__:
+            if type(None) not in field_type.__args__:
                 # filter `str` in Union
-                field.type = field.type.__args__[0] if field.type.__args__[1] is str else field.type.__args__[1]
-                origin_type = getattr(field.type, "__origin__", field.type)
-            elif bool not in field.type.__args__:
+                field_type = field_type.__args__[0] if field_type.__args__[1] is str else field_type.__args__[1]
+                origin_type = getattr(field_type, "__origin__", field_type)
+            elif bool not in field_type.__args__:
                 # filter `NoneType` in Union (except for `Union[bool, NoneType]`)
-                field.type = (
-                    field.type.__args__[0] if isinstance(None, field.type.__args__[1]) else field.type.__args__[1]
+                field_type = (
+                    field_type.__args__[0] if isinstance(None, field_type.__args__[1]) else field_type.__args__[1]
                 )
-                origin_type = getattr(field.type, "__origin__", field.type)
+                origin_type = getattr(field_type, "__origin__", field_type)
 
         # A variable to store kwargs for a boolean field, if needed
         # so that we can init a `no_*` complement argument (see below)
         bool_kwargs = {}
-        if origin_type is Literal or (isinstance(field.type, type) and issubclass(field.type, Enum)):
+        if origin_type is Literal or (isinstance(field_type, type) and issubclass(field_type, Enum)):
             if origin_type is Literal:
-                kwargs["choices"] = field.type.__args__
+                kwargs["choices"] = field_type.__args__
             else:
-                kwargs["choices"] = [x.value for x in field.type]
+                kwargs["choices"] = [x.value for x in field_type]
 
             kwargs["type"] = make_choice_type_function(kwargs["choices"])
 
-            if field.default is not dataclasses.MISSING:
+            if field.default is not MISSING:
                 kwargs["default"] = field.default
             else:
                 kwargs["required"] = True
-        elif field.type is bool or field.type == bool | None:
+        elif field_type is bool or field_type == bool | None:
             # Copy the correct kwargs to use to instantiate a `no_*` complement argument below.
             # We do not initialize it here because the `no_*` alternative must be instantiated after the real argument
             bool_kwargs = copy(kwargs)
 
             # Hack because type=bool in argparse does not behave as we want.
             kwargs["type"] = string_to_bool
-            if field.type is bool or (field.default is not None and field.default is not dataclasses.MISSING):
+            if field_type is bool or (field.default is not None and field.default is not MISSING):
                 # Default value is False if we have no default when of type bool.
-                default = False if field.default is dataclasses.MISSING else field.default
+                default = False if field.default is MISSING else field.default
                 # This is the value that will get picked if we don't include --{field.name} in any way
                 kwargs["default"] = default
                 # This tells argparse we accept 0 or 1 value after --{field.name}
@@ -218,18 +200,16 @@ class HfArgumentParser(ArgumentParser):
                 # This is the value that will get picked if we do --{field.name} (without value)
                 kwargs["const"] = True
         elif isclass(origin_type) and issubclass(origin_type, list):
-            kwargs["type"] = field.type.__args__[0]
+            kwargs["type"] = field_type.__args__[0]
             kwargs["nargs"] = "+"
-            if field.default_factory is not dataclasses.MISSING:
-                kwargs["default"] = field.default_factory()
-            elif field.default is dataclasses.MISSING:
+            if field.default is not MISSING:
+                kwargs["default"] = deepcopy(field.default)
+            else:
                 kwargs["required"] = True
         else:
-            kwargs["type"] = field.type
-            if field.default is not dataclasses.MISSING:
-                kwargs["default"] = field.default
-            elif field.default_factory is not dataclasses.MISSING:
-                kwargs["default"] = field.default_factory()
+            kwargs["type"] = field_type
+            if field.default is not MISSING:
+                kwargs["default"] = deepcopy(field.default)
             else:
                 kwargs["required"] = True
         parser.add_argument(*long_options, *aliases, **kwargs)
@@ -238,7 +218,7 @@ class HfArgumentParser(ArgumentParser):
         # Order is important for arguments with the same destination!
         # We use a copy of earlier kwargs because the original kwargs have changed a lot before reaching down
         # here and we do not need those changes/additional keys.
-        if field.default is True and (field.type is bool or field.type == bool | None):
+        if field.default is True and (field_type is bool or field_type == bool | None):
             bool_kwargs["default"] = False
             parser.add_argument(
                 f"--no_{field.name}",
@@ -263,11 +243,8 @@ class HfArgumentParser(ArgumentParser):
                 "Evaluation of Annotations (PEP 563)"
             )
 
-        for field in dataclasses.fields(dtype):
-            if not field.init:
-                continue
-            field.type = type_hints[field.name]
-            self._parse_dataclass_field(parser, field)
+        for field in fields(dtype):
+            self._parse_dataclass_field(parser, field, type_hints[field.name])
 
     def parse_args_into_dataclasses(
         self,
@@ -338,7 +315,7 @@ class HfArgumentParser(ArgumentParser):
         namespace, remaining_args = self.parse_known_args(args=args)
         outputs = []
         for dtype in self.dataclass_types:
-            keys = {f.name for f in dataclasses.fields(dtype) if f.init}
+            keys = {f.name for f in fields(dtype)}
             inputs = {k: v for k, v in vars(namespace).items() if k in keys}
             for k in keys:
                 delattr(namespace, k)
@@ -374,7 +351,7 @@ class HfArgumentParser(ArgumentParser):
         unused_keys = set(args.keys())
         outputs = []
         for dtype in self.dataclass_types:
-            keys = {f.name for f in dataclasses.fields(dtype) if f.init}
+            keys = {f.name for f in fields(dtype)}
             inputs = {k: v for k, v in args.items() if k in keys}
             unused_keys.difference_update(inputs.keys())
             obj = dtype(**inputs)

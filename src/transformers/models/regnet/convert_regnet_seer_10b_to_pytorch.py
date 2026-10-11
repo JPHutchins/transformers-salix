@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2022 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +20,6 @@ import json
 import os
 import re
 from collections import OrderedDict
-from dataclasses import dataclass, field
 from functools import partial
 from pathlib import Path
 from pprint import pprint
@@ -30,6 +28,7 @@ import torch
 import torch.nn as nn
 from classy_vision.models.regnet import RegNet, RegNetParams
 from huggingface_hub import hf_hub_download
+from salix import Struct
 from torch import Tensor
 from vissl.models.model_helpers import get_trunk_forward_outputs
 

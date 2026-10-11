@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2022 NVIDIA and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +14,11 @@ from salix import Struct
 """PyTorch GroupViT model."""
 
 import collections.abc
-from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init

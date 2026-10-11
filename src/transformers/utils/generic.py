@@ -17,6 +17,7 @@ Generic utilities
 
 from __future__ import annotations
 
+import copy
 import importlib
 import inspect
 import json
@@ -28,12 +29,12 @@ import warnings
 from collections import OrderedDict, UserDict
 from collections.abc import Callable, Iterable, MutableMapping
 from contextlib import AbstractContextManager, ExitStack, nullcontext
-from dataclasses import fields, is_dataclass
 from enum import Enum
 from functools import partial, wraps
 from typing import TYPE_CHECKING, Any, TypedDict, TypeVar
 
 import numpy as np
+from salix import MISSING, Struct, fields
 
 from ..utils import logging
 from .import_utils import is_mlx_available, is_torch_available, is_torch_fx_proxy, resolve_internal_import
@@ -412,6 +413,20 @@ def safe_load_json_file(json_file: str):
     return config_dict
 
 
+def is_struct(obj) -> bool:
+    return isinstance(obj, Struct) or isinstance(obj, type(Struct))
+
+
+def asdict(obj):
+    if isinstance(obj, Struct):
+        return {field.name: asdict(getattr(obj, field.name)) for field in fields(obj)}
+    if isinstance(obj, (list, tuple)):
+        return type(obj)(asdict(value) for value in obj)
+    if isinstance(obj, dict):
+        return type(obj)((asdict(key), asdict(value)) for key, value in obj.items())
+    return copy.deepcopy(obj)
+
+
 class ModelOutput(OrderedDict):
     """
     Base class for all model outputs as dataclass. Has a `__getitem__` that allows indexing by integer or slice (like a
@@ -433,22 +448,52 @@ class ModelOutput(OrderedDict):
         `static_graph=True` with modules that output `ModelOutput` subclasses.
         """
         _register_model_output_pytree_node(cls)
+        cls.__setattr__ = ModelOutput.__setattr__
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        if not is_struct(self):
+            if type(self) is not ModelOutput:
+                raise TypeError(
+                    f"{self.__module__}.{self.__class__.__name__} is not a Struct."
+                    " This is a subclass of ModelOutput and so must also inherit from `salix.Struct`."
+                )
+            super().__init__(*args, **kwargs)
+            _register_model_output_pytree_node(type(self))
+            return
+        super().__init__()
         _register_model_output_pytree_node(type(self))
-
-        # Subclasses of ModelOutput must use the @dataclass decorator
-        # This check is done in __init__ because the @dataclass decorator operates after __init_subclass__
-        # issubclass() would return True for issubclass(ModelOutput, ModelOutput) when False is needed
-        # Just need to check that the current class is not ModelOutput
-        is_modeloutput_subclass = self.__class__ != ModelOutput
-
-        if is_modeloutput_subclass and not is_dataclass(self):
+        class_fields = fields(self)
+        if len(args) > len(class_fields):
             raise TypeError(
-                f"{self.__module__}.{self.__class__.__name__} is not a dataclass."
-                " This is a subclass of ModelOutput and so must use the @dataclass decorator."
+                f"{type(self).__name__}() takes {len(class_fields)} positional arguments but {len(args)} were given"
             )
+        bound = {**dict(zip((field.name for field in class_fields), args)), **kwargs}
+        unexpected = bound.keys() - {field.name for field in class_fields}
+        if unexpected:
+            raise TypeError(f"{type(self).__name__}() got an unexpected keyword argument {sorted(unexpected)[0]!r}")
+        missing = [field.name for field in class_fields if field.default is MISSING and field.name not in bound]
+        if missing:
+            raise TypeError(f"{type(self).__name__}() missing required arguments: {missing}")
+        for field in class_fields:
+            if field.name in bound:
+                setattr(self, field.name, bound[field.name])
+        self.__post_init__()
+
+    def __repr__(self):
+        if not is_struct(self):
+            return super().__repr__()
+        return f"{type(self).__qualname__}({', '.join(f'{field.name}={getattr(self, field.name)!r}' for field in fields(self))})"
+
+    def __eq__(self, other):
+        if not is_struct(self):
+            return super().__eq__(other)
+        if type(other) is not type(self):
+            return NotImplemented
+        return tuple(getattr(self, field.name) for field in fields(self)) == tuple(
+            getattr(other, field.name) for field in fields(other)
+        )
+
+    __hash__ = None
 
     def __post_init__(self):
         """Check the ModelOutput dataclass.
@@ -465,7 +510,7 @@ class ModelOutput(OrderedDict):
             raise ValueError(f"{self.__class__.__name__} should not have more than one required field.")
 
         first_field = getattr(self, class_fields[0].name)
-        other_fields_are_none = all(self.__dict__.get(field.name) is None for field in class_fields[1:])
+        other_fields_are_none = all(getattr(self, field.name, None) is None for field in class_fields[1:])
 
         if other_fields_are_none and not is_tensor(first_field):
             if isinstance(first_field, dict):
@@ -502,7 +547,7 @@ class ModelOutput(OrderedDict):
                 self[class_fields[0].name] = first_field
         else:
             for field in class_fields:
-                v = self.__dict__.get(field.name)
+                v = getattr(self, field.name, None)
                 if v is not None:
                     self[field.name] = v
 
@@ -539,7 +584,7 @@ class ModelOutput(OrderedDict):
         super().__setattr__(key, value)
 
     def __reduce__(self):
-        if not is_dataclass(self):
+        if not is_struct(self):
             return super().__reduce__()
         callable, _args, *remaining = super().__reduce__()
         args = tuple(getattr(self, field.name) for field in fields(self))

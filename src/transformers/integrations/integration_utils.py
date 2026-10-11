@@ -15,6 +15,7 @@
 Integrations with other Python libraries.
 """
 
+from salix import fields
 import copy
 import functools
 import importlib.metadata
@@ -28,7 +29,6 @@ import shutil
 import sys
 import tempfile
 import warnings
-from dataclasses import fields
 from enum import Enum
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal

@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright (c) 2021 THUML @ Tsinghua University
 # Copyright 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # Copyright 2023 The HuggingFace Inc. team. All rights reserved.
@@ -17,10 +16,10 @@ from salix import Struct
 """PyTorch Autoformer model."""
 
 import math
-from dataclasses import dataclass
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init

@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2021 Deepmind and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,13 +16,13 @@ from salix import Struct
 import abc
 import math
 from collections.abc import Callable, Mapping
-from dataclasses import dataclass
 from functools import reduce
 from operator import __add__
 from typing import Any, Optional
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 

@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2023 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,10 +18,10 @@ and will be removed in the future.
 """
 
 import warnings
-from dataclasses import dataclass
 from typing import Union
 
 import torch
+from salix import Struct
 
 from .utils.import_utils import is_torchdynamo_compiling, is_tracing
 

@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2026 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,13 +14,13 @@ from salix import Struct
 
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ... import initialization as init
 from ...masking_utils import create_causal_mask

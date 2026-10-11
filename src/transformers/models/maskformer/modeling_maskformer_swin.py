@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2022 Meta Platforms, Inc. and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,9 +17,9 @@ states before downsampling, which is different from the default Swin Transformer
 
 import collections.abc
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init

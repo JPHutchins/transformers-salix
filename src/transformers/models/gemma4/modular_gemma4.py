@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2026 the HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,10 +15,10 @@ from salix import Struct
 import math
 from collections import UserDict
 from collections.abc import Callable
-from dataclasses import dataclass
 from functools import cached_property
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import functional as F
 

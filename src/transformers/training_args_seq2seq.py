@@ -1,4 +1,3 @@
-from typing import Annotated
 # Copyright 2020 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +13,8 @@ from typing import Annotated
 # limitations under the License.
 
 import logging
-from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Annotated
 
 from .generation.configuration_utils import GenerationConfig
 from .training_args import TrainingArguments
@@ -25,7 +24,6 @@ from .utils import add_start_docstrings
 logger = logging.getLogger(__name__)
 
 
-@dataclass
 @add_start_docstrings(TrainingArguments.__doc__)
 class Seq2SeqTrainingArguments(TrainingArguments):
     """
@@ -54,14 +52,31 @@ class Seq2SeqTrainingArguments(TrainingArguments):
     """  # fmt: skip  # Prevent Ruff from altering the indentation
 
     sortish_sampler: Annotated[bool, {"help": "Whether to use SortishSampler or not."}] = False
-    predict_with_generate: Annotated[bool, {"help": "Whether to use generate to calculate generative metrics (ROUGE] = False
-    generation_max_length: Annotated[int | None, { "help": ( "The `max_length` to use on each evaluation loop when `predict_with_generate=True`. Will default " "to the `max_length` value of the model configuration." ] = None
+    predict_with_generate: Annotated[
+        bool, {"help": "Whether to use generate to calculate generative metrics (ROUGE, BLEU)."}
+    ] = False
+    generation_max_length: Annotated[
+        int | None,
+        {
+            "help": (
+                "The `max_length` to use on each evaluation loop when `predict_with_generate=True`. Will default "
+                "to the `max_length` value of the model configuration."
+            )
         },
-    )
-    generation_num_beams: Annotated[int | None, { "help": ( "The `num_beams` to use on each evaluation loop when `predict_with_generate=True`. Will default " "to the `num_beams` value of the model configuration." ] = None
+    ] = None
+    generation_num_beams: Annotated[
+        int | None,
+        {
+            "help": (
+                "The `num_beams` to use on each evaluation loop when `predict_with_generate=True`. Will default "
+                "to the `num_beams` value of the model configuration."
+            )
         },
-    )
-    generation_config: Annotated[str | Path | GenerationConfig | None, { "help": "Model id] = None
+    ] = None
+    generation_config: Annotated[
+        str | Path | GenerationConfig | None,
+        {"help": "Model id, file path or url pointing to a GenerationConfig json file, to use during prediction."},
+    ] = None
 
     def to_dict(self):
         """

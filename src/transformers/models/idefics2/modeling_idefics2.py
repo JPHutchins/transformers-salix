@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2024 the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,9 +14,9 @@ from salix import Struct
 """PyTorch Idefics2 model."""
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -69,9 +68,8 @@ class Idefics2BaseModelOutputWithPast(ModelOutput, Struct, frozen=False):
     Base class for Idefics2 causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
 # Copied from transformers.models.idefics.modeling_idefics.IdeficsCausalLMOutputWithPast with Idefics->Idefics2
-class Idefics2CausalLMOutputWithPast(ModelOutput):
+class Idefics2CausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

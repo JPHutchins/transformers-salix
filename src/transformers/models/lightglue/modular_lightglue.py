@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +12,11 @@ from salix import Struct
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 from torch.nn.utils.rnn import pad_sequence
 

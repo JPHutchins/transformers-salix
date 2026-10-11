@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2026 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,12 +12,12 @@ from salix import Struct
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import pathlib
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn.functional as F
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import Tensor, nn
 from torchvision.transforms.v2 import functional as tvF
 

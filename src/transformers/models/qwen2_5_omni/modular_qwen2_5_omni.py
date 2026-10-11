@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 The Qwen team, Alibaba Group and the HuggingFace Inc. team. All rights reserved.
 #
 #
@@ -18,13 +17,13 @@ from salix import Struct
 import math
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
 import torch
 import torch.nn.functional as F
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 from torch.nn import Parameter
 

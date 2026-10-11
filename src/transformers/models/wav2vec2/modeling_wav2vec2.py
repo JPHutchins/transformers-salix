@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2021 The Fairseq Authors and the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,11 +16,11 @@ from salix import Struct
 import math
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 from safetensors.torch import load_file as safe_load_file
+from salix import Struct
 from torch import nn
 from torch.nn import CrossEntropyLoss
 

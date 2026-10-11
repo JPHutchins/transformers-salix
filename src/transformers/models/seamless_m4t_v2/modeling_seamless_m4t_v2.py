@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2023 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,9 +16,9 @@ from salix import Struct
 import copy
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import Tensor, nn
 from torch.nn import CrossEntropyLoss
 
@@ -118,9 +117,8 @@ SEAMLESS_M4T_V2_COMMON_CUSTOM_ARGS = r"""
     [`SeamlessM4Tv2ForTextToSpeech`], [`SeamlessM4Tv2ForSpeechToSpeech`] and [`SeamlessM4Tv2ForTextToSpeech`].
     """
 )
-@dataclass
 # Copied from transformers.models.seamless_m4t.modeling_seamless_m4t.SeamlessM4TGenerationOutput with SeamlessM4T->SeamlessM4Tv2
-class SeamlessM4Tv2GenerationOutput(ModelOutput):
+class SeamlessM4Tv2GenerationOutput(ModelOutput, Struct, frozen=False):
     r"""
     waveform (`torch.FloatTensor` of shape `(batch_size, sequence_length)`):
         The final audio waveform predicted by the model.

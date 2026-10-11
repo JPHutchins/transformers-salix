@@ -1,5 +1,3 @@
-from typing import Annotated
-from salix import Struct
 # Copyright 2020 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,11 +14,12 @@ from salix import Struct
 
 import os
 import time
-from dataclasses import dataclass, field
 from enum import Enum
+from typing import Annotated
 
 import torch
 from filelock import FileLock
+from salix import Struct
 from torch.utils.data import Dataset
 
 from ...models.auto.modeling_auto import MODEL_FOR_QUESTION_ANSWERING_MAPPING
@@ -40,25 +39,57 @@ class SquadDataTrainingArguments(Struct, frozen=False):
     Arguments pertaining to what data we are going to input our model for training and eval.
     """
 
-    model_type: Annotated[str, {"help": "Model type selected in the list: " + "] = None
-    data_dir: Annotated[str, {"help": "The input data dir. Should contain the .json files for the SQuAD task."} ] = None
-    max_seq_length: Annotated[int, { "help": ( "The maximum total input sequence length after tokenization. Sequences longer " "than this will be truncated] = 128
+    model_type: Annotated[str, {"help": "Model type selected in the list: " + ", ".join(MODEL_TYPES)}] = None
+    data_dir: Annotated[str, {"help": "The input data dir. Should contain the .json files for the SQuAD task."}] = None
+    max_seq_length: Annotated[
+        int,
+        {
+            "help": (
+                "The maximum total input sequence length after tokenization. Sequences longer "
+                "than this will be truncated, sequences shorter will be padded."
+            )
         },
-    )
-    doc_stride: Annotated[int, {"help": "When splitting up a long document into chunks] = 128
-    max_query_length: Annotated[int, { "help": ( "The maximum number of tokens for the question. Questions longer than this will " "be truncated to this length." ] = 64
+    ] = 128
+    doc_stride: Annotated[
+        int, {"help": "When splitting up a long document into chunks, how much stride to take between chunks."}
+    ] = 128
+    max_query_length: Annotated[
+        int,
+        {
+            "help": (
+                "The maximum number of tokens for the question. Questions longer than this will "
+                "be truncated to this length."
+            )
         },
-    )
-    max_answer_length: Annotated[int, { "help": ( "The maximum length of an answer that can be generated. This is needed because the start " "and end predictions are not conditioned on one another." ] = 30
+    ] = 64
+    max_answer_length: Annotated[
+        int,
+        {
+            "help": (
+                "The maximum length of an answer that can be generated. This is needed because the start "
+                "and end predictions are not conditioned on one another."
+            )
         },
-    )
-    overwrite_cache: Annotated[bool, {"help": "Overwrite the cached training and evaluation sets"} ] = False
-    version_2_with_negative: Annotated[bool, {"help": "If true] = False
-    null_score_diff_threshold: Annotated[float, {"help": "If null_score - best_non_null is greater than the threshold predict null."} ] = 0.0
-    n_best_size: Annotated[int, {"help": "If null_score - best_non_null is greater than the threshold predict null."} ] = 20
-    lang_id: Annotated[int, { "help": ( "language id of input for language-specific xlm models (see" " tokenization_xlm.PRETRAINED_INIT_CONFIGURATION)" ] = 0
+    ] = 30
+    overwrite_cache: Annotated[bool, {"help": "Overwrite the cached training and evaluation sets"}] = False
+    version_2_with_negative: Annotated[
+        bool, {"help": "If true, the SQuAD examples contain some that do not have an answer."}
+    ] = False
+    null_score_diff_threshold: Annotated[
+        float, {"help": "If null_score - best_non_null is greater than the threshold predict null."}
+    ] = 0.0
+    n_best_size: Annotated[
+        int, {"help": "If null_score - best_non_null is greater than the threshold predict null."}
+    ] = 20
+    lang_id: Annotated[
+        int,
+        {
+            "help": (
+                "language id of input for language-specific xlm models (see"
+                " tokenization_xlm.PRETRAINED_INIT_CONFIGURATION)"
+            )
         },
-    )
+    ] = 0
     threads: Annotated[int, {"help": "multiple threads for converting example to features"}] = 1
 
 

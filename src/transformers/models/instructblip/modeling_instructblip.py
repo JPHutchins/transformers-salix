@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2023 The Salesforce Authors and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,10 +14,10 @@ from salix import Struct
 """PyTorch InstructBLIP model."""
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -66,9 +65,8 @@ class BaseModelOutputWithVisionQformerOutputs(BaseModelOutputWithPooling, Struct
     Class defining the outputs of [`InstructBlipForConditionalGeneration`].
     """
 )
-@dataclass
 # Copied from transformers.models.blip_2.modeling_blip_2.Blip2ForConditionalGenerationModelOutput with Blip2->InstructBlip
-class InstructBlipForConditionalGenerationModelOutput(ModelOutput):
+class InstructBlipForConditionalGenerationModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor`, *optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Language modeling loss from the language model.

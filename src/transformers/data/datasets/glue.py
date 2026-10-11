@@ -1,5 +1,3 @@
-from typing import Annotated
-from salix import Struct
 # Copyright 2020 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,11 +15,12 @@ from salix import Struct
 import os
 import time
 import warnings
-from dataclasses import dataclass, field
 from enum import Enum
+from typing import Annotated
 
 import torch
 from filelock import FileLock
+from salix import Struct
 from torch.utils.data import Dataset
 
 from ...tokenization_utils_base import PreTrainedTokenizerBase
@@ -41,14 +40,20 @@ class GlueDataTrainingArguments(Struct, frozen=False):
     line.
     """
 
-    task_name: str = field(metadata={"help": "The name of the task to train on: " + ", ".join(glue_processors.keys())})
-    data_dir: str = field(
-        metadata={"help": "The input data dir. Should contain the .tsv files (or other data files) for the task."}
-    )
-    max_seq_length: Annotated[int, { "help": ( "The maximum total input sequence length after tokenization. Sequences longer " "than this will be truncated] = 128
+    task_name: Annotated[str, {"help": "The name of the task to train on: " + ", ".join(glue_processors.keys())}]
+    data_dir: Annotated[
+        str, {"help": "The input data dir. Should contain the .tsv files (or other data files) for the task."}
+    ]
+    max_seq_length: Annotated[
+        int,
+        {
+            "help": (
+                "The maximum total input sequence length after tokenization. Sequences longer "
+                "than this will be truncated, sequences shorter will be padded."
+            )
         },
-    )
-    overwrite_cache: Annotated[bool, {"help": "Overwrite the cached training and evaluation sets"} ] = False
+    ] = 128
+    overwrite_cache: Annotated[bool, {"help": "Overwrite the cached training and evaluation sets"}] = False
 
     def __post_init__(self):
         self.task_name = self.task_name.lower()

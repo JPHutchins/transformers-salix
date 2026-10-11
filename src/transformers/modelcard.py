@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2018 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +14,6 @@ from salix import Struct
 """Configuration base class and utilities."""
 
 import os
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -24,6 +22,7 @@ import yaml
 from huggingface_hub import is_offline_mode
 from huggingface_hub.errors import OfflineModeIsEnabled
 from huggingface_hub.utils import HFValidationError
+from salix import Struct
 
 from . import __version__
 from .models.auto.modeling_auto import (

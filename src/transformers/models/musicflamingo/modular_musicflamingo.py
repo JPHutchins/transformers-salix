@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2026 NVIDIA CORPORATION and the HuggingFace Inc. team. All rights
 # reserved.
 #
@@ -14,11 +13,11 @@ from salix import Struct
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 from math import pi
 
 import torch.nn as nn
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import Tensor, broadcast_tensors
 
 from ... import initialization as init

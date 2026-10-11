@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2022 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +19,9 @@ import os
 import warnings
 from abc import ABC, ABCMeta, abstractmethod
 from collections.abc import Callable
-from dataclasses import dataclass, is_dataclass
 from typing import TYPE_CHECKING, Any, Optional, Union
+
+from salix import Struct
 
 from .. import __version__
 from ..utils import (
@@ -1233,7 +1233,7 @@ class GenerationConfig(PushToHubMixin):
         def convert_dataclass_to_dict(obj):
             if isinstance(obj, dict):
                 return {key: convert_dataclass_to_dict(value) for key, value in obj.items()}
-            elif is_dataclass(obj):
+            elif isinstance(obj, Struct):
                 # Some of our dataclasses have a custom `to_dict()` method, and we prefer it
                 if hasattr(obj, "to_dict"):
                     return obj.to_dict()

@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 Microsoft and the HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,12 +14,12 @@ from salix import Struct
 import math
 import re
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch.nn as nn
 import torch.nn.functional as F
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN

@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 Google Inc. HuggingFace Inc. team. All rights reserved.
 #
 #
@@ -16,13 +15,13 @@ from salix import Struct
 import math
 from collections import UserDict
 from collections.abc import Callable, Sequence
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN

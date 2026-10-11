@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 The LLAMA4 and HuggingFace Inc. team. All rights reserved.
 #
 #
@@ -15,11 +14,11 @@ from salix import Struct
 # limitations under the License.
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from transformers.models.llama4.configuration_llama4 import Llama4VisionConfig
 

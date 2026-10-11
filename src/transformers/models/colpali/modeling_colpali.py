@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2024 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,9 +13,9 @@ from salix import Struct
 # limitations under the License.
 """PyTorch ColPali model"""
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from transformers import AutoModel

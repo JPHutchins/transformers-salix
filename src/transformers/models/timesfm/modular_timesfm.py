@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 Google LLC and HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,11 +15,11 @@ from salix import Struct
 
 import math
 from collections.abc import Callable, Sequence
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...modeling_flash_attention_utils import FlashAttentionKwargs

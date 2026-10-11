@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2020-present the HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +27,6 @@ import sys
 import warnings
 from collections.abc import Iterator, Mapping
 from contextlib import contextmanager
-from dataclasses import dataclass, field
 from itertools import chain
 from logging import StreamHandler
 from typing import Annotated, Any
@@ -37,6 +35,7 @@ import numpy as np
 import torch
 import torch.distributed as dist
 from packaging import version
+from salix import Struct
 from torch import nn
 from torch.utils.data import Dataset, IterableDataset, RandomSampler, Sampler
 from torch.utils.data.distributed import DistributedSampler
@@ -1163,15 +1162,69 @@ class AcceleratorConfig(Struct, frozen=False):
     """
 
     # Data related arguments
-    split_batches: Annotated[bool, { "help": "Whether or not the accelerator should split the batches yielded by the dataloaders across the devices. If" " `True` the actual batch size used will be the same on any kind of distributed processes] = False
-    dispatch_batches: Annotated[bool | None, { "help": "If set to `True`] = None
-    even_batches: Annotated[bool, { "help": "If set to `True`] = True
-    use_seedable_sampler: Annotated[bool, { "help": "Whether or not use a fully seedable random sampler ([`accelerate.data_loader.SeedableRandomSampler`])." "Ensures training results are fully reproducible using a different sampling technique. " "While seed-to-seed results may differ] = True
+    split_batches: Annotated[
+        bool,
+        {
+            "help": "Whether or not the accelerator should split the batches yielded by the dataloaders across the devices. If"
+            " `True` the actual batch size used will be the same on any kind of distributed processes, but it must be a"
+            " round multiple of the `num_processes` you are using. If `False`, actual batch size used will be the one set"
+            " in your script multiplied by the number of processes."
+        },
+    ] = False
+    dispatch_batches: Annotated[
+        bool | None,
+        {
+            "help": "If set to `True`, the dataloader prepared by the Accelerator is only iterated through on the main process"
+            " and then the batches are split and broadcast to each process. Will default to `True` for `DataLoader` whose"
+            " underlying dataset is an `IterableDataslet`, `False` otherwise."
+        },
+    ] = None
+    even_batches: Annotated[
+        bool,
+        {
+            "help": "If set to `True`, in cases where the total batch size across all processes does not exactly divide the"
+            " dataset, samples at the start of the dataset will be duplicated so the batch can be divided equally among"
+            " all workers."
+        },
+    ] = True
+    use_seedable_sampler: Annotated[
+        bool,
+        {
+            "help": "Whether or not use a fully seedable random sampler ([`accelerate.data_loader.SeedableRandomSampler`])."
+            "Ensures training results are fully reproducible using a different sampling technique. "
+            "While seed-to-seed results may differ, on average the differences are negligible when using"
+            "multiple different seeds to compare. Should also be ran with [`~utils.set_seed`] for the best results."
+        },
+    ] = True
 
-    non_blocking: Annotated[bool, { "help": "Whether to use non-blocking CUDA calls to help minimize synchronization during " "distributed training with prepared `DataLoader` inputs being moved to device. " "Best if used with `pin_memory=True` in the `TrainingArguments`. Requires accelerate " "v0.30.0." }] = False
+    non_blocking: Annotated[
+        bool,
+        {
+            "help": "Whether to use non-blocking CUDA calls to help minimize synchronization during "
+            "distributed training with prepared `DataLoader` inputs being moved to device. "
+            "Best if used with `pin_memory=True` in the `TrainingArguments`. Requires accelerate "
+            "v0.30.0."
+        },
+    ] = False
 
-    gradient_accumulation_kwargs: Annotated[dict | None, { "help": "Additional kwargs to configure gradient accumulation] = None
-    use_configured_state: Annotated[bool, { "help": "Whether or not to use a pre-configured `AcceleratorState` or `PartialState` defined before calling `TrainingArguments`." "If `True`] = False
+    gradient_accumulation_kwargs: Annotated[
+        dict | None,
+        {
+            "help": "Additional kwargs to configure gradient accumulation, see [`accelerate.utils.GradientAccumulationPlugin`]. "
+            "Any of the following (optional) keys are acceptable: "
+            "  num_steps (`int`): Will take precedence over [`~.TrainingArguments.gradient_accumulation_steps`] if "
+            "    the latter is set to 1, otherwise an exception will be raised. "
+            "  sync_each_batch (`bool`): Whether to synchronize the gradients at each data batch. "
+            "    The [`accelerate.utils.GradientAccumulationPlugin`] default is `False`."
+        },
+    ] = None
+    use_configured_state: Annotated[
+        bool,
+        {
+            "help": "Whether or not to use a pre-configured `AcceleratorState` or `PartialState` defined before calling `TrainingArguments`."
+            "If `True`, an `Accelerator` or `PartialState` must be initialized. May lead to issues using sweeps or hyperparameter tuning."
+        },
+    ] = False
 
     @classmethod
     def from_json_file(cls, json_file):
@@ -1180,7 +1233,7 @@ class AcceleratorConfig(Struct, frozen=False):
         with open_file(json_file, "r", encoding="utf-8") as f:
             config_dict = json.load(f)
         # Check for keys and load sensible defaults
-        extra_keys = sorted(key for key in config_dict if key not in cls.__dataclass_fields__)
+        extra_keys = sorted(key for key in config_dict if key not in {f.name for f in fields(cls)})
         if len(extra_keys) > 0:
             raise ValueError(
                 f"The config file at {json_file} had unknown keys ({extra_keys}), please try upgrading your `transformers`"

@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2024 Descript and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,12 +14,12 @@ from salix import Struct
 """Transformers DAC model."""
 
 import math
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...integrations.accelerate import force_accelerate_hooks
@@ -71,9 +70,8 @@ class DacEncoderOutput(ModelOutput, Struct, frozen=False):
 
 
 @auto_docstring
-@dataclass
 # Copied from transformers.models.encodec.modeling_encodec.EncodecDecoderOutput with Encodec->Dac, segment_length->input_length
-class DacDecoderOutput(ModelOutput):
+class DacDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     audio_values (`torch.FloatTensor`  of shape `(batch_size, input_length)`, *optional*):
         Decoded audio values, obtained using the decoder part of Dac.

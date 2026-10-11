@@ -16,16 +16,15 @@ Optimizer utilities for the Trainer class.
 """
 
 from __future__ import annotations
-from salix import Struct
 
 import importlib.metadata
 import logging
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
 
 import torch
 from packaging import version
+from salix import Struct
 from torch import nn
 
 from .optimization import Adafactor

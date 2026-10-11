@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2021 Iz Beltagy, Matthew E. Peters, Arman Cohan and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,9 +14,9 @@ from salix import Struct
 """PyTorch LED model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import CrossEntropyLoss
 
@@ -1079,9 +1078,8 @@ class LEDPreTrainedModel(PreTrainedModel):
     Base class for LEDEncoder's outputs, with potential hidden states, local and global attentions.
     """
 )
-@dataclass
 # Copied from transformers.models.longformer.modeling_longformer.LongformerBaseModelOutput with Longformer->LEDEncoder
-class LEDEncoderBaseModelOutput(ModelOutput):
+class LEDEncoderBaseModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     attentions (`tuple(torch.FloatTensor)`, *optional*, returned when `output_attentions=True` is passed or when `config.output_attentions=True`):
         Tuple of `torch.FloatTensor` (one for each layer) of shape `(batch_size, num_heads, sequence_length, x +

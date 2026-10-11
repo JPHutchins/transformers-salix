@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2024 Om Research Lab and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,12 +16,12 @@ from salix import Struct
 import math
 import warnings
 from collections import OrderedDict
-from dataclasses import dataclass
 from functools import lru_cache
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor
 
 from ... import initialization as init

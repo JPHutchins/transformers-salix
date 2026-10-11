@@ -12,12 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from __future__ import annotations
-from salix import Struct
 
 import inspect
 import os
 from collections.abc import Mapping
-from dataclasses import is_dataclass as _is_python_dataclass
 from functools import lru_cache
 from pathlib import Path
 from types import UnionType
@@ -31,7 +29,7 @@ from .doc import (
     PIPELINE_TASKS_TO_SAMPLE_DOCSTRINGS,
     PT_SAMPLE_DOCSTRINGS,
 )
-from .generic import ModelOutput
+from .generic import ModelOutput, is_struct
 
 
 PATH_TO_TRANSFORMERS = Path("src").resolve() / "transformers"
@@ -4482,7 +4480,7 @@ def auto_class_docstring(cls, custom_intro=None, custom_args=None, checkpoint=No
             source_args_dict = get_args_doc_from_source(ModelOutputArgs)
             doc_class = cls.__doc__ if cls.__doc__ else ""
             documented_kwargs = parse_docstring(doc_class)[0]
-            for param_name, param_type_annotation in [] if _is_python_dataclass(cls) else cls.__annotations__.items():
+            for param_name, param_type_annotation in [] if is_struct(cls) else cls.__annotations__.items():
                 param_type, optional = process_type_annotation(param_type_annotation, param_name)
 
                 # Check for default value

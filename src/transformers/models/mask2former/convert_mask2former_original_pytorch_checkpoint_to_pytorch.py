@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2022 Meta Platforms, Inc. and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +15,6 @@ import json
 import sys
 from argparse import ArgumentParser
 from collections.abc import Iterator
-from dataclasses import dataclass
 from io import BytesIO
 from pathlib import Path
 from pprint import pformat
@@ -30,6 +28,7 @@ from detectron2.config import get_cfg
 from detectron2.projects.deeplab import add_deeplab_config
 from huggingface_hub import hf_hub_download
 from PIL import Image
+from salix import Struct
 from torch import Tensor, nn
 
 from transformers import (

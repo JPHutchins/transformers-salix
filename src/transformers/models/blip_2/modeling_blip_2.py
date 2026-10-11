@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2023 The Salesforce Authors and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,10 +14,10 @@ from salix import Struct
 """PyTorch BLIP-2 model."""
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import CrossEntropyLoss
 
@@ -145,9 +144,8 @@ class Blip2ImageTextMatchingModelOutput(ModelOutput, Struct, frozen=False):
     Base class for text model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
 # Copied from transformers.models.clip.modeling_clip.CLIPTextModelOutput with CLIP->Blip2
-class Blip2TextModelOutput(ModelOutput):
+class Blip2TextModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     text_embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)` *optional* returned when model is initialized with `with_projection=True`):
         The text embeddings obtained by applying the projection layer to the pooler_output.
@@ -164,9 +162,8 @@ class Blip2TextModelOutput(ModelOutput):
     Base class for vision model's outputs that also contains image embeddings of the pooling of the last hidden states.
     """
 )
-@dataclass
 # Copied from transformers.models.clip.modeling_clip.CLIPVisionModelOutput with CLIP->Blip2
-class Blip2VisionModelOutput(ModelOutput):
+class Blip2VisionModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     image_embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)` *optional* returned when model is initialized with `with_projection=True`):
         The image embeddings obtained by applying the projection layer to the pooler_output.

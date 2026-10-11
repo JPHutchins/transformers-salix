@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2021 AlQuraishi Laboratory
 # Copyright 2021 DeepMind Technologies Limited
 #
@@ -16,13 +15,13 @@ from salix import Struct
 
 """Protein data type."""
 
-import dataclasses
 import re
 import string
 from collections.abc import Iterator, Mapping, Sequence
 from typing import Any
 
 import numpy as np
+from salix import Struct
 
 from . import residue_constants
 

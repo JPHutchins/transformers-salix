@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 Mobile Perception Systems Lab at TU/e and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +14,11 @@ from salix import Struct
 """PyTorch EoMT model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
 import torch.nn.functional as F
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init

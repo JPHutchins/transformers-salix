@@ -1,4 +1,3 @@
-from salix import Struct
 # MIT License
 #
 # Copyright (c) 2020  The Google AI Language Team Authors, The HuggingFace Inc. team and github/lonePatient
@@ -22,9 +21,9 @@ from salix import Struct
 # SOFTWARE.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 

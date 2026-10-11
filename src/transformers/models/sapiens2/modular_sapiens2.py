@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2026 Meta Platforms, Inc. and the HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Sapiens2 License. You may obtain a copy of the License at
@@ -12,12 +11,12 @@ from salix import Struct
 # limitations under the License.
 
 from collections.abc import Callable, Iterable
-from dataclasses import dataclass
 from typing import Union
 
 import torch
 import torch.nn.functional as F
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 from torchvision.transforms.v2 import functional as tvF
 

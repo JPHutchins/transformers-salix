@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,8 +16,9 @@ import re
 import shutil
 import sys
 from collections import OrderedDict, defaultdict
-from dataclasses import dataclass
 from typing import Any
+
+from salix import Struct
 
 from ..distributed.pipeline_parallel import PipelineStage
 

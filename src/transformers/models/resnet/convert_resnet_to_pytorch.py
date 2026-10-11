@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2022 The HuggingFace Inc. team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +15,6 @@ from salix import Struct
 
 import argparse
 import json
-from dataclasses import dataclass, field
 from functools import partial
 from pathlib import Path
 
@@ -24,6 +22,7 @@ import timm
 import torch
 import torch.nn as nn
 from huggingface_hub import hf_hub_download
+from salix import Struct
 from torch import Tensor
 
 from transformers import AutoImageProcessor, ResNetConfig, ResNetForImageClassification

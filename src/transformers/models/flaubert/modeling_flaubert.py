@@ -15,10 +15,10 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
@@ -235,9 +235,8 @@ class FlaubertPredLayer(nn.Module):
     Base class for outputs of question answering models using a [`~modeling_utils.FlaubertSQuADHead`].
     """
 )
-@dataclass
 # Copied from transformers.models.xlm.modeling_xlm.XLMSquadHeadOutput with XLM->Flaubert
-class FlaubertSquadHeadOutput(ModelOutput):
+class FlaubertSquadHeadOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned if both `start_positions` and `end_positions` are provided):
         Classification loss as the sum of start token, end token (and is_impossible if provided) classification
@@ -1350,9 +1349,8 @@ class FlaubertForQuestionAnsweringSimple(FlaubertPreTrainedModel):
     Base class for outputs of question answering models using a `SquadHead`.
     """
 )
-@dataclass
 # Copied from transformer.models.xlm.modeling_xlm.XLMForQuestionAnsweringOutput with XLM->Flaubert
-class FlaubertForQuestionAnsweringOutput(ModelOutput):
+class FlaubertForQuestionAnsweringOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned if both `start_positions` and `end_positions` are provided):
         Classification loss as the sum of start token, end token (and is_impossible if provided) classification

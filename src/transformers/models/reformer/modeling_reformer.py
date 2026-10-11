@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2020 The Trax Authors and The HuggingFace Inc. team.
 # Copyright (c) 2018, NVIDIA CORPORATION.  All rights reserved.
 #
@@ -18,13 +17,13 @@ from salix import Struct
 import sys
 from collections import namedtuple
 from collections.abc import Iterable
-from dataclasses import dataclass
 from functools import reduce
 from operator import mul
 from typing import Any
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 from torch.autograd.function import Function
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss

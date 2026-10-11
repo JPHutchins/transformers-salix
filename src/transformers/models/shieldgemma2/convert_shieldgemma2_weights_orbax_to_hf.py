@@ -1,4 +1,3 @@
-from salix import Struct
 r"""Utility to convert Gemma models from Orbax to HF Transformers checkpoint.
 
 python -m transformers.models.shieldgemma2.convert_shieldgemma2_weights_orbax_to_hf \
@@ -9,7 +8,6 @@ python -m transformers.models.shieldgemma2.convert_shieldgemma2_weights_orbax_to
     --precision='bfloat16'
 """
 
-import dataclasses
 from collections.abc import Iterator, Mapping, Sequence
 from typing import Any
 
@@ -19,6 +17,7 @@ import torch
 import tree
 from absl import app, flags, logging
 from orbax import checkpoint as obc
+from salix import Struct
 
 from ...image_utils import PILImageResampling
 from ..gemma import GemmaTokenizerFast

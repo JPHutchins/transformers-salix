@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2022 SHI Labs and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +18,6 @@ import os
 import sys
 from argparse import ArgumentParser
 from collections.abc import Iterator
-from dataclasses import dataclass
 from io import BytesIO
 from pathlib import Path
 from pprint import pformat
@@ -29,6 +27,7 @@ import httpx
 import torch
 import torchvision.transforms as T
 from PIL import Image
+from salix import Struct
 from torch import Tensor, nn
 
 

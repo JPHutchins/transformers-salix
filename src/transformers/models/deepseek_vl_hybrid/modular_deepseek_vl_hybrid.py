@@ -1,4 +1,3 @@
-from salix import Struct
 # Copyright 2025 Deepseek AI and The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,13 +13,13 @@ from salix import Struct
 # limitations under the License.
 
 from collections.abc import Iterable
-from dataclasses import dataclass
 from typing import Union
 
 import numpy as np
 import torch
 import torch.nn as nn
 from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ... import initialization as init
 from ...cache_utils import Cache
