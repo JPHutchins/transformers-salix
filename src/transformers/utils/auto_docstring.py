@@ -23,6 +23,7 @@ from typing import ClassVar, Union, get_args, get_origin
 
 import regex as re
 import typing_extensions
+from salix import MISSING, fields
 
 from .doc import (
     MODELS_TO_PIPELINE,
@@ -4286,6 +4287,31 @@ def auto_method_docstring(
     return func
 
 
+def _init_stand_in(cls):
+    if not is_struct(cls):
+        return cls.__init__
+
+    def __init__(self, *args, **kwargs):
+        pass
+
+    __init__.__qualname__ = f"{cls.__qualname__}.__init__"
+    __init__.__signature__ = inspect.Signature(
+        [
+            inspect.Parameter("self", inspect.Parameter.POSITIONAL_OR_KEYWORD),
+            *(
+                inspect.Parameter(
+                    field.name,
+                    inspect.Parameter.POSITIONAL_OR_KEYWORD,
+                    default=inspect.Parameter.empty if field.default is MISSING else field.default,
+                    annotation=field.type,
+                )
+                for field in fields(cls)
+            ),
+        ]
+    )
+    return __init__
+
+
 def auto_class_docstring(cls, custom_intro=None, custom_args=None, checkpoint=None):
     """
     Wrapper that automatically generates a docstring for classes based on their attributes and methods.
@@ -4302,12 +4328,12 @@ def auto_class_docstring(cls, custom_intro=None, custom_args=None, checkpoint=No
     docstring_args = ""
     if "PreTrainedModel" in (x.__name__ for x in cls.__mro__):
         docstring_init = auto_method_docstring(
-            cls.__init__, parent_class=cls, custom_args=custom_args, checkpoint=checkpoint
+            _init_stand_in(cls), parent_class=cls, custom_args=custom_args, checkpoint=checkpoint
         ).__doc__.replace("Args:", "Parameters:")
     elif "ProcessorMixin" in (x.__name__ for x in cls.__mro__):
         is_processor = True
         docstring_init = auto_method_docstring(
-            cls.__init__,
+            _init_stand_in(cls),
             parent_class=cls,
             custom_args=custom_args,
             checkpoint=checkpoint,
@@ -4342,7 +4368,7 @@ def auto_class_docstring(cls, custom_intro=None, custom_args=None, checkpoint=No
                 custom_args = "\n" + set_min_indent(direct_ancestor.__doc__.strip("\n"), 0) + "\n" + custom_args
 
         docstring_args = auto_method_docstring(
-            cls.__init__,
+            _init_stand_in(cls),
             parent_class=cls,
             custom_args=custom_args,
             checkpoint=checkpoint,
@@ -4352,7 +4378,7 @@ def auto_class_docstring(cls, custom_intro=None, custom_args=None, checkpoint=No
     elif any("BaseVideoProcessor" in x.__name__ for x in cls.__mro__):
         is_video_processor = True
         docstring_init = auto_method_docstring(
-            cls.__init__,
+            _init_stand_in(cls),
             parent_class=cls,
             custom_args=custom_args,
             checkpoint=checkpoint,
@@ -4361,7 +4387,7 @@ def auto_class_docstring(cls, custom_intro=None, custom_args=None, checkpoint=No
     elif any("BaseImageProcessor" in x.__name__ for x in cls.__mro__):
         is_image_processor = True
         docstring_init = auto_method_docstring(
-            cls.__init__,
+            _init_stand_in(cls),
             parent_class=cls,
             custom_args=custom_args,
             checkpoint=checkpoint,
@@ -4386,7 +4412,7 @@ def auto_class_docstring(cls, custom_intro=None, custom_args=None, checkpoint=No
             }
         allowed_params = own_config_params if own_config_params else None
         docstring_args = auto_method_docstring(
-            cls.__init__,
+            _init_stand_in(cls),
             parent_class=cls,
             custom_args=custom_args,
             checkpoint=checkpoint,

@@ -26,7 +26,6 @@ import unittest
 from pathlib import Path
 
 import torch
-from huggingface_hub.dataclasses import strict
 
 from transformers.configuration_utils import PretrainedConfig
 from transformers.image_processing_backends import TorchvisionBackend
@@ -386,7 +385,6 @@ class DummyForTestImageProcessorFast(TorchvisionBackend):
         pass
 
 
-@strict
 @auto_docstring(custom_intro="A minimal configuration for testing that config docstrings only show own args.")
 class DummyStrictConfig(PretrainedConfig):
     r"""

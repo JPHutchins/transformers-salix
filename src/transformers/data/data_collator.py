@@ -23,6 +23,7 @@ from salix import Struct
 
 from ..tokenization_utils_base import PreTrainedTokenizerBase
 from ..utils import PaddingStrategy
+from ..utils.generic import instance_attributes
 
 
 InputDataClass = Any
@@ -122,7 +123,7 @@ def torch_default_data_collator(features: list[InputDataClass]) -> dict[str, Any
     import torch
 
     if not isinstance(features[0], Mapping):
-        features = [vars(f) for f in features]
+        features = [instance_attributes(f) for f in features]
     first = features[0]
     batch = {}
 
@@ -156,7 +157,7 @@ def torch_default_data_collator(features: list[InputDataClass]) -> dict[str, Any
 
 def numpy_default_data_collator(features: list[InputDataClass]) -> dict[str, Any]:
     if not isinstance(features[0], Mapping):
-        features = [vars(f) for f in features]
+        features = [instance_attributes(f) for f in features]
     first = features[0]
     batch = {}
 

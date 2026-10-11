@@ -32,6 +32,7 @@ from ..utils import (
     is_torchao_available,
     logging,
 )
+from ..utils.generic import WithInstanceDict, instance_attributes
 
 
 if is_torch_available():
@@ -91,7 +92,7 @@ class AwqBackend(str, Enum):
     TORCH_FUSED_AWQ = "torch_fused_awq"
 
 
-class QuantizationConfigMixin(Struct, frozen=False):
+class QuantizationConfigMixin(WithInstanceDict, Struct, frozen=False):
     """
     Mixin class for quantization config
     """
@@ -152,11 +153,11 @@ class QuantizationConfigMixin(Struct, frozen=False):
         Serializes this instance to a Python dictionary. Returns:
             `dict[str, Any]`: Dictionary of all the attributes that make up this configuration instance.
         """
-        return copy.deepcopy(self.__dict__)
+        return copy.deepcopy(instance_attributes(self))
 
     def __iter__(self):
         """allows `dict(obj)` for situations where obj may be a dict or QuantizationConfigMixin"""
-        yield from copy.deepcopy(self.__dict__).items()
+        yield from copy.deepcopy(instance_attributes(self)).items()
 
     def __repr__(self):
         return f"{self.__class__.__name__} {self.to_json_string()}"
@@ -571,7 +572,7 @@ class BitsAndBytesConfig(QuantizationConfigMixin, Struct, frozen=False):
         Serializes this instance to a Python dictionary. Returns:
             `dict[str, Any]`: Dictionary of all the attributes that make up this configuration instance.
         """
-        output = copy.deepcopy(self.__dict__)
+        output = copy.deepcopy(instance_attributes(self))
         output["bnb_4bit_compute_dtype"] = str(output["bnb_4bit_compute_dtype"]).split(".")[1]
         output["bnb_4bit_quant_storage"] = str(output["bnb_4bit_quant_storage"]).split(".")[1]
         output["load_in_4bit"] = self.load_in_4bit
@@ -727,7 +728,7 @@ class GPTQConfig(QuantizationConfigMixin, Struct, frozen=False):
         self.post_init()
 
     def get_loading_attributes(self):
-        attributes_dict = copy.deepcopy(self.__dict__)
+        attributes_dict = copy.deepcopy(instance_attributes(self))
         loading_attributes = ["max_input_length", "backend"]
         loading_attributes_dict = {i: j for i, j in attributes_dict.items() if i in loading_attributes}
         return loading_attributes_dict
@@ -1303,7 +1304,7 @@ class FbgemmFp8Config(QuantizationConfigMixin, Struct, frozen=False):
         self.modules_to_not_convert = modules_to_not_convert
 
     def get_loading_attributes(self):
-        attributes_dict = copy.deepcopy(self.__dict__)
+        attributes_dict = copy.deepcopy(instance_attributes(self))
         loading_attributes = ["activation_scale_ub"]
         loading_attributes_dict = {i: j for i, j in attributes_dict.items() if i in loading_attributes}
         return loading_attributes_dict

@@ -34,7 +34,7 @@ from ..utils import (
     is_torch_available,
     logging,
 )
-from ..utils.generic import StructABCMeta
+from ..utils.generic import StructABCMeta, WithInstanceDict, instance_attributes
 
 
 if TYPE_CHECKING:
@@ -1178,7 +1178,7 @@ class GenerationConfig(PushToHubMixin):
         Returns:
             `dict[str, Any]`: Dictionary of all the attributes that make up this configuration instance.
         """
-        output = copy.deepcopy(self.__dict__)
+        output = copy.deepcopy(instance_attributes(self))
 
         # Fields to ignore at serialization time
         if "_commit_hash" in output:
@@ -1351,9 +1351,7 @@ class GenerationConfig(PushToHubMixin):
         return unused_kwargs
 
 
-
-
-class BaseWatermarkingConfig(ABC, Struct, frozen=False, metaclass=StructABCMeta):
+class BaseWatermarkingConfig(ABC, WithInstanceDict, Struct, frozen=False, metaclass=StructABCMeta):
     """Generic watermarking config"""
 
     @classmethod
@@ -1398,11 +1396,11 @@ class BaseWatermarkingConfig(ABC, Struct, frozen=False, metaclass=StructABCMeta)
         Returns:
             dict[str, Any]: Dictionary of all the attributes that make up this configuration instance.
         """
-        output = copy.deepcopy(self.__dict__)
+        output = copy.deepcopy(instance_attributes(self))
         return output
 
     def __iter__(self):
-        yield from copy.deepcopy(self.__dict__).items()
+        yield from copy.deepcopy(instance_attributes(self)).items()
 
     def __repr__(self):
         return f"{self.__class__.__name__} {self.to_json_string()}"
@@ -1414,7 +1412,7 @@ class BaseWatermarkingConfig(ABC, Struct, frozen=False, metaclass=StructABCMeta)
         Returns:
             str: JSON formatted string representing the configuration instance.
         """
-        return json.dumps(self.__dict__, indent=2) + "\n"
+        return json.dumps(instance_attributes(self), indent=2) + "\n"
 
     def update(self, **kwargs):
         """
@@ -1648,7 +1646,9 @@ class CompileConfig(Struct, frozen=False):
 
     def to_dict(self) -> dict[str, Any]:
         """Serializes this instance to a Python dictionary."""
-        return copy.deepcopy({key: value for key, value in self.__dict__.items() if key != "_compile_all_devices"})
+        return copy.deepcopy(
+            {key: value for key, value in instance_attributes(self).items() if key != "_compile_all_devices"}
+        )
 
 
 # TODO: add the @strict decorator to prevent attributes passed as args rather than kwargs

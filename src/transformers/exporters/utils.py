@@ -45,8 +45,10 @@ import sys
 from collections.abc import MutableMapping
 from typing import Any
 
+from salix import Struct
+
 from ..utils import logging
-from ..utils.generic import get_max_seqlen
+from ..utils.generic import get_max_seqlen, instance_attributes
 from ..utils.import_utils import is_torch_available
 
 
@@ -246,8 +248,8 @@ def _map_leaf_tensors(obj: Any, fn: callable) -> Any:
         for k in list(obj):
             obj[k] = _map_leaf_tensors(obj[k], fn)
         return obj
-    if hasattr(obj, "__dict__"):
-        for attr, attr_val in vars(obj).items():
+    if hasattr(obj, "__dict__") or isinstance(obj, Struct):
+        for attr, attr_val in instance_attributes(obj).items():
             setattr(obj, attr, _map_leaf_tensors(attr_val, fn))
     return obj
 
@@ -266,8 +268,8 @@ def _iter_leaf_tensors(obj: Any, prefix: str = ""):
         for key, value in obj.items():
             path = f"{prefix}.{key}" if prefix else key
             yield from _iter_leaf_tensors(value, path)
-    elif hasattr(obj, "__dict__"):
-        yield from _iter_leaf_tensors(vars(obj), prefix)
+    elif hasattr(obj, "__dict__") or isinstance(obj, Struct):
+        yield from _iter_leaf_tensors(instance_attributes(obj), prefix)
 
 
 # ── Public tensor utilities ────────────────────────────────────────────────

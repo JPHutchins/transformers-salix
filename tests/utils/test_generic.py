@@ -14,11 +14,11 @@
 
 import unittest
 import warnings
-from dataclasses import dataclass
 from unittest.mock import patch
 
 import numpy as np
 import pytest
+from salix import Struct
 
 from transformers.configuration_utils import PreTrainedConfig
 from transformers.modeling_outputs import BaseModelOutput, CausalLMOutputWithPast, ModelOutput
@@ -183,8 +183,7 @@ class GenericTester(unittest.TestCase):
         # early when called inside a compiled context, before touching the set.
         from transformers.utils.generic import _register_model_output_pytree_node
 
-        @dataclass
-        class DummyOutput(ModelOutput):
+        class DummyOutput(ModelOutput, Struct, frozen=False):
             last_hidden_state: "torch.Tensor" = None
 
         # Eager registration works normally

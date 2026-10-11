@@ -134,6 +134,7 @@ _deps = [
     "sacrebleu>=1.4.12,<2.0.0",
     "sacremoses",
     "safetensors>=0.8.0",
+    "salix",
     "sagemaker>=2.31.0",
     "schedulefree>=1.2.6",
     "scikit-learn",
@@ -270,6 +271,7 @@ install_requires = [
     deps["tokenizers"],
     deps["typer"],  # CLI utilities. In practice, already a dependency of huggingface_hub but we use it as well
     deps["safetensors"],
+    deps["salix"],  # record types: salix.Struct replaces dataclasses, attrs and NamedTuple
     deps["tqdm"],  # progress bars in model download and training scripts
 ]
 

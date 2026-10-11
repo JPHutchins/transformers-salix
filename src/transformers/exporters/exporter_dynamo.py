@@ -48,7 +48,10 @@ from collections.abc import MutableMapping
 from contextlib import contextmanager
 from typing import Any
 
+from salix import Struct
+
 from ..utils import logging
+from ..utils.generic import instance_attributes
 from ..utils.import_utils import is_detectron2_available, is_torch_available, torch_compilable_check
 from .base import HfExporter
 from .configs import DynamoConfig
@@ -513,8 +516,8 @@ def _flatten_to_context(obj: Any, tensors: list) -> Any:
         # `get_mask_sizes` onto its `DynamicCache`) — that pattern isn't exportable; such a model is
         # skipped until the binding is refactored away (e.g. into a `Cache` subclass).
         raise TypeError("Cannot flatten a bound method for pytree context")
-    if hasattr(obj, "__dict__"):
-        state = {k: _flatten_to_context(v, tensors) for k, v in vars(obj).items()}
+    if hasattr(obj, "__dict__") or isinstance(obj, Struct):
+        state = {k: _flatten_to_context(v, tensors) for k, v in instance_attributes(obj).items()}
         return {"_t": "obj", "p": _class_to_path(cls), "s": state}
 
     raise TypeError(f"Cannot flatten {type(obj).__name__} for pytree context")
@@ -564,7 +567,7 @@ def _unflatten_from_context(ctx: Any, tensors: list) -> Any:
         cls = _path_to_class(ctx["p"])
         instance = cls.__new__(cls)
         for k, v in ctx["s"].items():
-            instance.__dict__[k] = _unflatten_from_context(v, tensors)
+            object.__setattr__(instance, k, _unflatten_from_context(v, tensors))
         return instance
 
     raise TypeError(f"Unknown tag {t!r} in pytree context")
