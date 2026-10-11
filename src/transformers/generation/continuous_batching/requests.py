@@ -110,9 +110,13 @@ class GenerationOutput(Struct, frozen=False):
     logprobs: list[float] = []
     error: str | None = None
     status: RequestStatus = RequestStatus.PENDING
-    created_time: float = None
+    created_time: float = -1.0
     lifespan: tuple[float, float] = (-1, -1)  # (time request was no longer pending, time request finished)
     timestamps: list[float] | None = None  # Timestamps of the generated tokens
+
+    def __post_init__(self):
+        if self.created_time < 0:
+            self.created_time = time.perf_counter()
 
     def is_finished(self) -> bool:
         """Whether the request reached a terminal state, either because it finished generating or because it failed."""

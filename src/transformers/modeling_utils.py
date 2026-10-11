@@ -173,7 +173,7 @@ class LoadStateDictConfig(Struct, frozen=True):
     """
 
     pretrained_model_name_or_path: str | None = None
-    download_kwargs: DownloadKwargs | None = None
+    download_kwargs: DownloadKwargs | None = {}
     use_safetensors: bool | None = None
     ignore_mismatched_sizes: bool = False
     sharded_metadata: dict | None = None
