@@ -48,6 +48,7 @@ from .utils import (
     is_training_run_on_sagemaker,
     logging,
 )
+from .utils.generic import DefaultOnDeleteStruct, is_field_set
 
 
 if is_training_run_on_sagemaker():
@@ -1118,7 +1119,7 @@ if is_sagemaker_mp_enabled():
         return tensor.detach().concat().cpu()
 
 
-class AcceleratorConfig(Struct, frozen=False):
+class AcceleratorConfig(DefaultOnDeleteStruct, frozen=False):
     """
     A subset of arguments relating to the underlying [`accelerate.Accelerator`]
     implementation utilized in the `Trainer` that can be customized.
@@ -1242,10 +1243,15 @@ class AcceleratorConfig(Struct, frozen=False):
         return cls(**config_dict)
 
     def to_dict(self):
-        return copy.deepcopy(self.__dict__)
+        return copy.deepcopy(
+            {field.name: getattr(self, field.name) for field in fields(self) if is_field_set(self, field.name)}
+        )
 
     def pop(self, key, default=None):
-        return self.__dict__.pop(key, default)
+        value = getattr(self, key, default)
+        if is_field_set(self, key):
+            delattr(self, key)
+        return value
 
 
 class LayerWiseDummyOptimizer(torch.optim.Optimizer):

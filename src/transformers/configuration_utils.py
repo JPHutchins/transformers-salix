@@ -24,7 +24,7 @@ from typing import TYPE_CHECKING, Any, Literal, TypeVar, Union
 from huggingface_hub.dataclasses import type_validator
 from huggingface_hub.errors import StrictDataclassClassValidationError, StrictDataclassFieldValidationError
 from packaging import version
-from salix import MISSING, Field, Struct, fields
+from salix import Field, fields
 
 from . import __version__
 from .dynamic_module_utils import custom_object_save
@@ -42,7 +42,7 @@ from .utils import (
     is_torch_available,
     logging,
 )
-from .utils.generic import is_timm_config_dict
+from .utils.generic import DefaultOnDeleteStruct, is_field_set, is_timm_config_dict
 
 
 if TYPE_CHECKING:
@@ -100,14 +100,6 @@ def remap_legacy_layer_types(layer_types: list[str]) -> list[str]:
     return [_LEGACY_LAYER_TYPE_REMAP.get(t, t) for t in layer_types]
 
 
-def _is_set(instance: Any, name: str) -> bool:
-    try:
-        object.__getattribute__(instance, name)
-    except AttributeError:
-        return False
-    return True
-
-
 def _type_validator_of(field: Field):
     def validate_type(value: Any) -> None:
         type_validator(field.name, value, field.type)
@@ -133,7 +125,13 @@ def _class_validators(config_class: type) -> tuple:
 
 
 class PreTrainedConfig(
-    PushToHubMixin, RotaryEmbeddingConfigMixin, HeterogeneousConfigMixin, Struct, frozen=False, eq=False, repr=False
+    PushToHubMixin,
+    RotaryEmbeddingConfigMixin,
+    HeterogeneousConfigMixin,
+    DefaultOnDeleteStruct,
+    frozen=False,
+    eq=False,
+    repr=False,
 ):
     # no-format
     r"""
@@ -475,12 +473,6 @@ class PreTrainedConfig(
         if key in super().__getattribute__("attribute_map"):
             key = super().__getattribute__("attribute_map")[key]
         object.__setattr__(self, key, value)
-
-    def __getattr__(self, key):
-        defaults = {field.name: field.default for field in fields(self) if field.default is not MISSING}
-        if key in defaults:
-            return defaults[key]
-        raise AttributeError(f"'{type(self).__name__}' object has no attribute '{key}'")
 
     def __getattribute__(self, key):
         if key != "attribute_map" and key in super().__getattribute__("attribute_map"):
@@ -1006,7 +998,7 @@ class PreTrainedConfig(
             **{
                 field.name: object.__getattribute__(self, field.name)
                 for field in fields(self)
-                if self.attribute_map.get(field.name, field.name) == field.name and _is_set(self, field.name)
+                if self.attribute_map.get(field.name, field.name) == field.name and is_field_set(self, field.name)
             },
             **self.__dict__,
         }

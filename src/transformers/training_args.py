@@ -56,7 +56,7 @@ from .utils import (
     logging,
     requires_backends,
 )
-from .utils.generic import asdict, strtobool
+from .utils.generic import WithInstanceDict, asdict, strtobool
 from .utils.import_utils import enable_tf32, is_optimum_neuron_available
 
 
@@ -177,7 +177,7 @@ def _convert_str_dict(passed_value: dict):
     return passed_value
 
 
-class TrainingArguments(Struct, frozen=False):
+class TrainingArguments(WithInstanceDict, Struct, frozen=False):
     """
     Configuration class for controlling all aspects of model training with the Trainer.
     TrainingArguments centralizes all hyperparameters, optimization settings, logging preferences, and infrastructure choices needed for training.

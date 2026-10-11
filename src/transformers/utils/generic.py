@@ -31,7 +31,7 @@ from collections import OrderedDict, UserDict
 from collections.abc import Callable, Iterable, MutableMapping
 from contextlib import AbstractContextManager, ExitStack, nullcontext
 from enum import Enum
-from functools import partial, wraps
+from functools import cache, partial, wraps
 from typing import TYPE_CHECKING, Any, TypedDict, TypeVar
 
 import numpy as np
@@ -426,6 +426,31 @@ class TupleStruct(Struct):
 
 
 StructABCMeta = type("StructABCMeta", (type(Struct), ABCMeta), {})
+
+
+class WithInstanceDict:
+    pass
+
+
+def is_field_set(instance: Any, name: str) -> bool:
+    try:
+        object.__getattribute__(instance, name)
+    except AttributeError:
+        return False
+    return True
+
+
+@cache
+def _field_defaults(struct_class: type) -> dict[str, Any]:
+    return {field.name: field.default for field in fields(struct_class) if field.default is not MISSING}
+
+
+class DefaultOnDeleteStruct(Struct, frozen=False):
+    def __getattr__(self, key):
+        defaults = _field_defaults(type(self))
+        if key in defaults:
+            return defaults[key]
+        raise AttributeError(f"'{type(self).__name__}' object has no attribute '{key}'")
 
 
 def is_struct(obj) -> bool:

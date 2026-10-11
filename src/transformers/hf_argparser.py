@@ -206,9 +206,9 @@ class HfArgumentParser(ArgumentParser):
         elif isclass(origin_type) and issubclass(origin_type, list):
             kwargs["type"] = field_type.__args__[0]
             kwargs["nargs"] = "+"
-            if field.default is not MISSING:
+            if isinstance(field.default, list):
                 kwargs["default"] = deepcopy(field.default)
-            else:
+            elif field.default is MISSING:
                 kwargs["required"] = True
         else:
             kwargs["type"] = field_type
