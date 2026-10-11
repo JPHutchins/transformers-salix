@@ -14,7 +14,6 @@
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...masking_utils import create_bidirectional_mask
@@ -56,7 +55,6 @@ from ..roberta.modeling_roberta import (
 
 
 @auto_docstring(checkpoint="BAAI/AltCLIP")
-@strict
 class AltCLIPTextConfig(CLIPTextConfig):
     r"""
     project_dim (`int`, *optional*, defaults to 768):
@@ -97,7 +95,6 @@ class AltCLIPTextConfig(CLIPTextConfig):
 
 
 @auto_docstring(checkpoint="BAAI/AltCLIP")
-@strict
 class AltCLIPVisionConfig(CLIPVisionConfig):
     r"""
     Example:
@@ -117,7 +114,6 @@ class AltCLIPVisionConfig(CLIPVisionConfig):
 
 
 @auto_docstring(checkpoint="BAAI/AltCLIP")
-@strict
 class AltCLIPConfig(CLIPConfig):
     r"""
     Example:

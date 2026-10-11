@@ -13,14 +13,11 @@
 # limitations under the License.
 """PLBART model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="uclanlp/plbart-base")
-@strict
 class PLBartConfig(PreTrainedConfig):
     r"""
     Example:

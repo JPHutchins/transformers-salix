@@ -12,14 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="nvidia/parakeet-ctc-1.1b")
-@strict
 class ParakeetEncoderConfig(PreTrainedConfig):
     r"""
     convolution_bias (`bool`, *optional*, defaults to `True`):
@@ -87,7 +85,6 @@ class ParakeetEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="nvidia/parakeet-ctc-1.1b")
-@strict
 class ParakeetCTCConfig(PreTrainedConfig):
     r"""
     ctc_loss_reduction (`str`, *optional*, defaults to `"mean"`):
@@ -132,7 +129,6 @@ class ParakeetCTCConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="nvidia/parakeet-rnnt-0.6b")
-@strict
 class ParakeetRNNTConfig(PreTrainedConfig):
     r"""
     decoder_hidden_size (`int`, *optional*, defaults to 640):
@@ -184,7 +180,6 @@ class ParakeetRNNTConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="nvidia/parakeet-tdt-0.6b-v3")
-@strict
 class ParakeetTDTConfig(ParakeetRNNTConfig):
     r"""
     A TDT (Token-and-Duration Transducer) extends the base RNN-T configuration [`ParakeetRNNTConfig`] with a

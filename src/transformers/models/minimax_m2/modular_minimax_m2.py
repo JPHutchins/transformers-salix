@@ -15,7 +15,6 @@
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -46,7 +45,6 @@ from ..mixtral.modeling_mixtral import (
 
 
 @auto_docstring(checkpoint="MiniMaxAI/MiniMax-Text-01-hf")
-@strict
 class MiniMaxM2Config(PreTrainedConfig):
     r"""
     Example:

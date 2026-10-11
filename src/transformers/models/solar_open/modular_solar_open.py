@@ -13,7 +13,6 @@
 # limitations under the License.
 """PyTorch SolarOpen model."""
 
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ...utils import auto_docstring, logging
@@ -32,7 +31,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="upstage/Solar-Open-100B")
-@strict
 class SolarOpenConfig(Glm4MoeConfig):
     r"""
     n_group (`int`, *optional*, defaults to 1):

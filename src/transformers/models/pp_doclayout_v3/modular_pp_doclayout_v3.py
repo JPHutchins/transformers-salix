@@ -17,7 +17,6 @@ import math
 import numpy as np
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import nn
 from torchvision.transforms.v2 import functional as tvF
@@ -69,7 +68,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-DocLayoutV3_safetensors")
-@strict
 class PPDocLayoutV3Config(PreTrainedConfig):
     r"""
     initializer_bias_prior_prob (`float`, *optional*):

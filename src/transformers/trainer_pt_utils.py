@@ -35,7 +35,7 @@ import numpy as np
 import torch
 import torch.distributed as dist
 from packaging import version
-from salix import Struct
+from salix import Struct, fields
 from torch import nn
 from torch.utils.data import Dataset, IterableDataset, RandomSampler, Sampler
 from torch.utils.data.distributed import DistributedSampler

@@ -17,7 +17,6 @@ from collections.abc import Sequence
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -39,7 +38,6 @@ from ..rt_detr.modeling_rt_detr_resnet import RTDetrResNetConvLayer
 # TODO: Modular conversion for resnet must be fixed as
 # it provides incorrect import for configuration like resnet_resnet
 @auto_docstring(checkpoint="ustc-community/dfine_x_coco")
-@strict
 class HGNetV2Config(BackboneConfigMixin, PreTrainedConfig):
     r"""
     stem_channels (`list[int]`, *optional*, defaults to `[3, 32, 48]`):

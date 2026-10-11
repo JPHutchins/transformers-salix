@@ -19,7 +19,6 @@ from typing import Any
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 
 from ... import initialization as init
@@ -51,7 +50,6 @@ _R_SOFTPLUS_0 = 1.442695041
 
 
 @auto_docstring(checkpoint="google/videoprism-base-f16r288")
-@strict
 class VideoPrismVisionConfig(VivitConfig):
     r"""
     num_frames (`int`, *optional*, defaults to 16):
@@ -90,7 +88,6 @@ class VideoPrismVisionConfig(VivitConfig):
 
 
 @auto_docstring(checkpoint="google/videoprism-lvt-base-f16r288")
-@strict
 class VideoPrismTextConfig(SiglipTextConfig):
     r"""
     apply_l2norm (`bool`, *optional*, defaults to `True`):
@@ -117,7 +114,6 @@ class VideoPrismTextConfig(SiglipTextConfig):
 
 
 @auto_docstring(checkpoint="google/videoprism-lvt-base-f16r288")
-@strict
 class VideoPrismConfig(SiglipConfig):
     r"""
     Example:

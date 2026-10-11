@@ -19,7 +19,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 from torchvision.transforms.v2 import functional as tvF
 
 from ...activations import ACT2FN
@@ -516,7 +515,6 @@ class MuseGlimmerCausalLMOutputWithPast(Gemma3CausalLMOutputWithPast):
 
 
 @auto_docstring(checkpoint="meta-models/Muse-Glimmer-30B")
-@strict
 class MuseGlimmerVisionConfig(Kimi_K25VisionConfig):
     r"""
     pos_emb_height (`int`, *optional*):
@@ -555,7 +553,6 @@ class MuseGlimmerVisionConfig(Kimi_K25VisionConfig):
 
 
 @auto_docstring(checkpoint="meta-models/Muse-Glimmer-30B")
-@strict
 class MuseGlimmerTextConfig(Gemma2Config, PreTrainedConfig):
     r"""
     final_logit_softcapping (`float`, *optional*, defaults to 20.0):
@@ -633,7 +630,6 @@ class MuseGlimmerTextConfig(Gemma2Config, PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="meta-models/Muse-Glimmer-30B")
-@strict
 class MuseGlimmerConfig(PreTrainedConfig):
     r"""
     out_hidden_size (`int`, *optional*, defaults to 6144):

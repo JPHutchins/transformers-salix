@@ -13,14 +13,11 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="zju-community/efficientloftr")
-@strict
 class EfficientLoFTRConfig(PreTrainedConfig):
     r"""
     stage_num_blocks (`List`, *optional*, defaults to [1, 2, 4, 14]):

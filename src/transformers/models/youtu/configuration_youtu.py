@@ -24,15 +24,12 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="tencent/Youtu-LLM-2B")
-@strict
 class YoutuConfig(PreTrainedConfig):
     r"""
     rope_interleave (`bool`, *optional*, defaults to `True`):

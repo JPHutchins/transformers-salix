@@ -18,14 +18,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="ibm-granite/granite-speech-5.0-470m-turboctc")
-@strict
 class GraniteSpeech5EncoderConfig(PreTrainedConfig):
     r"""
     max_position_embeddings (`int`, *optional*, defaults to 512):
@@ -93,7 +91,6 @@ class GraniteSpeech5EncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="ibm-granite/granite-speech-5.0-470m-turboctc")
-@strict
 class GraniteSpeech5CTCConfig(PreTrainedConfig):
     r"""
     ctc_loss_reduction (`str`, *optional*, defaults to `"mean"`):

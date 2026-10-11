@@ -13,8 +13,6 @@
 # limitations under the License.
 """RADIO vision encoder configuration."""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...image_utils import OPENAI_CLIP_MEAN, OPENAI_CLIP_STD
 from ...utils import auto_docstring
@@ -24,7 +22,6 @@ __all__ = ["RadioConfig"]
 
 
 @auto_docstring(checkpoint="nvidia/C-RADIOv4-H")
-@strict
 class RadioConfig(PreTrainedConfig):
     r"""
     mlp_ratio (`float`, *optional*, defaults to 4.0):

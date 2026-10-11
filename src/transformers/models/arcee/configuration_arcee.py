@@ -18,7 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from transformers.utils import auto_docstring
 
@@ -27,7 +26,6 @@ from ...modeling_rope_utils import RopeParameters
 
 
 @auto_docstring(checkpoint="arcee-ai/AFM-4.5B")
-@strict
 class ArceeConfig(PreTrainedConfig):
     r"""
     ```python

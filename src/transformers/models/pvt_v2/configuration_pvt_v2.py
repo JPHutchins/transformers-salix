@@ -15,15 +15,12 @@
 # limitations under the License.
 """Pvt V2 model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import BackboneConfigMixin
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="OpenGVLab/pvt_v2_b0")
-@strict
 class PvtV2Config(BackboneConfigMixin, PreTrainedConfig):
     r"""
     num_encoder_blocks (`[int]`, *optional*, defaults to 4):

@@ -15,8 +15,6 @@
 
 from typing import Literal
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -29,7 +27,6 @@ ZOEDEPTH_PRETRAINED_CONFIG_ARCHIVE_MAP = {
 
 
 @auto_docstring(checkpoint="Intel/zoedepth-nyu")
-@strict
 class ZoeDepthConfig(PreTrainedConfig):
     r"""
     readout_type (`str`, *optional*, defaults to `"project"`):

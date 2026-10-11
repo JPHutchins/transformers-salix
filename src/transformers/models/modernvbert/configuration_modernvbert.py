@@ -20,15 +20,12 @@
 
 from typing import Literal
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="ModernVBERT/modernvbert")
-@strict
 class ModernVBertConfig(PreTrainedConfig):
     r"""
     pixel_shuffle_factor (`int | None`, *optional*, defaults to 4):

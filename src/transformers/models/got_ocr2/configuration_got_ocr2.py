@@ -19,15 +19,12 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="facebook/sam-vit-huge")
-@strict
 class GotOcr2VisionConfig(PreTrainedConfig):
     r"""
     output_channels (`int`, *optional*, defaults to 256):
@@ -65,7 +62,6 @@ class GotOcr2VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/sam-vit-huge")
-@strict
 class GotOcr2Config(PreTrainedConfig):
     r"""
     Example:

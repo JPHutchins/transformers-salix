@@ -12,8 +12,6 @@
 # limitations under the License.
 """Idefics3 model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 from ..auto import CONFIG_MAPPING, AutoConfig
@@ -23,7 +21,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="HuggingFaceM4/Idefics3-8B-Llama3")
-@strict
 class Idefics3VisionConfig(PreTrainedConfig):
     r"""
     Example:
@@ -59,7 +56,6 @@ class Idefics3VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="HuggingFaceM4/Idefics3-8B-Llama3")
-@strict
 class Idefics3Config(PreTrainedConfig):
     r"""
     scale_factor (`int`, *optional*, defaults to 2):

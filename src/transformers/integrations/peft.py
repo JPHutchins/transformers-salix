@@ -11,13 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from salix import replace
 import inspect
 import json
 import os
 from typing import TYPE_CHECKING, Any, Literal, Optional
 
 from safetensors import safe_open
+from salix import fields, replace
 
 from .._typing import PeftConfigLike
 from ..conversion_mapping import get_model_conversion_mapping
@@ -161,7 +161,11 @@ class PeftAdapterMixin:
 
         if local_files_only:
             kwargs["local_files_only"] = True
-        base_load_config = load_config.__dict__ if load_config is not None else {}
+        base_load_config = (
+            {field.name: getattr(load_config, field.name) for field in fields(load_config)}
+            if load_config is not None
+            else {}
+        )
         base_load_config.update(kwargs)
         base_load_config.setdefault("pretrained_model_name_or_path", None)
         load_config = LoadStateDictConfig(**base_load_config)

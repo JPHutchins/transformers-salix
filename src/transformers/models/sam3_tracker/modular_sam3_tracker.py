@@ -14,7 +14,6 @@
 
 
 import torch
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...configuration_utils import PreTrainedConfig
@@ -44,7 +43,6 @@ from ..sam2.processing_sam2 import Sam2Processor
 
 
 @auto_docstring(checkpoint="facebook/sam3")
-@strict
 class Sam3TrackerPromptEncoderConfig(Sam2PromptEncoderConfig):
     r"""
     mask_input_channels (`int`, *optional*, defaults to 16):
@@ -66,13 +64,11 @@ class Sam3TrackerProcessor(Sam2Processor):
 
 
 @auto_docstring(checkpoint="facebook/sam3")
-@strict
 class Sam3TrackerMaskDecoderConfig(Sam2MaskDecoderConfig):
     pass
 
 
 @auto_docstring(checkpoint="facebook/sam3")
-@strict
 class Sam3TrackerConfig(Sam2Config):
     r"""
     prompt_encoder_config (Union[`dict`, `Sam3TrackerPromptEncoderConfig`], *optional*):

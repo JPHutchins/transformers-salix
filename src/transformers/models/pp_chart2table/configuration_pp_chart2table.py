@@ -18,7 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -26,7 +25,6 @@ from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="facebook/sam-vit-huge")
-@strict
 class PPChart2TableVisionConfig(PreTrainedConfig):
     r"""
     output_channels (`int`, *optional*, defaults to 256):
@@ -64,7 +62,6 @@ class PPChart2TableVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-Chart2Table_safetensors")
-@strict
 class PPChart2TableConfig(PreTrainedConfig):
     r"""
     Example:

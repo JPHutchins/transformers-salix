@@ -19,8 +19,6 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 
@@ -29,7 +27,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="google/siglip2-base-patch16-naflex")
-@strict
 class Siglip2TextConfig(PreTrainedConfig):
     r"""
     Example:
@@ -72,7 +69,6 @@ class Siglip2TextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/siglip2-base-patch16-naflex")
-@strict
 class Siglip2VisionConfig(PreTrainedConfig):
     r"""
     num_patches (`int`, *optional*, defaults to 256):
@@ -113,7 +109,6 @@ class Siglip2VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/siglip2-base-patch16-naflex")
-@strict
 class Siglip2Config(PreTrainedConfig):
     r"""
     Example:

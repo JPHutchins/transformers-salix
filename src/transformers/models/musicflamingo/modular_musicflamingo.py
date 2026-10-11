@@ -16,7 +16,6 @@
 from math import pi
 
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import Tensor, broadcast_tensors
 
@@ -55,7 +54,6 @@ if is_torch_available():
 
 
 @auto_docstring(checkpoint="nvidia/music-flamingo-2601-hf")
-@strict
 class MusicFlamingoConfig(AudioFlamingo3Config):
     r"""
     audio_bos_token_id (`int`, *optional*, defaults to 151670):

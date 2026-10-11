@@ -13,14 +13,11 @@
 # limitations under the License.
 """ViT MAE model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/vit-mae-base")
-@strict
 class ViTMAEConfig(PreTrainedConfig):
     r"""
     decoder_num_hidden_layers (`int`, *optional*, defaults to 8):

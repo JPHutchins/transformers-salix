@@ -61,7 +61,9 @@ def make_choice_type_function(choices: list) -> Callable[[str], Any]:
     return lambda arg: str_to_choice.get(arg, arg)
 
 
-def HfArg(*, aliases: str | list[str] | None = None, help: str | None = None, metadata: dict | None = None, **kwargs) -> dict:
+def HfArg(
+    *, aliases: str | list[str] | None = None, help: str | None = None, metadata: dict | None = None, **kwargs
+) -> dict:
     """Argument helper enabling a concise syntax to annotate struct fields for parsing with `HfArgumentParser`.
 
     Example:
@@ -89,7 +91,9 @@ def HfArg(*, aliases: str | list[str] | None = None, help: str | None = None, me
 
 
 def _field_metadata(field: Field) -> dict:
-    return {key: value for extra in field.annotated_metadata if isinstance(extra, dict) for key, value in extra.items()}
+    return {
+        key: value for extra in field.annotated_metadata if isinstance(extra, dict) for key, value in extra.items()
+    }
 
 
 class HfArgumentParser(ArgumentParser):

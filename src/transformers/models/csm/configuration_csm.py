@@ -13,8 +13,6 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring, logging
@@ -25,7 +23,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="sesame/csm-1b")
-@strict
 class CsmDepthDecoderConfig(PreTrainedConfig):
     r"""
     backbone_hidden_size (`int`, *optional*, defaults to 2048):
@@ -86,7 +83,6 @@ class CsmDepthDecoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="sesame/csm-1b")
-@strict
 class CsmConfig(PreTrainedConfig):
     r"""
     codebook_pad_token_id (`int`, *optional*, defaults to 2050):

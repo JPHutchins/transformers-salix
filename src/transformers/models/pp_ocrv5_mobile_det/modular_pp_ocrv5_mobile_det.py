@@ -16,7 +16,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 
 from ...activations import ACT2FN
 from ...backbone_utils import consolidate_backbone_kwargs_to_config, load_backbone
@@ -42,7 +41,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-OCRv5_mobile_det_safetensors")
-@strict
 class PPOCRV5MobileDetConfig(PreTrainedConfig):
     r"""
     reduction (`int`, *optional*, defaults to 4):

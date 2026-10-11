@@ -18,7 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -26,7 +25,6 @@ from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="JetBrains/Mellum2-12B-A2.5B-Base")
-@strict
 class MellumConfig(PreTrainedConfig):
     r"""
     mlp_layer_types (`list[str]`, *optional*):

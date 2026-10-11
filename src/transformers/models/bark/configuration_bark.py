@@ -13,8 +13,6 @@
 # limitations under the License.
 """BARK model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 from ..auto import CONFIG_MAPPING, AutoConfig
@@ -24,7 +22,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="suno/bark")
-@strict
 class BarkSubModelConfig(PreTrainedConfig):
     r"""
     block_size (`int`, *optional*, defaults to 1024):
@@ -64,7 +61,6 @@ class BarkSubModelConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="suno/bark")
-@strict
 class BarkSemanticConfig(BarkSubModelConfig):
     r"""
     block_size (`int`, *optional*, defaults to 1024):
@@ -101,7 +97,6 @@ class BarkSemanticConfig(BarkSubModelConfig):
 
 
 @auto_docstring(checkpoint="suno/bark")
-@strict
 class BarkCoarseConfig(BarkSubModelConfig):
     r"""
     block_size (`int`, *optional*, defaults to 1024):
@@ -138,7 +133,6 @@ class BarkCoarseConfig(BarkSubModelConfig):
 
 
 @auto_docstring(checkpoint="suno/bark")
-@strict
 class BarkFineConfig(BarkSubModelConfig):
     r"""
     block_size (`int`, *optional*, defaults to 1024):
@@ -184,7 +178,6 @@ class BarkFineConfig(BarkSubModelConfig):
 
 
 @auto_docstring(checkpoint="suno/bark")
-@strict
 class BarkConfig(PreTrainedConfig):
     r"""
     semantic_config ([`BarkSemanticConfig`], *optional*):

@@ -16,7 +16,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 
 from ... import initialization as init
@@ -41,31 +40,26 @@ from ..siglip.modeling_siglip import SiglipAttention, SiglipEncoderLayer, Siglip
 
 
 @auto_docstring(checkpoint="yonigozlan/sam3-litetext-s0")
-@strict
 class Sam3LiteTextGeometryEncoderConfig(Sam3GeometryEncoderConfig):
     pass
 
 
 @auto_docstring(checkpoint="yonigozlan/sam3-litetext-s0")
-@strict
 class Sam3LiteTextDETREncoderConfig(Sam3DETREncoderConfig):
     pass
 
 
 @auto_docstring(checkpoint="yonigozlan/sam3-litetext-s0")
-@strict
 class Sam3LiteTextDETRDecoderConfig(Sam3DETRDecoderConfig):
     pass
 
 
 @auto_docstring(checkpoint="yonigozlan/sam3-litetext-s0")
-@strict
 class Sam3LiteTextMaskDecoderConfig(Sam3MaskDecoderConfig):
     pass
 
 
 @auto_docstring(checkpoint="yonigozlan/sam3-litetext-s0")
-@strict
 class Sam3LiteTextTextConfig(PreTrainedConfig):
     r"""
     use_repmixer_blocks (`bool`, *optional*, defaults to `True`):
@@ -95,7 +89,6 @@ class Sam3LiteTextTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="yonigozlan/sam3-litetext-s0")
-@strict
 class Sam3LiteTextConfig(PreTrainedConfig):
     r"""
     geometry_encoder_config (`dict` or `Sam3LiteTextGeometryEncoderConfig`, *optional*):

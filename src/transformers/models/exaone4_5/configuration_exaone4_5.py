@@ -18,7 +18,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -26,7 +25,6 @@ from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="LGAI-EXAONE/EXAONE-4.5-33B")
-@strict
 class Exaone4_5_VisionConfig(PreTrainedConfig):
     r"""
     window_size (`int`, *optional*, defaults to 11):
@@ -57,7 +55,6 @@ class Exaone4_5_VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="LGAI-EXAONE/EXAONE-4.5-33B")
-@strict
 class Exaone4_5_Config(PreTrainedConfig):
     model_type = "exaone4_5"
     sub_configs = {"vision_config": AutoConfig, "text_config": AutoConfig}

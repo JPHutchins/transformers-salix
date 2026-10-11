@@ -13,15 +13,12 @@
 # limitations under the License.
 """SAM3 model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="facebook/sam3")
-@strict
 class Sam3ViTConfig(PreTrainedConfig):
     r"""
     rope_theta (`float`, *optional*, defaults to 10000.0):
@@ -64,7 +61,6 @@ class Sam3ViTConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/sam3")
-@strict
 class Sam3VisionConfig(PreTrainedConfig):
     r"""
     fpn_hidden_size (`int`, *optional*, defaults to 256):
@@ -114,7 +110,6 @@ class Sam3VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/sam3")
-@strict
 class Sam3GeometryEncoderConfig(PreTrainedConfig):
     r"""
     roi_size (`int`, *optional*, defaults to 7):
@@ -136,7 +131,6 @@ class Sam3GeometryEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/sam3")
-@strict
 class Sam3DETREncoderConfig(PreTrainedConfig):
     r"""
     hidden_dropout (`float`, *optional*, defaults to 0.0):
@@ -157,7 +151,6 @@ class Sam3DETREncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/sam3")
-@strict
 class Sam3DETRDecoderConfig(PreTrainedConfig):
     r"""
     num_queries (`int`, *optional*, defaults to 200):
@@ -179,7 +172,6 @@ class Sam3DETRDecoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/sam3")
-@strict
 class Sam3MaskDecoderConfig(PreTrainedConfig):
     r"""
     num_upsampling_stages (`int`, *optional*, defaults to 3):
@@ -197,7 +189,6 @@ class Sam3MaskDecoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/sam3")
-@strict
 class Sam3Config(PreTrainedConfig):
     r"""
     geometry_encoder_config (`dict` or `Sam3GeometryEncoderConfig`, *optional*):

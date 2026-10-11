@@ -13,14 +13,11 @@
 # limitations under the License.
 """BigBird model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="google/bigbird-roberta-base")
-@strict
 class BigBirdConfig(PreTrainedConfig):
     r"""
     attention_type (`str`, *optional*, defaults to `"block_sparse"`):

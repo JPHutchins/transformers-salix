@@ -13,8 +13,6 @@
 # limitations under the License.
 """CLIP model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 
@@ -23,7 +21,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="openai/clip-vit-base-patch32")
-@strict
 class CLIPTextConfig(PreTrainedConfig):
     r"""
     Example:
@@ -73,7 +70,6 @@ class CLIPTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="openai/clip-vit-base-patch32")
-@strict
 class CLIPVisionConfig(PreTrainedConfig):
     r"""
     Example:
@@ -118,7 +114,6 @@ class CLIPVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="openai/clip-vit-base-patch32")
-@strict
 class CLIPConfig(PreTrainedConfig):
     r"""
     text_config (`dict`, *optional*):

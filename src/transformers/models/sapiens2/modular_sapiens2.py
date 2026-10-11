@@ -15,7 +15,6 @@ from typing import Union
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import nn
 from torchvision.transforms.v2 import functional as tvF
@@ -961,7 +960,6 @@ class Sapiens2ImageProcessor(BeitImageProcessor):
 
 
 @auto_docstring(checkpoint="facebook/sapiens2-seg-0.4b")
-@strict
 class Sapiens2HeadConfig(PreTrainedConfig):
     r"""
     upsample_out_channels (`list[int]`, *optional*):
@@ -1049,7 +1047,6 @@ class Sapiens2HeadConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/sapiens2-pretrain-0.4b")
-@strict
 class Sapiens2Config(DINOv3ViTConfig):
     r"""
     rope_theta (`float`, *optional*, defaults to 100.0):

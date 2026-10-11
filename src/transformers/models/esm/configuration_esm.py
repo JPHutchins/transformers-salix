@@ -13,9 +13,7 @@
 # limitations under the License.
 """ESM model configuration"""
 
-from typing import Union
-
-from huggingface_hub.dataclasses import strict
+from typing import Annotated, Union
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
@@ -25,7 +23,6 @@ from ...utils.type_validators import interval, is_divisible_by
 logger = logging.get_logger(__name__)
 
 
-@strict
 class StructureModuleConfig(PreTrainedConfig):
     """
     Args:
@@ -78,20 +75,19 @@ class StructureModuleConfig(PreTrainedConfig):
     inf: float | None = 1e5
 
 
-@strict
 class TrunkConfig(PreTrainedConfig):
     sub_configs = {"structure_module": StructureModuleConfig}
 
     num_blocks: int | None = 48
     sequence_state_dim: int | None = 1024
-    pairwise_state_dim: int | None = is_divisible_by(divisor=2)(default=128)
+    pairwise_state_dim: Annotated[int | None, is_divisible_by(divisor=2)] = 128
     sequence_head_width: int | None = 32
     pairwise_head_width: int | None = 32
     position_bins: int | None = 32
-    dropout: float | int | None = interval(max=0.4)(default=0.0)
+    dropout: Annotated[float | int | None, interval(max=0.4)] = 0.0
     layer_drop: float | int | None = 0.0
     cpu_grad_checkpoint: bool | None = False
-    max_recycles: int | None = interval(min=0)(default=4)
+    max_recycles: Annotated[int | None, interval(min=0)] = 4
     chunk_size: int | None = 128
     structure_module: Union[dict, "StructureModuleConfig"] | None = None
 
@@ -129,7 +125,6 @@ class TrunkConfig(PreTrainedConfig):
             )
 
 
-@strict
 class EsmFoldConfig(PreTrainedConfig):
     sub_configs = {"trunk": TrunkConfig}
 
@@ -153,7 +148,6 @@ class EsmFoldConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/esm-1b")
-@strict
 class EsmConfig(PreTrainedConfig):
     r"""
     mask_token_id (`int`, *optional*):

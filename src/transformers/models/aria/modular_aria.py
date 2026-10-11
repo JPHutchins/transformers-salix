@@ -14,7 +14,6 @@
 import math
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 from torchvision.transforms.v2 import functional as tvF
 
@@ -96,7 +95,6 @@ def sequential_experts_gemm(token_states, expert_weights, tokens_per_expert):
 
 
 @auto_docstring(checkpoint="rhymes-ai/Aria")
-@strict
 class AriaTextConfig(LlamaConfig):
     r"""
     moe_num_experts (`int`, *optional*, defaults to 8):
@@ -127,7 +125,6 @@ class AriaTextConfig(LlamaConfig):
 
 
 @auto_docstring(checkpoint="rhymes-ai/Aria")
-@strict
 class AriaConfig(PreTrainedConfig):
     r"""
     projector_patch_to_query_dict (`dict`, *optional*):

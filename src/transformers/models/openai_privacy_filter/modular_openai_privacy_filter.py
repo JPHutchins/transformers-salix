@@ -16,7 +16,6 @@
 from collections.abc import Callable
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 from torch.nn import functional as F
 
@@ -69,7 +68,6 @@ OPENAI_PRIVACY_FILTER_NER_LABELS = ("O",) + tuple(
 
 
 @auto_docstring(checkpoint="openai/privacy-filter")
-@strict
 class OpenAIPrivacyFilterConfig(GptOssConfig):
     model_type = "openai_privacy_filter"
     vocab_size: int = 200064

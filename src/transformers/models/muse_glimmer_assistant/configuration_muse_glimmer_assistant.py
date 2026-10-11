@@ -13,8 +13,6 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 
@@ -23,7 +21,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="meta-models/Muse-Glimmer-30B-assistant")
-@strict
 class MuseGlimmerAssistantConfig(PreTrainedConfig):
     r"""
     block_size (`int`, *optional*):

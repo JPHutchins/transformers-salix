@@ -18,15 +18,12 @@
 # limitations under the License.
 """GraniteMoe model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="ibm-granite/granite-speech-3.2-8b")
-@strict
 class GraniteMoeConfig(PreTrainedConfig):
     r"""
     ```python

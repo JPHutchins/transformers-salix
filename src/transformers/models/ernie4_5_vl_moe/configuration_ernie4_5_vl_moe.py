@@ -17,7 +17,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -28,7 +27,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="baidu/ERNIE-4.5-VL-28B-A3B-PT")
-@strict
 class Ernie4_5_VLMoeVisionConfig(PreTrainedConfig):
     r"""
     temporal_merge_size (`int`, *optional*, defaults to 2):
@@ -60,7 +58,6 @@ class Ernie4_5_VLMoeVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="baidu/ERNIE-4.5-VL-28B-A3B-PT")
-@strict
 class Ernie4_5_VLMoeTextConfig(PreTrainedConfig):
     r"""
     use_bias (`bool`, *optional*, defaults to `False`):
@@ -146,7 +143,6 @@ class Ernie4_5_VLMoeTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="baidu/ERNIE-4.5-VL-28B-A3B-PT")
-@strict
 class Ernie4_5_VLMoeConfig(PreTrainedConfig):
     r"""
     image_start_token_id (`int`, *optional*, defaults to 101304):

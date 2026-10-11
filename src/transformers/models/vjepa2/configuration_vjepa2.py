@@ -13,14 +13,11 @@
 # limitations under the License.
 """VJEPA 2 model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/vjepa2-vitl-fpc64-256")
-@strict
 class VJEPA2Config(PreTrainedConfig):
     r"""
     crop_size (`int`, *optional*, defaults to 256):

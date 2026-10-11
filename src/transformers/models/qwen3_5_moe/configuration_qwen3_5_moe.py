@@ -17,7 +17,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig, remap_legacy_layer_types
 from ...modeling_rope_utils import RopeParameters
@@ -25,7 +24,6 @@ from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3.5-35B-A3B")
-@strict
 class Qwen3_5MoeTextConfig(PreTrainedConfig):
     r"""
     linear_conv_kernel_dim (`int`, *optional*, defaults to 4):
@@ -135,7 +133,6 @@ class Qwen3_5MoeTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3.5-35B-A3B")
-@strict
 class Qwen3_5MoeVisionConfig(PreTrainedConfig):
     r"""
     out_hidden_size (`int`, *optional*, defaults to 3584):
@@ -162,7 +159,6 @@ class Qwen3_5MoeVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3.5-35B-A3B")
-@strict
 class Qwen3_5MoeConfig(PreTrainedConfig):
     r"""
     Example:

@@ -17,7 +17,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -25,7 +24,6 @@ from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="moonshotai/Kimi-K2.6")
-@strict
 class Kimi_K25VisionConfig(PreTrainedConfig):
     r"""
     pos_emb_height (`int`, *optional*):
@@ -55,7 +53,6 @@ class Kimi_K25VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="moonshotai/Kimi-K2.6")
-@strict
 class Kimi_K25Config(PreTrainedConfig):
     r"""
     projection_hidden_size (`int`, *optional*, defaults to `1152`):

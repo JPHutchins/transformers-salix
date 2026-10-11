@@ -14,7 +14,6 @@
 """PyTorch SAM 2 model."""
 
 import torch
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...configuration_utils import PreTrainedConfig
@@ -38,7 +37,6 @@ from ..sam2.modeling_sam2 import (
 
 
 @auto_docstring(checkpoint="yonigozlan/EdgeTAM-hf")
-@strict
 class EdgeTamVisionConfig(PreTrainedConfig):
     r"""
     backbone_channel_list (`List[int]`, *optional*, defaults to `[384, 192, 96, 48]`):
@@ -99,19 +97,16 @@ class EdgeTamVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="yonigozlan/EdgeTAM-hf")
-@strict
 class EdgeTamPromptEncoderConfig(Sam2PromptEncoderConfig):
     pass
 
 
 @auto_docstring(checkpoint="yonigozlan/EdgeTAM-hf")
-@strict
 class EdgeTamMaskDecoderConfig(Sam2MaskDecoderConfig):
     pass
 
 
 @auto_docstring(checkpoint="yonigozlan/EdgeTAM-hf")
-@strict
 class EdgeTamConfig(Sam2Config):
     r"""
     prompt_encoder_config (Union[`dict`, `EdgeTamPromptEncoderConfig`], *optional*):

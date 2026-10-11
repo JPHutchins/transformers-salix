@@ -20,7 +20,6 @@ from typing import Any
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 
 from ...cache_utils import Cache
 from ...configuration_utils import PreTrainedConfig
@@ -65,7 +64,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="zai-org/GLM-Image")
-@strict
 class GlmImageVQVAEConfig(PreTrainedConfig):
     model_type = "glm_image_vqmodel"
     base_config_key = "vq_config"
@@ -78,7 +76,6 @@ class GlmImageVQVAEConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="zai-org/GLM-Image")
-@strict
 class GlmImageVisionConfig(Glm4vVisionConfig):
     r"""
     Example:
@@ -115,7 +112,6 @@ class GlmImageVisionConfig(Glm4vVisionConfig):
 
 
 @auto_docstring(checkpoint="zai-org/GLM-Image")
-@strict
 class GlmImageTextConfig(Glm4vTextConfig):
     r"""
     vision_vocab_size (`int`, *optional*, defaults to 16512):
@@ -146,7 +142,6 @@ class GlmImageTextConfig(Glm4vTextConfig):
 
 
 @auto_docstring(checkpoint="zai-org/GLM-Image")
-@strict
 class GlmImageConfig(PreTrainedConfig):
     r"""
     image_start_token_id (`int`, *optional*, defaults to 16384):

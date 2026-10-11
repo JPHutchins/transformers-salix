@@ -13,14 +13,11 @@
 # limitations under the License.
 """CvT model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="microsoft/cvt-13")
-@strict
 class CvtConfig(PreTrainedConfig):
     r"""
     patch_stride (`list[int]`, *optional*, defaults to `[4, 2, 2]`):

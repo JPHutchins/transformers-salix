@@ -17,7 +17,6 @@ import math
 import torch
 import torch.nn as nn
 import torchvision.transforms.v2.functional as tvF
-from huggingface_hub.dataclasses import strict
 
 from ...activations import ACT2FN
 from ...backbone_utils import BackboneConfigMixin, BackboneMixin, filter_output_hidden_states
@@ -46,7 +45,6 @@ from ..resnet.modeling_resnet import ResNetConvLayer
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-LCNet_x1_0_doc_ori_safetensors")
-@strict
 class PPLCNetConfig(BackboneConfigMixin, PreTrainedConfig):
     r"""
     scale (`float`, *optional*, defaults to 1.0):

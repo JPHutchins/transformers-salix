@@ -17,7 +17,6 @@
 from collections.abc import Callable
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ...cache_utils import Cache, DynamicCache
@@ -55,7 +54,6 @@ _CONFIG_FOR_DOC = "Exaone4Config"
 
 
 @auto_docstring(checkpoint="LGAI-EXAONE/EXAONE-4.0-32B")
-@strict
 class Exaone4Config(PreTrainedConfig):
     r"""
     sliding_window_pattern (`str`, *optional*):

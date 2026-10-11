@@ -15,7 +15,6 @@
 encoder's final hidden states with an arbitrary subset of its intermediate hidden states."""
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ...modeling_outputs import BaseModelOutputWithPooling
@@ -33,7 +32,6 @@ from ..granite_speech.modeling_granite_speech import (
 
 
 @auto_docstring(checkpoint="ibm-granite/granite-speech-4.1-2b-plus")
-@strict
 class GraniteSpeechPlusEncoderConfig(GraniteSpeechEncoderConfig):
     r"""
     feedforward_mult (`int`, *optional*, defaults to 4):
@@ -73,7 +71,6 @@ class GraniteSpeechPlusEncoderConfig(GraniteSpeechEncoderConfig):
 
 
 @auto_docstring(checkpoint="ibm-granite/granite-speech-4.1-2b-plus")
-@strict
 class GraniteSpeechPlusConfig(GraniteSpeechConfig):
     r"""
     projector_config (`Union[AutoConfig, dict]`, *optional*, defaults to `Blip2QFormerConfig`):

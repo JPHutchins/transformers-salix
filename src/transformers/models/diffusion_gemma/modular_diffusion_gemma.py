@@ -16,7 +16,6 @@ from collections.abc import Callable
 from typing import Any
 
 import torch
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import nn
 
@@ -76,7 +75,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="google/diffusiongemma-26B-A4B-it")
-@strict
 class DiffusionGemmaTextConfig(Gemma4TextConfig):
     r"""
     use_bidirectional_attention (`str`, *optional*):
@@ -107,7 +105,6 @@ class DiffusionGemmaTextConfig(Gemma4TextConfig):
 
 
 @auto_docstring(checkpoint="google/diffusiongemma-26B-A4B-it")
-@strict
 class DiffusionGemmaConfig(Gemma4Config):
     r"""
     boi_token_id (`int`, *optional*, defaults to 255999):

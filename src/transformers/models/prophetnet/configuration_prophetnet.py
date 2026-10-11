@@ -13,14 +13,11 @@
 # limitations under the License.
 """ProphetNet model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="microsoft/prophetnet-large-uncased")
-@strict
 class ProphetNetConfig(PreTrainedConfig):
     r"""
     ngram (`int`, *optional*, defaults to 2):

@@ -20,8 +20,6 @@
 
 from typing import Literal
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -29,7 +27,6 @@ from ..auto import AutoConfig
 
 
 @auto_docstring(checkpoint="facebook/dinov3-vitl16-chmv2-dpt-head")
-@strict
 class CHMv2Config(PreTrainedConfig):
     r"""
     backbone_config (`Union[dict, "PreTrainedConfig"]`, *optional*):

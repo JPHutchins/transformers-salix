@@ -15,7 +15,6 @@
 
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ...cache_utils import Cache, DynamicCache
@@ -41,7 +40,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="HuggingFaceTB/SmolVLM2-2.2B-Instruct")
-@strict
 class SmolVLMVisionConfig(Idefics3VisionConfig):
     r"""
     Example:
@@ -72,7 +70,6 @@ class SmolVLMVisionTransformer(Idefics3VisionTransformer):
 
 
 @auto_docstring(checkpoint="HuggingFaceTB/SmolVLM2-2.2B-Instruct")
-@strict
 class SmolVLMConfig(Idefics3Config):
     r"""
     scale_factor (`int`, *optional*, defaults to 2):

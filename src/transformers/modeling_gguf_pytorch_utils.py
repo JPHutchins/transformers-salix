@@ -14,7 +14,6 @@
 # limitations under the License.
 
 import re
-from typing import NamedTuple
 
 import numpy as np
 from tqdm.auto import tqdm
@@ -26,6 +25,7 @@ from .integrations import (
     _gguf_parse_value,
 )
 from .utils import is_torch_available
+from .utils.generic import TupleStruct
 from .utils.import_utils import is_gguf_available
 from .utils.logging import get_logger
 
@@ -53,7 +53,7 @@ GGUF_TO_TRANSFORMERS_MAPPING = {
 GGUF_SUPPORTED_ARCHITECTURES = list(GGUF_TO_TRANSFORMERS_MAPPING["config"].keys())
 
 
-class GGUFTensor(NamedTuple):
+class GGUFTensor(TupleStruct):
     weights: np.ndarray
     name: str
     metadata: dict

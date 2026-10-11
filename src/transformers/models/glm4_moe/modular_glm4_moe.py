@@ -14,7 +14,6 @@
 """PyTorch GLM-4-MOE model."""
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ...configuration_utils import PreTrainedConfig
@@ -38,7 +37,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="zai-org/GLM-4.5")
-@strict
 class Glm4MoeConfig(PreTrainedConfig):
     r"""
     n_group (`int`, *optional*, defaults to 1):

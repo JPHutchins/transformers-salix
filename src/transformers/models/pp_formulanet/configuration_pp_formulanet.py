@@ -18,7 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
@@ -28,7 +27,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-FormulaNet_plus-L_safetensors")
-@strict
 class PPFormulaNetVisionConfig(PreTrainedConfig):
     r"""
     output_channels (`int`, *optional*, defaults to 256):
@@ -75,7 +73,6 @@ class PPFormulaNetVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-FormulaNet_plus-L_safetensors")
-@strict
 class PPFormulaNetTextConfig(PreTrainedConfig):
     r"""
     Example:
@@ -127,7 +124,6 @@ class PPFormulaNetTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-FormulaNet_plus-L_safetensors")
-@strict
 class PPFormulaNetConfig(PreTrainedConfig):
     model_type = "pp_formulanet"
     sub_configs = {"text_config": PPFormulaNetTextConfig, "vision_config": PPFormulaNetVisionConfig}

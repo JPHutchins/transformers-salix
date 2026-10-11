@@ -16,7 +16,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 
 from ... import initialization as init
@@ -57,7 +56,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="Intellindust/DEIMv2_HGNetv2_N_COCO")
-@strict
 class Deimv2Config(DFineConfig):
     r"""
     initializer_bias_prior_prob (`float`, *optional*):

@@ -780,9 +780,9 @@ class CsmForConditionalGeneration(CsmPreTrainedModel, CsmGenerationMixin):
         prefix = "depth_decoder_"
         prefix_len = len(prefix)
         depth_decoder_attrs = {
-            attr[prefix_len:]: value
-            for attr, value in vars(model.generation_config).items()
-            if attr.startswith(prefix)
+            attribute[prefix_len:]: value
+            for attribute, value in vars(model.generation_config).items()
+            if attribute.startswith(prefix)
         }
 
         vars(model.depth_decoder.generation_config).update({"_from_model_config": False, **depth_decoder_attrs})

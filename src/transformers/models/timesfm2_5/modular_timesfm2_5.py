@@ -18,7 +18,6 @@ from collections.abc import Callable, Sequence
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 
 from ...activations import ACT2FN
@@ -52,7 +51,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="google/timesfm-2.5-200m-transformers")
-@strict
 class TimesFm2_5Config(TimesFmConfig):
     r"""
     patch_length (`int`, *optional*, defaults to 32):

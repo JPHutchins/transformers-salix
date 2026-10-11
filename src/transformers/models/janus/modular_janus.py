@@ -16,7 +16,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import nn
 
@@ -58,7 +57,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="deepseek-community/Janus-Pro-1B")
-@strict
 class JanusVisionConfig(SiglipVisionConfig):
     r"""
     projection_dropout (`float`, *optional*, defaults to 0.0):
@@ -85,7 +83,6 @@ class JanusVisionConfig(SiglipVisionConfig):
 
 
 @auto_docstring(checkpoint="deepseek-community/Janus-Pro-1B")
-@strict
 class JanusVQVAEConfig(ChameleonVQVAEConfig):
     r"""
     base_channels (`int`, *optional*, defaults to 128):
@@ -125,7 +122,6 @@ class JanusVQVAEConfig(ChameleonVQVAEConfig):
 
 
 @auto_docstring(checkpoint="deepseek-community/Janus-Pro-1B")
-@strict
 class JanusConfig(PreTrainedConfig):
     r"""
     Example:

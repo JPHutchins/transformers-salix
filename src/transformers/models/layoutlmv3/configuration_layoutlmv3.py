@@ -13,14 +13,11 @@
 # limitations under the License.
 """LayoutLMv3 model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="microsoft/layoutlmv3-base")
-@strict
 class LayoutLMv3Config(PreTrainedConfig):
     r"""
     max_2d_position_embeddings (`int`, *optional*, defaults to 1024):

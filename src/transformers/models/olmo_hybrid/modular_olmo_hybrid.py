@@ -20,7 +20,6 @@ from collections.abc import Callable
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...cache_utils import Cache, DynamicCache
@@ -62,7 +61,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="allenai/Olmo-Hybrid-7B")
-@strict
 class OlmoHybridConfig(LlamaConfig):
     r"""
     linear_num_key_heads (`int`, *optional*):

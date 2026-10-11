@@ -16,7 +16,6 @@ import math
 from collections.abc import Callable
 
 import torch
-from huggingface_hub.dataclasses import strict
 from tokenizers import Tokenizer, decoders, normalizers, pre_tokenizers
 from tokenizers.models import BPE
 from torch import nn
@@ -163,7 +162,6 @@ class Tipsv2Processor(ProcessorMixin):
 
 
 @auto_docstring(checkpoint="google/tipsv2-b14")
-@strict
 class Tipsv2VisionConfig(Dinov2WithRegistersConfig):
     r"""
     layerscale_value (`float`, *optional*, defaults to `1.0`):
@@ -200,7 +198,6 @@ class Tipsv2VisionConfig(Dinov2WithRegistersConfig):
 
 
 @auto_docstring(checkpoint="google/tipsv2-b14")
-@strict
 class Tipsv2TextConfig(Siglip2TextConfig):
     r"""
     scale_sqrt_depth (`bool`, *optional*, defaults to `True`):
@@ -246,7 +243,6 @@ class Tipsv2TextConfig(Siglip2TextConfig):
 
 
 @auto_docstring(checkpoint="google/tipsv2-b14")
-@strict
 class Tipsv2Config(PreTrainedConfig):
     r"""
     text_config (`dict`, *optional*):

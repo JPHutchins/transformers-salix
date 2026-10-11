@@ -14,7 +14,6 @@
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ...backbone_utils import (
     consolidate_backbone_kwargs_to_config,
@@ -41,7 +40,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-OCRv6_small_det_safetensors")
-@strict
 class PPOCRV6SmallDetConfig(PPOCRV5MobileDetConfig):
     r"""
     reduction (`int`, *optional*, defaults to 4):

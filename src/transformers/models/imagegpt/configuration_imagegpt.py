@@ -13,14 +13,11 @@
 # limitations under the License.
 """OpenAI ImageGPT configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="openai/imagegpt-small")
-@strict
 class ImageGPTConfig(PreTrainedConfig):
     r"""
     scale_attn_by_inverse_layer_idx (`bool`, *optional*, defaults to `False`):

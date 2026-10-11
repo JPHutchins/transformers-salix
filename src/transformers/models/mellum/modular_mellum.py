@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import torch
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...configuration_utils import PreTrainedConfig
@@ -36,7 +35,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="JetBrains/Mellum2-12B-A2.5B-Base")
-@strict
 class MellumConfig(Qwen3MoeConfig):
     r"""
     mlp_layer_types (`list[str]`, *optional*):

@@ -16,7 +16,6 @@
 from typing import Literal
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -35,7 +34,6 @@ from ..dpt.modeling_dpt import DPTReassembleLayer, _get_backbone_hidden_size
 
 
 @auto_docstring(checkpoint="facebook/dinov3-vitl16-chmv2-dpt-head")
-@strict
 class CHMv2Config(PreTrainedConfig):
     r"""
     backbone_config (`Union[dict, "PreTrainedConfig"]`, *optional*):

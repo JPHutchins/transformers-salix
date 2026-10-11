@@ -18,7 +18,6 @@ import math
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 
 from ... import initialization as init
@@ -42,7 +41,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="PaddlePaddle/SLANet_plus_safetensors")
-@strict
 class SLANetConfig(SLANeXtConfig):
     r"""
     post_conv_out_channels (`int`, *optional*, defaults to 96):

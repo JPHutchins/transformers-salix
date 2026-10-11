@@ -16,14 +16,11 @@
 import functools
 import operator
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="microsoft/unispeech-large-1500h-cv")
-@strict
 class UniSpeechConfig(PreTrainedConfig):
     r"""
     feat_proj_dropout (`float`, *optional*, defaults to 0.0):

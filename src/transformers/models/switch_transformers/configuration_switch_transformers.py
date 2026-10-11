@@ -15,14 +15,11 @@
 
 from typing import Literal
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="google/switch-base-8")
-@strict
 class SwitchTransformersConfig(PreTrainedConfig):
     r"""
     num_sparse_encoder_layers (`int`, *optional*, defaults to 3):

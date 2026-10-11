@@ -18,14 +18,13 @@ import copy
 import json
 import math
 import os
-from collections.abc import Sequence
-from dataclasses import MISSING, dataclass, fields
-from functools import wraps
-from typing import TYPE_CHECKING, Any, ClassVar, Literal, TypeVar, Union
+from functools import cache
+from typing import TYPE_CHECKING, Any, Literal, TypeVar, Union
 
-from huggingface_hub.dataclasses import strict
+from huggingface_hub.dataclasses import type_validator
+from huggingface_hub.errors import StrictDataclassClassValidationError, StrictDataclassFieldValidationError
 from packaging import version
-from typing_extensions import dataclass_transform
+from salix import MISSING, Field, Struct, fields
 
 from . import __version__
 from .dynamic_module_utils import custom_object_save
@@ -101,51 +100,41 @@ def remap_legacy_layer_types(layer_types: list[str]) -> list[str]:
     return [_LEGACY_LAYER_TYPE_REMAP.get(t, t) for t in layer_types]
 
 
-# copied from huggingface_hub.dataclasses.strict when `accept_kwargs=True`
-def wrap_init_to_accept_kwargs(cls: dataclass):
-    # Get the original dataclass-generated __init__
-    original_init = cls.__init__
-
-    @wraps(original_init)
-    def __init__(self, *args, **kwargs: Any) -> None:
-        # Extract only the fields that are part of the dataclass
-        dataclass_fields = {f.name for f in fields(cls)}
-        standard_kwargs = {k: v for k, v in kwargs.items() if k in dataclass_fields}
-
-        # We need to call bare `__init__` without `__post_init__` but the `original_init` of
-        # any dataclas contains a call to post-init at the end (without kwargs)
-        if len(args) > 0:
-            raise ValueError(
-                f"{cls.__name__} accepts only keyword arguments, but found `{len(args)}` positional args."
-            )
-
-        for f in fields(cls):  # type: ignore
-            if f.name in standard_kwargs:
-                setattr(self, f.name, standard_kwargs[f.name])
-            elif f.default is not MISSING:
-                setattr(self, f.name, f.default)
-            elif f.default_factory is not MISSING:
-                setattr(self, f.name, f.default_factory())
-            else:
-                raise TypeError(f"Missing required field - '{f.name}'")
-
-        # Pass any additional kwargs to `__post_init__` and let the object
-        # decide whether to set the attr or use for different purposes (e.g. BC checks)
-        additional_kwargs = {}
-        for name, value in kwargs.items():
-            if name not in dataclass_fields:
-                additional_kwargs[name] = value
-
-        self.__post_init__(**additional_kwargs)
-
-    cls.__init__ = __init__
-    return cls
+def _is_set(instance: Any, name: str) -> bool:
+    try:
+        object.__getattribute__(instance, name)
+    except AttributeError:
+        return False
+    return True
 
 
-@dataclass_transform(kw_only_default=True)
-@strict(accept_kwargs=True)
-@dataclass(repr=False)
-class PreTrainedConfig(PushToHubMixin, RotaryEmbeddingConfigMixin, HeterogeneousConfigMixin):
+def _type_validator_of(field: Field):
+    def validate_type(value: Any) -> None:
+        type_validator(field.name, value, field.type)
+
+    return validate_type
+
+
+@cache
+def _field_validators(config_class: type) -> dict[str, tuple]:
+    return {
+        field.name: (_type_validator_of(field), *(extra for extra in field.annotated_metadata if callable(extra)))
+        for field in fields(config_class)
+    }
+
+
+@cache
+def _class_validators(config_class: type) -> tuple:
+    return tuple(
+        getattr(config_class, name)
+        for name in dir(config_class)
+        if name.startswith("validate_") and callable(getattr(config_class, name))
+    )
+
+
+class PreTrainedConfig(
+    PushToHubMixin, RotaryEmbeddingConfigMixin, HeterogeneousConfigMixin, Struct, frozen=False, eq=False, repr=False
+):
     # no-format
     r"""
     Base class for all configuration classes. Handles a few parameters common to all models' configurations as well as
@@ -242,24 +231,24 @@ class PreTrainedConfig(PushToHubMixin, RotaryEmbeddingConfigMixin, Heterogeneous
     # Class attributes that we don't want to save or have in `self.__dict__`
     # They are not supposed to be set/changed by users. Each field is set when
     # creating a model class
-    base_config_key: ClassVar[str] = ""
-    sub_configs: ClassVar[dict[str, type["PreTrainedConfig"]]] = {}
-    has_no_defaults_at_init: ClassVar[bool] = False
-    keys_to_ignore_at_inference: ClassVar[list[str]] = []
-    attribute_map: ClassVar[dict[str, str]] = {}
-    base_model_tp_plan: ClassVar[dict[str, Any] | None] = None
-    base_model_fsdp_plan: ClassVar[dict[Any, str]] = {
+    base_config_key = ""
+    sub_configs = {}
+    has_no_defaults_at_init = False
+    keys_to_ignore_at_inference = []
+    attribute_map = {}
+    base_model_tp_plan = None
+    base_model_fsdp_plan = {
         "embed_tokens": "free_full_weight",
         "layers.*": "free_full_weight",
         "norm": "keep_full_weight",
     }
-    base_model_pp_plan: ClassVar[dict[str, Sequence[list[str]]] | None] = None
-    base_model_ep_plan: ClassVar[dict[str, Sequence[list[str]]] | None] = None
-    _auto_class: ClassVar[str | None] = None
+    base_model_pp_plan = None
+    base_model_ep_plan = None
+    _auto_class = None
 
     # Attributes set internally when saving and used to infer model
     # class for `Auto` mapping
-    model_type: ClassVar[str] = ""
+    model_type = ""
     transformers_version: str | None = None
     architectures: list[str] | None = None
 
@@ -356,20 +345,24 @@ class PreTrainedConfig(PushToHubMixin, RotaryEmbeddingConfigMixin, Heterogeneous
                 "embed_tokens": "embedding_rowwise",
             }
 
-    def __init_subclass__(cls, *args, **kwargs):
-        super().__init_subclass__(*args, **kwargs)
-        cls_has_custom_init = "__init__" in cls.__dict__
-        # kw_only=True ensures fields without defaults in subclasses can follow
-        # parent fields that have defaults (Python dataclass ordering rule).
-        # Config fields are always passed as keyword arguments, so this is safe.
-        cls = dataclass(cls, repr=False, kw_only=True)
+    def __init__(self, *args, **kwargs):
+        if len(args) > 0:
+            raise ValueError(
+                f"{type(self).__name__} accepts only keyword arguments, but found `{len(args)}` positional args."
+            )
+        field_names = tuple(field.name for field in fields(self))
+        defaults = {name: object.__getattribute__(self, name) for name in field_names}
+        for name in field_names:
+            setattr(self, name, kwargs[name] if name in kwargs else defaults[name])
+        self.__post_init__(**{name: value for name, value in kwargs.items() if name not in field_names})
+        self.validate()
 
-        if not cls_has_custom_init:
-            # Wrap all subclasses to accept arbitrary kwargs for BC
-            # only if the subclass has no custom `__init__`. Most
-            # remote code has an init defined, but some model are not
-            # See https://huggingface.co/hmellor/Ilama-3.2-1B/blob/main/configuration_ilama.py
-            cls = wrap_init_to_accept_kwargs(cls)
+    def validate(self) -> None:
+        for validator in _class_validators(type(self)):
+            try:
+                validator(self)
+            except (ValueError, TypeError) as error:
+                raise StrictDataclassClassValidationError(validator=validator.__name__, cause=error) from error
 
     @property
     def name_or_path(self) -> str | None:
@@ -474,9 +467,20 @@ class PreTrainedConfig(PushToHubMixin, RotaryEmbeddingConfigMixin, Heterogeneous
         self.dtype = value
 
     def __setattr__(self, key, value):
+        for validator in _field_validators(type(self)).get(key, ()):
+            try:
+                validator(value)
+            except (ValueError, TypeError) as error:
+                raise StrictDataclassFieldValidationError(field=key, cause=error) from error
         if key in super().__getattribute__("attribute_map"):
             key = super().__getattribute__("attribute_map")[key]
-        super().__setattr__(key, value)
+        object.__setattr__(self, key, value)
+
+    def __getattr__(self, key):
+        defaults = {field.name: field.default for field in fields(self) if field.default is not MISSING}
+        if key in defaults:
+            return defaults[key]
+        raise AttributeError(f"'{type(self).__name__}' object has no attribute '{key}'")
 
     def __getattribute__(self, key):
         if key != "attribute_map" and key in super().__getattribute__("attribute_map"):
@@ -997,8 +1001,18 @@ class PreTrainedConfig(PushToHubMixin, RotaryEmbeddingConfigMixin, Heterogeneous
 
         return obj
 
+    def _attributes(self) -> dict[str, Any]:
+        return {
+            **{
+                field.name: object.__getattribute__(self, field.name)
+                for field in fields(self)
+                if self.attribute_map.get(field.name, field.name) == field.name and _is_set(self, field.name)
+            },
+            **self.__dict__,
+        }
+
     def __eq__(self, other):
-        return isinstance(other, PreTrainedConfig) and (self.__dict__ == other.__dict__)
+        return isinstance(other, PreTrainedConfig) and (self._attributes() == other._attributes())
 
     def __repr__(self):
         return f"{self.__class__.__name__} {self.to_json_string()}"
@@ -1006,7 +1020,7 @@ class PreTrainedConfig(PushToHubMixin, RotaryEmbeddingConfigMixin, Heterogeneous
     def __iter__(self):
         # HeterogeneousConfigMixin: keys of `self.__dict__` that are per-layer attributes
         # may require hiding when using a heterogeneous config.
-        yield from self._iter_config_keys_with_heterogeneous_adjustment(self.__dict__)
+        yield from self._iter_config_keys_with_heterogeneous_adjustment(self._attributes())
 
     def to_diff_dict(self) -> dict[str, Any]:
         """
@@ -1080,7 +1094,7 @@ class PreTrainedConfig(PushToHubMixin, RotaryEmbeddingConfigMixin, Heterogeneous
         Returns:
             `dict[str, Any]`: Dictionary of all the attributes that make up this configuration instance.
         """
-        output = copy.deepcopy(self.__dict__)
+        output = copy.deepcopy(self._attributes())
         if hasattr(self.__class__, "model_type"):
             output["model_type"] = self.__class__.model_type
 

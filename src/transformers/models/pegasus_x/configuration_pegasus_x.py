@@ -13,14 +13,11 @@
 # limitations under the License.
 """PEGASUS-X model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="google/pegasus-x-large")
-@strict
 class PegasusXConfig(PreTrainedConfig):
     r"""
     num_global_tokens (`int`, *optional*, defaults to 128):

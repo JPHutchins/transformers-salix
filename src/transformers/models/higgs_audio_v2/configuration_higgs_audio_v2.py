@@ -19,7 +19,7 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
+from typing import Annotated
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -28,7 +28,6 @@ from ...utils.type_validators import interval
 
 
 @auto_docstring(checkpoint="bosonai/higgs-audio-v2-generation-3B-base")
-@strict
 class HiggsAudioV2Config(PreTrainedConfig):
     r"""
     audio_bos_token_id (`int`, *optional*, defaults to 128013):
@@ -81,7 +80,7 @@ class HiggsAudioV2Config(PreTrainedConfig):
     num_key_value_heads: int = 8
     hidden_act: str = "silu"
     max_position_embeddings: int = 2048
-    initializer_range: float = interval(min=0.0, max=1.0)(default=0.02)
+    initializer_range: Annotated[float, interval(min=0.0, max=1.0)] = 0.02
     rms_norm_eps: float = 1e-5
     use_cache: bool = True
     pad_token_id: int | None = 128001

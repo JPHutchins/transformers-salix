@@ -13,14 +13,11 @@
 # limitations under the License.
 """LiLT configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="SCUT-DLVCLab/lilt-roberta-en-base")
-@strict
 class LiltConfig(PreTrainedConfig):
     r"""
     channel_shrink_ratio (`int`, *optional*, defaults to 4):

@@ -26,6 +26,7 @@ import random
 import re
 import time
 import warnings
+from abc import ABCMeta
 from collections import OrderedDict, UserDict
 from collections.abc import Callable, Iterable, MutableMapping
 from contextlib import AbstractContextManager, ExitStack, nullcontext
@@ -411,6 +412,20 @@ def safe_load_json_file(json_file: str):
     except json.JSONDecodeError:
         raise OSError(f"It looks like the config file at '{json_file}' is not a valid JSON file.")
     return config_dict
+
+
+class TupleStruct(Struct):
+    def __iter__(self):
+        return (getattr(self, field.name) for field in fields(self))
+
+    def __getitem__(self, index):
+        return tuple(self)[index]
+
+    def __len__(self) -> int:
+        return len(fields(self))
+
+
+StructABCMeta = type("StructABCMeta", (type(Struct), ABCMeta), {})
 
 
 def is_struct(obj) -> bool:

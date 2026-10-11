@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from salix import MISSING, fields
 import ast
 import collections
 import contextlib
@@ -50,6 +49,7 @@ from unittest.mock import patch
 import httpx
 from huggingface_hub import create_repo, delete_repo
 from packaging import version
+from salix import MISSING, fields
 
 from transformers import logging as transformers_logging
 

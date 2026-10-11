@@ -13,8 +13,6 @@
 # limitations under the License.
 """DPT model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -22,7 +20,6 @@ from ..auto.configuration_auto import AutoConfig
 
 
 @auto_docstring(checkpoint="Intel/dpt-large")
-@strict
 class DPTConfig(PreTrainedConfig):
     r"""
     is_hybrid (`bool`, *optional*, defaults to `False`):

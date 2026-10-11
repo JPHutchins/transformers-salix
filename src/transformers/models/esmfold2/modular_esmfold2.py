@@ -43,7 +43,7 @@ class EsmFold2AtomInputs(Struct, frozen=False):
 
     Taken as one argument by [`EsmFold2Model.forward`], holding the raw featurizer tensors.
     ``EsmFold2Model._prepare_features`` then one-hot encodes the categorical fields and zeroes the
-    padding, and ``forward`` swaps those in with `dataclasses.replace`, so every consumer downstream of
+    padding, and ``forward`` swaps those in with `salix.replace`, so every consumer downstream of
     that point sees the encoded forms documented below. Returned on [`EsmFold2TrunkOutput`] so the
     diffusion sampler and the confidence head reuse the trunk's featurization rather than redoing it.
 

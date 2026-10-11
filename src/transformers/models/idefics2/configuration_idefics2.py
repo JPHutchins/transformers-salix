@@ -12,8 +12,6 @@
 # limitations under the License.
 """Idefics2 model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 from ..auto import CONFIG_MAPPING, AutoConfig
@@ -23,7 +21,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="HuggingFaceM4/idefics2-8b")
-@strict
 class Idefics2VisionConfig(PreTrainedConfig):
     r"""
     Example:
@@ -59,7 +56,6 @@ class Idefics2VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="HuggingFaceM4/idefics2-8b")
-@strict
 class Idefics2PerceiverConfig(PreTrainedConfig):
     r"""
     resampler_n_latents (`int`, *optional*, defaults to 64):
@@ -95,7 +91,6 @@ class Idefics2PerceiverConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="HuggingFaceM4/idefics2-8b")
-@strict
 class Idefics2Config(PreTrainedConfig):
     r"""
     perceiver_config (`IdeficsPerceiverConfig` or `dict`, *optional*):

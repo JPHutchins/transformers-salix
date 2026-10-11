@@ -20,7 +20,6 @@ from typing import Any
 import numpy as np
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 
 from ... import initialization as init
@@ -94,7 +93,6 @@ class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling, Struct, f
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-VL-4B-Instruct")
-@strict
 class Qwen3VLVisionConfig(PreTrainedConfig):
     r"""
     out_hidden_size (`int`, *optional*, defaults to 3584):
@@ -124,7 +122,6 @@ class Qwen3VLVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-VL-4B-Instruct")
-@strict
 class Qwen3VLTextConfig(PreTrainedConfig):
     r"""
     Example:
@@ -172,7 +169,6 @@ class Qwen3VLTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-VL-4B-Instruct")
-@strict
 class Qwen3VLConfig(PreTrainedConfig):
     r"""
     Example:

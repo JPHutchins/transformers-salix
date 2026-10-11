@@ -17,7 +17,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -54,7 +53,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="skt/A.X-K2")
-@strict
 class AXK2Config(DeepseekV32Config):
     r"""
     n_group (`int`, *optional*):

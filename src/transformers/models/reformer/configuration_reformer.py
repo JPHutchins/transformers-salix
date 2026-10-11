@@ -14,14 +14,11 @@
 # limitations under the License.
 """Reformer model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="google/reformer-crime-and-punishment")
-@strict
 class ReformerConfig(PreTrainedConfig):
     r"""
     attention_head_size (`int`, *optional*, defaults to 64):

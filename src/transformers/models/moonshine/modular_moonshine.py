@@ -16,7 +16,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 
 from ...activations import ACT2FN
@@ -48,7 +47,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="UsefulSensors/moonshine-tiny")
-@strict
 class MoonshineConfig(PreTrainedConfig):
     r"""
     encoder_num_key_value_heads (`int`, *optional*):

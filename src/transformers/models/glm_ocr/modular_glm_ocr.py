@@ -16,7 +16,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ...modeling_outputs import BaseModelOutputWithPooling
 from ...modeling_utils import ALL_ATTENTION_FUNCTIONS
@@ -54,7 +53,6 @@ class GlmOcrVisionMlp(Glm4VisionMlp):
 
 
 @auto_docstring(checkpoint="zai-org/GLM-OCR")
-@strict
 class GlmOcrVisionConfig(Glm4vVisionConfig):
     hidden_size: int = 1024
     attention_bias: bool = True
@@ -64,7 +62,6 @@ class GlmOcrVisionConfig(Glm4vVisionConfig):
 
 
 @auto_docstring(checkpoint="zai-org/GLM-OCR")
-@strict
 class GlmOcrTextConfig(Glm4vTextConfig):
     r"""
     Example:
@@ -92,7 +89,6 @@ class GlmOcrTextConfig(Glm4vTextConfig):
 
 
 @auto_docstring(checkpoint="zai-org/GLM-OCR")
-@strict
 class GlmOcrConfig(Glm4vConfig):
     r"""
     image_start_token_id (`int`, *optional*, defaults to 59256):

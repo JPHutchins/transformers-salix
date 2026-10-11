@@ -15,14 +15,11 @@
 # limitations under the License.
 """I-BERT configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="kssteven/ibert-roberta-base")
-@strict
 class IBertConfig(PreTrainedConfig):
     r"""
     type_vocab_size (`int`, *optional*, defaults to 2):

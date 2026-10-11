@@ -18,7 +18,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
+
+from salix import fields
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -31,7 +32,6 @@ from ...utils import auto_docstring
     """,
     checkpoint="tencent/HunyuanOCR",
 )
-@strict
 class HunYuanVLVisionConfig(PreTrainedConfig):
     r"""
     interpolate_mode (`str`, *optional*, defaults to `"bilinear"`):
@@ -102,7 +102,6 @@ class HunYuanVLVisionConfig(PreTrainedConfig):
     """,
     checkpoint="tencent/HunyuanOCR",
 )
-@strict
 class HunYuanVLTextConfig(PreTrainedConfig):
     r"""
     eod_token_id (`int`, *optional*, defaults to 3):
@@ -233,7 +232,6 @@ class HunYuanVLTextConfig(PreTrainedConfig):
     """,
     checkpoint="tencent/HunyuanOCR",
 )
-@strict
 class HunYuanVLConfig(PreTrainedConfig):
     r"""
     text_config (`HunYuanVLTextConfig` or `dict`, *optional*):
@@ -277,7 +275,7 @@ class HunYuanVLConfig(PreTrainedConfig):
         # public OCR checkpoints.
         text_config_class = self.sub_configs["text_config"]
         text_keys = (
-            set(text_config_class.__dataclass_fields__)
+            {field.name for field in fields(text_config_class)}
             | set(text_config_class.attribute_map)
             | {"rope_scaling", "rope_theta"}
         )

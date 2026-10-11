@@ -13,8 +13,6 @@
 # limitations under the License.
 """Blt model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring, logging
@@ -24,7 +22,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="itazap/blt-1b-hf")
-@strict
 class BltLocalEncoderConfig(PreTrainedConfig):
     r"""
     cross_attn_all_layers (`bool`, *optional*, defaults to `True`):
@@ -62,7 +59,6 @@ class BltLocalEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="itazap/blt-1b-hf")
-@strict
 class BltLocalDecoderConfig(PreTrainedConfig):
     r"""
     cross_attn_all_layers (`bool`, *optional*, defaults to `True`):
@@ -105,7 +101,6 @@ class BltLocalDecoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="itazap/blt-1b-hf")
-@strict
 class BltGlobalTransformerConfig(PreTrainedConfig):
     model_type = "blt_global_transformer"
     default_theta = 500000.0
@@ -133,7 +128,6 @@ class BltGlobalTransformerConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="itazap/blt-1b-hf")
-@strict
 class BltPatcherConfig(PreTrainedConfig):
     model_type = "blt_patcher"
 
@@ -161,7 +155,6 @@ class BltPatcherConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="itazap/blt-1b-hf")
-@strict
 class BltConfig(PreTrainedConfig):
     r"""
     patch_in_forward (`bool`, *optional*, defaults to `True`):

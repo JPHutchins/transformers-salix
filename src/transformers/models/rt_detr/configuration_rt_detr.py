@@ -13,8 +13,6 @@
 # limitations under the License.
 """RT-DETR model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -22,7 +20,6 @@ from ..auto import AutoConfig
 
 
 @auto_docstring(checkpoint="PekingU/rtdetr_r50vd")
-@strict
 class RTDetrConfig(PreTrainedConfig):
     r"""
     initializer_bias_prior_prob (`float`, *optional*):

@@ -13,14 +13,11 @@
 # limitations under the License.
 """SwiftFormer model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="MBZUAI/swiftformer-xs")
-@strict
 class SwiftFormerConfig(PreTrainedConfig):
     r"""
     embed_dims (`list[int]`, *optional*, defaults to `[48, 56, 112, 220]`):

@@ -15,7 +15,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...configuration_utils import PreTrainedConfig
@@ -39,7 +38,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="DeepGlint-AI/mlcd-vit-bigG-patch14-336")
-@strict
 class MLCDVisionConfig(PreTrainedConfig):
     r"""
     num_key_value_groups (`int`, *optional*, defaults to 1):

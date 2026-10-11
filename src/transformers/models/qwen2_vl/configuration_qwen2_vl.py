@@ -15,15 +15,12 @@
 
 import inspect
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="Qwen/Qwen2-VL-7B-Instruct")
-@strict
 class Qwen2VLVisionConfig(PreTrainedConfig):
     model_type = "qwen2_vl_vision"
     base_config_key = "vision_config"
@@ -42,7 +39,6 @@ class Qwen2VLVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen2-VL-7B-Instruct")
-@strict
 class Qwen2VLTextConfig(PreTrainedConfig):
     r"""
     ```python
@@ -132,7 +128,6 @@ class Qwen2VLTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen2-VL-7B-Instruct")
-@strict
 class Qwen2VLConfig(PreTrainedConfig):
     r"""
     Example:

@@ -13,14 +13,11 @@
 # limitations under the License.
 """Funnel Transformer model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="funnel-transformer/small")
-@strict
 class FunnelConfig(PreTrainedConfig):
     r"""
     block_sizes (`list[int]`, *optional*, defaults to `[4, 4, 4]`):

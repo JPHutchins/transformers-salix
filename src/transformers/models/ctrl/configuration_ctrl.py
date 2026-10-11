@@ -13,14 +13,11 @@
 # limitations under the License.
 """Salesforce CTRL configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="Salesforce/ctrl")
-@strict
 class CTRLConfig(PreTrainedConfig):
     r"""
     dff (`int`, *optional*, defaults to 8192):

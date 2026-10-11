@@ -18,7 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
@@ -29,7 +28,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="deepseek-community/Janus-Pro-1B")
-@strict
 class JanusVisionConfig(PreTrainedConfig):
     r"""
     projection_dropout (`float`, *optional*, defaults to 0.0):
@@ -62,7 +60,6 @@ class JanusVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="deepseek-community/Janus-Pro-1B")
-@strict
 class JanusVQVAEConfig(PreTrainedConfig):
     r"""
     base_channels (`int`, *optional*, defaults to 128):
@@ -101,7 +98,6 @@ class JanusVQVAEConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="deepseek-community/Janus-Pro-1B")
-@strict
 class JanusConfig(PreTrainedConfig):
     r"""
     Example:

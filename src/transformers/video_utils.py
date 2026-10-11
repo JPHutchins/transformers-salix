@@ -41,6 +41,7 @@ from .utils import (
     logging,
     requires_backends,
 )
+from .utils.generic import StructABCMeta
 
 
 if is_vision_available():
@@ -76,7 +77,7 @@ VideoInput = Union[
 ]
 
 
-class VideoMetadata(Mapping, Struct, frozen=False):
+class VideoMetadata(Mapping, Struct, frozen=False, metaclass=StructABCMeta):
     total_num_frames: int
     fps: float | None = None
     width: int | None = None

@@ -13,14 +13,11 @@
 # limitations under the License.
 """GLPN model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="vinvino02/glpn-kitti")
-@strict
 class GLPNConfig(PreTrainedConfig):
     r"""
     num_encoder_blocks (`int`, *optional*, defaults to 4):

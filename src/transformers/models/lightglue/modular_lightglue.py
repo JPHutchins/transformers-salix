@@ -15,7 +15,6 @@ from collections.abc import Callable
 
 import numpy as np
 import torch
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import nn
 from torch.nn.utils.rnn import pad_sequence
@@ -42,7 +41,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="ETH-CVG/lightglue_superpoint")
-@strict
 class LightGlueConfig(PreTrainedConfig):
     r"""
     keypoint_detector_config (`Union[AutoConfig, dict]`,  *optional*, defaults to `SuperPointConfig`):

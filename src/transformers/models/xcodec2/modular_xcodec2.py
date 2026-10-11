@@ -17,7 +17,6 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 
 from ... import initialization as init
@@ -54,7 +53,6 @@ from ..voxtral.modeling_voxtral import VoxtralPreTrainedModel
 
 
 @auto_docstring(checkpoint="HKUSTAudio/xcodec2-hf")
-@strict
 class Xcodec2Config(LlamaConfig):
     r"""
     downsampling_ratios (`list[int]`, *optional*, defaults to `[2, 2, 4, 4, 5]`):

@@ -13,15 +13,12 @@
 # limitations under the License.
 """DINOv3 model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import BackboneConfigMixin
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/dinov3-vits16-pretrain-lvd1689m")
-@strict
 class DINOv3ViTConfig(BackboneConfigMixin, PreTrainedConfig):
     r"""
     rope_theta (`float`, *optional*, defaults to 100.0):

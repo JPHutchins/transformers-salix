@@ -17,7 +17,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
+from typing import Annotated
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -26,7 +26,6 @@ from ...utils.type_validators import interval
 
 
 @auto_docstring(checkpoint="biohub/ESMC-6B-hf")
-@strict
 class EsmcConfig(PreTrainedConfig):
     r"""
     mask_token_id (`int`, *optional*, defaults to 32):
@@ -76,7 +75,7 @@ class EsmcConfig(PreTrainedConfig):
     num_key_value_heads: int | None = None
     hidden_act: str = "silu"
     max_position_embeddings: int = 2048
-    initializer_range: float = interval(min=0.0, max=1.0)(default=0.02)
+    initializer_range: Annotated[float, interval(min=0.0, max=1.0)] = 0.02
     pad_token_id: int | None = 1
     bos_token_id: int | None = 0
     eos_token_id: int | list[int] | None = 2

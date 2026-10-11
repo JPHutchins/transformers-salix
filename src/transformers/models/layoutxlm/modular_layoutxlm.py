@@ -13,14 +13,11 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...utils import auto_docstring
 from ..layoutlmv2.configuration_layoutlmv2 import LayoutLMv2Config
 
 
 @auto_docstring(checkpoint="microsoft/layoutxlm-base")
-@strict
 class LayoutXLMConfig(LayoutLMv2Config):
     r"""
     max_2d_position_embeddings (`int`, *optional*, defaults to 1024):

@@ -15,7 +15,6 @@
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ...cache_utils import Cache
 from ...modeling_outputs import CausalLMOutputWithPast
@@ -34,7 +33,6 @@ from ..granite.modeling_granite import (
 
 
 @auto_docstring(checkpoint="naver-hyperclovax/HyperCLOVAX-SEED-Think-14B")
-@strict
 class HyperCLOVAXConfig(GraniteConfig):
     r"""
     embedding_multiplier (`float`, *optional*, defaults to `1.0`):

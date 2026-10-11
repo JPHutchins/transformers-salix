@@ -17,7 +17,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -25,7 +24,6 @@ from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="ibm-granite/granite-speech-4.1-2b-plus")
-@strict
 class GraniteSpeechPlusEncoderConfig(PreTrainedConfig):
     r"""
     feedforward_mult (`int`, *optional*, defaults to 4):
@@ -91,7 +89,6 @@ class GraniteSpeechPlusEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="ibm-granite/granite-speech-4.1-2b-plus")
-@strict
 class GraniteSpeechPlusConfig(PreTrainedConfig):
     r"""
     projector_config (`Union[AutoConfig, dict]`, *optional*, defaults to `Blip2QFormerConfig`):

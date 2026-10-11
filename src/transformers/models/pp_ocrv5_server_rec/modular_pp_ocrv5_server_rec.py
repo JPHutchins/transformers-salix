@@ -18,7 +18,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision.transforms.v2.functional as tvF
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 
 from ...backbone_utils import consolidate_backbone_kwargs_to_config, load_backbone
@@ -57,7 +56,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-OCRv5_server_rec_safetensors")
-@strict
 class PPOCRV5ServerRecConfig(PreTrainedConfig):
     r"""
     head_out_channels (`int`, *optional*, defaults to 18385):

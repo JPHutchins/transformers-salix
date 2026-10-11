@@ -16,7 +16,6 @@ from collections.abc import Callable
 from typing import Any
 
 import torch
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import nn
 
@@ -57,7 +56,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="AnnaZhang/lwdetr_small_60e_coco")
-@strict
 class LwDetrViTConfig(VitDetConfig):
     r"""
     pretrain_image_size (`int`, *optional*, defaults to 224):
@@ -115,7 +113,6 @@ class LwDetrViTConfig(VitDetConfig):
 
 
 @auto_docstring(checkpoint="AnnaZhang/lwdetr_small_60e_coco")
-@strict
 class LwDetrConfig(PreTrainedConfig):
     r"""
     projector_scale_factors (`list[float]`, *optional*, defaults to `[]`):

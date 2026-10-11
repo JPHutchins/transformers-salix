@@ -16,7 +16,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 
 from ...cache_utils import Cache, DynamicCache
 from ...masking_utils import create_causal_mask
@@ -46,7 +45,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="zai-org/GLM-5")
-@strict
 class GlmMoeDsaConfig(DeepseekV32Config):
     r"""
     n_group (`int`, *optional*, defaults to 1):

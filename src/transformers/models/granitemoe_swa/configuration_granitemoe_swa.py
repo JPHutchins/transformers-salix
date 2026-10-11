@@ -17,7 +17,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -25,7 +24,6 @@ from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="ibm-granite/granite-swash-3b-a600m")
-@strict
 class GraniteMoeSWAConfig(PreTrainedConfig):
     r"""
     shared_intermediate_size (`int`, *optional*, defaults to 0):

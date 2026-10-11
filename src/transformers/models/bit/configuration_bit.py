@@ -13,15 +13,12 @@
 # limitations under the License.
 """BiT model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import BackboneConfigMixin
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="google/bit-50")
-@strict
 class BitConfig(BackboneConfigMixin, PreTrainedConfig):
     r"""
     layer_type (`str`, *optional*, defaults to `"preactivation"`):

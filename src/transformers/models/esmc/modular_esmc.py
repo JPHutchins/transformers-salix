@@ -18,7 +18,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 from torch.nn import functional as F
 
 from ...masking_utils import create_bidirectional_mask, packed_sequence_mask_function
@@ -53,7 +52,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="biohub/ESMC-6B-hf")
-@strict
 class EsmcConfig(LlamaConfig):
     r"""
     mask_token_id (`int`, *optional*, defaults to 32):

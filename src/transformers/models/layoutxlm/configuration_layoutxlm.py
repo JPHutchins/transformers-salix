@@ -19,8 +19,6 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, is_detectron2_available
 
@@ -31,7 +29,6 @@ if is_detectron2_available():
 
 
 @auto_docstring(checkpoint="microsoft/layoutxlm-base")
-@strict
 class LayoutXLMConfig(PreTrainedConfig):
     r"""
     max_2d_position_embeddings (`int`, *optional*, defaults to 1024):

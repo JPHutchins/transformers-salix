@@ -16,7 +16,6 @@ import warnings
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from torch import Tensor
 
 from ... import initialization as init
@@ -39,7 +38,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="PekingU/rtdetr_r18vd")
-@strict
 class RTDetrV2Config(PreTrainedConfig):
     r"""
     initializer_bias_prior_prob (`float`, *optional*):

@@ -14,7 +14,6 @@
 
 
 import torch
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import nn
 from typing_extensions import Unpack
@@ -192,7 +191,6 @@ class Tipsv2DptImageProcessor(Tipsv2ImageProcessor):
 
 
 @auto_docstring(checkpoint="google/tipsv2-b14-dpt")
-@strict
 class Tipsv2DptConfig(PreTrainedConfig):
     r"""
     neck_hidden_sizes (`list[int]`, *optional*, defaults to `[96, 192, 384, 768]`):

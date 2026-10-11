@@ -13,14 +13,11 @@
 # limitations under the License.
 """Swin2SR Transformer model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="caidas/swin2sr-classicalsr-x2-64")
-@strict
 class Swin2SRConfig(PreTrainedConfig):
     r"""
     num_channels_out (`int`, *optional*, defaults to `num_channels`):

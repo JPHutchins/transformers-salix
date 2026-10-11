@@ -17,7 +17,6 @@ from numbers import Number
 
 import numpy as np
 import torch
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import Tensor, nn
 
@@ -51,13 +50,11 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="facebook/maskformer-swin-base-ade")
-@strict
 class MaskFormerDetrConfig(DetrConfig):
     model_type = "detr"
 
 
 @auto_docstring(checkpoint="facebook/maskformer-swin-base-ade")
-@strict
 class MaskFormerConfig(PreTrainedConfig):
     r"""
     fpn_feature_size (`int`, *optional*, defaults to 256):

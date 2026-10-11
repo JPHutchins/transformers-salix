@@ -13,8 +13,6 @@
 # limitations under the License.
 """Evolla model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring, logging
@@ -24,7 +22,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="westlake-repl/Evolla-10B-hf")
-@strict
 class SaProtConfig(PreTrainedConfig):
     r"""
     mask_token_id (`int`, *optional*, defaults to 4):
@@ -60,7 +57,6 @@ class SaProtConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="westlake-repl/Evolla-10B-hf")
-@strict
 class EvollaConfig(PreTrainedConfig):
     r"""
     protein_encoder_config (`dict`, *optional*):

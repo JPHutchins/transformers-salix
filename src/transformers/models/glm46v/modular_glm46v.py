@@ -14,7 +14,6 @@
 
 
 import numpy as np
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -28,7 +27,6 @@ from ..glm4v.video_processing_glm4v import Glm4vVideoProcessor
 
 
 @auto_docstring(checkpoint="zai-org/GLM-4.1V-9B-Thinking")
-@strict
 class Glm46VConfig(PreTrainedConfig):
     r"""
     image_start_token_id (`int`, *optional*, defaults to 151339):

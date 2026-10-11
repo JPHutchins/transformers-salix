@@ -19,15 +19,12 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="openbmb/MiniCPM-V-4.6")
-@strict
 class MiniCPMV4_6VisionConfig(PreTrainedConfig):
     r"""
     insert_layer_id (`int`, *optional*, defaults to 6):
@@ -62,7 +59,6 @@ class MiniCPMV4_6VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="openbmb/MiniCPM-V-4.6")
-@strict
 class MiniCPMV4_6Config(PreTrainedConfig):
     r"""
     insert_layer_id (`int`, *optional*, defaults to 6):

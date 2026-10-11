@@ -19,8 +19,6 @@
 # limitations under the License.
 import math
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import BackboneConfigMixin, consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
@@ -31,7 +29,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="AnnaZhang/lwdetr_small_60e_coco")
-@strict
 class LwDetrViTConfig(BackboneConfigMixin, PreTrainedConfig):
     r"""
     pretrain_image_size (`int`, *optional*, defaults to 224):
@@ -105,7 +102,6 @@ class LwDetrViTConfig(BackboneConfigMixin, PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="AnnaZhang/lwdetr_small_60e_coco")
-@strict
 class LwDetrConfig(PreTrainedConfig):
     r"""
     projector_scale_factors (`list[float]`, *optional*, defaults to `[]`):

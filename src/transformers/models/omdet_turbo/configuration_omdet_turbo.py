@@ -15,8 +15,6 @@
 
 from typing import Literal
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
@@ -27,7 +25,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="omlab/omdet-turbo-swin-tiny-hf")
-@strict
 class OmDetTurboConfig(PreTrainedConfig):
     r"""
     apply_layernorm_after_vision_backbone (`bool`, *optional*, defaults to `True`):

@@ -20,8 +20,6 @@
 
 from typing import Literal
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
@@ -29,7 +27,6 @@ from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="ibm-granite4_vision_text/granite4_vision_text-3.0-8b-base")
-@strict
 class Granite4VisionTextConfig(PreTrainedConfig):
     r"""
     ```python
@@ -97,7 +94,6 @@ class Granite4VisionTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="llava-hf/llava-v1.6-mistral-7b-hf")
-@strict
 class Granite4VisionConfig(PreTrainedConfig):
     r"""
     image_grid_pinpoints (`list`, *optional*):

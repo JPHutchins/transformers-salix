@@ -19,7 +19,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision.transforms.v2.functional as tvF
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 
 from ... import initialization as init
@@ -48,7 +47,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="PaddlePaddle/SLANeXt_wired_safetensors")
-@strict
 class SLANeXtVisionConfig(GotOcr2VisionConfig):
     image_size: int = 512
 
@@ -58,7 +56,6 @@ class SLANeXtVisionAttention(GotOcr2VisionAttention):
 
 
 @auto_docstring(checkpoint="PaddlePaddle/SLANeXt_wired_safetensors")
-@strict
 class SLANeXtConfig(PreTrainedConfig):
     r"""
     vision_config (`dict` or [`SLANeXtVisionConfig`], *optional*):

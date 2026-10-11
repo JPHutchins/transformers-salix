@@ -501,7 +501,7 @@ def _flatten_to_context(obj: Any, tensors: list) -> Any:
             "p": _class_to_path(cls),
             "v": {k: _flatten_to_context(v, tensors) for k, v in obj.items()},
         }
-    if isinstance(obj, (tuple, list, set, frozenset)):  # sequences/sets incl. NamedTuple
+    if isinstance(obj, (tuple, list, set, frozenset)):  # sequences/sets incl. named tuples
         return {
             "_t": "seq",
             "p": _class_to_path(cls),
@@ -559,7 +559,7 @@ def _unflatten_from_context(ctx: Any, tensors: list) -> Any:
         try:
             return cls(items)  # tuple, list subclass, set, frozenset, etc.
         except TypeError:
-            return cls(*items)  # NamedTuple (requires positional args)
+            return cls(*items)  # named tuple (requires positional args)
     if t == "obj":
         cls = _path_to_class(ctx["p"])
         instance = cls.__new__(cls)

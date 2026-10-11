@@ -14,7 +14,6 @@
 
 
 import torch
-from huggingface_hub.dataclasses import strict
 
 from transformers.models.instructblip.configuration_instructblip import (
     InstructBlipConfig,
@@ -38,7 +37,6 @@ from ...utils import auto_docstring, can_return_tuple
 
 
 @auto_docstring(checkpoint="Salesforce/instructblip-flan-t5-xl")
-@strict
 class InstructBlipVideoVisionConfig(InstructBlipVisionConfig):
     r"""
     Example:
@@ -58,7 +56,6 @@ class InstructBlipVideoVisionConfig(InstructBlipVisionConfig):
 
 
 @auto_docstring(checkpoint="Salesforce/instructblip-flan-t5-xl")
-@strict
 class InstructBlipVideoQFormerConfig(InstructBlipQFormerConfig):
     r"""
     cross_attention_frequency (`int`, *optional*, defaults to 2):
@@ -82,7 +79,6 @@ class InstructBlipVideoQFormerConfig(InstructBlipQFormerConfig):
 
 
 @auto_docstring(checkpoint="Salesforce/instructblip-flan-t5-xl")
-@strict
 class InstructBlipVideoConfig(InstructBlipConfig):
     r"""
     qformer_config (`dict`, *optional*):

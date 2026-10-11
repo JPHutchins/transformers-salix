@@ -18,7 +18,6 @@ import math
 from typing import Any
 
 import torch
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import nn
 
@@ -46,7 +45,6 @@ from ..clip.modeling_clip import (
 
 
 @auto_docstring(checkpoint="CIDAS/clipseg-rd64")
-@strict
 class CLIPSegTextConfig(CLIPTextConfig):
     r"""
     Example:
@@ -68,7 +66,6 @@ class CLIPSegTextConfig(CLIPTextConfig):
 
 
 @auto_docstring(checkpoint="CIDAS/clipseg-rd64")
-@strict
 class CLIPSegVisionConfig(CLIPVisionConfig):
     r"""
     Example:
@@ -90,7 +87,6 @@ class CLIPSegVisionConfig(CLIPVisionConfig):
 
 
 @auto_docstring(checkpoint="CIDAS/clipseg-rd64")
-@strict
 class CLIPSegConfig(CLIPConfig):
     r"""
     extract_layers (`list[int]`, *optional*, defaults to `[3, 6, 9]`):

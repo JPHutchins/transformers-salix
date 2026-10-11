@@ -13,14 +13,11 @@
 # limitations under the License.
 """TimeSformer model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/timesformer-base-finetuned-k600")
-@strict
 class TimesformerConfig(PreTrainedConfig):
     r"""
     num_frames (`int`, *optional*, defaults to 8):

@@ -13,15 +13,12 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="zai-org/GLM-ASR-Nano-2512")
-@strict
 class GlmAsrEncoderConfig(PreTrainedConfig):
     r"""
     Example:
@@ -62,7 +59,6 @@ class GlmAsrEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="zai-org/GLM-ASR-Nano-2512")
-@strict
 class GlmAsrConfig(PreTrainedConfig):
     r"""
     Example:

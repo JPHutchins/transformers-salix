@@ -13,14 +13,11 @@
 # limitations under the License.
 """OPT model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/opt-350m")
-@strict
 class OPTConfig(PreTrainedConfig):
     r"""
     do_layer_norm_before (`bool`, *optional*, defaults to `True`):

@@ -15,7 +15,6 @@
 from typing import Optional, Union
 
 import torch
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 
 from ...configuration_utils import PreTrainedConfig
@@ -37,7 +36,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="ModernVBERT/colmodernvbert-merged")
-@strict
 class ColModernVBertConfig(ColQwen2Config):
     r"""
     Example:

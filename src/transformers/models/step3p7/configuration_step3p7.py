@@ -18,7 +18,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -26,7 +25,6 @@ from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="stepfun-ai/Step-3.7-Flash")
-@strict
 class Step3p7VisionConfig(PreTrainedConfig):
     r"""
     Example:
@@ -75,7 +73,6 @@ class Step3p7VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="stepfun-ai/Step-3.7-Flash")
-@strict
 class Step3p7TextConfig(PreTrainedConfig):
     r"""
     mlp_layer_types (`list[str]`, *optional*):
@@ -311,7 +308,6 @@ class Step3p7TextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="stepfun-ai/Step-3.7-Flash")
-@strict
 class Step3p7Config(PreTrainedConfig):
     model_type = "step3p7"
     sub_configs = {"vision_config": Step3p7VisionConfig, "text_config": Step3p7TextConfig}

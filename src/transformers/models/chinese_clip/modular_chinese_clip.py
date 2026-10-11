@@ -14,7 +14,6 @@
 """PyTorch Chinese-CLIP model."""
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -52,7 +51,6 @@ from ..clip.modeling_clip import (
 
 
 @auto_docstring(checkpoint="OFA-Sys/chinese-clip-vit-base-patch16")
-@strict
 class ChineseCLIPTextConfig(CLIPTextConfig):
     r"""
     type_vocab_size (`int`, *optional*, defaults to 2):
@@ -91,7 +89,6 @@ class ChineseCLIPTextConfig(CLIPTextConfig):
 
 
 @auto_docstring(checkpoint="OFA-Sys/chinese-clip-vit-base-patch16")
-@strict
 class ChineseCLIPVisionConfig(CLIPVisionConfig):
     r"""
     Example:
@@ -110,7 +107,6 @@ class ChineseCLIPVisionConfig(CLIPVisionConfig):
 
 
 @auto_docstring(checkpoint="OFA-Sys/chinese-clip-vit-base-patch16")
-@strict
 class ChineseCLIPConfig(CLIPConfig):
     r"""
     Example:

@@ -17,7 +17,7 @@ import copy
 import json
 import os
 import warnings
-from abc import ABC, ABCMeta, abstractmethod
+from abc import ABC, abstractmethod
 from collections.abc import Callable
 from typing import TYPE_CHECKING, Any, Optional, Union
 
@@ -34,6 +34,7 @@ from ..utils import (
     is_torch_available,
     logging,
 )
+from ..utils.generic import StructABCMeta
 
 
 if TYPE_CHECKING:
@@ -1350,10 +1351,9 @@ class GenerationConfig(PushToHubMixin):
         return unused_kwargs
 
 
-_StructABCMeta = type("_StructABCMeta", (type(Struct), ABCMeta), {})
 
 
-class BaseWatermarkingConfig(ABC, Struct, frozen=False, metaclass=_StructABCMeta):
+class BaseWatermarkingConfig(ABC, Struct, frozen=False, metaclass=StructABCMeta):
     """Generic watermarking config"""
 
     @classmethod
@@ -1434,7 +1434,7 @@ class BaseWatermarkingConfig(ABC, Struct, frozen=False, metaclass=_StructABCMeta
     def construct_processor(self, vocab_size): ...
 
 
-class WatermarkingConfig(BaseWatermarkingConfig, Struct, frozen=False, metaclass=_StructABCMeta):
+class WatermarkingConfig(BaseWatermarkingConfig, Struct, frozen=False, metaclass=StructABCMeta):
     """
     Class that holds arguments for watermark generation and should be passed into `GenerationConfig` during `generate`.
     See [this paper](https://huggingface.co/papers/2306.04634) for more details on the arguments.
@@ -1511,7 +1511,7 @@ class WatermarkingConfig(BaseWatermarkingConfig, Struct, frozen=False, metaclass
         )
 
 
-class SynthIDTextWatermarkingConfig(BaseWatermarkingConfig, Struct, frozen=False, metaclass=_StructABCMeta):
+class SynthIDTextWatermarkingConfig(BaseWatermarkingConfig, Struct, frozen=False, metaclass=StructABCMeta):
     """
     Class that holds arguments for watermark generation and should be passed into `GenerationConfig` during `generate`.
     See [this paper](https://www.nature.com/articles/s41586-024-08025-4) for more details on the arguments.

@@ -20,8 +20,6 @@
 # limitations under the License.
 from typing import Any
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 from ..siglip import SiglipVisionConfig
@@ -31,7 +29,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="google/t5gemma-2-270m-270m")
-@strict
 class T5Gemma2TextConfig(PreTrainedConfig):
     r"""
     query_pre_attn_scalar (`float`, *optional*, defaults to 256):
@@ -146,7 +143,6 @@ class T5Gemma2TextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/t5gemma-2-270m-270m")
-@strict
 class T5Gemma2EncoderConfig(PreTrainedConfig):
     r"""
     mm_tokens_per_image (`int`, *optional*, defaults to 256):
@@ -215,7 +211,6 @@ class T5Gemma2EncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/t5gemma-2-270m-270m")
-@strict
 class T5Gemma2DecoderConfig(PreTrainedConfig):
     r"""
     query_pre_attn_scalar (`float`, *optional*, defaults to 256):
@@ -330,7 +325,6 @@ class T5Gemma2DecoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/t5gemma-2-270m-270m")
-@strict
 class T5Gemma2Config(PreTrainedConfig):
     r"""
     encoder (`Union[T5Gemma2EncoderConfig, dict]`, optional, *optional*):

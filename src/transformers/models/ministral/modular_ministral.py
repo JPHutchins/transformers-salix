@@ -14,7 +14,6 @@
 
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ...cache_utils import Cache, DynamicCache
@@ -42,7 +41,6 @@ from ..qwen2.modeling_qwen2 import (
 
 
 @auto_docstring(checkpoint="mistralai/Ministral-8B-Instruct-2410")
-@strict
 class MinistralConfig(MistralConfig):
     r"""
     Example:

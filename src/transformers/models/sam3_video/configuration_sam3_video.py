@@ -13,8 +13,6 @@
 # limitations under the License.
 """SAM3 Video model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 from ..auto import CONFIG_MAPPING, AutoConfig
@@ -24,7 +22,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="facebook/sam3")
-@strict
 class Sam3VideoConfig(PreTrainedConfig):
     r"""
     detector_config (`dict` or `Sam3Config`, *optional*):

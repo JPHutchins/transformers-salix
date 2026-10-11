@@ -15,7 +15,6 @@
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ...activations import ACT2FN
 from ...configuration_utils import PreTrainedConfig
@@ -36,7 +35,6 @@ from ..pp_lcnet.modeling_pp_lcnet import (
 
 
 @auto_docstring(checkpoint="PaddlePaddle/Not_yet_released")
-@strict
 class PPLCNetV3Config(PPLCNetConfig):
     r"""
     scale (`float`, *optional*, defaults to 1.0):

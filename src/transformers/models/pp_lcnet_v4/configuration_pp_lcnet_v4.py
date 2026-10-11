@@ -21,15 +21,12 @@
 
 from collections.abc import Sequence
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import BackboneConfigMixin
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="PaddlePaddle/Not_yet_released")
-@strict
 class PPLCNetV4Config(BackboneConfigMixin, PreTrainedConfig):
     r"""
     scale (`float`, *optional*, defaults to 1.0):

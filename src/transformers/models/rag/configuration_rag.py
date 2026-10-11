@@ -13,15 +13,12 @@
 # limitations under the License.
 """RAG model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto.configuration_auto import AutoConfig
 
 
 @auto_docstring(checkpoint="")
-@strict
 class RagConfig(PreTrainedConfig):
     r"""
     prefix (`str`, *optional*):

@@ -19,8 +19,6 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...models.auto.modeling_auto import MODEL_FOR_CAUSAL_LM_MAPPING_NAMES
 from ...utils import auto_docstring, logging
@@ -31,7 +29,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="Salesforce/instructblip-flan-t5-xl")
-@strict
 class InstructBlipVideoVisionConfig(PreTrainedConfig):
     r"""
     Example:
@@ -66,7 +63,6 @@ class InstructBlipVideoVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Salesforce/instructblip-flan-t5-xl")
-@strict
 class InstructBlipVideoQFormerConfig(PreTrainedConfig):
     r"""
     cross_attention_frequency (`int`, *optional*, defaults to 2):
@@ -108,7 +104,6 @@ class InstructBlipVideoQFormerConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Salesforce/instructblip-flan-t5-xl")
-@strict
 class InstructBlipVideoConfig(PreTrainedConfig):
     r"""
     qformer_config (`dict`, *optional*):

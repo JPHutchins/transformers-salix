@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...feature_extraction_utils import BatchFeature
 from ...image_processing_backends import PilBackend, TorchvisionBackend
@@ -27,7 +26,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-Chart2Table_safetensors")
-@strict
 class PPChart2TableConfig(GotOcr2Config):
     model_type = "pp_chart2table"
 

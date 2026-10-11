@@ -16,7 +16,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ...cache_utils import Cache, DynamicCache
 from ...configuration_utils import PreTrainedConfig
@@ -47,7 +46,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="CohereForAI/c4ai-command-r-v01")
-@strict
 class Cohere2Config(PreTrainedConfig):
     r"""
     logit_scale (`float`, *optional*, defaults to 0.0625):

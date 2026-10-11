@@ -18,7 +18,6 @@ from typing import Any, Literal
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -46,7 +45,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="poolside/laguna-XS.2")
-@strict
 class LagunaConfig(Qwen2MoeConfig):
     r"""
     gating (`bool` or `str`, *optional*, defaults to `True`):

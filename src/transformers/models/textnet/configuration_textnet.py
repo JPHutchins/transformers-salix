@@ -13,15 +13,12 @@
 # limitations under the License.
 """TextNet model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import BackboneConfigMixin
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="czczup/textnet-base")
-@strict
 class TextNetConfig(BackboneConfigMixin, PreTrainedConfig):
     r"""
     stem_kernel_size (`int`, *optional*, defaults to 3):

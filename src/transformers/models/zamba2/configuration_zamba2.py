@@ -14,15 +14,12 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig, remap_legacy_layer_types
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="Zyphra/Zamba2-2.7B")
-@strict
 class Zamba2Config(PreTrainedConfig):
     r"""
     mamba_ngroups (`int`, *optional*, defaults to 1):

@@ -14,7 +14,6 @@
 
 
 import torch
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import nn
 
@@ -38,7 +37,6 @@ from ..eomt.modeling_eomt import (
 
 
 @auto_docstring(checkpoint="tue-mps/videomt-dinov2-small-ytvis2019")
-@strict
 class VideomtConfig(EomtConfig):
     model_type = "videomt"
 

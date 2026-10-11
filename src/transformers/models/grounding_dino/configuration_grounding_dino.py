@@ -13,8 +13,6 @@
 # limitations under the License.
 """Grounding DINO model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
@@ -25,7 +23,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="IDEA-Research/grounding-dino-tiny")
-@strict
 class GroundingDinoConfig(PreTrainedConfig):
     r"""
     num_queries (`int`, *optional*, defaults to 900):

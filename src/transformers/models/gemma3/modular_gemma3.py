@@ -17,7 +17,6 @@ from typing import Any
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...cache_utils import Cache, DynamicCache
@@ -66,7 +65,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="google/gemma-3-4b-it")
-@strict
 class Gemma3TextConfig(Gemma2Config, PreTrainedConfig):
     r"""
     query_pre_attn_scalar (`float`, *optional*, defaults to 256):
@@ -167,7 +165,6 @@ class Gemma3TextConfig(Gemma2Config, PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/gemma-3-4b-it")
-@strict
 class Gemma3Config(PreTrainedConfig):
     r"""
     mm_tokens_per_image (`int`, *optional*, defaults to 256):

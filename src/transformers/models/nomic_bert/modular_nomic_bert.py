@@ -15,7 +15,6 @@
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 from torch.nn import CrossEntropyLoss
 
 from ...configuration_utils import PreTrainedConfig
@@ -50,7 +49,6 @@ from ..llama.modeling_llama import LlamaRotaryEmbedding
 
 
 @auto_docstring(checkpoint="nomic-ai/nomic-embed-text-v1.5")
-@strict
 class NomicBertConfig(BertConfig):
     r"""
     Examples:

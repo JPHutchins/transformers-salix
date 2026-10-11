@@ -22,7 +22,6 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import Tensor
 from tqdm import tqdm
@@ -72,7 +71,6 @@ class Sam2VideoMaskDecoderConfig(Sam2MaskDecoderConfig):
 
 
 @auto_docstring(checkpoint="facebook/sam2.1-hiera-tiny")
-@strict
 class Sam2VideoConfig(PreTrainedConfig):
     r"""
     prompt_encoder_config (Union[`dict`, `Sam2PromptEncoderConfig`], *optional*):

@@ -19,8 +19,6 @@
 # limitations under the License.
 from typing import Any, Literal
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import (
     auto_docstring,
@@ -32,7 +30,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="google/gemma-4-12B-it")
-@strict
 class Gemma4UnifiedAudioConfig(PreTrainedConfig):
     r"""
     audio_embed_dim (`int`, defaults to 640):
@@ -84,7 +81,6 @@ class Gemma4UnifiedAudioConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/gemma-4-12B-it")
-@strict
 class Gemma4UnifiedTextConfig(PreTrainedConfig):
     r"""
     use_bidirectional_attention (`str`, *optional*):
@@ -206,7 +202,6 @@ class Gemma4UnifiedTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/gemma-4-12B-it")
-@strict
 class Gemma4UnifiedVisionConfig(PreTrainedConfig):
     r"""
     patch_size (`int`, defaults to 16):
@@ -251,7 +246,6 @@ class Gemma4UnifiedVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/gemma-4-12B-it")
-@strict
 class Gemma4UnifiedConfig(PreTrainedConfig):
     r"""
     boi_token_id (`int`, *optional*, defaults to 255999):

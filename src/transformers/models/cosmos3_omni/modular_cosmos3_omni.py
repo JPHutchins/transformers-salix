@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_utils import PreTrainedModel
@@ -27,7 +26,6 @@ from ..qwen3_vl.modeling_qwen3_vl import Qwen3VLForConditionalGeneration, Qwen3V
 
 
 @auto_docstring(checkpoint="nvidia/Cosmos3-Nano")
-@strict
 class Cosmos3OmniConfig(Qwen3VLConfig):
     r"""
     Example:

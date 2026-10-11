@@ -19,7 +19,6 @@ from typing import Any
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from torch import Tensor
 
 from ... import initialization as init
@@ -58,19 +57,16 @@ from ..sam2_video.modeling_sam2_video import (
 
 
 @auto_docstring(checkpoint="yonigozlan/EdgeTAM-hf")
-@strict
 class EdgeTamVideoPromptEncoderConfig(Sam2VideoPromptEncoderConfig):
     pass
 
 
 @auto_docstring(checkpoint="yonigozlan/EdgeTAM-hf")
-@strict
 class EdgeTamVideoMaskDecoderConfig(Sam2VideoMaskDecoderConfig):
     pass
 
 
 @auto_docstring(checkpoint="yonigozlan/EdgeTAM-hf")
-@strict
 class EdgeTamVideoConfig(PreTrainedConfig):
     r"""
     prompt_encoder_config (Union[`dict`, `EdgeTamVideoPromptEncoderConfig`], *optional*):

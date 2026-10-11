@@ -18,7 +18,6 @@ from collections.abc import Callable
 from typing import Literal
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
@@ -50,7 +49,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="answerdotai/ModernBERT-base")
-@strict
 class ModernBertConfig(PreTrainedConfig):
     r"""
     initializer_cutoff_factor (`float`, *optional*, defaults to 2.0):

@@ -18,7 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -26,7 +25,6 @@ from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="yonigozlan/sam3-litetext-s0")
-@strict
 class Sam3LiteTextGeometryEncoderConfig(PreTrainedConfig):
     r"""
     roi_size (`int`, *optional*, defaults to 7):
@@ -48,7 +46,6 @@ class Sam3LiteTextGeometryEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="yonigozlan/sam3-litetext-s0")
-@strict
 class Sam3LiteTextDETREncoderConfig(PreTrainedConfig):
     r"""
     hidden_dropout (`float`, *optional*, defaults to 0.0):
@@ -69,7 +66,6 @@ class Sam3LiteTextDETREncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="yonigozlan/sam3-litetext-s0")
-@strict
 class Sam3LiteTextDETRDecoderConfig(PreTrainedConfig):
     r"""
     num_queries (`int`, *optional*, defaults to 200):
@@ -91,7 +87,6 @@ class Sam3LiteTextDETRDecoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="yonigozlan/sam3-litetext-s0")
-@strict
 class Sam3LiteTextMaskDecoderConfig(PreTrainedConfig):
     r"""
     num_upsampling_stages (`int`, *optional*, defaults to 3):
@@ -109,7 +104,6 @@ class Sam3LiteTextMaskDecoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="yonigozlan/sam3-litetext-s0")
-@strict
 class Sam3LiteTextTextConfig(PreTrainedConfig):
     r"""
     use_repmixer_blocks (`bool`, *optional*, defaults to `True`):
@@ -139,7 +133,6 @@ class Sam3LiteTextTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="yonigozlan/sam3-litetext-s0")
-@strict
 class Sam3LiteTextConfig(PreTrainedConfig):
     r"""
     geometry_encoder_config (`dict` or `Sam3LiteTextGeometryEncoderConfig`, *optional*):

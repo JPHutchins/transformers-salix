@@ -14,7 +14,6 @@
 # limitations under the License.
 
 import torch
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import nn
 
@@ -42,19 +41,16 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="syscv-community/sam-hq-vit-base")
-@strict
 class SamHQPromptEncoderConfig(SamPromptEncoderConfig):
     pass
 
 
 @auto_docstring(checkpoint="syscv-community/sam-hq-vit-base")
-@strict
 class SamHQVisionConfig(SamVisionConfig):
     pass
 
 
 @auto_docstring(checkpoint="syscv-community/sam-hq-vit-base")
-@strict
 class SamHQMaskDecoderConfig(SamMaskDecoderConfig):
     r"""
     mlp_dim (`int`, *optional*, defaults to 2048):
@@ -75,7 +71,6 @@ class SamHQMaskDecoderConfig(SamMaskDecoderConfig):
 
 
 @auto_docstring(checkpoint="syscv-community/sam-hq-vit-base")
-@strict
 class SamHQConfig(SamConfig):
     r"""
     prompt_encoder_config (Union[`dict`, `SamHQPromptEncoderConfig`], *optional*):

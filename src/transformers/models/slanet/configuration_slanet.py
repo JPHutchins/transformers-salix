@@ -19,8 +19,6 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -28,7 +26,6 @@ from ..auto import AutoConfig
 
 
 @auto_docstring(checkpoint="PaddlePaddle/SLANet_plus_safetensors")
-@strict
 class SLANetConfig(PreTrainedConfig):
     r"""
     post_conv_out_channels (`int`, *optional*, defaults to 96):

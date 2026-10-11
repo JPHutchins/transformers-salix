@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_outputs import CausalLMOutputWithPast
@@ -39,7 +38,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="rednote-hilab/dots.llm1.base")
-@strict
 class Dots1Config(PreTrainedConfig):
     r"""
     n_group (`int`, *optional*, defaults to 1):

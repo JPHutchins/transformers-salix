@@ -13,14 +13,11 @@
 # limitations under the License.
 """Flaubert configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="flaubert/flaubert_base_uncased")
-@strict
 class FlaubertConfig(PreTrainedConfig):
     r"""
     pre_norm (`bool`, *optional*, defaults to `False`):

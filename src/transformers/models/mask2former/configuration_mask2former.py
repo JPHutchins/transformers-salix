@@ -13,8 +13,6 @@
 # limitations under the License.
 """Mask2Former model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
@@ -25,7 +23,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="facebook/mask2former-swin-small-coco-instance")
-@strict
 class Mask2FormerConfig(PreTrainedConfig):
     r"""
     feature_size (`int`, *optional*, defaults to 256):

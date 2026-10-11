@@ -13,14 +13,11 @@
 # limitations under the License.
 """SeamlessM4Tv2 model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/hf-seamless-m4t-medium")
-@strict
 class SeamlessM4Tv2Config(PreTrainedConfig):
     r"""
     t2u_vocab_size (`int`, *optional*, defaults to 10082):

@@ -16,7 +16,6 @@ import re
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 
 from ...configuration_utils import PreTrainedConfig
@@ -48,7 +47,6 @@ from ..internvl.processing_internvl import InternVLProcessor, InternVLProcessorK
 
 
 @auto_docstring(checkpoint="baidu/Qianfan-OCR")
-@strict
 class QianfanOCRVisionConfig(InternVLVisionConfig):
     r"""
     projection_dropout (`float`, *optional*, defaults to 0.0):
@@ -84,7 +82,6 @@ class QianfanOCRVisionConfig(InternVLVisionConfig):
 
 
 @auto_docstring(checkpoint="baidu/Qianfan-OCR")
-@strict
 class QianfanOCRConfig(InternVLConfig):
     r"""
     downsample_ratio (`float`, *optional*, defaults to 0.5):

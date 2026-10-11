@@ -14,7 +14,6 @@
 import math
 
 import torch
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import nn
 
@@ -40,7 +39,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="microsoft/VibeVoice-ASR-HF")
-@strict
 class VibeVoiceAsrConfig(PreTrainedConfig):
     r"""
     acoustic_tokenizer_encoder_config (`Union[VibeVoiceAcousticTokenizerConfig, dict]`, *optional*):

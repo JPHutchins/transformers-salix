@@ -13,14 +13,11 @@
 # limitations under the License.
 """Audio Spectrogram Transformer (AST) model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="MIT/ast-finetuned-audioset-10-10-0.4593")
-@strict
 class ASTConfig(PreTrainedConfig):
     r"""
     frequency_stride (`int`, *optional*, defaults to 10):

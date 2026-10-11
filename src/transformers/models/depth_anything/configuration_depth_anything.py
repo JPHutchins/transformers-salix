@@ -13,8 +13,6 @@
 # limitations under the License.
 """DepthAnything model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -22,7 +20,6 @@ from ..auto.configuration_auto import AutoConfig
 
 
 @auto_docstring(checkpoint="LiheYoung/depth-anything-small-hf")
-@strict
 class DepthAnythingConfig(PreTrainedConfig):
     r"""
     reassemble_hidden_size (`int`, *optional*, defaults to 384):

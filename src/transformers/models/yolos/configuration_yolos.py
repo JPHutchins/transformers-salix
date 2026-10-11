@@ -13,14 +13,11 @@
 # limitations under the License.
 """YOLOS model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="hustvl/yolos-base")
-@strict
 class YolosConfig(PreTrainedConfig):
     r"""
     num_detection_tokens (`int`, *optional*, defaults to 100):

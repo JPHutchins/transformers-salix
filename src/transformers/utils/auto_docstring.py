@@ -2880,11 +2880,11 @@ def generate_processor_intro(cls) -> str:
     components = []
     component_classes = []
 
-    for attr in attributes:
+    for attribute in attributes:
         # Get the class name for this attribute
-        class_attr = f"{attr}_class"
+        class_attr = f"{attribute}_class"
         # Format attribute name for display
-        attr_display = attr.replace("_", " ")
+        attr_display = attribute.replace("_", " ")
         components.append(attr_display)
         component_classes.append(f"[`{{{class_attr}}}`]")
     if not components:

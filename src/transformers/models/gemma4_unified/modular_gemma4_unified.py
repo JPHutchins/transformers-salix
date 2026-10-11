@@ -16,7 +16,6 @@ from collections import UserDict
 from typing import Any, Literal
 
 import torch
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import nn
 from torch.nn import init
@@ -369,7 +368,6 @@ class Gemma4UnifiedProcessor(Gemma4Processor):
 
 
 @auto_docstring(checkpoint="google/gemma-4-12B-it")
-@strict
 class Gemma4UnifiedAudioConfig(PreTrainedConfig):
     r"""
     audio_embed_dim (`int`, defaults to 640):
@@ -421,7 +419,6 @@ class Gemma4UnifiedAudioConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/gemma-4-12B-it")
-@strict
 class Gemma4UnifiedTextConfig(Gemma4TextConfig):
     r"""
     use_bidirectional_attention (`str`, *optional*):
@@ -466,7 +463,6 @@ class Gemma4UnifiedTextConfig(Gemma4TextConfig):
 
 
 @auto_docstring(checkpoint="google/gemma-4-12B-it")
-@strict
 class Gemma4UnifiedVisionConfig(PreTrainedConfig):
     r"""
     patch_size (`int`, defaults to 16):
@@ -511,7 +507,6 @@ class Gemma4UnifiedVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/gemma-4-12B-it")
-@strict
 class Gemma4UnifiedConfig(Gemma4Config):
     sub_configs = {
         "text_config": Gemma4UnifiedTextConfig,

@@ -18,7 +18,6 @@ from typing import Union
 import numpy as np
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 
 from ... import initialization as init
@@ -68,7 +67,6 @@ DEEPSEEK_VL_COMMON_CUSTOM_ARGS = r"""
 
 
 @auto_docstring(checkpoint="deepseek-community/deepseek-vl-7b-chat")
-@strict
 class DeepseekVLHybridConfig(DeepseekVLConfig):
     r"""
     high_res_vision_config (`Union[AutoConfig, dict]`,  *optional*, defaults to `SamVisionConfig`):

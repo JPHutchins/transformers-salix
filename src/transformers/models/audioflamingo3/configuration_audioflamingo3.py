@@ -14,15 +14,12 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="nvidia/audio-flamingo-3-hf")
-@strict
 class AudioFlamingo3EncoderConfig(PreTrainedConfig):
     r"""
     max_source_positions (`int`, *optional*, defaults to 1500):
@@ -69,7 +66,6 @@ class AudioFlamingo3EncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="nvidia/audio-flamingo-3-hf")
-@strict
 class AudioFlamingo3Config(PreTrainedConfig):
     r"""
     Example:

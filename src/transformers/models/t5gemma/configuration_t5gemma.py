@@ -20,15 +20,12 @@
 # limitations under the License.
 from typing import Any
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="google/t5_gemma_module-7b")
-@strict
 class T5GemmaModuleConfig(PreTrainedConfig):
     r"""
     query_pre_attn_scalar (`float`, *optional*, defaults to 256):
@@ -110,7 +107,6 @@ class T5GemmaModuleConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/t5_gemma_module-7b")
-@strict
 class T5GemmaConfig(PreTrainedConfig):
     r"""
     encoder (`Union[T5GemmaModuleConfig, dict]`, optional, *optional*):

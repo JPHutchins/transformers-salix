@@ -22,7 +22,6 @@
 import math
 
 import numpy as np
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -30,7 +29,6 @@ from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="bosonai/higgs-audio-v2-tokenizer")
-@strict
 class HiggsAudioV2TokenizerConfig(PreTrainedConfig):
     r"""
     target_bandwidths (`List[float]`, *optional*, defaults to `[0.5, 1, 1.5, 2]`):

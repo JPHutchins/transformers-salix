@@ -20,14 +20,11 @@
 
 import math
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="nvidia/nemotron-speech-streaming-en-0.6b")
-@strict
 class NemotronAsrStreamingEncoderConfig(PreTrainedConfig):
     r"""
     convolution_bias (`bool`, *optional*, defaults to `True`):
@@ -116,7 +113,6 @@ class NemotronAsrStreamingEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="nvidia/nemotron-speech-streaming-en-0.6b")
-@strict
 class NemotronAsrStreamingConfig(PreTrainedConfig):
     r"""
     decoder_hidden_size (`int`, *optional*, defaults to 640):

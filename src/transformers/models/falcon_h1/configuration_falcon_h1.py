@@ -13,15 +13,12 @@
 # limitations under the License.
 """FalconH1 model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="tiiuae/Falcon-H1-1.5B-Deep-Instruct")
-@strict
 class FalconH1Config(PreTrainedConfig):
     r"""
     num_logits_to_keep (`int` or `None`, *optional*, defaults to 1):

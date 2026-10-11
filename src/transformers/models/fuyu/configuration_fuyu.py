@@ -13,8 +13,6 @@
 # limitations under the License.
 """Fuyu model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring, logging
@@ -25,7 +23,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="adept/fuyu-8b")
-@strict
 class FuyuConfig(PreTrainedConfig):
     r"""
     Example:

@@ -17,7 +17,6 @@ from typing import Literal
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
@@ -42,7 +41,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="ModernVBERT/modernvbert")
-@strict
 class ModernVBertConfig(PreTrainedConfig):
     r"""
     pixel_shuffle_factor (`int | None`, *optional*, defaults to 4):

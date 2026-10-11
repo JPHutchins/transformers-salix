@@ -28,7 +28,7 @@ import warnings
 from collections import OrderedDict, UserDict
 from collections.abc import Callable, Collection, Mapping, Sequence, Sized
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Generic, NamedTuple, Union, overload
+from typing import TYPE_CHECKING, Any, Generic, Union, overload
 
 import numpy as np
 from huggingface_hub import is_offline_mode
@@ -65,6 +65,7 @@ from .utils import (
 from .utils.chat_parsing import ResponseParser
 from .utils.chat_parsing import parse_response as _template_parse_response
 from .utils.chat_template_utils import render_jinja_template
+from .utils.generic import TupleStruct
 
 
 if TYPE_CHECKING:
@@ -129,7 +130,7 @@ logger = logging.get_logger(__name__)
 VERY_LARGE_INTEGER = int(1e30)  # This is used to set the max input length for a model with infinite size input
 LARGE_INTEGER = int(1e20)  # This is used when we need something big but slightly smaller than VERY_LARGE_INTEGER
 
-# Define type aliases and NamedTuples
+# Define type aliases and named tuples
 TextInput = str
 PreTokenizedInput = list[str]
 EncodedInput = list[int]
@@ -162,7 +163,7 @@ class TruncationStrategy(ExplicitEnum):
     DO_NOT_TRUNCATE = "do_not_truncate"
 
 
-class CharSpan(NamedTuple):
+class CharSpan(TupleStruct):
     """
     Character span in the original string.
 
@@ -175,7 +176,7 @@ class CharSpan(NamedTuple):
     end: int
 
 
-class TokenSpan(NamedTuple):
+class TokenSpan(TupleStruct):
     """
     Token span in an encoded string (list of tokens).
 
@@ -583,7 +584,7 @@ class BatchEncoding(UserDict, Generic[_V]):
         """
         Get the character span in the original string corresponding to given word in a sequence of the batch.
 
-        Character spans are returned as a CharSpan NamedTuple with:
+        Character spans are returned as a CharSpan named tuple with:
 
         - start: index of the first character in the original string
         - end: index of the character following the last character in the original string
@@ -606,7 +607,7 @@ class BatchEncoding(UserDict, Generic[_V]):
 
         Returns:
             `CharSpan`: Span of the associated character or characters in the string. CharSpan
-            is a NamedTuple with:
+            is a named tuple with:
 
                 - start: index of the first character associated to the word in the original string
                 - end: index of the character following the last character associated to the word in the original

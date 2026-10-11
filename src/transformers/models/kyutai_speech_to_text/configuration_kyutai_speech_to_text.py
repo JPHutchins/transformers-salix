@@ -13,8 +13,6 @@
 # limitations under the License.s
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring, logging
@@ -25,7 +23,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="kyutai/stt-2.6b-en-trfs")
-@strict
 class KyutaiSpeechToTextConfig(PreTrainedConfig):
     r"""
     codebook_vocab_size (`int`, *optional*, defaults to 2049):

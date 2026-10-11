@@ -12,8 +12,6 @@
 # limitations under the License.
 """Mllama model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 
@@ -22,7 +20,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="meta-llama/Llama-3.2-11B-Vision")
-@strict
 class MllamaVisionConfig(PreTrainedConfig):
     r"""
     num_global_layers (`int`, *optional*, defaults to 8):
@@ -96,7 +93,6 @@ class MllamaVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="meta-llama/Llama-3.2-11B-Vision")
-@strict
 class MllamaTextConfig(PreTrainedConfig):
     r"""
     cross_attention_layers (`list[int]`, *optional*):
@@ -147,7 +143,6 @@ class MllamaTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="meta-llama/Llama-3.2-11B-Vision")
-@strict
 class MllamaConfig(PreTrainedConfig):
     r"""
     Example:

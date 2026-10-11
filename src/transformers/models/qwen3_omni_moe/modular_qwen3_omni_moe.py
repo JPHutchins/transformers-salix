@@ -19,7 +19,6 @@ import re
 
 import numpy as np
 import torch
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import nn
 from torch.nn import functional as F
@@ -224,7 +223,6 @@ class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling, Struct, f
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeAudioEncoderConfig(Qwen2_5OmniAudioEncoderConfig):
     r"""
     max_source_positions (`int`, *optional*, defaults to 1500):
@@ -248,13 +246,11 @@ class Qwen3OmniMoeAudioEncoderConfig(Qwen2_5OmniAudioEncoderConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeVisionEncoderConfig(Qwen3VLMoeVisionConfig):
     pass
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeTextConfig(PreTrainedConfig):
     r"""
     decoder_sparse_step (`int`, *optional*, defaults to 1):
@@ -334,7 +330,6 @@ class Qwen3OmniMoeTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeThinkerConfig(Qwen2_5OmniThinkerConfig):
     r"""
     position_id_per_seconds (`int`, *optional*, defaults to 25):
@@ -375,7 +370,6 @@ class Qwen3OmniMoeThinkerConfig(Qwen2_5OmniThinkerConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeTalkerCodePredictorConfig(Qwen3Config):
     r"""
     num_code_groups (`int`, *optional*, defaults to 32):
@@ -398,7 +392,6 @@ class Qwen3OmniMoeTalkerCodePredictorConfig(Qwen3Config):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeTalkerTextConfig(Qwen3MoeConfig):
     base_model_ep_plan = {
         "layers.*.mlp.gate": "ep_router",
@@ -423,7 +416,6 @@ class Qwen3OmniMoeTalkerTextConfig(Qwen3MoeConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeTalkerConfig(PreTrainedConfig):
     r"""
     code_predictor_config (`dict`, *optional*):
@@ -518,7 +510,6 @@ class Qwen3OmniMoeTalkerConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeCode2WavConfig(PreTrainedConfig):
     r"""
     num_quantizers (`int`, *optional*, defaults to 16):
@@ -574,7 +565,6 @@ class Qwen3OmniMoeCode2WavConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeConfig(PreTrainedConfig):
     r"""
     thinker_config (`dict`, *optional*):

@@ -14,8 +14,6 @@
 
 from typing import Any
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 from ..auto import CONFIG_MAPPING, AutoConfig
@@ -25,7 +23,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="google/gemma-4-e2b-it")
-@strict
 class Gemma4AssistantConfig(PreTrainedConfig):
     r"""
     backbone_hidden_size (`int`, defaults to 1536):

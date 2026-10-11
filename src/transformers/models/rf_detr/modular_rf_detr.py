@@ -16,7 +16,6 @@ from typing import Any
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import Tensor, nn
 from torchvision.transforms.v2 import functional as tvF
@@ -386,7 +385,6 @@ class RfDetrImageProcessor(DetrImageProcessor):
 
 
 @auto_docstring(checkpoint="Roboflow/rf-detr-base")
-@strict
 class RfDetrDinov2Config(Dinov2Config):
     r"""
     layerscale_value (`float`, *optional*, defaults to 1.0):
@@ -437,7 +435,6 @@ class RfDetrDinov2Config(Dinov2Config):
 
 
 @auto_docstring(checkpoint="Roboflow/rf-detr-base")
-@strict
 class RfDetrConfig(LwDetrConfig):
     r"""
     hidden_expansion (`float`, *optional*, defaults to 0.5):

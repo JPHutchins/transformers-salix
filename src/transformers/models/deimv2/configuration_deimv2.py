@@ -18,7 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...backbone_utils import consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
@@ -29,7 +28,6 @@ from ..auto import AutoConfig
 # TODO: Attribute map assignment logic should be fixed in modular
 # as well as super() call parsing because otherwise we cannot re-write args after initialization
 @auto_docstring(checkpoint="Intellindust/DEIMv2_HGNetv2_N_COCO")
-@strict
 class Deimv2Config(PreTrainedConfig):
     r"""
     initializer_bias_prior_prob (`float`, *optional*):

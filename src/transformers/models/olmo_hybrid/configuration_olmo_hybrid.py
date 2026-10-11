@@ -18,7 +18,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
+from typing import Annotated
 
 from ...configuration_utils import PreTrainedConfig, remap_legacy_layer_types
 from ...modeling_rope_utils import RopeParameters
@@ -27,7 +27,6 @@ from ...utils.type_validators import interval
 
 
 @auto_docstring(checkpoint="allenai/Olmo-Hybrid-7B")
-@strict
 class OlmoHybridConfig(PreTrainedConfig):
     r"""
     linear_num_key_heads (`int`, *optional*):
@@ -95,7 +94,7 @@ class OlmoHybridConfig(PreTrainedConfig):
     num_key_value_heads: int | None = None
     hidden_act: str = "silu"
     max_position_embeddings: int = 65536
-    initializer_range: float = interval(min=0.0, max=1.0)(default=0.02)
+    initializer_range: Annotated[float, interval(min=0.0, max=1.0)] = 0.02
     rms_norm_eps: float = 1e-06
     use_cache: bool = True
     pad_token_id: int | None = 100277

@@ -15,7 +15,6 @@
 Integrations with other Python libraries.
 """
 
-from salix import fields
 import copy
 import functools
 import importlib.metadata
@@ -35,6 +34,7 @@ from typing import TYPE_CHECKING, Any, Literal
 
 import numpy as np
 import packaging.version
+from salix import fields
 
 
 if os.getenv("WANDB_MODE") == "offline":

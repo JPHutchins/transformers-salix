@@ -13,14 +13,11 @@
 # limitations under the License.
 """Perceiver model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="deepmind/language-perceiver")
-@strict
 class PerceiverConfig(PreTrainedConfig):
     r"""
     num_latents (`int`, *optional*, defaults to 256):

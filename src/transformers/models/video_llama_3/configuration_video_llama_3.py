@@ -17,7 +17,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -25,7 +24,6 @@ from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="lkhl/VideoLLaMA3-2B-Image-HF")
-@strict
 class VideoLlama3VisionConfig(PreTrainedConfig):
     r"""
     Example:
@@ -59,7 +57,6 @@ class VideoLlama3VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="lkhl/VideoLLaMA3-2B-Image-HF")
-@strict
 class VideoLlama3Config(PreTrainedConfig):
     model_type = "video_llama_3"
     sub_configs = {"vision_config": VideoLlama3VisionConfig, "text_config": AutoConfig}

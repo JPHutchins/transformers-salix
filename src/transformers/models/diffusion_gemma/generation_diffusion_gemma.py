@@ -206,12 +206,12 @@ class DiffusionGemmaGenerationConfig(GenerationConfig):
         current_module = sys.modules[__name__]
 
         for attr_name in ("sampler_config",):
-            attr = getattr(self, attr_name)
+            stored = getattr(self, attr_name)
             # Load the right dataclass using the `_cls_name` field
-            if isinstance(attr, dict):
-                cls_name = attr.pop("_cls_name", None)
+            if isinstance(stored, dict):
+                cls_name = stored.pop("_cls_name", None)
                 config_dataclass = getattr(current_module, cls_name)
-                loaded_attr = config_dataclass(**attr)
+                loaded_attr = config_dataclass(**stored)
                 setattr(self, attr_name, loaded_attr)
 
     @staticmethod

@@ -13,15 +13,12 @@
 # limitations under the License.
 """Config class for Granite Speech."""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="ibm-granite/granite-speech-3.3-2b")
-@strict
 class GraniteSpeechEncoderConfig(PreTrainedConfig):
     r"""
     feedforward_mult (`int`, *optional*, defaults to 4):
@@ -80,7 +77,6 @@ class GraniteSpeechEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="ibm-granite/granite-speech-3.3-2b")
-@strict
 class GraniteSpeechConfig(PreTrainedConfig):
     r"""
     projector_config (`Union[AutoConfig, dict]`, *optional*, defaults to `Blip2QFormerConfig`):

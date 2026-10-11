@@ -17,7 +17,6 @@ from collections.abc import Callable
 
 import numpy as np
 import torch
-from huggingface_hub.dataclasses import strict
 from salix import Struct
 from torch import nn
 
@@ -68,7 +67,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="nvidia/nemotron-speech-streaming-en-0.6b")
-@strict
 class NemotronAsrStreamingEncoderConfig(ParakeetEncoderConfig):
     r"""
     convolution_bias (`bool`, *optional*, defaults to `True`):
@@ -128,7 +126,6 @@ class NemotronAsrStreamingEncoderConfig(ParakeetEncoderConfig):
 
 
 @auto_docstring(checkpoint="nvidia/nemotron-speech-streaming-en-0.6b")
-@strict
 class NemotronAsrStreamingConfig(ParakeetRNNTConfig):
     r"""
     decoder_hidden_size (`int`, *optional*, defaults to 640):

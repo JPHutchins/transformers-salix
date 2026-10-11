@@ -20,15 +20,12 @@
 
 from typing import Any, Literal
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="Zyphra/ZAYA1-8B")
-@strict
 class ZayaConfig(PreTrainedConfig):
     r"""
     lm_head_bias (`bool`, *optional*, defaults to `False`):

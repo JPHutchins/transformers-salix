@@ -23,7 +23,6 @@ backends apply the same sink through the shared attention dispatch by passing ``
 import copy
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 from torch.nn import functional as F
 
@@ -51,7 +50,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="ibm-granite/granite-swash-3b-a600m")
-@strict
 class GraniteMoeSWAConfig(GraniteMoeSharedConfig):
     r"""
     shared_intermediate_size (`int`, *optional*, defaults to 0):
