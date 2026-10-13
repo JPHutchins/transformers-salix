@@ -42,7 +42,7 @@ from .utils import (
     is_torch_available,
     logging,
 )
-from .utils.generic import DefaultOnDeleteStruct, is_field_set, is_timm_config_dict
+from .utils.generic import DefaultOnDeleteStruct, is_timm_config_dict
 
 
 if TYPE_CHECKING:
@@ -994,14 +994,16 @@ class PreTrainedConfig(
         return obj
 
     def _attributes(self) -> dict[str, Any]:
-        return {
-            **{
-                field.name: object.__getattribute__(self, field.name)
-                for field in fields(self)
-                if self.attribute_map.get(field.name, field.name) == field.name and is_field_set(self, field.name)
-            },
-            **self.__dict__,
-        }
+        attribute_map = self.attribute_map
+        values = {}
+        for name in type(self).__struct_fields__:
+            if attribute_map.get(name, name) != name:
+                continue
+            try:
+                values[name] = object.__getattribute__(self, name)
+            except AttributeError:
+                continue
+        return {**values, **self.__dict__}
 
     def __eq__(self, other):
         return isinstance(other, PreTrainedConfig) and (self._attributes() == other._attributes())
