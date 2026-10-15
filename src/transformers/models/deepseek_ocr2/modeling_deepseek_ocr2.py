@@ -21,10 +21,10 @@
 import collections
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -54,8 +54,7 @@ from .configuration_deepseek_ocr2 import (
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class DeepseekOcr2ModelOutputWithPooling(BaseModelOutputWithPooling):
+class DeepseekOcr2ModelOutputWithPooling(BaseModelOutputWithPooling, Struct, frozen=False):
     """
     local_last_hidden_state (`torch.FloatTensor` of shape `(total_local_patches, sequence_length, hidden_size)`, *optional*):
         Last hidden state from the vision encoder for local (cropped) patches.
@@ -75,8 +74,7 @@ class DeepseekOcr2ModelOutputWithPooling(BaseModelOutputWithPooling):
     Base class for Llava outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class DeepseekOcr2ModelOutputWithPast(BaseModelOutputWithPast):
+class DeepseekOcr2ModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance. For more details, see our [kv cache guide](https://huggingface.co/docs/transformers/en/kv_cache).
@@ -96,8 +94,7 @@ class DeepseekOcr2ModelOutputWithPast(BaseModelOutputWithPast):
     Base class for DeepseekOcr2 causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class DeepseekOcr2CausalLMOutputWithPast(ModelOutput):
+class DeepseekOcr2CausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

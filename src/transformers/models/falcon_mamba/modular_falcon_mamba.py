@@ -14,7 +14,6 @@
 """PyTorch FALCONMAMBA model."""
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -44,7 +43,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="tiiuae/falcon-mamba-7b")
-@strict
 class FalconMambaConfig(MambaConfig):
     r"""
     expand (`int`, *optional*, defaults to 2):

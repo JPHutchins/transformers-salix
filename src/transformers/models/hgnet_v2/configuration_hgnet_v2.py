@@ -21,8 +21,6 @@
 
 from collections.abc import Sequence
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import BackboneConfigMixin
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -31,7 +29,6 @@ from ...utils import auto_docstring
 # TODO: Modular conversion for resnet must be fixed as
 # it provides incorrect import for configuration like resnet_resnet
 @auto_docstring(checkpoint="ustc-community/dfine_x_coco")
-@strict
 class HGNetV2Config(BackboneConfigMixin, PreTrainedConfig):
     r"""
     stem_channels (`list[int]`, *optional*, defaults to `[3, 32, 48]`):

@@ -18,7 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -26,7 +25,6 @@ from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="yonigozlan/EdgeTAM-hf")
-@strict
 class EdgeTamVideoPromptEncoderConfig(PreTrainedConfig):
     r"""
     mask_input_channels (`int`, *optional*, defaults to 16):
@@ -50,7 +48,6 @@ class EdgeTamVideoPromptEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="yonigozlan/EdgeTAM-hf")
-@strict
 class EdgeTamVideoMaskDecoderConfig(PreTrainedConfig):
     r"""
     mlp_dim (`int`, *optional*, defaults to 2048):
@@ -88,7 +85,6 @@ class EdgeTamVideoMaskDecoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="yonigozlan/EdgeTAM-hf")
-@strict
 class EdgeTamVideoConfig(PreTrainedConfig):
     r"""
     prompt_encoder_config (Union[`dict`, `EdgeTamVideoPromptEncoderConfig`], *optional*):

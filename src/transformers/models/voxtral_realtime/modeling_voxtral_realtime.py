@@ -19,12 +19,12 @@
 # limitations under the License.
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 from functools import cached_property
 from types import GeneratorType
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -112,13 +112,11 @@ class VoxtralRealtimeConv1dPaddingCache:
         return padded_hidden_states
 
 
-@dataclass
-class VoxtralRealtimeEncoderOutput(BaseModelOutputWithPast):
+class VoxtralRealtimeEncoderOutput(BaseModelOutputWithPast, Struct, frozen=False):
     padding_cache: VoxtralRealtimeConv1dPaddingCache | None = None
 
 
-@dataclass
-class VoxtralRealtimeModelOutputWithPast(BaseModelOutputWithPast):
+class VoxtralRealtimeModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     Args:
         encoder_past_key_values (`Cache`, *optional*):
@@ -135,8 +133,7 @@ class VoxtralRealtimeModelOutputWithPast(BaseModelOutputWithPast):
     audio_hidden_states: torch.FloatTensor | None = None
 
 
-@dataclass
-class VoxtralRealtimeCausalLMOutputWithPast(CausalLMOutputWithPast):
+class VoxtralRealtimeCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     Args:
         encoder_past_key_values (`Cache`, *optional*):

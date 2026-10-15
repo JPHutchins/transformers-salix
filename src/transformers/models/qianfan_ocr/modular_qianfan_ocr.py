@@ -13,11 +13,10 @@
 # limitations under the License.
 
 import re
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ...configuration_utils import PreTrainedConfig
 from ...image_utils import ImageInput
@@ -48,7 +47,6 @@ from ..internvl.processing_internvl import InternVLProcessor, InternVLProcessorK
 
 
 @auto_docstring(checkpoint="baidu/Qianfan-OCR")
-@strict
 class QianfanOCRVisionConfig(InternVLVisionConfig):
     r"""
     projection_dropout (`float`, *optional*, defaults to 0.0):
@@ -84,7 +82,6 @@ class QianfanOCRVisionConfig(InternVLVisionConfig):
 
 
 @auto_docstring(checkpoint="baidu/Qianfan-OCR")
-@strict
 class QianfanOCRConfig(InternVLConfig):
     r"""
     downsample_ratio (`float`, *optional*, defaults to 0.5):
@@ -242,8 +239,7 @@ class QianfanOCRPreTrainedModel(InternVLPreTrainedModel):
     Base class for QianfanOCR outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class QianfanOCRModelOutputWithPast(InternVLModelOutputWithPast):
+class QianfanOCRModelOutputWithPast(InternVLModelOutputWithPast, Struct, frozen=False):
     r"""
     image_hidden_states (`torch.FloatTensor`, *optional*):
         A `torch.FloatTensor` of size `(batch_size, num_images, sequence_length, hidden_size)`.

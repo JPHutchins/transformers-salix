@@ -13,14 +13,11 @@
 # limitations under the License.
 """Splinter model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="tau/splinter-base")
-@strict
 class SplinterConfig(PreTrainedConfig):
     r"""
     question_token_id (`int`, *optional*, defaults to 104):

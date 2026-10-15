@@ -20,12 +20,12 @@
 import itertools
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 from torch.nn import LayerNorm
 
 from ... import initialization as init
@@ -432,8 +432,7 @@ class Glm4vMoePreTrainedModel(PreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class Glm4vMoeCausalLMOutputWithPast(CausalLMOutputWithPast):
+class Glm4vMoeCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -1013,8 +1012,7 @@ class Glm4vMoeTextModel(Glm4vMoePreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class Glm4vMoeModelOutputWithPast(BaseModelOutputWithPast):
+class Glm4vMoeModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.

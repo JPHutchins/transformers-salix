@@ -14,10 +14,10 @@
 """PyTorch MAMBA2 model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -674,9 +674,8 @@ class Mamba2PreTrainedModel(PreTrainedModel):
     Class for the MAMBA2 model outputs.
     """
 )
-@dataclass
 # Copied from transformers.models.mamba.modeling_mamba.MambaOutput with MAMBA->MAMBA2,Mamba->Mamba2
-class Mamba2Output(ModelOutput):
+class Mamba2Output(ModelOutput, Struct, frozen=False):
     r"""
     cache_params (`Cache`):
         The state of the model at the last time step. Can be used in a forward method with the next `input_ids` to
@@ -695,9 +694,8 @@ class Mamba2Output(ModelOutput):
     Base class for causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
 # Copied from transformers.models.mamba.modeling_mamba.MambaCausalLMOutput with Mamba->Mamba2
-class Mamba2CausalLMOutput(ModelOutput):
+class Mamba2CausalLMOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

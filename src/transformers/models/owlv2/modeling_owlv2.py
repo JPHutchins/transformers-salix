@@ -14,10 +14,10 @@
 """PyTorch OWLv2 model."""
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -63,8 +63,7 @@ def image_text_contrastive_loss(similarity: torch.Tensor) -> torch.Tensor:
 
 
 @auto_docstring
-@dataclass
-class Owlv2Output(ModelOutput):
+class Owlv2Output(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for image-text similarity.
@@ -173,8 +172,7 @@ def generalized_box_iou(boxes1, boxes2):
     Output type of [`Owlv2ForObjectDetection`].
     """
 )
-@dataclass
-class Owlv2ObjectDetectionOutput(ModelOutput):
+class Owlv2ObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a
@@ -229,9 +227,8 @@ class Owlv2ObjectDetectionOutput(ModelOutput):
     Output type of [`Owlv2ForObjectDetection.image_guided_detection`].
     """
 )
-@dataclass
 # Copied from transformers.models.owlvit.modeling_owlvit.OwlViTImageGuidedObjectDetectionOutput with OwlViT->Owlv2,OWL-ViT->OWLv2
-class Owlv2ImageGuidedObjectDetectionOutput(ModelOutput):
+class Owlv2ImageGuidedObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, num_patches, num_queries)`):
         Classification logits (including no-object) for all queries.

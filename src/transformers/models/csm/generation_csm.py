@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Optional
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ...generation import (
     GenerateDecoderOnlyOutput,
@@ -37,8 +37,7 @@ if TYPE_CHECKING:
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class CsmGenerateOutput(GenerateDecoderOnlyOutput):
+class CsmGenerateOutput(GenerateDecoderOnlyOutput, Struct, frozen=False):
     """
     Outputs of CsmForConditionalGeneration.generate.
 

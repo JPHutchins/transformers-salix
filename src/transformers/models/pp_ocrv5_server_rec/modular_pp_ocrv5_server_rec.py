@@ -13,13 +13,12 @@
 # limitations under the License.
 
 import math
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision.transforms.v2.functional as tvF
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ...backbone_utils import consolidate_backbone_kwargs_to_config, load_backbone
 from ...configuration_utils import PreTrainedConfig
@@ -57,7 +56,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-OCRv5_server_rec_safetensors")
-@strict
 class PPOCRV5ServerRecConfig(PreTrainedConfig):
     r"""
     head_out_channels (`int`, *optional*, defaults to 18385):
@@ -421,8 +419,7 @@ class PPOCRV5ServerRecModel(PPOCRV5ServerRecPreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class PPOCRV5ServerRecForTextRecognitionOutput(BaseModelOutputWithNoAttention):
+class PPOCRV5ServerRecForTextRecognitionOutput(BaseModelOutputWithNoAttention, Struct, frozen=False):
     r"""
     head_hidden_states (`tuple(torch.FloatTensor)`, *optional*, returned when `output_hidden_states=True` is passed or when `config.output_hidden_states=True`):
         Hidden-states of the PPOCRV5ServerRecHead at the output of each layer plus the optional initial embedding outputs.

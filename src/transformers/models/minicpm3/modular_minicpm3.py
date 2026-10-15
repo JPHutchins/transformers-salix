@@ -16,7 +16,6 @@ import math
 from collections.abc import Callable
 
 import torch
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...cache_utils import Cache
@@ -45,7 +44,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="openbmb/MiniCPM3-4B")
-@strict
 class MiniCPM3Config(LlamaConfig):
     r"""
     kv_lora_rank (`int`, *optional*, defaults to 256):

@@ -18,11 +18,11 @@
 
 import math
 from collections.abc import Callable, Iterable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -52,8 +52,7 @@ from .configuration_sapiens2 import Sapiens2Config
     each selected feature stage (used when `config.return_class_token=True`).
     """
 )
-@dataclass
-class Sapiens2BackboneOutput(BackboneOutput):
+class Sapiens2BackboneOutput(BackboneOutput, Struct, frozen=False):
     r"""
     cls_tokens (`tuple(torch.FloatTensor)`, *optional*):
         CLS token from each selected feature stage, each of shape `(batch_size, hidden_size)`.
@@ -71,8 +70,7 @@ class Sapiens2BackboneOutput(BackboneOutput):
     Class for outputs of pose estimation models.
     """
 )
-@dataclass
-class Sapiens2PoseEstimatorOutput(ModelOutput):
+class Sapiens2PoseEstimatorOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Pose estimation loss.
@@ -95,8 +93,7 @@ class Sapiens2PoseEstimatorOutput(ModelOutput):
     Class for outputs of normal estimation models.
     """
 )
-@dataclass
-class Sapiens2NormalEstimatorOutput(ModelOutput):
+class Sapiens2NormalEstimatorOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Normal estimation loss.
@@ -122,8 +119,7 @@ class Sapiens2NormalEstimatorOutput(ModelOutput):
     Class for outputs of pointmap estimation models.
     """
 )
-@dataclass
-class Sapiens2PointmapEstimatorOutput(ModelOutput):
+class Sapiens2PointmapEstimatorOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Pointmap estimation loss.
@@ -152,8 +148,7 @@ class Sapiens2PointmapEstimatorOutput(ModelOutput):
     Class for outputs of image matting models.
     """
 )
-@dataclass
-class Sapiens2ImageMattingOutput(ModelOutput):
+class Sapiens2ImageMattingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Loss.

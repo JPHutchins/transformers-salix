@@ -14,9 +14,9 @@
 """PyTorch Bros model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import CrossEntropyLoss
 
@@ -46,8 +46,7 @@ logger = logging.get_logger(__name__)
     Base class for outputs of token classification models.
     """
 )
-@dataclass
-class BrosSpadeOutput(ModelOutput):
+class BrosSpadeOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification loss.

@@ -19,10 +19,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -62,8 +62,7 @@ from .configuration_gemma3 import Gemma3Config, Gemma3TextConfig
     Base class for Gemma3 outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class Gemma3ModelOutputWithPast(BaseModelOutputWithPast):
+class Gemma3ModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     image_hidden_states (`torch.FloatTensor`, *optional*):
         A `torch.FloatTensor` of size `(batch_size, num_images, sequence_length, hidden_size)`.
@@ -78,8 +77,7 @@ class Gemma3ModelOutputWithPast(BaseModelOutputWithPast):
     Base class for Gemma3 causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class Gemma3CausalLMOutputWithPast(ModelOutput):
+class Gemma3CausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

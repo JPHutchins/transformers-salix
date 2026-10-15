@@ -14,11 +14,10 @@
 
 import itertools
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
-from huggingface_hub.dataclasses import strict
+from salix import Struct, fields
 from torch import nn
 from torchvision.transforms.v2 import functional as tvF
 
@@ -66,8 +65,7 @@ from ..siglip.modeling_siglip import SiglipEncoderLayer, SiglipMLP
 
 
 @auto_docstring
-@dataclass
-class HunYuanVLModelOutputWithPast(BaseModelOutputWithPast):
+class HunYuanVLModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     image_hidden_states (`torch.FloatTensor`, *optional*):
         Last image features produced by the vision tower and scattered into the language-model token stream.
@@ -82,7 +80,6 @@ class HunYuanVLModelOutputWithPast(BaseModelOutputWithPast):
     """,
     checkpoint="tencent/HunyuanOCR",
 )
-@strict
 class HunYuanVLVisionConfig(PreTrainedConfig):
     r"""
     interpolate_mode (`str`, *optional*, defaults to `"bilinear"`):
@@ -153,7 +150,6 @@ class HunYuanVLVisionConfig(PreTrainedConfig):
     """,
     checkpoint="tencent/HunyuanOCR",
 )
-@strict
 class HunYuanVLTextConfig(HunYuanDenseV1Config):
     r"""
     eod_token_id (`int`, *optional*, defaults to 3):
@@ -264,7 +260,6 @@ class HunYuanVLTextConfig(HunYuanDenseV1Config):
     """,
     checkpoint="tencent/HunyuanOCR",
 )
-@strict
 class HunYuanVLConfig(Qwen2VLConfig):
     r"""
     text_config (`HunYuanVLTextConfig` or `dict`, *optional*):
@@ -308,7 +303,7 @@ class HunYuanVLConfig(Qwen2VLConfig):
         # public OCR checkpoints.
         text_config_class = self.sub_configs["text_config"]
         text_keys = (
-            set(text_config_class.__dataclass_fields__)
+            {field.name for field in fields(text_config_class)}
             | set(text_config_class.attribute_map)
             | {"rope_scaling", "rope_theta"}
         )

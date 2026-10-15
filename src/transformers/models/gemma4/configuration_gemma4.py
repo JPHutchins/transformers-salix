@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Any, Literal
-
-from huggingface_hub.dataclasses import strict
+from typing import Annotated, Any, Literal
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
@@ -25,7 +23,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="google/gemma-4-e2b-it")
-@strict
 class Gemma4AudioConfig(PreTrainedConfig):
     r"""
     subsampling_conv_channels (`list[int]`, defaults to `[128, 32]`):
@@ -73,7 +70,7 @@ class Gemma4AudioConfig(PreTrainedConfig):
     rms_norm_eps: float = 1e-6
     gradient_clipping: float = 1e10
     output_proj_dims: int = 1536
-    initializer_range: float = interval(min=0.0, max=1.0)(default=0.02)
+    initializer_range: Annotated[float, interval(min=0.0, max=1.0)] = 0.02
 
     def __post_init__(self, **kwargs):
         # JSON serialization converts tuples to lists, convert back
@@ -83,7 +80,6 @@ class Gemma4AudioConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/gemma-4-e2b-it")
-@strict
 class Gemma4TextConfig(PreTrainedConfig):
     r"""
     use_bidirectional_attention (`str`, *optional*):
@@ -239,7 +235,6 @@ class Gemma4TextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/gemma-4-e2b-it")
-@strict
 class Gemma4VisionConfig(PreTrainedConfig):
     r"""
     pooling_kernel_size (`int`, *optional*):
@@ -296,7 +291,6 @@ class Gemma4VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/gemma-4-e2b-it")
-@strict
 class Gemma4Config(PreTrainedConfig):
     r"""
     boi_token_id (`int`, *optional*, defaults to 255999):

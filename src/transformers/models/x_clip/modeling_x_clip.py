@@ -20,10 +20,10 @@
 
 import copy
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -40,8 +40,7 @@ from .configuration_x_clip import XCLIPConfig, XCLIPTextConfig, XCLIPVisionConfi
 
 
 @auto_docstring
-@dataclass
-class XCLIPOutput(ModelOutput):
+class XCLIPOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for video-text similarity.

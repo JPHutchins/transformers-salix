@@ -21,7 +21,6 @@ from typing import Union
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -56,7 +55,6 @@ if is_torch_flex_attn_available():
 
 
 @auto_docstring(checkpoint="SmallDoge/Doge-320M")
-@strict
 class DogeConfig(PreTrainedConfig):
     r"""
     keep_window_size (`int`, *optional*, defaults to 2048):

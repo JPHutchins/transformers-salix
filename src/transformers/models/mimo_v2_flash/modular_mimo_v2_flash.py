@@ -16,7 +16,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...cache_utils import Cache
@@ -43,7 +42,6 @@ from ..qwen2.modeling_qwen2 import Qwen2Attention
 
 
 @auto_docstring(checkpoint="XiaomiMiMo/MiMo-V2-Flash")
-@strict
 class MiMoV2FlashConfig(Glm4MoeConfig):
     r"""
     n_group (`int`, *optional*, defaults to 1):

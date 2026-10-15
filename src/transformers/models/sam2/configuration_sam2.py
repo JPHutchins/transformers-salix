@@ -13,15 +13,12 @@
 # limitations under the License.
 """SAM2 model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="facebook/sam2.1-hiera-tiny")
-@strict
 class Sam2HieraDetConfig(PreTrainedConfig):
     r"""
     patch_kernel_size (`list[int]`, *optional*, defaults to `[7, 7]`):
@@ -99,7 +96,6 @@ class Sam2HieraDetConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/sam2.1-hiera-tiny")
-@strict
 class Sam2VisionConfig(PreTrainedConfig):
     r"""
     backbone_channel_list (`List[int]`, *optional*, defaults to `[768, 384, 192, 96]`):
@@ -158,7 +154,6 @@ class Sam2VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/sam2.1-hiera-tiny")
-@strict
 class Sam2PromptEncoderConfig(PreTrainedConfig):
     r"""
     mask_input_channels (`int`, *optional*, defaults to 16):
@@ -182,7 +177,6 @@ class Sam2PromptEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/sam2.1-hiera-tiny")
-@strict
 class Sam2MaskDecoderConfig(PreTrainedConfig):
     r"""
     mlp_dim (`int`, *optional*, defaults to 2048):
@@ -220,7 +214,6 @@ class Sam2MaskDecoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/sam2.1-hiera-tiny")
-@strict
 class Sam2Config(PreTrainedConfig):
     r"""
     prompt_encoder_config (Union[`dict`, `Sam2PromptEncoderConfig`], *optional*):

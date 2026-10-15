@@ -19,9 +19,9 @@
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -44,8 +44,7 @@ from .configuration_granite_speech5 import GraniteSpeech5CTCConfig, GraniteSpeec
     is not preserved in the model's forward.
     """
 )
-@dataclass
-class GraniteSpeech5EncoderModelOutput(BaseModelOutputWithPooling):
+class GraniteSpeech5EncoderModelOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     attention_mask (`torch.Tensor` of shape `(batch_size, sequence_length)`, *optional*):
         Mask to avoid performing attention on padding token indices after sequence compression. Returned because the
@@ -461,8 +460,7 @@ class GraniteSpeech5Encoder(GraniteSpeech5PreTrainedModel):
         return torch.clamp(relpos_dist, -context_size, context_size) + self.config.max_position_embeddings
 
 
-@dataclass
-class GraniteSpeech5CTCGenerateOutput(ModelOutput):
+class GraniteSpeech5CTCGenerateOutput(ModelOutput, Struct, frozen=False):
     """
     Outputs of GraniteSpeech5 CTC model generation.
 

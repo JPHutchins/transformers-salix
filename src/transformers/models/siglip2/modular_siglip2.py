@@ -16,7 +16,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from tokenizers import normalizers
 
 from transformers.models.gemma.tokenization_gemma import GemmaTokenizer
@@ -84,13 +83,11 @@ class Siglip2Tokenizer(GemmaTokenizer):
 
 
 @auto_docstring(checkpoint="google/siglip2-base-patch16-naflex")
-@strict
 class Siglip2TextConfig(SiglipTextConfig):
     pass
 
 
 @auto_docstring(checkpoint="google/siglip2-base-patch16-naflex")
-@strict
 class Siglip2VisionConfig(SiglipVisionConfig):
     r"""
     num_patches (`int`, *optional*, defaults to 256):
@@ -119,7 +116,6 @@ class Siglip2VisionConfig(SiglipVisionConfig):
 
 
 @auto_docstring(checkpoint="google/siglip2-base-patch16-naflex")
-@strict
 class Siglip2Config(SiglipConfig):
     pass
 

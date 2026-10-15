@@ -13,15 +13,12 @@
 # limitations under the License.
 """VitDet model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import BackboneConfigMixin
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="google/vitdet-base-patch16-224")
-@strict
 class VitDetConfig(BackboneConfigMixin, PreTrainedConfig):
     r"""
     pretrain_image_size (`int`, *optional*, defaults to 224):

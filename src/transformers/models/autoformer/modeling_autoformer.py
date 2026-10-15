@@ -16,10 +16,10 @@
 """PyTorch Autoformer model."""
 
 import math
-from dataclasses import dataclass
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -45,8 +45,7 @@ logger = logging.get_logger(__name__)
     Base class for model's outputs that may also contain a past key/values (to speed up sequential decoding).
     """
 )
-@dataclass
-class AutoFormerDecoderOutput(ModelOutput):
+class AutoFormerDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.
@@ -70,8 +69,7 @@ class AutoFormerDecoderOutput(ModelOutput):
     Autoformer model output that contains the additional trend output.
     """
 )
-@dataclass
-class AutoformerModelOutput(ModelOutput):
+class AutoformerModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the decoder of the model.

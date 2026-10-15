@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ... import initialization as init
 from ...cache_utils import Cache, DynamicCache
@@ -51,8 +51,7 @@ logger = logging.get_logger(__name__)
     Base class for the model autoregressive outputs.
     """
 )
-@dataclass
-class CsmOutputWithPast(ModelOutput):
+class CsmOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).
@@ -450,9 +449,9 @@ class CsmForConditionalGeneration(CsmPreTrainedModel, CsmGenerationMixin):
         prefix = "depth_decoder_"
         prefix_len = len(prefix)
         depth_decoder_attrs = {
-            attr[prefix_len:]: value
-            for attr, value in vars(model.generation_config).items()
-            if attr.startswith(prefix)
+            attribute[prefix_len:]: value
+            for attribute, value in vars(model.generation_config).items()
+            if attribute.startswith(prefix)
         }
 
         vars(model.depth_decoder.generation_config).update({"_from_model_config": False, **depth_decoder_attrs})

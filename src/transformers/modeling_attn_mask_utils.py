@@ -18,10 +18,10 @@ and will be removed in the future.
 """
 
 import warnings
-from dataclasses import dataclass
 from typing import Union
 
 import torch
+from salix import Struct
 
 from .utils.import_utils import is_torchdynamo_compiling, is_tracing
 
@@ -32,8 +32,7 @@ DEPRECATION_MESSAGE = (
 )
 
 
-@dataclass
-class AttentionMaskConverter:
+class AttentionMaskConverter(Struct, frozen=False):
     """
     A utility attention mask class that allows one to:
         - Create a causal 4d mask

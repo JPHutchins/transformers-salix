@@ -21,11 +21,11 @@
 import itertools
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
+from salix import Struct
 from torch.nn import LayerNorm
 
 from ... import initialization as init
@@ -68,8 +68,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class Qwen2VLModelOutputWithPast(BaseModelOutputWithPast):
+class Qwen2VLModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -80,8 +79,7 @@ class Qwen2VLModelOutputWithPast(BaseModelOutputWithPast):
 
 
 @auto_docstring
-@dataclass
-class Qwen2VLCausalLMOutputWithPast(CausalLMOutputWithPast):
+class Qwen2VLCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.

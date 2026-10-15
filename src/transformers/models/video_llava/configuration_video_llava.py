@@ -14,8 +14,6 @@
 
 from typing import Literal
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 from ..auto import CONFIG_MAPPING, AutoConfig
@@ -25,7 +23,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="LanguageBind/Video-LLaVA-7B-hf")
-@strict
 class VideoLlavaConfig(PreTrainedConfig):
     r"""
     Example:

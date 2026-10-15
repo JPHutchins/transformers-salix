@@ -19,7 +19,6 @@
 
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -42,7 +41,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="tencent/Youtu-LLM-2B")
-@strict
 class YoutuConfig(DeepseekV3Config):
     r"""
     rope_interleave (`bool`, *optional*, defaults to `True`):

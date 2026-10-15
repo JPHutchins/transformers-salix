@@ -20,7 +20,6 @@ the experts, and the model / causal-LM scaffolding — is inherited unchanged fr
 """
 
 import torch
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...modeling_layers import GenericForSequenceClassification, GenericForTokenClassification
@@ -46,7 +45,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="skt/A.X-K1")
-@strict
 class AXK1Config(DeepseekV3Config):
     r"""
     n_group (`int`, *optional*, defaults to 8):

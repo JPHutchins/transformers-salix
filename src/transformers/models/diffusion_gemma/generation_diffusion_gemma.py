@@ -18,10 +18,10 @@ import math
 import sys
 from abc import ABC, abstractmethod
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 
 from ...cache_utils import (
     Cache,
@@ -206,12 +206,12 @@ class DiffusionGemmaGenerationConfig(GenerationConfig):
         current_module = sys.modules[__name__]
 
         for attr_name in ("sampler_config",):
-            attr = getattr(self, attr_name)
+            stored = getattr(self, attr_name)
             # Load the right dataclass using the `_cls_name` field
-            if isinstance(attr, dict):
-                cls_name = attr.pop("_cls_name", None)
+            if isinstance(stored, dict):
+                cls_name = stored.pop("_cls_name", None)
                 config_dataclass = getattr(current_module, cls_name)
-                loaded_attr = config_dataclass(**attr)
+                loaded_attr = config_dataclass(**stored)
                 setattr(self, attr_name, loaded_attr)
 
     @staticmethod
@@ -243,8 +243,7 @@ class DiffusionGemmaGenerationConfig(GenerationConfig):
         raise NotImplementedError("DiffusionGemmaGenerationConfig does not support `from_model_config`")
 
 
-@dataclass
-class DiffusionGemmaGenerationOutput(ModelOutput):
+class DiffusionGemmaGenerationOutput(ModelOutput, Struct, frozen=False):
     """
     Output class for DiffusionGemma generation.
 
@@ -316,8 +315,7 @@ class LinearTemperatureScheduleLogitsProcessor(LogitsProcessor):
         return scores / temperature
 
 
-@dataclass
-class EntropyBoundSamplerConfig:
+class EntropyBoundSamplerConfig(Struct, frozen=False):
     """
     Configuration class for the entropy bound sampler.
 

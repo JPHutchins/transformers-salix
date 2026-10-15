@@ -2900,7 +2900,7 @@ class Trainer:
 
         </Tip>
 
-        Returns: *NamedTuple* A namedtuple with the following keys:
+        Returns: *named tuple* A namedtuple with the following keys:
 
             - predictions (`np.ndarray`): The predictions on `test_dataset`.
             - label_ids (`np.ndarray`, *optional*): The labels (if the dataset contained some).

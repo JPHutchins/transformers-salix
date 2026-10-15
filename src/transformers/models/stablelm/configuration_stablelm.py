@@ -13,15 +13,12 @@
 # limitations under the License.
 """StableLM model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="stabilityai/stablelm-3b-4e1t")
-@strict
 class StableLmConfig(PreTrainedConfig):
     r"""
     use_parallel_residual (`bool`, *optional*, defaults to `False`):

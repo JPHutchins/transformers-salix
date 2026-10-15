@@ -17,7 +17,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...backbone_utils import BackboneConfigMixin, consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
@@ -26,7 +25,6 @@ from ..auto import AutoConfig
 
 
 @auto_docstring(checkpoint="Roboflow/rf-detr-base")
-@strict
 class RfDetrDinov2Config(BackboneConfigMixin, PreTrainedConfig):
     r"""
     layerscale_value (`float`, *optional*, defaults to 1.0):
@@ -99,7 +97,6 @@ class RfDetrDinov2Config(BackboneConfigMixin, PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Roboflow/rf-detr-base")
-@strict
 class RfDetrConfig(PreTrainedConfig):
     r"""
     hidden_expansion (`float`, *optional*, defaults to 0.5):

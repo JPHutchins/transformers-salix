@@ -20,10 +20,10 @@
 import math
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -55,8 +55,7 @@ from .configuration_rt_detr import RTDetrConfig
     - a stacked tensor of intermediate reference points.
     """
 )
-@dataclass
-class RTDetrDecoderOutput(ModelOutput):
+class RTDetrDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(batch_size, config.decoder_layers, num_queries, hidden_size)`):
         Stacked intermediate hidden states (output of each layer of the decoder).
@@ -90,8 +89,7 @@ class RTDetrDecoderOutput(ModelOutput):
     Base class for outputs of the RT-DETR encoder-decoder model.
     """
 )
-@dataclass
-class RTDetrModelOutput(ModelOutput):
+class RTDetrModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_queries, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the decoder of the model.
@@ -148,8 +146,7 @@ class RTDetrModelOutput(ModelOutput):
     Output type of [`RTDetrForObjectDetection`].
     """
 )
-@dataclass
-class RTDetrObjectDetectionOutput(ModelOutput):
+class RTDetrObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

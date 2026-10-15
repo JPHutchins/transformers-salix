@@ -14,10 +14,10 @@
 """PyTorch DepthPro model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -35,8 +35,7 @@ logger = logging.get_logger(__name__)
     Base class for DepthPro's outputs.
     """
 )
-@dataclass
-class DepthProOutput(ModelOutput):
+class DepthProOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, n_patches_per_batch, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.
@@ -55,8 +54,7 @@ class DepthProOutput(ModelOutput):
     Base class for DepthProForDepthEstimation's output.
     """
 )
-@dataclass
-class DepthProDepthEstimatorOutput(ModelOutput):
+class DepthProDepthEstimatorOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification (or regression if config.num_labels==1) loss.

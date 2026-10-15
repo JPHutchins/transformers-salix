@@ -13,8 +13,6 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
@@ -22,7 +20,6 @@ from ..auto import CONFIG_MAPPING
 
 
 @auto_docstring(checkpoint="UsefulSensors/moonshine-streaming-tiny")
-@strict
 class MoonshineStreamingEncoderConfig(PreTrainedConfig):
     r"""
     sample_rate (`int`, *optional*, defaults to 16000):
@@ -77,7 +74,6 @@ class MoonshineStreamingEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="UsefulSensors/moonshine-streaming-tiny")
-@strict
 class MoonshineStreamingConfig(PreTrainedConfig):
     r"""
     pad_head_dim_to_multiple_of (`int`, *optional*):

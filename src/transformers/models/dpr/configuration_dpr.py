@@ -13,14 +13,11 @@
 # limitations under the License.
 """DPR model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/dpr-ctx_encoder-single-nq-base")
-@strict
 class DPRConfig(PreTrainedConfig):
     r"""
     Example:

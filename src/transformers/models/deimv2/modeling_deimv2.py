@@ -20,11 +20,11 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor
 
 from ... import initialization as init
@@ -50,8 +50,7 @@ from .configuration_deimv2 import Deimv2Config
     - a stacked tensor of intermediate reference points.
     """
 )
-@dataclass
-class Deimv2DecoderOutput(ModelOutput):
+class Deimv2DecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(batch_size, config.decoder_layers, num_queries, hidden_size)`):
         Stacked intermediate hidden states (output of each layer of the decoder).
@@ -85,8 +84,7 @@ class Deimv2DecoderOutput(ModelOutput):
     Base class for outputs of the RT-DETR encoder-decoder model.
     """
 )
-@dataclass
-class Deimv2ModelOutput(ModelOutput):
+class Deimv2ModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_queries, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the decoder of the model.
@@ -144,8 +142,7 @@ class Deimv2ModelOutput(ModelOutput):
     Attentions are only available for HybridEncoder variants with AIFI layers.
     """
 )
-@dataclass
-class Deimv2EncoderOutput(ModelOutput):
+class Deimv2EncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     feature_maps (`list[torch.FloatTensor]`):
         List of multi-scale feature maps from the encoder, one per feature level.
@@ -1986,8 +1983,7 @@ class Deimv2Model(Deimv2PreTrainedModel):
     Output type of [`Deimv2ForObjectDetection`].
     """
 )
-@dataclass
-class Deimv2ObjectDetectionOutput(ModelOutput):
+class Deimv2ObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

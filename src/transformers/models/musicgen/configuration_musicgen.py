@@ -15,15 +15,12 @@
 
 from typing import ClassVar
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto.configuration_auto import AutoConfig
 
 
 @auto_docstring(checkpoint="facebook/musicgen-small")
-@strict
 class MusicgenDecoderConfig(PreTrainedConfig):
     model_type = "musicgen_decoder"
     base_config_key = "decoder_config"
@@ -60,7 +57,6 @@ class MusicgenDecoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/musicgen-small")
-@strict
 class MusicgenConfig(PreTrainedConfig):
     r"""
     text_encoder (`Union[dict, `PretrainedConfig`]`):

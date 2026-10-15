@@ -17,13 +17,12 @@
 import math
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 from torch.nn import Parameter
 
@@ -171,7 +170,6 @@ def get_pool_indices(feature_lens: torch.Tensor, kwargs: dict | None = None) -> 
 
 
 @auto_docstring(checkpoint="Qwen/Qwen2.5-Omni-7B")
-@strict
 class Qwen2_5OmniVisionEncoderConfig(Qwen2_5_VLVisionConfig):
     r"""
     window_size (`int`, *optional*, defaults to 11):
@@ -202,7 +200,6 @@ class Qwen2_5OmniVisionEncoderConfig(Qwen2_5_VLVisionConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen2.5-Omni-7B")
-@strict
 class Qwen2_5OmniAudioEncoderConfig(Qwen2AudioEncoderConfig):
     r"""
     max_source_positions (`int`, *optional*, defaults to 1500):
@@ -235,7 +232,6 @@ class Qwen2_5OmniAudioEncoderConfig(Qwen2AudioEncoderConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen2.5-Omni-7B")
-@strict
 class Qwen2_5OmniTextConfig(PreTrainedConfig):
     r"""
     Example:
@@ -319,7 +315,6 @@ class Qwen2_5OmniTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen2.5-Omni-7B")
-@strict
 class Qwen2_5OmniThinkerConfig(PreTrainedConfig):
     r"""
     position_id_per_seconds (`int`, *optional*, defaults to 25):
@@ -403,7 +398,6 @@ class Qwen2_5OmniThinkerConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen2.5-Omni-7B")
-@strict
 class Qwen2_5OmniTalkerConfig(PreTrainedConfig):
     r"""
     tts_text_start_token_id (`int`, *optional*, defaults to 151860):
@@ -516,7 +510,6 @@ class Qwen2_5OmniTalkerConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen2.5-Omni-7B")
-@strict
 class Qwen2_5OmniDiTConfig(PreTrainedConfig):
     r"""
     ff_mult (`int`, *optional*, defaults to 2):
@@ -581,7 +574,6 @@ class Qwen2_5OmniDiTConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen2.5-Omni-7B")
-@strict
 class Qwen2_5OmniBigVGANConfig(PreTrainedConfig):
     r"""
     mel_dim (`int`, *optional*, defaults to 80):
@@ -609,7 +601,6 @@ class Qwen2_5OmniBigVGANConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen2.5-Omni-7B")
-@strict
 class Qwen2_5OmniToken2WavConfig(PreTrainedConfig):
     r"""
     dit_config ([`DiT_Args`], *optional*):
@@ -671,7 +662,6 @@ class Qwen2_5OmniToken2WavConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen2.5-Omni-7B")
-@strict
 class Qwen2_5OmniConfig(PreTrainedConfig):
     r"""
     thinker_config (`dict`, *optional*):
@@ -1138,8 +1128,7 @@ class Qwen2_5OmniPreTrainedModelForConditionalGeneration(Qwen2_5OmniPreTrainedMo
 
 
 @auto_docstring
-@dataclass
-class Qwen2_5OmniThinkerCausalLMOutputWithPast(CausalLMOutputWithPast):
+class Qwen2_5OmniThinkerCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -2121,8 +2110,7 @@ class Qwen2_5OmniThinkerForConditionalGeneration(Qwen2_5OmniPreTrainedModelForCo
 
 
 @auto_docstring
-@dataclass
-class Qwen2_5OmniTalkerCausalLMOutputWithPast(CausalLMOutputWithPast):
+class Qwen2_5OmniTalkerCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.

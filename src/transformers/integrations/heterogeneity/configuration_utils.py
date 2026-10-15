@@ -17,8 +17,9 @@ from __future__ import annotations
 
 import copy
 from collections.abc import Iterable, Sequence
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
+
+from salix import Struct
 
 from transformers.utils import logging
 
@@ -36,8 +37,7 @@ class AmbiguousGlobalPerLayerAttributeError(RuntimeError):
     """Raised when a per-layer attribute is read from a heterogeneous global config."""
 
 
-@dataclass
-class _HeterogeneitySpec:
+class _HeterogeneitySpec(Struct, frozen=False):
     per_layer_overrides: dict[int, dict[str, Any]]
     per_layer_attributes: set[str]
     explicit_per_layer_attributes: set[str]

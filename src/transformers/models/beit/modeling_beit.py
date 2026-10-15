@@ -19,9 +19,9 @@
 # limitations under the License.
 
 from collections.abc import Callable, Iterable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -50,8 +50,7 @@ from .configuration_beit import BeitConfig
     Class for outputs of [`BeitModel`].
     """
 )
-@dataclass
-class BeitModelOutputWithPooling(BaseModelOutputWithPooling):
+class BeitModelOutputWithPooling(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, hidden_size)`):
         Average of the last layer hidden states of the patch tokens (excluding the *[CLS]* token) if

@@ -18,11 +18,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -57,8 +57,7 @@ from .configuration_kimi_k25 import Kimi_K25Config, Kimi_K25VisionConfig
     Base class for Kimi_K25 outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class Kimi_K25ModelOutputWithPast(BaseModelOutputWithPast):
+class Kimi_K25ModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance. For more details, see our [kv cache guide](https://huggingface.co/docs/transformers/en/kv_cache).
@@ -78,8 +77,7 @@ class Kimi_K25ModelOutputWithPast(BaseModelOutputWithPast):
     Base class for Kimi_K25 causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class Kimi_K25CausalLMOutputWithPast(ModelOutput):
+class Kimi_K25CausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

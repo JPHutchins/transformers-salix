@@ -14,9 +14,9 @@
 """PyTorch LeViT model."""
 
 import itertools
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -39,8 +39,7 @@ logger = logging.get_logger(__name__)
     Output type of [`LevitForImageClassificationWithTeacher`].
     """
 )
-@dataclass
-class LevitForImageClassificationWithTeacherOutput(ModelOutput):
+class LevitForImageClassificationWithTeacherOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, config.num_labels)`):
         Prediction scores as the average of the `cls_logits` and `distillation_logits`.

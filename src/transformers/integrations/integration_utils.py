@@ -28,13 +28,13 @@ import shutil
 import sys
 import tempfile
 import warnings
-from dataclasses import fields
 from enum import Enum
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal
 
 import numpy as np
 import packaging.version
+from salix import fields
 
 
 if os.getenv("WANDB_MODE") == "offline":

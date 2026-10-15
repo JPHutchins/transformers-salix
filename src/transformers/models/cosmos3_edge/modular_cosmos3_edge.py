@@ -20,7 +20,6 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 
 from ...cache_utils import Cache, DynamicCache
 from ...configuration_utils import PreTrainedConfig
@@ -86,7 +85,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="nvidia/Cosmos3-Edge")
-@strict
 class Cosmos3EdgeTextConfig(LlamaConfig):
     model_type = "cosmos3_edge_text"
     base_config_key = "text_config"
@@ -145,7 +143,6 @@ class Cosmos3EdgeTextConfig(LlamaConfig):
 
 
 @auto_docstring(checkpoint="nvidia/Cosmos3-Edge")
-@strict
 class Cosmos3EdgeVisionConfig(Siglip2VisionConfig):
     r"""
     num_patches (`int`, *optional*, defaults to 256):
@@ -162,7 +159,6 @@ class Cosmos3EdgeVisionConfig(Siglip2VisionConfig):
 
 
 @auto_docstring(checkpoint="nvidia/Cosmos3-Edge")
-@strict
 class Cosmos3EdgeConfig(PreTrainedConfig):
     r"""
     projector_hidden_size (`int`, *optional*, defaults to 11520):

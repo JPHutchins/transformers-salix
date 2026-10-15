@@ -13,11 +13,10 @@
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -58,7 +57,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="deepseek-community/Janus-Pro-1B")
-@strict
 class JanusVisionConfig(SiglipVisionConfig):
     r"""
     projection_dropout (`float`, *optional*, defaults to 0.0):
@@ -85,7 +83,6 @@ class JanusVisionConfig(SiglipVisionConfig):
 
 
 @auto_docstring(checkpoint="deepseek-community/Janus-Pro-1B")
-@strict
 class JanusVQVAEConfig(ChameleonVQVAEConfig):
     r"""
     base_channels (`int`, *optional*, defaults to 128):
@@ -125,7 +122,6 @@ class JanusVQVAEConfig(ChameleonVQVAEConfig):
 
 
 @auto_docstring(checkpoint="deepseek-community/Janus-Pro-1B")
-@strict
 class JanusConfig(PreTrainedConfig):
     r"""
     Example:
@@ -214,8 +210,7 @@ class JanusPreTrainedModel(PreTrainedModel):
     Base class for Janus VQ-VAE mode model outputs.
     """
 )
-@dataclass
-class JanusVQVAEOutput(ModelOutput):
+class JanusVQVAEOutput(ModelOutput, Struct, frozen=False):
     r"""
     decoded_pixel_values (`torch.FloatTensor` of shape `(batch_size, num_channels, image_size, image_size)`):
         Reconstructed pixel values after encoding and decoding the input.

@@ -20,11 +20,11 @@
 
 import math
 from collections.abc import Callable, Sequence
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -43,8 +43,7 @@ from .configuration_timesfm2_5 import TimesFm2_5Config
 
 
 @auto_docstring
-@dataclass
-class TimesFm2_5Output(BaseModelOutput):
+class TimesFm2_5Output(BaseModelOutput, Struct, frozen=False):
     r"""
     context_mu (`torch.Tensor` of shape `(batch_size, num_patches)`):
         Running means computed per input patch during normalization.
@@ -60,8 +59,7 @@ class TimesFm2_5Output(BaseModelOutput):
 
 
 @auto_docstring
-@dataclass
-class TimesFm2_5OutputForPrediction(BaseModelOutput):
+class TimesFm2_5OutputForPrediction(BaseModelOutput, Struct, frozen=False):
     r"""
     mean_predictions (`torch.Tensor` of shape `(batch_size, horizon_length)`):
         Deterministic forecasts after denormalization.

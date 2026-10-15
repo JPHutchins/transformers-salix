@@ -15,13 +15,12 @@
 
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -84,8 +83,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling):
+class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     deepstack_features (`List[torch.FloatTensor]`, *optional*):
         List of hidden-states (feature maps) from deepstack layers.
@@ -95,7 +93,6 @@ class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-VL-4B-Instruct")
-@strict
 class Qwen3VLVisionConfig(PreTrainedConfig):
     r"""
     out_hidden_size (`int`, *optional*, defaults to 3584):
@@ -125,7 +122,6 @@ class Qwen3VLVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-VL-4B-Instruct")
-@strict
 class Qwen3VLTextConfig(PreTrainedConfig):
     r"""
     Example:
@@ -173,7 +169,6 @@ class Qwen3VLTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-VL-4B-Instruct")
-@strict
 class Qwen3VLConfig(PreTrainedConfig):
     r"""
     Example:

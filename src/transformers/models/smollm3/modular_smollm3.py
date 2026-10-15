@@ -15,7 +15,6 @@
 from collections.abc import Callable
 
 import torch
-from huggingface_hub.dataclasses import strict
 
 from ...cache_utils import Cache
 from ...configuration_utils import PreTrainedConfig
@@ -42,7 +41,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="HuggingFaceTB/SmolLM3-3B")
-@strict
 class SmolLM3Config(PreTrainedConfig):
     r"""
     no_rope_layers (`List[int]`, *optional*):

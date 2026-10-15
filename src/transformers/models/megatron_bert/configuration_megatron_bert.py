@@ -13,14 +13,11 @@
 # limitations under the License.
 """MEGATRON_BERT model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="nvidia/megatron-bert-uncased-345m")
-@strict
 class MegatronBertConfig(PreTrainedConfig):
     r"""
     Examples:

@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
+
+from salix import Struct
 
 from ...audio_utils import AudioInput, make_list_of_audio
 from ...cache_utils import Cache
@@ -315,8 +316,7 @@ class Nemotron3_5AsrProcessor(NemotronAsrStreamingProcessor):
 
 
 @auto_docstring
-@dataclass
-class Nemotron3_5AsrRNNTOutput(BaseModelOutputWithPooling):
+class Nemotron3_5AsrRNNTOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor`, *optional*, returned when `labels` is provided):
         RNN-T transducer loss.

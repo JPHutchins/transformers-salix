@@ -14,12 +14,11 @@
 
 import math
 from collections.abc import Callable, Sequence
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ...activations import ACT2FN
 from ...masking_utils import create_causal_mask
@@ -52,7 +51,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="google/timesfm-2.5-200m-transformers")
-@strict
 class TimesFm2_5Config(TimesFmConfig):
     r"""
     patch_length (`int`, *optional*, defaults to 32):
@@ -110,8 +108,7 @@ class TimesFm2_5Config(TimesFmConfig):
 
 
 @auto_docstring
-@dataclass
-class TimesFm2_5Output(TimesFmOutput):
+class TimesFm2_5Output(TimesFmOutput, Struct, frozen=False):
     r"""
     context_mu (`torch.Tensor` of shape `(batch_size, num_patches)`):
         Running means computed per input patch during normalization.
@@ -124,8 +121,7 @@ class TimesFm2_5Output(TimesFmOutput):
 
 
 @auto_docstring
-@dataclass
-class TimesFm2_5OutputForPrediction(TimesFmOutputForPrediction):
+class TimesFm2_5OutputForPrediction(TimesFmOutputForPrediction, Struct, frozen=False):
     r"""
     mean_predictions (`torch.Tensor` of shape `(batch_size, horizon_length)`):
         Deterministic forecasts after denormalization.

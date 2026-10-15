@@ -35,7 +35,6 @@ import re
 import sys
 from collections.abc import Iterable
 from pathlib import Path
-from typing import NamedTuple
 
 import requests
 import torch
@@ -43,6 +42,7 @@ from accelerate import init_empty_weights
 from huggingface_hub import hf_hub_download
 from PIL import Image
 from safetensors.torch import load_file
+from salix import Struct
 
 from transformers import EomtDinov3Config, EomtDinov3ForUniversalSegmentation, EomtImageProcessorFast
 
@@ -54,7 +54,7 @@ DEFAULT_BACKBONE_REPO_ID = "facebook/dinov3-vitl16-pretrain-lvd1689m"
 DEFAULT_IMAGE_SIZE = 640
 
 
-class CheckpointSpec(NamedTuple):
+class CheckpointSpec(Struct):
     """Metadata describing how to convert an official EoMT-DINOv3 checkpoint."""
 
     model_id: str
@@ -416,7 +416,7 @@ def _load_original_model(
     return model
 
 
-class BackboneVerificationOutputs(NamedTuple):
+class BackboneVerificationOutputs(Struct):
     patch_embeddings: torch.Tensor
     rope_embeddings: tuple[torch.Tensor, torch.Tensor]
     hidden_states: list[torch.Tensor]

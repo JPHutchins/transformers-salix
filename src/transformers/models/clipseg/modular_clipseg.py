@@ -15,11 +15,10 @@
 
 import copy
 import math
-from dataclasses import dataclass
 from typing import Any
 
 import torch
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -46,7 +45,6 @@ from ..clip.modeling_clip import (
 
 
 @auto_docstring(checkpoint="CIDAS/clipseg-rd64")
-@strict
 class CLIPSegTextConfig(CLIPTextConfig):
     r"""
     Example:
@@ -68,7 +66,6 @@ class CLIPSegTextConfig(CLIPTextConfig):
 
 
 @auto_docstring(checkpoint="CIDAS/clipseg-rd64")
-@strict
 class CLIPSegVisionConfig(CLIPVisionConfig):
     r"""
     Example:
@@ -90,7 +87,6 @@ class CLIPSegVisionConfig(CLIPVisionConfig):
 
 
 @auto_docstring(checkpoint="CIDAS/clipseg-rd64")
-@strict
 class CLIPSegConfig(CLIPConfig):
     r"""
     extract_layers (`list[int]`, *optional*, defaults to `[3, 6, 9]`):
@@ -142,8 +138,7 @@ class CLIPSegOutput(CLIPOutput):
 
 
 @auto_docstring
-@dataclass
-class CLIPSegDecoderOutput(ModelOutput):
+class CLIPSegDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, height, width)`):
         Classification scores for each pixel.
@@ -162,8 +157,7 @@ class CLIPSegDecoderOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class CLIPSegImageSegmentationOutput(ModelOutput):
+class CLIPSegImageSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Binary cross entropy loss for segmentation.

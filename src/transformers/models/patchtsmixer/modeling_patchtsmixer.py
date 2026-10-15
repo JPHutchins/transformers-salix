@@ -15,10 +15,10 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from transformers.modeling_utils import PreTrainedModel
 from transformers.utils import ModelOutput
@@ -1087,8 +1087,7 @@ class PatchTSMixerNOPScaler(nn.Module):
     Base class for `PatchTSMixerEncoderOutput`, with potential hidden states.
     """
 )
-@dataclass
-class PatchTSMixerEncoderOutput(ModelOutput):
+class PatchTSMixerEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_channels, num_patches, d_model)`):
         Hidden-state at the output of the last layer of the model.
@@ -1165,8 +1164,7 @@ class PatchTSMixerEncoder(PatchTSMixerPreTrainedModel):
     Base class for model's outputs, with potential hidden states.
     """
 )
-@dataclass
-class PatchTSMixerModelOutput(ModelOutput):
+class PatchTSMixerModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor`  of shape `(batch_size, num_channels, num_patches, d_model)`):
         Hidden-state at the output of the last layer of the model.
@@ -1286,8 +1284,7 @@ class PatchTSMixerModel(PatchTSMixerPreTrainedModel):
     Output type of [`PatchTSMixerForPreTrainingOutput`].
     """
 )
-@dataclass
-class PatchTSMixerForPreTrainingOutput(ModelOutput):
+class PatchTSMixerForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `y` is provided, `torch.FloatTensor` of shape `()`):
         Total loss
@@ -1388,8 +1385,7 @@ class PatchTSMixerForPretraining(PatchTSMixerPreTrainedModel):
     Output type of [`PatchTSMixerForPredictionOutput`].
     """
 )
-@dataclass
-class PatchTSMixerForPredictionOutput(ModelOutput):
+class PatchTSMixerForPredictionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `y` is provided, `torch.FloatTensor` of shape `()`):
         Total loss.
@@ -1419,8 +1415,7 @@ class PatchTSMixerForPredictionOutput(ModelOutput):
     distribution.
     """
 )
-@dataclass
-class SamplePatchTSMixerPredictionOutput(ModelOutput):
+class SamplePatchTSMixerPredictionOutput(ModelOutput, Struct, frozen=False):
     r"""
     sequences (`torch.FloatTensor` of shape `(batch_size, num_samples, prediction_length, number_channels)`):
         Sampled values from the chosen distribution.
@@ -1435,8 +1430,7 @@ class SamplePatchTSMixerPredictionOutput(ModelOutput):
     distribution.
     """
 )
-@dataclass
-class SamplePatchTSMixerRegressionOutput(ModelOutput):
+class SamplePatchTSMixerRegressionOutput(ModelOutput, Struct, frozen=False):
     r"""
     sequences (`torch.FloatTensor` of shape `(batch_size, num_samples, prediction_length, number_channels)`):
         Sampled values from the chosen distribution.
@@ -1685,8 +1679,7 @@ class PatchTSMixerForPrediction(PatchTSMixerPreTrainedModel):
     Output type of [`PatchTSMixerForTimeSeriesClassificationOutput`].
     """
 )
-@dataclass
-class PatchTSMixerForTimeSeriesClassificationOutput(ModelOutput):
+class PatchTSMixerForTimeSeriesClassificationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `y` is provided, `torch.FloatTensor` of shape `()`):
         Total loss.
@@ -1808,8 +1801,7 @@ class PatchTSMixerForTimeSeriesClassification(PatchTSMixerPreTrainedModel):
     Output type of [`PatchTSMixerForRegressionOutput`].
     """
 )
-@dataclass
-class PatchTSMixerForRegressionOutput(ModelOutput):
+class PatchTSMixerForRegressionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `y` is provided, `torch.FloatTensor` of shape `()`):
         Total loss.

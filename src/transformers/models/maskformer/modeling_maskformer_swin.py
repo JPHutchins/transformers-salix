@@ -17,9 +17,9 @@ states before downsampling, which is different from the default Swin Transformer
 
 import collections.abc
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -39,8 +39,7 @@ from .configuration_maskformer_swin import MaskFormerSwinConfig
     Class for MaskFormerSwinModel's outputs that also contains the spatial dimensions of the hidden states.
     """
 )
-@dataclass
-class MaskFormerSwinModelOutputWithPooling(ModelOutput):
+class MaskFormerSwinModelOutputWithPooling(ModelOutput, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, hidden_size)`):
         Last layer hidden-state after a mean pooling operation.
@@ -62,8 +61,7 @@ class MaskFormerSwinModelOutputWithPooling(ModelOutput):
     Class for SwinEncoder's outputs.
     """
 )
-@dataclass
-class MaskFormerSwinBaseModelOutput(ModelOutput):
+class MaskFormerSwinBaseModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     hidden_states_spatial_dimensions (`tuple(tuple(int, int))`, *optional*):
         A tuple containing the spatial dimension of each `hidden_state` needed to reshape the `hidden_states` to

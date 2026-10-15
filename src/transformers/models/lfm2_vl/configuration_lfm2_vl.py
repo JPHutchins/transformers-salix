@@ -13,15 +13,12 @@
 # limitations under the License.
 """PyTorch LFM2-VL model."""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="LiquidAI/LFM2-VL-1.6B")
-@strict
 class Lfm2VlConfig(PreTrainedConfig):
     r"""
     projector_use_layernorm (`bool`, *optional*, defaults to `True`):

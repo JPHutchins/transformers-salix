@@ -13,15 +13,12 @@
 # limitations under the License.
 """Qwen3MoE model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-30B-A3B-Base")
-@strict
 class Qwen3MoeConfig(PreTrainedConfig):
     r"""
     decoder_sparse_step (`int`, *optional*, defaults to 1):

@@ -14,11 +14,11 @@
 """PyTorch Chameleon model."""
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from functools import cached_property
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 
 from ...activations import ACT2FN
@@ -48,8 +48,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class ChameleonVQVAEModelOutput(BaseModelOutputWithPooling):
+class ChameleonVQVAEModelOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     quantized_last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_channels, image_size, image_size)`):
         Quantized last hidden state from the VQ-VAE model.

@@ -13,14 +13,11 @@
 # limitations under the License.
 """Blenderbot model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/blenderbot-3B")
-@strict
 class BlenderbotConfig(PreTrainedConfig):
     r"""
     encoder_no_repeat_ngram_size (`int`, *optional*, defaults to 3):

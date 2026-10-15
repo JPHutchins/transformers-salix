@@ -13,14 +13,11 @@
 # limitations under the License.
 """BioGPT model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="microsoft/biogpt")
-@strict
 class BioGptConfig(PreTrainedConfig):
     r"""
     Example:

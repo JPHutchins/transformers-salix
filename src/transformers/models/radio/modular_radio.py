@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -41,8 +41,7 @@ __all__ = ["RadioModel", "RadioPreTrainedModel"]
 
 
 @auto_docstring(custom_intro="Output of [`RadioModel`].")
-@dataclass
-class RadioModelOutput(ModelOutput):
+class RadioModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     summary (`torch.FloatTensor` of shape `(batch_size, num_summary_idxs * hidden_size)`):
         Flattened summary embedding, gathered from the cls tokens selected by `config.summary_idxs`.

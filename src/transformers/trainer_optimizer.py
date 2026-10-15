@@ -20,11 +20,11 @@ from __future__ import annotations
 import importlib.metadata
 import logging
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
 
 import torch
 from packaging import version
+from salix import Struct
 from torch import nn
 
 from .optimization import Adafactor
@@ -51,8 +51,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-@dataclass
-class OptimizerContext:
+class OptimizerContext(Struct, frozen=False):
     """Context object passed to all optimizer handlers."""
 
     args: TrainingArguments

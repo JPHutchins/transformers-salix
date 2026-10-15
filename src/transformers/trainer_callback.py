@@ -15,24 +15,23 @@
 Callbacks to use with the Trainer class and customize the training loop.
 """
 
-import dataclasses
 import json
 import math
-from dataclasses import dataclass
 
 import numpy as np
+from salix import Struct
 from tqdm.auto import tqdm
 
 from .trainer_utils import IntervalStrategy, SaveStrategy, has_length
 from .training_args import TrainingArguments
 from .utils import logging
+from .utils.generic import asdict
 
 
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class TrainerState:
+class TrainerState(Struct, frozen=False):
     """
     A class containing the [`Trainer`] inner state that will be saved along the model and optimizer when checkpointing
     and passed to the [`TrainerCallback`].
@@ -142,7 +141,7 @@ class TrainerState:
 
     def save_to_json(self, json_path: str):
         """Save the content of this instance in JSON format inside `json_path`."""
-        json_string = json.dumps(dataclasses.asdict(self), indent=2, sort_keys=True) + "\n"
+        json_string = json.dumps(asdict(self), indent=2, sort_keys=True) + "\n"
         with open(json_path, "w", encoding="utf-8") as f:
             f.write(json_string)
 
@@ -230,8 +229,7 @@ class ExportableState:
         return instance
 
 
-@dataclass
-class TrainerControl(ExportableState):
+class TrainerControl(ExportableState, Struct, frozen=False):
     """
     A class that handles the [`Trainer`] control flow. This class is used by the [`TrainerCallback`] to activate some
     switches in the training loop.

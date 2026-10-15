@@ -20,8 +20,6 @@
 
 from typing import Any, Literal
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 from ..auto import CONFIG_MAPPING, AutoConfig
@@ -31,7 +29,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="google/diffusiongemma-26B-A4B-it")
-@strict
 class DiffusionGemmaTextConfig(PreTrainedConfig):
     r"""
     use_bidirectional_attention (`str`, *optional*):
@@ -159,7 +156,6 @@ class DiffusionGemmaTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/diffusiongemma-26B-A4B-it")
-@strict
 class DiffusionGemmaConfig(PreTrainedConfig):
     r"""
     boi_token_id (`int`, *optional*, defaults to 255999):

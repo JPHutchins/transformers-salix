@@ -14,14 +14,11 @@
 # limitations under the License.
 """XLM-RoBERTa configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="FacebookAI/xlm-mlm-en-2048")
-@strict
 class XLMRobertaConfig(PreTrainedConfig):
     r"""
     Examples:

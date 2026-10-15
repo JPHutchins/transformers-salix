@@ -16,11 +16,11 @@
 from collections import OrderedDict, defaultdict
 from collections.abc import Iterator
 from copy import deepcopy
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor
 from tqdm.auto import tqdm
 
@@ -458,8 +458,7 @@ class Sam3VideoInferenceSession:
 
 
 @auto_docstring(custom_intro="Base class for the Sam3Video model's output.")
-@dataclass
-class Sam3VideoSegmentationOutput(ModelOutput):
+class Sam3VideoSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     object_ids (`list[int]`, *optional*):
         List of object IDs being tracked in the current frame.

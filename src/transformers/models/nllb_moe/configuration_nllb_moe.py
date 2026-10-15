@@ -15,14 +15,11 @@
 
 from typing import Literal
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/nllb-moe-54b")
-@strict
 class NllbMoeConfig(PreTrainedConfig):
     r"""
     router_bias (`bool`, *optional*, defaults to `False`):

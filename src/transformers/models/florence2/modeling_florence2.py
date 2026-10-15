@@ -19,11 +19,11 @@
 # limitations under the License.
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -596,8 +596,7 @@ class Florence2MultiModalProjector(nn.Module):
     decoding.
     """
 )
-@dataclass
-class Florence2Seq2SeqModelOutput(Seq2SeqModelOutput):
+class Florence2Seq2SeqModelOutput(Seq2SeqModelOutput, Struct, frozen=False):
     r"""
     image_hidden_states (`torch.FloatTensor`, *optional*):
         A `torch.FloatTensor` of size `(batch_size, num_image_tokens, hidden_size)`.
@@ -613,8 +612,7 @@ class Florence2Seq2SeqModelOutput(Seq2SeqModelOutput):
     decoding.
     """
 )
-@dataclass
-class Florence2Seq2SeqLMOutput(Seq2SeqLMOutput):
+class Florence2Seq2SeqLMOutput(Seq2SeqLMOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

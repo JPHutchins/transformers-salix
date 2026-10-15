@@ -15,7 +15,8 @@ from __future__ import annotations
 
 import functools
 from collections.abc import Callable
-from dataclasses import dataclass
+
+from salix import Struct
 
 from ..core_model_loading import ConversionOps
 from ..quantizers.quantizers_utils import should_convert_module
@@ -37,8 +38,7 @@ if is_torch_available():
 SF_VEC_SIZE = 16
 
 
-@dataclass(frozen=True)
-class NVFP4Kernel:
+class NVFP4Kernel(Struct, frozen=True):
     """Entry points exposed by the NVFP4 Hub kernel."""
 
     PackedWeight: type

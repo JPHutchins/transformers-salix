@@ -17,7 +17,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -48,7 +47,6 @@ from ..eomt.modeling_eomt import (
 
 
 @auto_docstring(checkpoint="tue-mps/coco_panoptic_eomt_large_640_dinov3")
-@strict
 class EomtDinov3Config(EomtConfig):
     r"""
     layerscale_value (`float`, *optional*, defaults to 1.0):

@@ -25,7 +25,6 @@ import re
 import sys
 import typing
 from collections.abc import Callable
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Annotated, Any, Literal, TypedDict, TypeVar, Union
 
@@ -34,6 +33,7 @@ import typing_extensions
 from huggingface_hub import is_offline_mode
 from huggingface_hub.dataclasses import validate_typed_dict
 from huggingface_hub.errors import EntryNotFoundError
+from salix import Struct
 
 from .audio_utils import AudioInput, load_audio, make_list_of_audio
 from .dynamic_module_utils import custom_object_save
@@ -563,8 +563,7 @@ class AllKwargsForChatTemplate(TypedDict, total=False):
     template_kwargs: ProcessorChatTemplateKwargs
 
 
-@dataclass
-class MultiModalData:
+class MultiModalData(Struct, frozen=False):
     """
     Dataclass that holds extra useful data for processing
     multimodal data. Processors currently cannot return keys,

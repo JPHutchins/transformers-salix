@@ -17,7 +17,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
@@ -27,7 +26,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="OFA-Sys/chinese-clip-vit-base-patch16")
-@strict
 class ChineseCLIPTextConfig(PreTrainedConfig):
     r"""
     type_vocab_size (`int`, *optional*, defaults to 2):
@@ -78,7 +76,6 @@ class ChineseCLIPTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="OFA-Sys/chinese-clip-vit-base-patch16")
-@strict
 class ChineseCLIPVisionConfig(PreTrainedConfig):
     r"""
     Example:
@@ -122,7 +119,6 @@ class ChineseCLIPVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="OFA-Sys/chinese-clip-vit-base-patch16")
-@strict
 class ChineseCLIPConfig(PreTrainedConfig):
     r"""
     Example:

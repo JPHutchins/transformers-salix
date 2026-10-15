@@ -17,7 +17,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -44,7 +43,6 @@ OPENAI_PRIVACY_FILTER_NER_LABELS = ("O",) + tuple(
 
 
 @auto_docstring(checkpoint="openai/privacy-filter")
-@strict
 class OpenAIPrivacyFilterConfig(PreTrainedConfig):
     model_type = "openai_privacy_filter"
     attribute_map = {

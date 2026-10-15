@@ -13,14 +13,11 @@
 # limitations under the License.
 """SqueezeBERT model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="squeezebert/squeezebert-uncased")
-@strict
 class SqueezeBertConfig(PreTrainedConfig):
     r"""
     q_groups (`int`, *optional*, defaults to 4):

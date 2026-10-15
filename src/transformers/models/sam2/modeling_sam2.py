@@ -20,12 +20,12 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor
 
 from ... import initialization as init
@@ -52,8 +52,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(custom_intro="Base class for the vision encoder's outputs.")
-@dataclass
-class Sam2VisionEncoderOutput(BaseModelOutputWithPooling):
+class Sam2VisionEncoderOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, height, width, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.
@@ -70,8 +69,7 @@ class Sam2VisionEncoderOutput(BaseModelOutputWithPooling):
 
 
 @auto_docstring(custom_intro="Base class for the Sam2 model's output.")
-@dataclass
-class Sam2ImageSegmentationOutput(ModelOutput):
+class Sam2ImageSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     iou_scores (`torch.FloatTensor` of shape `(batch_size, point_batch_size, num_masks)`):
         The Intersection over Union (IoU) scores of the predicted masks.
@@ -551,8 +549,7 @@ class Sam2MultiScaleBlock(GradientCheckpointingLayer):
     Hiera model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
-class Sam2HieraDetModelOutput(ModelOutput):
+class Sam2HieraDetModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, height, width, hidden_size)`):
         hidden-states at the output of the last layer of the model.

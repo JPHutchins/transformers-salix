@@ -17,7 +17,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...cache_utils import Cache, DynamicCache
@@ -59,14 +58,12 @@ from ..qwen3_vl.video_processing_qwen3_vl import Qwen3VLVideoProcessor
 
 
 @auto_docstring(checkpoint="CohereLabs/North-Micro-Vision-Instruct")
-@strict
 class CohereCompassVisionConfig(Qwen3VLVisionConfig):
     model_type = "cohere_compass_vision"
     base_config_key = "vision_config"
 
 
 @auto_docstring(checkpoint="CohereLabs/North-Micro-Vision-Instruct")
-@strict
 class CohereCompassTextConfig(Cohere2Config):
     r"""
     logit_scale (`float`, *optional*):
@@ -98,7 +95,6 @@ class CohereCompassTextConfig(Cohere2Config):
 
 
 @auto_docstring(checkpoint="CohereLabs/North-Micro-Vision-Instruct")
-@strict
 class CohereCompassConfig(Qwen3VLConfig):
     r"""
     Example:

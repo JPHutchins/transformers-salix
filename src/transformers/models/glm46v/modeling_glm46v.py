@@ -20,11 +20,11 @@
 
 
 import itertools
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ...cache_utils import Cache
 from ...generation import GenerationMixin
@@ -59,8 +59,7 @@ class Glm46VPreTrainedModel(PreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class Glm46VModelOutputWithPast(BaseModelOutputWithPast):
+class Glm46VModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -430,8 +429,7 @@ class Glm46VModel(Glm46VPreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class Glm46VCausalLMOutputWithPast(CausalLMOutputWithPast):
+class Glm46VCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.

@@ -14,7 +14,6 @@
 
 
 import torch
-from huggingface_hub.dataclasses import strict
 
 from ...cache_utils import Cache, DynamicCache
 from ...configuration_utils import PreTrainedConfig
@@ -37,7 +36,6 @@ from ..olmoe.modeling_olmoe import (
 
 
 @auto_docstring(checkpoint="allenai/FlexOlmo-7x7B-1T")
-@strict
 class FlexOlmoConfig(PreTrainedConfig):
     r"""
     Example:

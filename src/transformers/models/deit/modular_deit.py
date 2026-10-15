@@ -13,9 +13,9 @@
 # limitations under the License.
 """PyTorch DeiT (Data-efficient Image Transformers) model."""
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -237,8 +237,7 @@ class DeiTForImageClassification(ViTForImageClassification):
     Output type of [`DeiTForImageClassificationWithTeacher`].
     """
 )
-@dataclass
-class DeiTForImageClassificationWithTeacherOutput(ModelOutput):
+class DeiTForImageClassificationWithTeacherOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, config.num_labels)`):
         Prediction scores as the average of the cls_logits and distillation logits.

@@ -15,7 +15,6 @@
 from collections.abc import Callable
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -43,7 +42,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="ibm-granite/granite-speech-5.0-470m-turboctc")
-@strict
 class GraniteSpeech5EncoderConfig(PreTrainedConfig):
     r"""
     max_position_embeddings (`int`, *optional*, defaults to 512):
@@ -111,7 +109,6 @@ class GraniteSpeech5EncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="ibm-granite/granite-speech-5.0-470m-turboctc")
-@strict
 class GraniteSpeech5CTCConfig(ParakeetCTCConfig):
     r"""
     ctc_loss_reduction (`str`, *optional*, defaults to `"mean"`):

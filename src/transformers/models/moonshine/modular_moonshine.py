@@ -13,11 +13,10 @@
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ...activations import ACT2FN
 from ...cache_utils import Cache, DynamicCache, EncoderDecoderCache
@@ -48,7 +47,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="UsefulSensors/moonshine-tiny")
-@strict
 class MoonshineConfig(PreTrainedConfig):
     r"""
     encoder_num_key_value_heads (`int`, *optional*):
@@ -140,8 +138,7 @@ class MoonshineConfig(PreTrainedConfig):
     Extends [~modeling_outputs.BaseModelOutput] to include the output attention mask since sequence length is not preserved in the model's forward.
     """
 )
-@dataclass
-class MoonshineEncoderModelOutput(BaseModelOutput):
+class MoonshineEncoderModelOutput(BaseModelOutput, Struct, frozen=False):
     r"""
     attention_mask (`torch.Tensor` of shape `(batch_size, sequence_length)`, *optional*):
         Mask to avoid performing attention on padding token indices after sequence compression. Returned because the

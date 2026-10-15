@@ -16,7 +16,6 @@ import itertools
 from collections.abc import Callable
 
 import torch
-from huggingface_hub.dataclasses import strict
 from tokenizers import Tokenizer, decoders, normalizers, pre_tokenizers, processors
 from tokenizers.models import Unigram
 from torch import nn
@@ -214,7 +213,6 @@ class LasrProcessor(ProcessorMixin):
 
 
 @auto_docstring(checkpoint="google/medasr")
-@strict
 class LasrEncoderConfig(ParakeetEncoderConfig):
     r"""
     convolution_bias (`bool`, *optional*, defaults to `False`):
@@ -274,7 +272,6 @@ class LasrEncoderConfig(ParakeetEncoderConfig):
 
 
 @auto_docstring(checkpoint="google/medasr")
-@strict
 class LasrCTCConfig(ParakeetCTCConfig):
     r"""
     ctc_loss_reduction (`str`, *optional*, defaults to `"mean"`):

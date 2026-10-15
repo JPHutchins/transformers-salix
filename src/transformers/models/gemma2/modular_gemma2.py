@@ -16,7 +16,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ...activations import ACT2FN
 from ...cache_utils import Cache, DynamicCache
@@ -54,7 +53,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="google/gemma2-7b")
-@strict
 class Gemma2Config(PreTrainedConfig):
     r"""
     query_pre_attn_scalar (`float`, *optional*, defaults to 256):

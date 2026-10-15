@@ -18,8 +18,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 
+from salix import Struct
 from torch import nn
 
 from transformers import AutoModel
@@ -54,8 +54,7 @@ class ColQwen2PreTrainedModel(PreTrainedModel):
     Base class for ColQwen2 embeddings output.
     """
 )
-@dataclass
-class ColQwen2ForRetrievalOutput(ModelOutput):
+class ColQwen2ForRetrievalOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

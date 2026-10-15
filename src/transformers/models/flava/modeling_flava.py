@@ -16,10 +16,10 @@
 import collections
 import math
 from collections import OrderedDict
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -58,8 +58,7 @@ FlavaPossibleConfigs = FlavaTextConfig | FlavaImageConfig | FlavaMultimodalConfi
     `text_projection` layers on `image_embeddings` and `text_embeddings` respectively.
     """
 )
-@dataclass
-class FlavaModelOutput(ModelOutput):
+class FlavaModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     image_embeddings (`torch.FloatTensor` of shape `(batch_size, output_dim)`, *optional*, returned when `pixel_values` are present):
         The image embeddings which are basically the pooled output of [`FlavaImageModel`].
@@ -94,8 +93,7 @@ class FlavaModelOutput(ModelOutput):
     Class representing pretraining losses from FLAVA model
     """
 )
-@dataclass
-class FlavaLosses(ModelOutput):
+class FlavaLosses(ModelOutput, Struct, frozen=False):
     r"""
     mim (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `mim_labels` and `pixel_values` are present, `input_ids_masked` is absent and `mim_weight` > 0.):
         Masked Image Modeling loss as used in BeIT calculated only for unimodal image data.
@@ -138,8 +136,7 @@ class FlavaLosses(ModelOutput):
     `text_projection` layers on `image_embeddings` and `text_embeddings` respectively.
     """
 )
-@dataclass
-class FlavaForPreTrainingOutput(ModelOutput):
+class FlavaForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor`, *optional*, returned when `return_loss` is True):
         Total loss calculated for this model.

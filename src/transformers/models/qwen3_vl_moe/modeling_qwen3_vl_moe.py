@@ -21,12 +21,12 @@
 import itertools
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -556,8 +556,7 @@ class Qwen3VLMoeVisionBlock(GradientCheckpointingLayer):
 
 
 @auto_docstring
-@dataclass
-class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling):
+class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     deepstack_features (`List[torch.FloatTensor]`, *optional*):
         List of hidden-states (feature maps) from deepstack layers.
@@ -944,8 +943,7 @@ class Qwen3VLMoeTextModel(Qwen3VLMoePreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class Qwen3VLMoeModelOutputWithPast(BaseModelOutputWithPast):
+class Qwen3VLMoeModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -957,8 +955,7 @@ class Qwen3VLMoeModelOutputWithPast(BaseModelOutputWithPast):
 
 
 @auto_docstring
-@dataclass
-class Qwen3VLMoeCausalLMOutputWithPast(CausalLMOutputWithPast):
+class Qwen3VLMoeCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.

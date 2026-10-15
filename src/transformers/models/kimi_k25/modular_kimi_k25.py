@@ -18,7 +18,6 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...cache_utils import Cache
@@ -105,7 +104,6 @@ def get_vision_temporal_merge_index(
 
 
 @auto_docstring(checkpoint="moonshotai/Kimi-K2.6")
-@strict
 class Kimi_K25VisionConfig(PreTrainedConfig):
     r"""
     pos_emb_height (`int`, *optional*):
@@ -135,7 +133,6 @@ class Kimi_K25VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="moonshotai/Kimi-K2.6")
-@strict
 class Kimi_K25Config(PreTrainedConfig):
     r"""
     projection_hidden_size (`int`, *optional*, defaults to `1152`):

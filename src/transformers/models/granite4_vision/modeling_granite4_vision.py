@@ -20,11 +20,11 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 from fractions import Fraction
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -52,8 +52,7 @@ from .configuration_granite4_vision import Granite4VisionConfig, Granite4VisionT
     Base class for Llava outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class Granite4VisionModelOutputWithPast(BaseModelOutputWithPast):
+class Granite4VisionModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     deepstack_features (`list[tuple[int, list[torch.Tensor]]]`, *optional*):
         List of `(llm_layer_idx, packed_features)` pairs produced by the deepstack
@@ -71,8 +70,7 @@ class Granite4VisionModelOutputWithPast(BaseModelOutputWithPast):
     Base class for Granite4Vision causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class Granite4VisionCausalLMOutputWithPast(ModelOutput):
+class Granite4VisionCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).
@@ -99,8 +97,7 @@ class Granite4VisionCausalLMOutputWithPast(ModelOutput):
     Base class for Granite4Vision causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class Granite4VisionImageFeaturesOutput(BaseModelOutputWithPooling):
+class Granite4VisionImageFeaturesOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     deepstack_features (`list[tuple[int, list[torch.Tensor]]]`, *optional*):
         List of `(llm_layer_idx, packed_features)` pairs produced by the deepstack

@@ -18,7 +18,6 @@ from collections.abc import Callable
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -68,7 +67,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="MiniMaxAI/MiniMax-M3")
-@strict
 class MiniMaxM3VLTextConfig(MiniMaxM2Config):
     r"""
     dense_intermediate_size (`int`, *optional*, defaults to 12288):
@@ -164,7 +162,6 @@ class MiniMaxM3VLTextConfig(MiniMaxM2Config):
 
 
 @auto_docstring(checkpoint="MiniMaxAI/MiniMax-M3")
-@strict
 class MiniMaxM3VLVisionConfig(PreTrainedConfig):
     r"""
     rope_parameters (`RopeParameters`, *optional*):
@@ -192,7 +189,6 @@ class MiniMaxM3VLVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="MiniMaxAI/MiniMax-M3")
-@strict
 class MiniMaxM3VLConfig(PreTrainedConfig):
     model_type = "minimax_m3_vl"
     sub_configs = {"text_config": AutoConfig, "vision_config": AutoConfig}

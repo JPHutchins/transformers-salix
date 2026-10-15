@@ -13,8 +13,6 @@
 # limitations under the License.
 """LayoutLMv2 model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, is_detectron2_available
 
@@ -25,7 +23,6 @@ if is_detectron2_available():
 
 
 @auto_docstring(checkpoint="microsoft/layoutlmv2-base-uncased")
-@strict
 class LayoutLMv2Config(PreTrainedConfig):
     r"""
     max_2d_position_embeddings (`int`, *optional*, defaults to 1024):

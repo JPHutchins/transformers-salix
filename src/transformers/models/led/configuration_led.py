@@ -13,14 +13,11 @@
 # limitations under the License.
 """LED model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="allenai/led-base-16384")
-@strict
 class LEDConfig(PreTrainedConfig):
     r"""
     max_encoder_position_embeddings (`int`, *optional*, defaults to 16384):

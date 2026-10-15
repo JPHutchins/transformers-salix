@@ -18,9 +18,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ...modeling_utils import PreTrainedModel
@@ -51,8 +51,7 @@ class ColModernVBertPreTrainedModel(PreTrainedModel):
     Base class for ColModernVBert embeddings output.
     """
 )
-@dataclass
-class ColModernVBertForRetrievalOutput(ModelOutput):
+class ColModernVBertForRetrievalOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

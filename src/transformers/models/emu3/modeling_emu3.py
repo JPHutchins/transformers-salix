@@ -21,12 +21,12 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 from functools import cached_property
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -47,8 +47,7 @@ from .configuration_emu3 import Emu3Config, Emu3TextConfig, Emu3VQVAEConfig
 
 
 @auto_docstring
-@dataclass
-class Emu3VQVAEModelOutput(BaseModelOutputWithPooling):
+class Emu3VQVAEModelOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     image_tokens (`torch.LongTensor` of shape `(batch_size, config.vocab_size`):
         Indices of the image tokens predicted by the VQ-VAE model.

@@ -21,10 +21,10 @@
 import copy
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -41,8 +41,7 @@ from .configuration_clipseg import CLIPSegConfig, CLIPSegTextConfig, CLIPSegVisi
 
 
 @auto_docstring
-@dataclass
-class CLIPSegOutput(ModelOutput):
+class CLIPSegOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for image-text similarity.
@@ -75,8 +74,7 @@ class CLIPSegOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class CLIPSegDecoderOutput(ModelOutput):
+class CLIPSegDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, height, width)`):
         Classification scores for each pixel.
@@ -95,8 +93,7 @@ class CLIPSegDecoderOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class CLIPSegImageSegmentationOutput(ModelOutput):
+class CLIPSegImageSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Binary cross entropy loss for segmentation.

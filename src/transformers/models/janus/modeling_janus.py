@@ -19,10 +19,10 @@
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -68,8 +68,7 @@ class JanusPreTrainedModel(PreTrainedModel):
     Base class for Janus VQ-VAE mode model outputs.
     """
 )
-@dataclass
-class JanusVQVAEOutput(ModelOutput):
+class JanusVQVAEOutput(ModelOutput, Struct, frozen=False):
     r"""
     decoded_pixel_values (`torch.FloatTensor` of shape `(batch_size, num_channels, image_size, image_size)`):
         Reconstructed pixel values after encoding and decoding the input.
@@ -86,8 +85,7 @@ class JanusVQVAEOutput(ModelOutput):
     Base class for Janus model's outputs that may also contain a past key/values (to speed up sequential decoding).
     """
 )
-@dataclass
-class JanusBaseModelOutputWithPast(ModelOutput):
+class JanusBaseModelOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.
@@ -113,8 +111,7 @@ class JanusBaseModelOutputWithPast(ModelOutput):
     Base class for Janus causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class JanusCausalLMOutputWithPast(ModelOutput):
+class JanusCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).
@@ -823,8 +820,7 @@ class JanusVQVAEDecoder(nn.Module):
 
 
 @auto_docstring
-@dataclass
-class JanusVQVAEModelOutput(BaseModelOutputWithPooling):
+class JanusVQVAEModelOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     quantized_last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_channels, image_size, image_size)`):
         Quantized last hidden state from the VQ-VAE model.

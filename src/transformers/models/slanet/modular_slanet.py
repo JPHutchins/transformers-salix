@@ -14,12 +14,11 @@
 
 
 import math
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ... import initialization as init
 from ...backbone_utils import consolidate_backbone_kwargs_to_config, load_backbone
@@ -42,7 +41,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="PaddlePaddle/SLANet_plus_safetensors")
-@strict
 class SLANetConfig(SLANeXtConfig):
     r"""
     post_conv_out_channels (`int`, *optional*, defaults to 96):
@@ -119,8 +117,7 @@ class SLANetPreTrainedModel(SLANeXtPreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class SLANetForTableRecognitionOutput(BaseModelOutputWithNoAttention):
+class SLANetForTableRecognitionOutput(BaseModelOutputWithNoAttention, Struct, frozen=False):
     r"""
     head_hidden_states (`tuple(torch.FloatTensor)`, *optional*, returned when `output_hidden_states=True` is passed or when `config.output_hidden_states=True`):
         Hidden-states of the SLANetSLAHead at each prediction step, varies up to max `self.config.max_text_length` states (depending on early exits).

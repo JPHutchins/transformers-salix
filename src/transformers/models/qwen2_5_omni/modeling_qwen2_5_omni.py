@@ -22,12 +22,12 @@
 import math
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 from torch.nn import Parameter
 
@@ -514,8 +514,7 @@ class Qwen2_5OmniPreTrainedModelForConditionalGeneration(Qwen2_5OmniPreTrainedMo
 
 
 @auto_docstring
-@dataclass
-class Qwen2_5OmniThinkerCausalLMOutputWithPast(CausalLMOutputWithPast):
+class Qwen2_5OmniThinkerCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -2124,8 +2123,7 @@ class Qwen2_5OmniThinkerForConditionalGeneration(Qwen2_5OmniPreTrainedModelForCo
 
 
 @auto_docstring
-@dataclass
-class Qwen2_5OmniTalkerCausalLMOutputWithPast(CausalLMOutputWithPast):
+class Qwen2_5OmniTalkerCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.

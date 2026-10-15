@@ -19,11 +19,11 @@
 # limitations under the License.
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor
 
 from ... import initialization as init
@@ -48,8 +48,7 @@ from .configuration_d_fine import DFineConfig
     - a stacked tensor of intermediate reference points.
     """
 )
-@dataclass
-class DFineDecoderOutput(ModelOutput):
+class DFineDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(batch_size, config.decoder_layers, num_queries, hidden_size)`):
         Stacked intermediate hidden states (output of each layer of the decoder).
@@ -1300,8 +1299,7 @@ class DFineDecoder(DFinePreTrainedModel):
     Base class for outputs of the RT-DETR encoder-decoder model.
     """
 )
-@dataclass
-class DFineModelOutput(ModelOutput):
+class DFineModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_queries, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the decoder of the model.
@@ -1868,8 +1866,7 @@ class DFineModel(DFinePreTrainedModel):
     Output type of [`DFineForObjectDetection`].
     """
 )
-@dataclass
-class DFineObjectDetectionOutput(ModelOutput):
+class DFineObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

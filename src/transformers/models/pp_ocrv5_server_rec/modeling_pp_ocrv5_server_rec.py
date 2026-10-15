@@ -19,11 +19,11 @@
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ...activations import ACT2FN
 from ...backbone_utils import load_backbone
@@ -343,8 +343,7 @@ class PPOCRV5ServerRecModel(PPOCRV5ServerRecPreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class PPOCRV5ServerRecForTextRecognitionOutput(BaseModelOutputWithNoAttention):
+class PPOCRV5ServerRecForTextRecognitionOutput(BaseModelOutputWithNoAttention, Struct, frozen=False):
     r"""
     head_hidden_states (`tuple(torch.FloatTensor)`, *optional*, returned when `output_hidden_states=True` is passed or when `config.output_hidden_states=True`):
         Hidden-states of the PPOCRV5ServerRecHead at the output of each layer plus the optional initial embedding outputs.

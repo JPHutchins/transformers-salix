@@ -18,14 +18,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="google/medasr")
-@strict
 class LasrEncoderConfig(PreTrainedConfig):
     r"""
     convolution_bias (`bool`, *optional*, defaults to `False`):
@@ -99,7 +97,6 @@ class LasrEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/medasr")
-@strict
 class LasrCTCConfig(PreTrainedConfig):
     r"""
     ctc_loss_reduction (`str`, *optional*, defaults to `"mean"`):

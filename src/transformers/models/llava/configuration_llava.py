@@ -14,15 +14,12 @@
 
 from typing import Literal
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="llava-hf/llava-1.5-7b-hf")
-@strict
 class LlavaConfig(PreTrainedConfig):
     r"""
     Example:

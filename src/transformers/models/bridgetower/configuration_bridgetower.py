@@ -13,8 +13,6 @@
 # limitations under the License.
 """BridgeTower model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 
@@ -23,7 +21,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="BridgeTower/bridgetower-base")
-@strict
 class BridgeTowerVisionConfig(PreTrainedConfig):
     r"""
     stop_gradient (`bool`, *optional*, defaults to `False`):
@@ -61,7 +58,6 @@ class BridgeTowerVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="BridgeTower/bridgetower-base")
-@strict
 class BridgeTowerTextConfig(PreTrainedConfig):
     r"""
     Example:
@@ -100,7 +96,6 @@ class BridgeTowerTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="BridgeTower/bridgetower-base")
-@strict
 class BridgeTowerConfig(PreTrainedConfig):
     r"""
     share_cross_modal_transformer_layers (`bool`, *optional*, defaults to `True`):

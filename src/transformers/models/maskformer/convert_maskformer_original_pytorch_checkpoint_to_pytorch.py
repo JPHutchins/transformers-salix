@@ -14,7 +14,6 @@
 import sys
 from argparse import ArgumentParser
 from collections.abc import Iterator
-from dataclasses import dataclass
 from io import BytesIO
 from pathlib import Path
 from pprint import pformat
@@ -28,6 +27,7 @@ from detectron2.config import get_cfg
 from detectron2.data import MetadataCatalog
 from detectron2.projects.deeplab import add_deeplab_config
 from PIL import Image
+from salix import Struct
 from torch import Tensor, nn
 
 from transformers.models.maskformer.feature_extraction_maskformer import MaskFormerImageProcessor
@@ -88,8 +88,7 @@ def prepare_img():
     return image
 
 
-@dataclass
-class Args:
+class Args(Struct, frozen=False):
     """Fake command line arguments needed by maskformer/detectron implementation"""
 
     config_file: str

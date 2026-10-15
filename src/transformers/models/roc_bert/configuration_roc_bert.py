@@ -13,14 +13,11 @@
 # limitations under the License.
 """RoCBert model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="weiweishi/roc-bert-base-zh")
-@strict
 class RoCBertConfig(PreTrainedConfig):
     r"""
     enable_pronunciation (`bool`, *optional*, defaults to `True`):

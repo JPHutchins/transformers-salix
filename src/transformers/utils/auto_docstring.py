@@ -16,7 +16,6 @@ from __future__ import annotations
 import inspect
 import os
 from collections.abc import Mapping
-from dataclasses import is_dataclass as _is_python_dataclass
 from functools import lru_cache
 from pathlib import Path
 from types import UnionType
@@ -24,13 +23,14 @@ from typing import ClassVar, Union, get_args, get_origin
 
 import regex as re
 import typing_extensions
+from salix import MISSING, fields
 
 from .doc import (
     MODELS_TO_PIPELINE,
     PIPELINE_TASKS_TO_SAMPLE_DOCSTRINGS,
     PT_SAMPLE_DOCSTRINGS,
 )
-from .generic import ModelOutput
+from .generic import ModelOutput, is_struct
 
 
 PATH_TO_TRANSFORMERS = Path("src").resolve() / "transformers"
@@ -2881,11 +2881,11 @@ def generate_processor_intro(cls) -> str:
     components = []
     component_classes = []
 
-    for attr in attributes:
+    for attribute in attributes:
         # Get the class name for this attribute
-        class_attr = f"{attr}_class"
+        class_attr = f"{attribute}_class"
         # Format attribute name for display
-        attr_display = attr.replace("_", " ")
+        attr_display = attribute.replace("_", " ")
         components.append(attr_display)
         component_classes.append(f"[`{{{class_attr}}}`]")
     if not components:
@@ -4287,6 +4287,31 @@ def auto_method_docstring(
     return func
 
 
+def _init_stand_in(cls):
+    if not is_struct(cls):
+        return cls.__init__
+
+    def __init__(self, *args, **kwargs):
+        pass
+
+    __init__.__qualname__ = f"{cls.__qualname__}.__init__"
+    __init__.__signature__ = inspect.Signature(
+        [
+            inspect.Parameter("self", inspect.Parameter.POSITIONAL_OR_KEYWORD),
+            *(
+                inspect.Parameter(
+                    field.name,
+                    inspect.Parameter.POSITIONAL_OR_KEYWORD,
+                    default=inspect.Parameter.empty if field.default is MISSING else field.default,
+                    annotation=field.type,
+                )
+                for field in fields(cls)
+            ),
+        ]
+    )
+    return __init__
+
+
 def auto_class_docstring(cls, custom_intro=None, custom_args=None, checkpoint=None):
     """
     Wrapper that automatically generates a docstring for classes based on their attributes and methods.
@@ -4303,12 +4328,12 @@ def auto_class_docstring(cls, custom_intro=None, custom_args=None, checkpoint=No
     docstring_args = ""
     if "PreTrainedModel" in (x.__name__ for x in cls.__mro__):
         docstring_init = auto_method_docstring(
-            cls.__init__, parent_class=cls, custom_args=custom_args, checkpoint=checkpoint
+            _init_stand_in(cls), parent_class=cls, custom_args=custom_args, checkpoint=checkpoint
         ).__doc__.replace("Args:", "Parameters:")
     elif "ProcessorMixin" in (x.__name__ for x in cls.__mro__):
         is_processor = True
         docstring_init = auto_method_docstring(
-            cls.__init__,
+            _init_stand_in(cls),
             parent_class=cls,
             custom_args=custom_args,
             checkpoint=checkpoint,
@@ -4343,7 +4368,7 @@ def auto_class_docstring(cls, custom_intro=None, custom_args=None, checkpoint=No
                 custom_args = "\n" + set_min_indent(direct_ancestor.__doc__.strip("\n"), 0) + "\n" + custom_args
 
         docstring_args = auto_method_docstring(
-            cls.__init__,
+            _init_stand_in(cls),
             parent_class=cls,
             custom_args=custom_args,
             checkpoint=checkpoint,
@@ -4353,7 +4378,7 @@ def auto_class_docstring(cls, custom_intro=None, custom_args=None, checkpoint=No
     elif any("BaseVideoProcessor" in x.__name__ for x in cls.__mro__):
         is_video_processor = True
         docstring_init = auto_method_docstring(
-            cls.__init__,
+            _init_stand_in(cls),
             parent_class=cls,
             custom_args=custom_args,
             checkpoint=checkpoint,
@@ -4362,7 +4387,7 @@ def auto_class_docstring(cls, custom_intro=None, custom_args=None, checkpoint=No
     elif any("BaseImageProcessor" in x.__name__ for x in cls.__mro__):
         is_image_processor = True
         docstring_init = auto_method_docstring(
-            cls.__init__,
+            _init_stand_in(cls),
             parent_class=cls,
             custom_args=custom_args,
             checkpoint=checkpoint,
@@ -4387,7 +4412,7 @@ def auto_class_docstring(cls, custom_intro=None, custom_args=None, checkpoint=No
             }
         allowed_params = own_config_params if own_config_params else None
         docstring_args = auto_method_docstring(
-            cls.__init__,
+            _init_stand_in(cls),
             parent_class=cls,
             custom_args=custom_args,
             checkpoint=checkpoint,
@@ -4481,7 +4506,7 @@ def auto_class_docstring(cls, custom_intro=None, custom_args=None, checkpoint=No
             source_args_dict = get_args_doc_from_source(ModelOutputArgs)
             doc_class = cls.__doc__ if cls.__doc__ else ""
             documented_kwargs = parse_docstring(doc_class)[0]
-            for param_name, param_type_annotation in [] if _is_python_dataclass(cls) else cls.__annotations__.items():
+            for param_name, param_type_annotation in [] if is_struct(cls) else cls.__annotations__.items():
                 param_type, optional = process_type_annotation(param_type_annotation, param_name)
 
                 # Check for default value
@@ -4628,8 +4653,7 @@ def auto_docstring(obj=None, *, custom_intro=None, custom_args=None, checkpoint=
         @auto_docstring(
             custom_intro="Custom model outputs with additional fields."
         )
-        @dataclass
-        class MyModelOutput(ImageClassifierOutput):
+        class MyModelOutput(ImageClassifierOutput, Struct, frozen=False):
             r'''
             loss (`torch.FloatTensor`, *optional*):
                 The loss of the model.

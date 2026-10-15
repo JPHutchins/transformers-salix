@@ -14,7 +14,6 @@
 
 
 import torch
-from huggingface_hub.dataclasses import strict
 
 from ...cache_utils import Cache, DynamicCache
 from ...masking_utils import create_causal_mask, create_sliding_window_causal_mask
@@ -35,7 +34,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="facebook/cwm")
-@strict
 class CwmConfig(LlamaConfig):
     model_type = "cwm"
     default_theta = 1_000_000.0

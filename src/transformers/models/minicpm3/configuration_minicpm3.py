@@ -20,15 +20,12 @@
 
 import math
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="openbmb/MiniCPM3-4B")
-@strict
 class MiniCPM3Config(PreTrainedConfig):
     r"""
     kv_lora_rank (`int`, *optional*, defaults to 256):

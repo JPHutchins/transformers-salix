@@ -13,8 +13,6 @@
 # limitations under the License.
 """chameleon model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring, logging
@@ -24,7 +22,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="facebook/chameleon-7b")
-@strict
 class ChameleonVQVAEConfig(PreTrainedConfig):
     r"""
     resolution (`int`, *optional*, defaults to 512):
@@ -62,7 +59,6 @@ class ChameleonVQVAEConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/chameleon-7b")
-@strict
 class ChameleonConfig(PreTrainedConfig):
     r"""
     model_parallel_size (`int`, *optional*, defaults to 1):

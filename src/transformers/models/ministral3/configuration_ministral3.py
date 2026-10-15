@@ -13,8 +13,6 @@
 # limitations under the License.
 """Ministral model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring, logging
@@ -24,7 +22,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="mistralai/Ministral-3-8B-Base-2512")
-@strict
 class Ministral3Config(PreTrainedConfig):
     r"""
     Example:

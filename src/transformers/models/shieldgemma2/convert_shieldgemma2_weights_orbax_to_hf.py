@@ -8,7 +8,6 @@ python -m transformers.models.shieldgemma2.convert_shieldgemma2_weights_orbax_to
     --precision='bfloat16'
 """
 
-import dataclasses
 from collections.abc import Iterator, Mapping, Sequence
 from typing import Any
 
@@ -18,6 +17,7 @@ import torch
 import tree
 from absl import app, flags, logging
 from orbax import checkpoint as obc
+from salix import Struct
 
 from ...image_utils import PILImageResampling
 from ..gemma import GemmaTokenizerFast
@@ -333,8 +333,7 @@ def transpose_reshape(x: torch.Tensor) -> torch.Tensor:
     return x.reshape(x.shape[0] * x.shape[1], x.shape[2]).contiguous()
 
 
-@dataclasses.dataclass(frozen=True)
-class ConversionResult:
+class ConversionResult(Struct, frozen=True):
     state_tree: dict[str, torch.Tensor]
     config: ShieldGemma2Config
 

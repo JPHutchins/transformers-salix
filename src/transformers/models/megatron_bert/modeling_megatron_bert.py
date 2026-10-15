@@ -15,9 +15,9 @@
 """PyTorch MegatronBERT model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
@@ -521,9 +521,8 @@ class MegatronBertPreTrainedModel(PreTrainedModel):
     Output type of [`MegatronBertForPreTraining`].
     """
 )
-@dataclass
 # Copied from transformers.models.bert.modeling_bert.BertForPreTrainingOutput with Bert->MegatronBert
-class MegatronBertForPreTrainingOutput(ModelOutput):
+class MegatronBertForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the masked language modeling loss and the next sequence prediction

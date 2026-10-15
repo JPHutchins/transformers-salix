@@ -13,14 +13,11 @@
 # limitations under the License.
 """MobileViTV2 model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="apple/mobilevitv2-1.0")
-@strict
 class MobileViTV2Config(PreTrainedConfig):
     r"""
     aspp_out_channels (`int`, *optional*, defaults to 512):

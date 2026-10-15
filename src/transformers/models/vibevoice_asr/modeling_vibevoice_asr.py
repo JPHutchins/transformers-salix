@@ -17,9 +17,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -258,8 +258,7 @@ class VibeVoiceAsrPreTrainedModel(PreTrainedModel):
     Base class for VibeVoice ASR outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class VibeVoiceAsrModelOutputWithPast(BaseModelOutputWithPast):
+class VibeVoiceAsrModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance.
@@ -275,8 +274,7 @@ class VibeVoiceAsrModelOutputWithPast(BaseModelOutputWithPast):
     Base class for VibeVoice ASR causal language model outputs.
     """
 )
-@dataclass
-class VibeVoiceAsrCausalLMOutputWithPast(ModelOutput):
+class VibeVoiceAsrCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss.

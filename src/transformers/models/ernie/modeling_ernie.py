@@ -19,10 +19,10 @@
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
+from salix import Struct
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
 from ... import initialization as init
@@ -694,8 +694,7 @@ class ErnieModel(ErniePreTrainedModel):
     Output type of [`ErnieForPreTraining`].
     """
 )
-@dataclass
-class ErnieForPreTrainingOutput(ModelOutput):
+class ErnieForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the masked language modeling loss and the next sequence prediction

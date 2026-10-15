@@ -15,10 +15,10 @@
 import math
 from collections import UserDict
 from collections.abc import Callable
-from dataclasses import dataclass
 from functools import cached_property
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import functional as F
 
@@ -181,8 +181,7 @@ class Gemma4CausalLMOutputWithPast(Gemma3nCausalLMOutputWithPast):
     shared_kv_states: dict[str, tuple[torch.Tensor, torch.Tensor]] | None = None
 
 
-@dataclass
-class Gemma4TextModelOutputWithPast(BaseModelOutputWithPast):
+class Gemma4TextModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     """
     BaseModelOutputWithPast extended with shared_kv_states for KV sharing.
 
@@ -196,8 +195,7 @@ class Gemma4TextModelOutputWithPast(BaseModelOutputWithPast):
 
 
 @auto_docstring
-@dataclass
-class Gemma4AudioModelOutput(BaseModelOutputWithPooling):
+class Gemma4AudioModelOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     attention_mask (`torch.BoolTensor`, *optional*):
         A torch.BoolTensor of shape `(batch_size, num_frames)`. True for valid positions, False for padding.

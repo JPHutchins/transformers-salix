@@ -19,9 +19,9 @@
 # limitations under the License.
 from collections import UserDict
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import init
 
@@ -63,8 +63,7 @@ from .configuration_gemma4_unified import (
 
 
 @auto_docstring
-@dataclass
-class Gemma4UnifiedAudioModelOutput(ModelOutput):
+class Gemma4UnifiedAudioModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, ..., hidden_size)`):
         Last hidden state that went through the audio specific multimodal projectors.
@@ -76,8 +75,7 @@ class Gemma4UnifiedAudioModelOutput(ModelOutput):
     attention_mask: torch.BoolTensor | None = None
 
 
-@dataclass
-class Gemma4UnifiedTextModelOutputWithPast(BaseModelOutputWithPast):
+class Gemma4UnifiedTextModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     """
     BaseModelOutputWithPast extended with shared_kv_states for KV sharing.
 
@@ -95,8 +93,7 @@ class Gemma4UnifiedTextModelOutputWithPast(BaseModelOutputWithPast):
     Base class for Gemma4Unified causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class Gemma4UnifiedCausalLMOutputWithPast(ModelOutput):
+class Gemma4UnifiedCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).
@@ -135,8 +132,7 @@ class Gemma4UnifiedCausalLMOutputWithPast(ModelOutput):
     Base class for Gemma4Unified outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class Gemma4UnifiedModelOutputWithPast(BaseModelOutputWithPast):
+class Gemma4UnifiedModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance. For more details, see our [kv cache guide](https://huggingface.co/docs/transformers/en/kv_cache).

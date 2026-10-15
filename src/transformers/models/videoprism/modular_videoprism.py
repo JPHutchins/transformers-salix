@@ -14,13 +14,12 @@
 
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ... import initialization as init
 from ...masking_utils import create_causal_mask
@@ -51,7 +50,6 @@ _R_SOFTPLUS_0 = 1.442695041
 
 
 @auto_docstring(checkpoint="google/videoprism-base-f16r288")
-@strict
 class VideoPrismVisionConfig(VivitConfig):
     r"""
     num_frames (`int`, *optional*, defaults to 16):
@@ -90,7 +88,6 @@ class VideoPrismVisionConfig(VivitConfig):
 
 
 @auto_docstring(checkpoint="google/videoprism-lvt-base-f16r288")
-@strict
 class VideoPrismTextConfig(SiglipTextConfig):
     r"""
     apply_l2norm (`bool`, *optional*, defaults to `True`):
@@ -117,7 +114,6 @@ class VideoPrismTextConfig(SiglipTextConfig):
 
 
 @auto_docstring(checkpoint="google/videoprism-lvt-base-f16r288")
-@strict
 class VideoPrismConfig(SiglipConfig):
     r"""
     Example:
@@ -197,8 +193,7 @@ class VideoPrismProcessor(ProcessorMixin):
 
 
 @auto_docstring(custom_intro="""Base class for model outputs that include spatial and temporal states.""")
-@dataclass
-class BaseModelOutputWithSpatialAndTemporalStates(BaseModelOutput):
+class BaseModelOutputWithSpatialAndTemporalStates(BaseModelOutput, Struct, frozen=False):
     r"""
     last_temporal_hidden_state (`torch.FloatTensor`, *optional*):
         The last hidden state of the temporal encoder, typically of shape
@@ -215,8 +210,7 @@ class BaseModelOutputWithSpatialAndTemporalStates(BaseModelOutput):
 @auto_docstring(
     custom_intro="""Base class for VideoPrismClipModel outputs.""",
 )
-@dataclass
-class VideoPrismClipOutput(ModelOutput):
+class VideoPrismClipOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits_per_video (`torch.FloatTensor` of shape `(video_batch_size, text_batch_size)`):
         The scaled dot product scores between `video_embeds` and `text_embeds`. This represents the video-text

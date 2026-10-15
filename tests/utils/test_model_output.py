@@ -14,9 +14,9 @@
 
 import io
 import unittest
-from dataclasses import dataclass
 
 import pytest
+from salix import Struct
 
 from transformers import AlbertForMaskedLM
 from transformers.testing_utils import require_torch
@@ -27,8 +27,7 @@ if is_torch_available():
     import torch
 
 
-@dataclass
-class ModelOutputTest(ModelOutput):
+class ModelOutputTest(ModelOutput, Struct, frozen=False):
     a: float
     b: float | None = None
     c: float | None = None
@@ -177,8 +176,8 @@ class ModelOutputTester(unittest.TestCase):
         assert torch.allclose(model(**input_dict).logits, loaded_ep(**input_dict).logits)
 
 
-class ModelOutputTestNoDataclass(ModelOutput):
-    """Invalid test subclass of ModelOutput where @dataclass decorator is not used"""
+class ModelOutputTestNoStruct(ModelOutput):
+    """Invalid test subclass of ModelOutput that does not inherit from Struct"""
 
     a: float
     b: float | None = None
@@ -190,8 +189,8 @@ class ModelOutputSubclassTester(unittest.TestCase):
         # Check that direct usage of ModelOutput instantiates without errors
         ModelOutput({"a": 1.1})
 
-    def test_subclass_no_dataclass(self):
-        # Check that a subclass of ModelOutput without @dataclass is invalid
+    def test_subclass_no_struct(self):
+        # Check that a subclass of ModelOutput without Struct is invalid
         # A valid subclass is inherently tested other unit tests above.
         with self.assertRaises(TypeError):
-            ModelOutputTestNoDataclass(a=1.1, b=2.2, c=3.3)
+            ModelOutputTestNoStruct(a=1.1, b=2.2, c=3.3)

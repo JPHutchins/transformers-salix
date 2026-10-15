@@ -20,11 +20,11 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -450,8 +450,7 @@ class Qwen3ASRMultiModalProjector(nn.Module):
         return hidden_states
 
 
-@dataclass
-class Qwen3ASRModelOutputWithPast(BaseModelOutputWithPast):
+class Qwen3ASRModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     audio_hidden_states (`torch.FloatTensor`, *optional*):
         Projected audio hidden states.
@@ -580,8 +579,7 @@ class Qwen3ASRModel(Qwen3ASRPreTrainedModel):
     Base class for Qwen3ASR causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class Qwen3ASRCausalLMOutputWithPast(ModelOutput):
+class Qwen3ASRCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

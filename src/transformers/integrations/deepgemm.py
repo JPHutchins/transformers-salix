@@ -32,9 +32,9 @@ import os
 import re
 import shutil
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 
 from ..utils import logging
 from ..utils.deprecation import deprecate_kwarg
@@ -51,8 +51,7 @@ logger = logging.get_logger(__name__)
 # ── Kernel loading ─────────────────────────────────────────────────────────────
 
 
-@dataclass(frozen=True)
-class DeepGEMM:
+class DeepGEMM(Struct, frozen=True):
     """Curated entry points exposed by `kernels-community/deep-gemm`."""
 
     fp8_fp4_matmul: Callable

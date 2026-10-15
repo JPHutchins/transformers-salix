@@ -14,9 +14,9 @@
 """PyTorch ZoeDepth model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -36,8 +36,7 @@ logger = logging.get_logger(__name__)
     Extension of `DepthEstimatorOutput` to include domain logits (ZoeDepth specific).
     """
 )
-@dataclass
-class ZoeDepthDepthEstimatorOutput(ModelOutput):
+class ZoeDepthDepthEstimatorOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification (or regression if config.num_labels==1) loss.

@@ -14,7 +14,6 @@
 """Configuration base class and utilities."""
 
 import os
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -23,6 +22,7 @@ import yaml
 from huggingface_hub import is_offline_mode
 from huggingface_hub.errors import OfflineModeIsEnabled
 from huggingface_hub.utils import HFValidationError
+from salix import Struct
 
 from . import __version__
 from .models.auto.modeling_auto import (
@@ -169,8 +169,7 @@ def _get_mapping_values(mapping):
     return result
 
 
-@dataclass
-class TrainingSummary:
+class TrainingSummary(Struct, frozen=False):
     model_name: str
     language: str | list[str] | None = None
     license: str | None = None

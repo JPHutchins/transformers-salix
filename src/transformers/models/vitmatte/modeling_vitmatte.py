@@ -13,9 +13,9 @@
 # limitations under the License.
 """PyTorch ViTMatte model."""
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -30,8 +30,7 @@ from .configuration_vitmatte import VitMatteConfig
     Class for outputs of image matting models.
     """
 )
-@dataclass
-class ImageMattingOutput(ModelOutput):
+class ImageMattingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Loss.

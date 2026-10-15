@@ -21,10 +21,10 @@
 import collections.abc
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -42,8 +42,7 @@ from .configuration_tipsv2 import Tipsv2Config, Tipsv2TextConfig, Tipsv2VisionCo
 
 
 @auto_docstring
-@dataclass
-class Tipsv2Output(ModelOutput):
+class Tipsv2Output(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for image-text similarity.

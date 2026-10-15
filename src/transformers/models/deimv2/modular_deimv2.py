@@ -12,12 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ... import initialization as init
 from ...backbone_utils import load_backbone
@@ -57,7 +56,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="Intellindust/DEIMv2_HGNetv2_N_COCO")
-@strict
 class Deimv2Config(DFineConfig):
     r"""
     initializer_bias_prior_prob (`float`, *optional*):
@@ -206,8 +204,7 @@ class Deimv2ModelOutput(DFineModelOutput):
     Attentions are only available for HybridEncoder variants with AIFI layers.
     """
 )
-@dataclass
-class Deimv2EncoderOutput(ModelOutput):
+class Deimv2EncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     feature_maps (`list[torch.FloatTensor]`):
         List of multi-scale feature maps from the encoder, one per feature level.

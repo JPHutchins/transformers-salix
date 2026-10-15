@@ -20,9 +20,9 @@
 
 import itertools
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -51,8 +51,7 @@ from .configuration_hunyuan_vl import HunYuanVLConfig, HunYuanVLTextConfig, HunY
 
 
 @auto_docstring
-@dataclass
-class HunYuanVLModelOutputWithPast(BaseModelOutputWithPast):
+class HunYuanVLModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     image_hidden_states (`torch.FloatTensor`, *optional*):
         Last image features produced by the vision tower and scattered into the language-model token stream.

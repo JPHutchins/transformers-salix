@@ -13,15 +13,12 @@
 # limitations under the License.
 """Swin Transformer model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import BackboneConfigMixin
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="microsoft/swin-tiny-patch4-window7-224")
-@strict
 class SwinConfig(BackboneConfigMixin, PreTrainedConfig):
     r"""
     depths (`list(int)`, *optional*, defaults to `[2, 2, 6, 2]`):

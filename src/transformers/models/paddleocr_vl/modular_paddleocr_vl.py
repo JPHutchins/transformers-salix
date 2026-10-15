@@ -22,7 +22,6 @@ import warnings
 
 import numpy as np
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -253,7 +252,6 @@ class PaddleOCRVLProcessor(ProcessorMixin):
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PaddleOCR-VL")
-@strict
 class PaddleOCRVisionConfig(SiglipVisionConfig):
     r"""
     Example:
@@ -285,13 +283,11 @@ class PaddleOCRVisionConfig(SiglipVisionConfig):
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PaddleOCR-VL")
-@strict
 class PaddleOCRTextConfig(Ernie4_5Config):
     model_type = "paddleocr_vl_text"
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PaddleOCR-VL")
-@strict
 class PaddleOCRVLConfig(Qwen2VLConfig):
     r"""
     Example:

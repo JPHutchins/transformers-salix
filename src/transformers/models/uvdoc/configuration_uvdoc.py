@@ -21,8 +21,6 @@
 
 from collections.abc import Sequence
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import BackboneConfigMixin, consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -30,7 +28,6 @@ from ..auto import AutoConfig
 
 
 @auto_docstring(checkpoint="PaddlePaddle/UVDoc_safetensors")
-@strict
 class UVDocBackboneConfig(BackboneConfigMixin, PreTrainedConfig):
     r"""
     resnet_head (`Sequence[list[int] | tuple[int, ...]]`, *optional*, defaults to `((3, 32), (32, 32))`):
@@ -110,7 +107,6 @@ class UVDocBackboneConfig(BackboneConfigMixin, PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="PaddlePaddle/UVDoc_safetensors")
-@strict
 class UVDocConfig(PreTrainedConfig):
     r"""
     padding_mode (`str`, *optional*, defaults to `"reflect"`):

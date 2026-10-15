@@ -17,7 +17,6 @@
 from collections.abc import Callable
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -50,7 +49,6 @@ from ..qwen2_vl.processing_qwen2_vl import Qwen2VLProcessor
 
 
 @auto_docstring(checkpoint="LGAI-EXAONE/EXAONE-4.5-33B")
-@strict
 class Exaone4_5_VisionConfig(Qwen2_5_VLVisionConfig):
     r"""
     window_size (`int`, *optional*, defaults to 11):
@@ -68,7 +66,6 @@ class Exaone4_5_VisionConfig(Qwen2_5_VLVisionConfig):
 
 
 @auto_docstring(checkpoint="LGAI-EXAONE/EXAONE-4.5-33B")
-@strict
 class Exaone4_5_Config(PreTrainedConfig):
     model_type = "exaone4_5"
     sub_configs = {"vision_config": AutoConfig, "text_config": AutoConfig}

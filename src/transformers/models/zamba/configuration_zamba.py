@@ -15,14 +15,11 @@
 
 import math
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig, remap_legacy_layer_types
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="Zyphra/Zamba-7B-v1")
-@strict
 class ZambaConfig(PreTrainedConfig):
     r"""
     attention_hidden_size (`int`, *optional*):

@@ -20,7 +20,6 @@ import json
 import os
 import re
 from collections import OrderedDict
-from dataclasses import dataclass, field
 from functools import partial
 from pathlib import Path
 from pprint import pprint
@@ -29,6 +28,7 @@ import torch
 import torch.nn as nn
 from classy_vision.models.regnet import RegNet, RegNetParams
 from huggingface_hub import hf_hub_download
+from salix import Struct
 from torch import Tensor
 from vissl.models.model_helpers import get_trunk_forward_outputs
 
@@ -41,12 +41,11 @@ logging.set_verbosity_info()
 logger = logging.get_logger()
 
 
-@dataclass
-class Tracker:
+class Tracker(Struct, frozen=False):
     module: nn.Module
-    traced: list[nn.Module] = field(default_factory=list)
-    handles: list = field(default_factory=list)
-    name2module: dict[str, nn.Module] = field(default_factory=OrderedDict)
+    traced: list[nn.Module] = []
+    handles: list = []
+    name2module: dict[str, nn.Module] = None
 
     def _forward_hook(self, m, inputs: Tensor, outputs: Tensor, name: str):
         has_not_submodules = len(list(m.modules())) == 1 or isinstance(m, (nn.Conv2d, nn.BatchNorm2d))

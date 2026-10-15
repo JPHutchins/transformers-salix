@@ -14,11 +14,10 @@
 """PyTorch EoMT model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -50,7 +49,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="tue-mps/coco_panoptic_eomt_large_640")
-@strict
 class EomtConfig(ViTConfig):
     r"""
     layerscale_value (`float`, *optional*, defaults to 1.0):
@@ -143,8 +141,7 @@ class EomtConfig(ViTConfig):
     [`~EomtImageProcessor] for details regarding usage.
     """
 )
-@dataclass
-class EomtForUniversalSegmentationOutput(ModelOutput):
+class EomtForUniversalSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.Tensor`, *optional*):
         The computed loss, returned when labels are present.

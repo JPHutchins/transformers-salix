@@ -17,7 +17,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -45,7 +44,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="deepseek-ai/DeepSeek-V2-Lite")
-@strict
 class DeepseekV2Config(LlamaConfig):
     r"""
     first_k_dense_replace (`int`, *optional*, defaults to 0):

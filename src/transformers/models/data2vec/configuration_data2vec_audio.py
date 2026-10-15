@@ -15,14 +15,11 @@
 
 import math
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/data2vec-audio-base-960h")
-@strict
 class Data2VecAudioConfig(PreTrainedConfig):
     r"""
     feat_proj_dropout (`float`, *optional*, defaults to 0.0):

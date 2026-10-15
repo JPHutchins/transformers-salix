@@ -18,10 +18,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn.utils.rnn import pad_sequence
 
@@ -44,8 +44,7 @@ from .configuration_lightglue import LightGlueConfig
     matching information.
     """
 )
-@dataclass
-class LightGlueKeypointMatchingOutput(ModelOutput):
+class LightGlueKeypointMatchingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*):
         Loss computed during training.

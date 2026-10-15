@@ -13,14 +13,11 @@
 # limitations under the License.
 """MBART model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/mbart-large-cc25")
-@strict
 class MBartConfig(PreTrainedConfig):
     r"""
     Example:

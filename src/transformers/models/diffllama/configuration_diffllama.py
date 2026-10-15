@@ -16,15 +16,12 @@
 # limitations under the License.
 """DiffLlama model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="kajuma/DiffLlama-0.3B-handcut")
-@strict
 class DiffLlamaConfig(PreTrainedConfig):
     r"""
     lambda_std_dev (`float`, *optional*, defaults to 0.1):

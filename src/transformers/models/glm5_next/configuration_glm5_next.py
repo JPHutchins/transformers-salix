@@ -18,14 +18,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="zai-org/GLM-5.3-Flash")
-@strict
 class Glm5NextTextConfig(PreTrainedConfig):
     r"""
     n_group (`int`, *optional*, defaults to 1):
@@ -229,7 +227,6 @@ class Glm5NextTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="zai-org/GLM-5.3-Flash")
-@strict
 class Glm5NextVisionConfig(PreTrainedConfig):
     r"""
     out_hidden_size (`int`, *optional*, defaults to 1536):
@@ -263,7 +260,6 @@ class Glm5NextVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="zai-org/GLM-5.3-Flash")
-@strict
 class Glm5NextConfig(PreTrainedConfig):
     r"""
     image_token_id (`int`, *optional*, defaults to 154854):

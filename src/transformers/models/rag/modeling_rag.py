@@ -14,9 +14,9 @@
 """RAG model implementation."""
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ...cache_utils import Cache, EncoderDecoderCache
@@ -38,8 +38,7 @@ logger = logging.get_logger(__name__)
     Base class for retriever augmented marginalized models outputs.
     """
 )
-@dataclass
-class RetrievAugLMMarginOutput(ModelOutput):
+class RetrievAugLMMarginOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss.
@@ -130,8 +129,7 @@ class RetrievAugLMMarginOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class RetrievAugLMOutput(ModelOutput):
+class RetrievAugLMOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, sequence_length, config.vocab_size)`):
         Prediction scores of the language modeling head. The score is possibly marginalized over all documents for

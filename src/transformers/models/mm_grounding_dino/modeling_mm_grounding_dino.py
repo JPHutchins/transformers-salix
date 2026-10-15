@@ -19,10 +19,10 @@
 # limitations under the License.
 import math
 import warnings
-from dataclasses import dataclass
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -683,8 +683,7 @@ class MMGroundingDinoConvModel(nn.Module):
     - vision and text intermediate hidden states
     """
 )
-@dataclass
-class MMGroundingDinoEncoderOutput(ModelOutput):
+class MMGroundingDinoEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state_vision (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the vision encoder.
@@ -1242,8 +1241,7 @@ class MMGroundingDinoEncoder(MMGroundingDinoPreTrainedModel):
     - a stacked tensor of intermediate reference points.
     """
 )
-@dataclass
-class MMGroundingDinoDecoderOutput(ModelOutput):
+class MMGroundingDinoDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(batch_size, config.decoder_layers, num_queries, hidden_size)`):
         Stacked intermediate hidden states (output of each layer of the decoder).
@@ -1623,8 +1621,7 @@ class MMGroundingDinoDecoder(MMGroundingDinoPreTrainedModel):
     Base class for outputs of the Grounding DINO encoder-decoder model.
     """
 )
-@dataclass
-class MMGroundingDinoModelOutput(ModelOutput):
+class MMGroundingDinoModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_queries, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the decoder of the model.
@@ -2201,8 +2198,7 @@ class MMGroundingDinoMLPPredictionHead(nn.Module):
     Output type of [`MMGroundingDinoForObjectDetection`].
     """
 )
-@dataclass
-class MMGroundingDinoObjectDetectionOutput(ModelOutput):
+class MMGroundingDinoObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

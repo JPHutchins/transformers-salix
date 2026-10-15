@@ -18,14 +18,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="tue-mps/videomt-dinov2-small-ytvis2019")
-@strict
 class VideomtConfig(PreTrainedConfig):
     r"""
     layerscale_value (`float`, *optional*, defaults to 1.0):

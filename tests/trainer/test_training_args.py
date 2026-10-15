@@ -1,4 +1,3 @@
-import dataclasses
 import os
 import tempfile
 import unittest
@@ -377,11 +376,8 @@ class TestTrainingArguments(unittest.TestCase):
         self.assertEqual(args.lr_scheduler_kwargs, {"factor": 0.5})
 
     def test_dtype_to_json(self):
-        @dataclasses.dataclass
         class TorchDtypeTrainingArguments(TrainingArguments):
-            dtype: torch.dtype = dataclasses.field(
-                default=torch.float32,
-            )
+            dtype: torch.dtype = torch.float32
 
         for dtype in [
             "float32",

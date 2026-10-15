@@ -17,7 +17,6 @@ import math
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -71,7 +70,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="Qwen/Qwen4-Exp")
-@strict
 class Qwen4ExpTextConfig(Qwen3_5MoeTextConfig):
     r"""
     linear_conv_kernel_dim (`int`, *optional*, defaults to 4):
@@ -266,14 +264,12 @@ class Qwen4ExpTextConfig(Qwen3_5MoeTextConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen4-Exp")
-@strict
 class Qwen4ExpVisionConfig(Qwen3_5MoeVisionConfig):
     model_type = "qwen4_exp_vision"
     base_model_fsdp_plan = None
 
 
 @auto_docstring(checkpoint="Qwen/Qwen4-Exp")
-@strict
 class Qwen4ExpConfig(Qwen3_5MoeConfig):
     r"""
     Example:

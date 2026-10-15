@@ -17,6 +17,7 @@ Generic utilities
 
 from __future__ import annotations
 
+import copy
 import importlib
 import inspect
 import json
@@ -25,15 +26,16 @@ import random
 import re
 import time
 import warnings
+from abc import ABCMeta
 from collections import OrderedDict, UserDict
 from collections.abc import Callable, Iterable, MutableMapping
 from contextlib import AbstractContextManager, ExitStack, nullcontext
-from dataclasses import fields, is_dataclass
 from enum import Enum
 from functools import partial, wraps
 from typing import TYPE_CHECKING, Any, TypedDict, TypeVar
 
 import numpy as np
+from salix import Struct, fields
 
 from ..utils import logging
 from .import_utils import is_mlx_available, is_torch_available, is_torch_fx_proxy, resolve_internal_import
@@ -412,6 +414,77 @@ def safe_load_json_file(json_file: str):
     return config_dict
 
 
+class TupleStruct(Struct):
+    def __iter__(self):
+        return (getattr(self, field.name) for field in fields(self))
+
+    def __getitem__(self, index):
+        return tuple(self)[index]
+
+    def __len__(self) -> int:
+        return len(fields(self))
+
+
+StructABCMeta = type("StructABCMeta", (type(Struct), ABCMeta), {})
+
+
+class WithInstanceDict:
+    pass
+
+
+def is_field_set(instance: Any, name: str) -> bool:
+    try:
+        object.__getattribute__(instance, name)
+    except AttributeError:
+        return False
+    return True
+
+
+class DefaultOnDeleteStruct(Struct, frozen=False):
+    def __getattr__(self, key):
+        names = type(self).__struct_fields__
+        defaults = type(self).__struct_defaults__
+        first_defaulted = len(names) - len(defaults)
+        if key in names and names.index(key) >= first_defaulted:
+            return defaults[names.index(key) - first_defaulted]
+        raise AttributeError(f"'{type(self).__name__}' object has no attribute '{key}'")
+
+
+def instance_attributes(instance: Any) -> dict[str, Any]:
+    return {
+        **(
+            {
+                field.name: getattr(instance, field.name)
+                for field in fields(instance)
+                if is_field_set(instance, field.name)
+            }
+            if isinstance(instance, Struct)
+            else {}
+        ),
+        **getattr(instance, "__dict__", {}),
+    }
+
+
+def is_struct(obj) -> bool:
+    return isinstance(obj, Struct) or isinstance(obj, type(Struct))
+
+
+def asdict(obj):
+    if isinstance(obj, Struct):
+        return {field.name: asdict(getattr(obj, field.name)) for field in fields(obj)}
+    if isinstance(obj, (list, tuple)):
+        return type(obj)(asdict(value) for value in obj)
+    if isinstance(obj, dict):
+        return type(obj)((asdict(key), asdict(value)) for key, value in obj.items())
+    return copy.deepcopy(obj)
+
+
+def _struct_defaults_by_name(struct_class: type) -> dict[str, Any]:
+    names = struct_class.__struct_fields__
+    defaults = struct_class.__struct_defaults__
+    return dict(zip(names[len(names) - len(defaults) :], defaults))
+
+
 class ModelOutput(OrderedDict):
     """
     Base class for all model outputs as dataclass. Has a `__getitem__` that allows indexing by integer or slice (like a
@@ -433,22 +506,52 @@ class ModelOutput(OrderedDict):
         `static_graph=True` with modules that output `ModelOutput` subclasses.
         """
         _register_model_output_pytree_node(cls)
+        cls.__setattr__ = ModelOutput.__setattr__
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        if not is_struct(self):
+            if type(self) is not ModelOutput:
+                raise TypeError(
+                    f"{self.__module__}.{self.__class__.__name__} is not a Struct."
+                    " This is a subclass of ModelOutput and so must also inherit from `salix.Struct`."
+                )
+            super().__init__(*args, **kwargs)
+            _register_model_output_pytree_node(type(self))
+            return
+        super().__init__()
         _register_model_output_pytree_node(type(self))
-
-        # Subclasses of ModelOutput must use the @dataclass decorator
-        # This check is done in __init__ because the @dataclass decorator operates after __init_subclass__
-        # issubclass() would return True for issubclass(ModelOutput, ModelOutput) when False is needed
-        # Just need to check that the current class is not ModelOutput
-        is_modeloutput_subclass = self.__class__ != ModelOutput
-
-        if is_modeloutput_subclass and not is_dataclass(self):
+        names = type(self).__struct_fields__
+        if len(args) > len(names):
             raise TypeError(
-                f"{self.__module__}.{self.__class__.__name__} is not a dataclass."
-                " This is a subclass of ModelOutput and so must use the @dataclass decorator."
+                f"{type(self).__name__}() takes {len(names)} positional arguments but {len(args)} were given"
             )
+        bound = {**dict(zip(names, args)), **kwargs}
+        unexpected = [name for name in bound if name not in names]
+        if unexpected:
+            raise TypeError(f"{type(self).__name__}() got an unexpected keyword argument {unexpected[0]!r}")
+        defaults = _struct_defaults_by_name(type(self))
+        missing = [name for name in names if name not in defaults and name not in bound]
+        if missing:
+            raise TypeError(f"{type(self).__name__}() missing required arguments: {missing}")
+        for name in names:
+            setattr(self, name, bound[name] if name in bound else defaults[name])
+        self.__post_init__()
+
+    def __repr__(self):
+        if not is_struct(self):
+            return super().__repr__()
+        return f"{type(self).__qualname__}({', '.join(f'{field.name}={getattr(self, field.name)!r}' for field in fields(self))})"
+
+    def __eq__(self, other):
+        if not is_struct(self):
+            return super().__eq__(other)
+        if type(other) is not type(self):
+            return NotImplemented
+        return tuple(getattr(self, field.name) for field in fields(self)) == tuple(
+            getattr(other, field.name) for field in fields(other)
+        )
+
+    __hash__ = None
 
     def __post_init__(self):
         """Check the ModelOutput dataclass.
@@ -456,16 +559,17 @@ class ModelOutput(OrderedDict):
         Only occurs if @dataclass decorator has been used.
         """
         _register_model_output_pytree_node(type(self))
-        class_fields = fields(self)
+        class_fields = type(self).__struct_fields__
+        defaults = _struct_defaults_by_name(type(self))
 
         # Safety and consistency checks
         if not len(class_fields):
             raise ValueError(f"{self.__class__.__name__} has no fields.")
-        if not all(field.default is None for field in class_fields[1:]):
+        if not all(name in defaults and defaults[name] is None for name in class_fields[1:]):
             raise ValueError(f"{self.__class__.__name__} should not have more than one required field.")
 
-        first_field = getattr(self, class_fields[0].name)
-        other_fields_are_none = all(self.__dict__.get(field.name) is None for field in class_fields[1:])
+        first_field = getattr(self, class_fields[0])
+        other_fields_are_none = all(getattr(self, name, None) is None for name in class_fields[1:])
 
         if other_fields_are_none and not is_tensor(first_field):
             if isinstance(first_field, dict):
@@ -482,13 +586,13 @@ class ModelOutput(OrderedDict):
             # set the associated fields
             if first_field_iterator:
                 # reset first field to None and remove it from the internal dictionary
-                setattr(self, class_fields[0].name, None)
-                super().__delitem__(class_fields[0].name)
+                setattr(self, class_fields[0], None)
+                super().__delitem__(class_fields[0])
                 for idx, element in enumerate(iterator):
                     if not isinstance(element, (list, tuple)) or len(element) != 2 or not isinstance(element[0], str):
                         if idx == 0:
                             # If we do not have an iterator of key/values, set it as attribute
-                            self[class_fields[0].name] = first_field
+                            self[class_fields[0]] = first_field
                         else:
                             # If we have a mixed iterator, raise an error
                             raise ValueError(
@@ -499,12 +603,12 @@ class ModelOutput(OrderedDict):
                     if element[1] is not None:
                         self[element[0]] = element[1]
             elif first_field is not None:
-                self[class_fields[0].name] = first_field
+                self[class_fields[0]] = first_field
         else:
-            for field in class_fields:
-                v = self.__dict__.get(field.name)
+            for name in class_fields:
+                v = getattr(self, name, None)
                 if v is not None:
-                    self[field.name] = v
+                    self[name] = v
 
     def __delitem__(self, *args, **kwargs):
         raise Exception(f"You cannot use ``__delitem__`` on a {self.__class__.__name__} instance.")
@@ -526,20 +630,19 @@ class ModelOutput(OrderedDict):
             return self.to_tuple()[k]
 
     def __setattr__(self, name, value):
-        field_names = {field.name for field in fields(self)}
-        if name in field_names and value is not None:
+        if name in type(self).__struct_fields__ and value is not None:
             # Don't call self.__setitem__ to avoid recursion errors
             super().__setitem__(name, value)
-        super().__setattr__(name, value)
+        object.__setattr__(self, name, value)
 
     def __setitem__(self, key, value):
         # Will raise a KeyException if needed
         super().__setitem__(key, value)
         # Don't call self.__setattr__ to avoid recursion errors
-        super().__setattr__(key, value)
+        object.__setattr__(self, key, value)
 
     def __reduce__(self):
-        if not is_dataclass(self):
+        if not is_struct(self):
             return super().__reduce__()
         callable, _args, *remaining = super().__reduce__()
         args = tuple(getattr(self, field.name) for field in fields(self))

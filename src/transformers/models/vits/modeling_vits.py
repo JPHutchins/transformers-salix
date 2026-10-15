@@ -14,11 +14,11 @@
 """PyTorch VITS model."""
 
 import math
-from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -41,8 +41,7 @@ logger = logging.get_logger(__name__)
     Describes the outputs for the VITS model, with potential hidden states and attentions.
     """
 )
-@dataclass
-class VitsModelOutput(ModelOutput):
+class VitsModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     waveform (`torch.FloatTensor` of shape `(batch_size, sequence_length)`):
         The final audio waveform predicted by the model.
@@ -65,8 +64,7 @@ class VitsModelOutput(ModelOutput):
     Describes the outputs for the VITS text encoder model, with potential hidden states and attentions.
     """
 )
-@dataclass
-class VitsTextEncoderOutput(ModelOutput):
+class VitsTextEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     prior_means (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         The predicted mean values of the prior distribution for the latent text variables.

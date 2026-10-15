@@ -16,7 +16,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...cache_utils import Cache, DynamicCache
@@ -54,7 +53,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-VL-30B-A3B-Instruct")
-@strict
 class Qwen3VLMoeTextConfig(Qwen3MoeConfig):
     r"""
     decoder_sparse_step (`int`, *optional*, defaults to 1):
@@ -130,14 +128,12 @@ class Qwen3VLMoeTextConfig(Qwen3MoeConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-VL-30B-A3B-Instruct")
-@strict
 class Qwen3VLMoeVisionConfig(Qwen3VLVisionConfig):
     model_type = "qwen3_vl_moe_vision"
     pass
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-VL-30B-A3B-Instruct")
-@strict
 class Qwen3VLMoeConfig(Qwen3VLConfig):
     r"""
     Example:

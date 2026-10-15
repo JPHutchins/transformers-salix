@@ -19,11 +19,11 @@
 # limitations under the License.
 
 import math
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -38,8 +38,7 @@ from .generation_vibevoice import VibeVoiceGenerationMixin
 
 
 @auto_docstring(custom_intro="""Base class for VibeVoice outputs, with hidden states and attentions.""")
-@dataclass
-class VibeVoiceBaseModelOutputWithPast(BaseModelOutputWithPast):
+class VibeVoiceBaseModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     audio_features (`torch.FloatTensor` of shape `(batch_size, sequence_length, feature_size)`, *optional*):
         Extracted audio features that can be used for conditioning the language model.
@@ -49,8 +48,7 @@ class VibeVoiceBaseModelOutputWithPast(BaseModelOutputWithPast):
 
 
 @auto_docstring(custom_intro="""VibeVoice causal language model outputs.""")
-@dataclass
-class VibeVoiceCausalLMOutputWithPast(BaseModelOutputWithPast):
+class VibeVoiceCausalLMOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

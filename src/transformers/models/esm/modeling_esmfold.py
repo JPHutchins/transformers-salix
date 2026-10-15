@@ -14,12 +14,12 @@
 import math
 import sys
 from collections.abc import Callable, Sequence
-from dataclasses import dataclass
 from functools import partial
 
 import numpy as np
 import torch
 import torch.nn as nn
+from salix import Struct
 from torch.nn import LayerNorm
 
 from ... import initialization as init
@@ -56,8 +56,7 @@ logger = logging.get_logger(__name__)
     Output type of [`EsmForProteinFoldingOutput`].
     """
 )
-@dataclass
-class EsmForProteinFoldingOutput(ModelOutput):
+class EsmForProteinFoldingOutput(ModelOutput, Struct, frozen=False):
     r"""
     frames (`torch.FloatTensor`):
         Output frames.

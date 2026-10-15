@@ -20,11 +20,11 @@
 
 import math
 from collections.abc import Callable, Sequence
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...integrations import use_kernel_forward_from_hub
@@ -42,8 +42,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class TimesFmOutput(BaseModelOutput):
+class TimesFmOutput(BaseModelOutput, Struct, frozen=False):
     r"""
     loc (`torch.Tensor` of shape `(batch_size, )`):
         The mean of the time series inputs.
@@ -56,8 +55,7 @@ class TimesFmOutput(BaseModelOutput):
 
 
 @auto_docstring
-@dataclass
-class TimesFmOutputForPrediction(BaseModelOutput):
+class TimesFmOutputForPrediction(BaseModelOutput, Struct, frozen=False):
     r"""
     mean_predictions (`torch.Tensor` of shape `(batch_size, sequence_length)`):
         The mean predictions of the time series.

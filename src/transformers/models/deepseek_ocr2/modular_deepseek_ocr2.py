@@ -13,11 +13,10 @@
 # limitations under the License.
 
 import math
-from dataclasses import dataclass
 
 import numpy as np
 import torch
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 from torchvision.transforms.v2 import functional as tvF
 
@@ -490,7 +489,6 @@ class DeepseekOcr2ImageProcessorPil(GotOcr2ImageProcessorPil):
 
 
 @auto_docstring(checkpoint="deepseek-community/DeepSeek-OCR-2")
-@strict
 class DeepseekOcr2SamVisionConfig(SamVisionConfig):
     r"""
     output_channels (`int`, *optional*, defaults to 256):
@@ -519,7 +517,6 @@ class DeepseekOcr2SamVisionConfig(SamVisionConfig):
 
 
 @auto_docstring(checkpoint="deepseek-community/DeepSeek-OCR-2")
-@strict
 class DeepseekOcr2VisionEncoderConfig(Qwen2Config):
     r"""
     Example:
@@ -535,7 +532,6 @@ class DeepseekOcr2VisionEncoderConfig(Qwen2Config):
 
 
 @auto_docstring(checkpoint="deepseek-community/DeepSeek-OCR-2")
-@strict
 class DeepseekOcr2VisionConfig(PreTrainedConfig):
     r"""
     sam_config (`dict` or `DeepseekOcr2SamVisionConfig`, *optional*):
@@ -569,7 +565,6 @@ class DeepseekOcr2VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="deepseek-community/DeepSeek-OCR-2")
-@strict
 class DeepseekOcr2TextConfig(DeepseekV2Config):
     r"""
     n_group (`int`, *optional*):
@@ -617,7 +612,6 @@ class DeepseekOcr2TextConfig(DeepseekV2Config):
 
 
 @auto_docstring(checkpoint="deepseek-community/DeepSeek-OCR-2")
-@strict
 class DeepseekOcr2Config(PreTrainedConfig):
     r"""
     vision_config (`dict` or `DeepseekOcr2VisionConfig`, *optional*):
@@ -649,8 +643,7 @@ class DeepseekOcr2Config(PreTrainedConfig):
         super().__post_init__(**kwargs)
 
 
-@dataclass
-class DeepseekOcr2ModelOutputWithPooling(BaseModelOutputWithPooling):
+class DeepseekOcr2ModelOutputWithPooling(BaseModelOutputWithPooling, Struct, frozen=False):
     """
     local_last_hidden_state (`torch.FloatTensor` of shape `(total_local_patches, sequence_length, hidden_size)`, *optional*):
         Last hidden state from the vision encoder for local (cropped) patches.

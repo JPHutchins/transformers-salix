@@ -19,12 +19,12 @@
 # limitations under the License.
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -537,8 +537,7 @@ class PeAudioPreTrainedModel(PreTrainedModel):
     Class for outputs of [`PeAudioEncoder`].
     """
 )
-@dataclass
-class PeAudioEncoderOutput(BaseModelOutputWithPooling):
+class PeAudioEncoderOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     codec_features (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`, *optional*):
         Features extracted from the codec encoder, used as intermediate representations before the main encoder
@@ -686,8 +685,7 @@ class PeAudioEncoder(PeAudioPreTrainedModel):
     Class for outputs of [`PeAudioModel`] and [`PeAudioFrameLevelModel`].
     """
 )
-@dataclass
-class PeAudioOutput(ModelOutput):
+class PeAudioOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*):
         Contrastive loss computed between audio and text representations.

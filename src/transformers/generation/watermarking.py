@@ -13,12 +13,12 @@
 # limitations under the License.
 
 import collections
-from dataclasses import dataclass
 from functools import lru_cache
 from typing import TYPE_CHECKING, Any, Union
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCELoss
 
@@ -35,8 +35,7 @@ if TYPE_CHECKING:
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class WatermarkDetectorOutput:
+class WatermarkDetectorOutput(Struct, frozen=False):
     """
     Outputs of a watermark detector.
 
@@ -269,8 +268,7 @@ class BayesianDetectorConfig(PreTrainedConfig):
         self.watermarking_config = watermarking_config
 
 
-@dataclass
-class BayesianWatermarkDetectorModelOutput(ModelOutput):
+class BayesianWatermarkDetectorModelOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for outputs of models predicting if the text is watermarked.
 

@@ -18,14 +18,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="syscv-community/sam-hq-vit-base")
-@strict
 class SamHQPromptEncoderConfig(PreTrainedConfig):
     r"""
     mask_input_channels (`int`, *optional*, defaults to 16):
@@ -50,7 +48,6 @@ class SamHQPromptEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="syscv-community/sam-hq-vit-base")
-@strict
 class SamHQVisionConfig(PreTrainedConfig):
     r"""
     output_channels (`int`, *optional*, defaults to 256):
@@ -115,7 +112,6 @@ class SamHQVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="syscv-community/sam-hq-vit-base")
-@strict
 class SamHQMaskDecoderConfig(PreTrainedConfig):
     r"""
     mlp_dim (`int`, *optional*, defaults to 2048):
@@ -149,7 +145,6 @@ class SamHQMaskDecoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="syscv-community/sam-hq-vit-base")
-@strict
 class SamHQConfig(PreTrainedConfig):
     r"""
     prompt_encoder_config (Union[`dict`, `SamHQPromptEncoderConfig`], *optional*):

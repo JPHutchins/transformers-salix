@@ -18,7 +18,6 @@ from collections.abc import Sequence
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 
 from ...activations import ACT2FN
 from ...backbone_utils import (
@@ -46,7 +45,6 @@ from ..pp_ocrv5_server_det.modeling_pp_ocrv5_server_det import PPOCRV5ServerDetP
 
 
 @auto_docstring(checkpoint="PaddlePaddle/UVDoc_safetensors")
-@strict
 class UVDocBackboneConfig(BackboneConfigMixin, PreTrainedConfig):
     r"""
     resnet_head (`Sequence[list[int] | tuple[int, ...]]`, *optional*, defaults to `((3, 32), (32, 32))`):
@@ -126,7 +124,6 @@ class UVDocBackboneConfig(BackboneConfigMixin, PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="PaddlePaddle/UVDoc_safetensors")
-@strict
 class UVDocConfig(PreTrainedConfig):
     r"""
     padding_mode (`str`, *optional*, defaults to `"reflect"`):

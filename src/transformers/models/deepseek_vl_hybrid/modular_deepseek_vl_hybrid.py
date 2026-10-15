@@ -13,13 +13,12 @@
 # limitations under the License.
 
 from collections.abc import Iterable
-from dataclasses import dataclass
 from typing import Union
 
 import numpy as np
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ... import initialization as init
 from ...cache_utils import Cache
@@ -68,7 +67,6 @@ DEEPSEEK_VL_COMMON_CUSTOM_ARGS = r"""
 
 
 @auto_docstring(checkpoint="deepseek-community/deepseek-vl-7b-chat")
-@strict
 class DeepseekVLHybridConfig(DeepseekVLConfig):
     r"""
     high_res_vision_config (`Union[AutoConfig, dict]`,  *optional*, defaults to `SamVisionConfig`):
@@ -111,8 +109,7 @@ class DeepseekVLHybridConfig(DeepseekVLConfig):
 
 
 @auto_docstring
-@dataclass
-class BaseModelOutputWithHighResVisionEncodings(BaseModelOutputWithPooling):
+class BaseModelOutputWithHighResVisionEncodings(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     high_res_vision_last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the high resolution vision model.

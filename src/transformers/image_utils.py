@@ -15,12 +15,12 @@
 import base64
 import os
 from collections.abc import Iterable
-from dataclasses import dataclass, fields
 from io import BytesIO
 from typing import Any, Union
 
 import httpx
 import numpy as np
+from salix import Struct, fields
 
 from .utils import (
     ExplicitEnum,
@@ -1009,8 +1009,7 @@ def validate_kwargs(valid_processor_keys: list[str], captured_kwargs: list[str])
         logger.warning(f"Unused or unrecognized kwargs: {unused_key_str}.")
 
 
-@dataclass()
-class SizeDict:
+class SizeDict(Struct, frozen=False):
     """
     Hashable dictionary to store image size information.
     """

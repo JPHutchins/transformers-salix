@@ -13,10 +13,10 @@
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Optional
 
 import torch
+from salix import Struct
 
 from ...cache_utils import DynamicCache, StaticCache
 from ...generation import (
@@ -43,8 +43,7 @@ if TYPE_CHECKING:
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class VibeVoiceGenerateOutput(GenerateDecoderOnlyOutput):
+class VibeVoiceGenerateOutput(GenerateDecoderOnlyOutput, Struct, frozen=False):
     """
     Outputs of VibeVoiceForConditionalGeneration.generate.
 

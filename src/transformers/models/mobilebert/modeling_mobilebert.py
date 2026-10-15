@@ -21,9 +21,9 @@
 # SOFTWARE.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
@@ -561,8 +561,7 @@ class MobileBertPreTrainedModel(PreTrainedModel):
     Output type of [`MobileBertForPreTraining`].
     """
 )
-@dataclass
-class MobileBertForPreTrainingOutput(ModelOutput):
+class MobileBertForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the masked language modeling loss and the next sequence prediction

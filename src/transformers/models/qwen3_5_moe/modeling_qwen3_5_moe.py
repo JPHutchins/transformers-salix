@@ -21,11 +21,11 @@
 import itertools
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -1286,8 +1286,7 @@ class Qwen3_5MoeVisionModel(Qwen3_5MoePreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class Qwen3_5MoeModelOutputWithPast(BaseModelOutputWithPast):
+class Qwen3_5MoeModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -1299,8 +1298,7 @@ class Qwen3_5MoeModelOutputWithPast(BaseModelOutputWithPast):
 
 
 @auto_docstring
-@dataclass
-class Qwen3_5MoeCausalLMOutputWithPast(CausalLMOutputWithPast):
+class Qwen3_5MoeCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.

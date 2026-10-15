@@ -16,14 +16,11 @@
 import functools
 import operator
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="microsoft/speecht5_asr")
-@strict
 class SpeechT5Config(PreTrainedConfig):
     r"""
     positional_dropout (`float`, *optional*, defaults to 0.1):
@@ -221,7 +218,6 @@ class SpeechT5Config(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="microsoft/speecht5_asr")
-@strict
 class SpeechT5HifiGanConfig(PreTrainedConfig):
     r"""
     model_in_dim (`int`, *optional*, defaults to 80):

@@ -14,7 +14,6 @@
 
 
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -35,7 +34,6 @@ from ..glm4_moe.modeling_glm4_moe import (
 
 
 @auto_docstring(checkpoint="zai-org/GLM-4.5")
-@strict
 class Glm4MoeLiteConfig(PreTrainedConfig):
     r"""
     n_group (`int`, *optional*, defaults to 1):

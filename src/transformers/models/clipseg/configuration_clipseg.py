@@ -17,7 +17,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
@@ -27,7 +26,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="CIDAS/clipseg-rd64")
-@strict
 class CLIPSegTextConfig(PreTrainedConfig):
     r"""
     Example:
@@ -76,7 +74,6 @@ class CLIPSegTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="CIDAS/clipseg-rd64")
-@strict
 class CLIPSegVisionConfig(PreTrainedConfig):
     r"""
     Example:
@@ -120,7 +117,6 @@ class CLIPSegVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="CIDAS/clipseg-rd64")
-@strict
 class CLIPSegConfig(PreTrainedConfig):
     r"""
     extract_layers (`list[int]`, *optional*, defaults to `[3, 6, 9]`):

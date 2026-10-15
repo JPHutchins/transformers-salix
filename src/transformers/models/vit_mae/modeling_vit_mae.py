@@ -20,9 +20,9 @@
 
 from collections.abc import Callable, Iterable
 from copy import deepcopy
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -42,8 +42,7 @@ from .configuration_vit_mae import ViTMAEConfig
     Class for ViTMAEModel's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class ViTMAEModelOutput(ModelOutput):
+class ViTMAEModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     mask (`torch.FloatTensor` of shape `(batch_size, sequence_length)`):
         Tensor indicating which patches are masked (1) and which are not (0).
@@ -63,8 +62,7 @@ class ViTMAEModelOutput(ModelOutput):
     Class for ViTMAEDecoder's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class ViTMAEDecoderOutput(ModelOutput):
+class ViTMAEDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, sequence_length, patch_size ** 2 * num_channels)`):
         Pixel reconstruction logits.
@@ -80,8 +78,7 @@ class ViTMAEDecoderOutput(ModelOutput):
     Class for ViTMAEForPreTraining's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class ViTMAEForPreTrainingOutput(ModelOutput):
+class ViTMAEForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`):
         Pixel reconstruction loss.

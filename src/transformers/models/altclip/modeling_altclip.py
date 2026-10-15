@@ -18,11 +18,11 @@
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -39,8 +39,7 @@ from .configuration_altclip import AltCLIPConfig, AltCLIPTextConfig, AltCLIPVisi
 
 
 @auto_docstring
-@dataclass
-class AltCLIPOutput(ModelOutput):
+class AltCLIPOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for image-text similarity.

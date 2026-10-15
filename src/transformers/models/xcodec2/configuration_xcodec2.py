@@ -18,8 +18,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from typing import Annotated
+
 import numpy as np
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -29,7 +30,6 @@ from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="HKUSTAudio/xcodec2-hf")
-@strict
 class Xcodec2Config(PreTrainedConfig):
     r"""
     downsampling_ratios (`list[int]`, *optional*, defaults to `[2, 2, 4, 4, 5]`):
@@ -65,7 +65,7 @@ class Xcodec2Config(PreTrainedConfig):
     num_key_value_heads: int = 16
     hidden_act: str = "silu"
     max_position_embeddings: int = 4096
-    initializer_range: float = interval(min=0.0, max=1.0)(default=0.02)
+    initializer_range: Annotated[float, interval(min=0.0, max=1.0)] = 0.02
     rms_norm_eps: float = 1e-6
     pad_token_id: int | None = None
     tie_word_embeddings: bool = False

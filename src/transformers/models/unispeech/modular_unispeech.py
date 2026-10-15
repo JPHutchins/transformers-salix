@@ -14,10 +14,10 @@
 """PyTorch UniSpeech model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ... import initialization as init
 from ...modeling_outputs import ModelOutput, Wav2Vec2BaseModelOutput
@@ -48,8 +48,7 @@ logger = logging.get_logger(__name__)
     Output type of [`UniSpeechForPreTrainingOutput`], with potential hidden states and attentions.
     """
 )
-@dataclass
-class UniSpeechForPreTrainingOutput(ModelOutput):
+class UniSpeechForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when model is in train mode, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the contrastive loss (L_m) and the diversity loss (L_d) as stated in the [official

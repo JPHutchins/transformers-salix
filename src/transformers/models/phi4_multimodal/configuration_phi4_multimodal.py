@@ -20,15 +20,12 @@
 
 import math
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="microsoft/Phi-4-multimodal-instruct")
-@strict
 class Phi4MultimodalVisionConfig(PreTrainedConfig):
     r"""
     crop_size (`int`, *optional*, defaults to 448):
@@ -64,7 +61,6 @@ class Phi4MultimodalVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="microsoft/Phi-4-multimodal-instruct")
-@strict
 class Phi4MultimodalAudioConfig(PreTrainedConfig):
     r"""
     num_blocks (`int`, *optional*, defaults to 24):
@@ -156,7 +152,6 @@ class Phi4MultimodalAudioConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="microsoft/Phi-4-multimodal-instruct")
-@strict
 class Phi4MultimodalConfig(PreTrainedConfig):
     r"""
     original_max_position_embeddings (`int`, *optional*, defaults to 4096):

@@ -16,10 +16,10 @@
 import collections.abc
 from collections.abc import Callable
 from copy import deepcopy
-from dataclasses import dataclass
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import MSELoss
 
@@ -43,8 +43,7 @@ logger = logging.get_logger(__name__)
     Class for VideoMAEDecoder's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class VideoMAEDecoderOutput(ModelOutput):
+class VideoMAEDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, patch_size ** 2 * num_channels)`):
         Pixel reconstruction logits.
@@ -60,8 +59,7 @@ class VideoMAEDecoderOutput(ModelOutput):
     Class for VideoMAEForPreTraining's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class VideoMAEForPreTrainingOutput(ModelOutput):
+class VideoMAEForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`):
         Pixel reconstruction loss.

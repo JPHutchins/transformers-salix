@@ -13,14 +13,11 @@
 # limitations under the License.
 """Marian model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="Helsinki-NLP/opus-mt-en-de")
-@strict
 class MarianConfig(PreTrainedConfig):
     r"""
     decoder_vocab_size (`int`, *optional*):

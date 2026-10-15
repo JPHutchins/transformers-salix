@@ -15,9 +15,9 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -462,8 +462,7 @@ class DecisionTransformerGPT2Model(DecisionTransformerGPT2PreTrainedModel):
     Base class for model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
-class DecisionTransformerOutput(ModelOutput):
+class DecisionTransformerOutput(ModelOutput, Struct, frozen=False):
     r"""
     state_preds (`torch.FloatTensor` of shape `(batch_size, sequence_length, state_dim)`):
         Environment state predictions

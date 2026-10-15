@@ -13,14 +13,11 @@
 # limitations under the License.
 """GPT Neo model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="EleutherAI/gpt-neo-1.3B")
-@strict
 class GPTNeoConfig(PreTrainedConfig):
     r"""
     attention_types (`list`, *optional*, defaults to `[[['global', 'local'], 12]]`):

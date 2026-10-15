@@ -18,7 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -26,7 +25,6 @@ from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="zai-org/GLM-Image")
-@strict
 class GlmImageVQVAEConfig(PreTrainedConfig):
     model_type = "glm_image_vqmodel"
     base_config_key = "vq_config"
@@ -39,7 +37,6 @@ class GlmImageVQVAEConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="zai-org/GLM-Image")
-@strict
 class GlmImageVisionConfig(PreTrainedConfig):
     r"""
     Example:
@@ -76,7 +73,6 @@ class GlmImageVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="zai-org/GLM-Image")
-@strict
 class GlmImageTextConfig(PreTrainedConfig):
     r"""
     vision_vocab_size (`int`, *optional*, defaults to 16512):
@@ -143,7 +139,6 @@ class GlmImageTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="zai-org/GLM-Image")
-@strict
 class GlmImageConfig(PreTrainedConfig):
     r"""
     image_start_token_id (`int`, *optional*, defaults to 16384):

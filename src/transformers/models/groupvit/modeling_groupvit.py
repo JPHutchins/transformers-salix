@@ -14,11 +14,11 @@
 """PyTorch GroupViT model."""
 
 import collections.abc
-from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -261,8 +261,7 @@ class GroupViTTokenAssign(nn.Module):
 
 
 @auto_docstring
-@dataclass
-class GroupViTModelOutput(ModelOutput):
+class GroupViTModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for image-text similarity.

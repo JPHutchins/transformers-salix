@@ -13,14 +13,11 @@
 # limitations under the License.
 """VilT model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="dandelin/vilt-b32-mlm")
-@strict
 class ViltConfig(PreTrainedConfig):
     r"""
     modality_type_vocab_size (`int`, *optional*, defaults to 2):

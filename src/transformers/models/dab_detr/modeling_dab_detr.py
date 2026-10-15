@@ -14,9 +14,9 @@
 """PyTorch DAB-DETR model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -82,9 +82,8 @@ def encode_sinusoidal_position_embedding(
     decoding losses.
     """
 )
-@dataclass
 # Copied from transformers.models.conditional_detr.modeling_conditional_detr.ConditionalDetrDecoderOutput with ConditionalDetr->DabDetr,Conditional DETR->DAB-DETR,2 (anchor points)->4 (anchor points)
-class DabDetrDecoderOutput(BaseModelOutputWithCrossAttentions):
+class DabDetrDecoderOutput(BaseModelOutputWithCrossAttentions, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(config.decoder_layers, batch_size, num_queries, hidden_size)`, *optional*, returned when `config.auxiliary_loss=True`):
         Intermediate decoder activations, i.e. the output of each decoder layer, each of them gone through a
@@ -105,9 +104,8 @@ class DabDetrDecoderOutput(BaseModelOutputWithCrossAttentions):
     losses.
     """
 )
-@dataclass
 # Copied from transformers.models.conditional_detr.modeling_conditional_detr.ConditionalDetrModelOutput with ConditionalDetr->DabDetr,Conditional DETR->DAB-DETR,2 (anchor points)->4 (anchor points)
-class DabDetrModelOutput(Seq2SeqModelOutput):
+class DabDetrModelOutput(Seq2SeqModelOutput, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(config.decoder_layers, batch_size, sequence_length, hidden_size)`, *optional*, returned when `config.auxiliary_loss=True`):
         Intermediate decoder activations, i.e. the output of each decoder layer, each of them gone through a
@@ -125,9 +123,8 @@ class DabDetrModelOutput(Seq2SeqModelOutput):
     Output type of [`DabDetrForObjectDetection`].
     """
 )
-@dataclass
 # Copied from transformers.models.detr.modeling_detr.DetrObjectDetectionOutput with Detr->DabDetr
-class DabDetrObjectDetectionOutput(ModelOutput):
+class DabDetrObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

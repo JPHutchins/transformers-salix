@@ -15,9 +15,9 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ...activations import ACT2FN
@@ -36,8 +36,7 @@ from .configuration_idefics import IdeficsVisionConfig
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class IdeficsVisionModelOutput(ModelOutput):
+class IdeficsVisionModelOutput(ModelOutput, Struct, frozen=False):
     """
     Base class for vision model's outputs that also contains image embeddings of the pooling of the last hidden states.
 

@@ -23,7 +23,6 @@ import warnings
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -63,7 +62,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="Qwen/Qwen2-VL-7B-Instruct")
-@strict
 class Qwen2_5_VLVisionConfig(PreTrainedConfig):
     r"""
     tokens_per_second (`int`, *optional*, defaults to 41):

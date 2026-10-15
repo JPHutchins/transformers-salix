@@ -14,9 +14,9 @@
 """PyTorch Hiera model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -44,8 +44,7 @@ logger = logging.get_logger(__name__)
     Hiera encoder's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class HieraEncoderOutput(ModelOutput):
+class HieraEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     reshaped_hidden_states (`tuple(torch.FloatTensor)`, *optional*, returned when `output_hidden_states=True` is passed or when `config.output_hidden_states=True`):
         Tuple of `torch.FloatTensor` (one for the output of the embeddings + one for the output of each stage) of
@@ -66,8 +65,7 @@ class HieraEncoderOutput(ModelOutput):
     Hiera model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
-class HieraModelOutput(ModelOutput):
+class HieraModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, hidden_size)`, *optional*, returned when `add_pooling_layer=True` is passed):
         Average pooling of the last layer hidden-state.
@@ -97,8 +95,7 @@ class HieraModelOutput(ModelOutput):
     Hiera image classification outputs.
     """
 )
-@dataclass
-class HieraForImageClassificationOutput(ImageClassifierOutput):
+class HieraForImageClassificationOutput(ImageClassifierOutput, Struct, frozen=False):
     r"""
     reshaped_hidden_states (`tuple(torch.FloatTensor)`, `optional`):
         Tuple of `torch.FloatTensor` (one for the output of the embeddings + one for the output of each stage) of
@@ -116,8 +113,7 @@ class HieraForImageClassificationOutput(ImageClassifierOutput):
     Class for HieraForPreTraining's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class HieraForPreTrainingOutput(ModelOutput):
+class HieraForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`):
         Pixel reconstruction loss.

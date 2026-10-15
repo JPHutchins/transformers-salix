@@ -21,13 +21,13 @@
 import math
 from collections import OrderedDict
 from collections.abc import Callable, Iterator
-from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor
 from tqdm import tqdm
 
@@ -645,8 +645,7 @@ class Sam2VideoFeedForward(nn.Module):
 
 
 @auto_docstring(custom_intro="Base class for the Sam2Video model's output.")
-@dataclass
-class Sam2VideoImageSegmentationOutput(ModelOutput):
+class Sam2VideoImageSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     iou_scores (`torch.FloatTensor` of shape `(batch_size, point_batch_size, num_masks)`):
         The Intersection over Union (IoU) scores of the predicted masks.
@@ -686,8 +685,7 @@ class Sam2VideoImageSegmentationOutput(ModelOutput):
 
 
 @auto_docstring(custom_intro="Base class for the Sam2 model's output.")
-@dataclass
-class Sam2VideoSegmentationOutput(ModelOutput):
+class Sam2VideoSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     object_ids (`list[int]`, *optional*):
         List of object IDs being tracked in the current frame.
@@ -1184,8 +1182,7 @@ class Sam2VideoPositionalEmbedding(nn.Module):
 
 
 @auto_docstring(custom_intro="Base class for the vision encoder's outputs.")
-@dataclass
-class Sam2VideoVisionEncoderOutput(BaseModelOutputWithPooling):
+class Sam2VideoVisionEncoderOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, height, width, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.

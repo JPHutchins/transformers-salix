@@ -15,11 +15,11 @@
 
 import collections
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -43,8 +43,7 @@ logger = logging.get_logger(__name__)
     layer to the pooler_output.
     """
 )
-@dataclass
-class SamVisionEncoderOutput(ModelOutput):
+class SamVisionEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     image_embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)` *optional* returned when model is initialized with `with_projection=True`):
         The image embeddings obtained by applying the projection layer to the pooler_output.
@@ -61,8 +60,7 @@ class SamVisionEncoderOutput(ModelOutput):
     Base class for Segment-Anything model's output
     """
 )
-@dataclass
-class SamImageSegmentationOutput(ModelOutput):
+class SamImageSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     iou_scores (`torch.FloatTensor` of shape `(batch_size, num_masks)`):
         The iou scores of the predicted masks.

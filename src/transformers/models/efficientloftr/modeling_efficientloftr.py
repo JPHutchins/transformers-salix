@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -45,8 +45,7 @@ from .configuration_efficientloftr import EfficientLoFTRConfig
     images, the maximum number of matches is set as the dimension of the matches and matching scores.
     """
 )
-@dataclass
-class EfficientLoFTRKeypointMatchingOutput(ModelOutput):
+class EfficientLoFTRKeypointMatchingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*):
         Loss computed during training.

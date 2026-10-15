@@ -14,12 +14,12 @@
 
 import json
 import os
-from dataclasses import asdict, dataclass
 from typing import Literal
 
+from salix import Struct, fields
 
-@dataclass
-class DistributedConfig:
+
+class DistributedConfig(Struct, frozen=False):
     """
     Configuration for native distributed inference and training with tensor, pipeline, or FSDP2 parallelism.
 
@@ -83,7 +83,7 @@ class DistributedConfig:
     @classmethod
     def from_dict(cls, config_dict: dict, **kwargs) -> "DistributedConfig":
         merged = {**config_dict, **kwargs}
-        valid_keys = {f.name for f in cls.__dataclass_fields__.values()}
+        valid_keys = {f.name for f in fields(cls)}
         return cls(**{k: v for k, v in merged.items() if k in valid_keys})
 
     def to_dict(self) -> dict:

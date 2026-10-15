@@ -14,11 +14,11 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass, replace
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct, replace
 from torch import Tensor
 
 from ... import initialization as init
@@ -38,13 +38,12 @@ from .configuration_esmfold2 import EsmFold2AtomEncoderConfig, EsmFold2Config, E
 from .generation_esmfold2 import EsmFold2FoldingMixin
 
 
-@dataclass
-class EsmFold2AtomInputs:  # trf-ignore: TRF031
+class EsmFold2AtomInputs(Struct, frozen=False):
     """Featurized reference-conformer atom inputs, bundled so the atom stack takes one argument.
 
     Taken as one argument by [`EsmFold2Model.forward`], holding the raw featurizer tensors.
     ``EsmFold2Model._prepare_features`` then one-hot encodes the categorical fields and zeroes the
-    padding, and ``forward`` swaps those in with `dataclasses.replace`, so every consumer downstream of
+    padding, and ``forward`` swaps those in with `salix.replace`, so every consumer downstream of
     that point sees the encoded forms documented below. Returned on [`EsmFold2TrunkOutput`] so the
     diffusion sampler and the confidence head reuse the trunk's featurization rather than redoing it.
 
@@ -72,8 +71,7 @@ class EsmFold2AtomInputs:  # trf-ignore: TRF031
     atom_to_token: Tensor
 
 
-@dataclass
-class EsmFold2DenoiserConditioning:  # trf-ignore: TRF031
+class EsmFold2DenoiserConditioning(Struct, frozen=False):
     """Denoiser conditioning that depends on neither the noise level nor the noisy coordinates.
 
     Built once per fold by ``EsmFold2DiffusionModule.prepare_conditioning``, with both attention masks
@@ -1155,8 +1153,7 @@ class EsmFold2MSAPairWeightedAveraging(nn.Module):
     have a leading `num_diffusion_samples` axis.
     """
 )
-@dataclass
-class EsmFold2Output(ModelOutput):
+class EsmFold2Output(ModelOutput, Struct, frozen=False):
     r"""
     distogram_logits (`torch.FloatTensor` of shape `(batch_size, num_tokens, num_tokens, distogram_bins)`):
         Predicted distance-distribution logits over residue pairs (RNG-independent; no diffusion sampling).
@@ -1217,8 +1214,7 @@ class EsmFold2Output(ModelOutput):
     here is deterministic given the inputs apart from the trunk's random initial pair state.
     """
 )
-@dataclass
-class EsmFold2TrunkOutput(ModelOutput):
+class EsmFold2TrunkOutput(ModelOutput, Struct, frozen=False):
     r"""
     distogram_logits (`torch.FloatTensor` of shape `(batch_size, num_tokens, num_tokens, distogram_bins)`):
         Predicted distance-distribution logits over residue pairs.

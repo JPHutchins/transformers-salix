@@ -16,14 +16,11 @@
 import functools
 import operator
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/hubert-base-ls960")
-@strict
 class HubertConfig(PreTrainedConfig):
     r"""
     feat_proj_layer_norm (`bool`, *optional*, defaults to `True`):

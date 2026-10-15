@@ -13,15 +13,12 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="mistralai/Voxtral-Mini-3B-2507")
-@strict
 class VoxtralEncoderConfig(PreTrainedConfig):
     r"""
     max_source_positions (`int`, *optional*, defaults to 1500):
@@ -72,7 +69,6 @@ class VoxtralEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="mistralai/Voxtral-Mini-3B-2507")
-@strict
 class VoxtralConfig(PreTrainedConfig):
     r"""
     Example:

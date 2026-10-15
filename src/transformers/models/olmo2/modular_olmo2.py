@@ -21,7 +21,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from transformers.utils.generic import TransformersKwargs
 
@@ -46,7 +45,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="allenai/OLMo-2-1124-7B")
-@strict
 class Olmo2Config(OlmoConfig):
     r"""
     Example:

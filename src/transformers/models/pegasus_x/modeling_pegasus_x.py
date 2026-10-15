@@ -15,10 +15,10 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import CrossEntropyLoss
 
@@ -45,8 +45,7 @@ from .configuration_pegasus_x import PegasusXConfig
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class DimensionInfo:
+class DimensionInfo(Struct, frozen=False):
     """Wrapper for dimension info."""
 
     batch_size: int  # batch size

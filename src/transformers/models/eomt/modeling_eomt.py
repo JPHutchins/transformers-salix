@@ -21,11 +21,11 @@
 import collections.abc
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -58,8 +58,7 @@ if is_accelerate_available():
     [`~EomtImageProcessor] for details regarding usage.
     """
 )
-@dataclass
-class EomtForUniversalSegmentationOutput(ModelOutput):
+class EomtForUniversalSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.Tensor`, *optional*):
         The computed loss, returned when labels are present.

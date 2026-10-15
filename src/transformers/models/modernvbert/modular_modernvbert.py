@@ -13,12 +13,11 @@
 # limitations under the License.
 
 import math
-from dataclasses import dataclass
 from typing import Literal
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
 from ... import initialization as init
@@ -42,7 +41,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="ModernVBERT/modernvbert")
-@strict
 class ModernVBertConfig(PreTrainedConfig):
     r"""
     pixel_shuffle_factor (`int | None`, *optional*, defaults to 4):
@@ -99,8 +97,7 @@ class ModernVBertConfig(PreTrainedConfig):
         super().__post_init__(**kwargs)
 
 
-@dataclass
-class ModernVBertBaseModelOutput(BaseModelOutput):
+class ModernVBertBaseModelOutput(BaseModelOutput, Struct, frozen=False):
     """
     Base class for ModernVBERT model's outputs.
     Args:
@@ -129,8 +126,7 @@ class ModernVBertBaseModelOutput(BaseModelOutput):
     image_hidden_states: tuple[torch.FloatTensor] | None = None
 
 
-@dataclass
-class ModernVBertMaskedLMOutput(MaskedLMOutput):
+class ModernVBertMaskedLMOutput(MaskedLMOutput, Struct, frozen=False):
     """
     Base class for ModernVBERT model's outputs with masked language modeling loss.
     Args:

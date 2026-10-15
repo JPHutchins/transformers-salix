@@ -13,11 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 from math import pi
 
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import Tensor, broadcast_tensors
 
 from ... import initialization as init
@@ -55,7 +54,6 @@ if is_torch_available():
 
 
 @auto_docstring(checkpoint="nvidia/music-flamingo-2601-hf")
-@strict
 class MusicFlamingoConfig(AudioFlamingo3Config):
     r"""
     audio_bos_token_id (`int`, *optional*, defaults to 151670):
@@ -254,8 +252,7 @@ class MusicFlamingoPreTrainedModel(AudioFlamingo3PreTrainedModel):
             init.copy_(module.position_angles, buffer_value)
 
 
-@dataclass
-class MusicFlamingoModelOutputWithPast(AudioFlamingo3ModelOutputWithPast):
+class MusicFlamingoModelOutputWithPast(AudioFlamingo3ModelOutputWithPast, Struct, frozen=False):
     pass
 
 

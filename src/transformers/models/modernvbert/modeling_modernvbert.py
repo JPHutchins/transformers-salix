@@ -19,10 +19,10 @@
 # limitations under the License.
 
 import math
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
+from salix import Struct
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
 from ... import initialization as init
@@ -42,8 +42,7 @@ from ..auto import AutoModel
 from .configuration_modernvbert import ModernVBertConfig
 
 
-@dataclass
-class ModernVBertBaseModelOutput(BaseModelOutput):
+class ModernVBertBaseModelOutput(BaseModelOutput, Struct, frozen=False):
     """
     Base class for ModernVBERT model's outputs.
     Args:
@@ -72,8 +71,7 @@ class ModernVBertBaseModelOutput(BaseModelOutput):
     image_hidden_states: tuple[torch.FloatTensor] | None = None
 
 
-@dataclass
-class ModernVBertMaskedLMOutput(MaskedLMOutput):
+class ModernVBertMaskedLMOutput(MaskedLMOutput, Struct, frozen=False):
     """
     Base class for ModernVBERT model's outputs with masked language modeling loss.
     Args:

@@ -17,14 +17,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="nvidia/Cosmos3-Edge")
-@strict
 class Cosmos3EdgeTextConfig(PreTrainedConfig):
     r"""
     ```python
@@ -115,7 +113,6 @@ class Cosmos3EdgeTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="nvidia/Cosmos3-Edge")
-@strict
 class Cosmos3EdgeVisionConfig(PreTrainedConfig):
     r"""
     num_patches (`int`, *optional*, defaults to 256):
@@ -138,7 +135,6 @@ class Cosmos3EdgeVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="nvidia/Cosmos3-Edge")
-@strict
 class Cosmos3EdgeConfig(PreTrainedConfig):
     r"""
     projector_hidden_size (`int`, *optional*, defaults to 11520):

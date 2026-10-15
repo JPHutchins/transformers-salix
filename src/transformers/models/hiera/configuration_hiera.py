@@ -13,15 +13,12 @@
 # limitations under the License.
 """Hiera model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import BackboneConfigMixin
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/hiera-base-224")
-@strict
 class HieraConfig(BackboneConfigMixin, PreTrainedConfig):
     r"""
     patch_stride (`list(int)`, *optional*, defaults to `[4, 4]`):

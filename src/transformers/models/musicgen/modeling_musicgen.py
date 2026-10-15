@@ -18,11 +18,11 @@ import inspect
 import math
 import random
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Optional
 
 import torch
 import torch.nn as nn
+from salix import Struct
 from torch.nn import CrossEntropyLoss
 
 from ... import initialization as init
@@ -65,8 +65,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class MusicgenUnconditionalInput(ModelOutput):
+class MusicgenUnconditionalInput(ModelOutput, Struct, frozen=False):
     r"""
     encoder_outputs (`tuple[torch.FloatTensor]` of length 1, with tensor shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the text encoder model.

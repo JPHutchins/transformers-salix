@@ -14,10 +14,10 @@
 """PyTorch BLIP-2 model."""
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import CrossEntropyLoss
 
@@ -57,8 +57,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class BaseModelOutputWithVisionQformerOutputs(BaseModelOutputWithPooling):
+class BaseModelOutputWithVisionQformerOutputs(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     vision_outputs (`BaseModelOutputWithPooling`):
         Outputs of the vision encoder.
@@ -75,8 +74,7 @@ class BaseModelOutputWithVisionQformerOutputs(BaseModelOutputWithPooling):
     Class defining the outputs of [`Blip2ForConditionalGeneration`].
     """
 )
-@dataclass
-class Blip2ForConditionalGenerationModelOutput(ModelOutput):
+class Blip2ForConditionalGenerationModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor`, *optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Language modeling loss from the language model.
@@ -106,8 +104,7 @@ class Blip2ForConditionalGenerationModelOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class Blip2ImageTextMatchingModelOutput(ModelOutput):
+class Blip2ImageTextMatchingModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for image-text similarity.
@@ -147,9 +144,8 @@ class Blip2ImageTextMatchingModelOutput(ModelOutput):
     Base class for text model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
 # Copied from transformers.models.clip.modeling_clip.CLIPTextModelOutput with CLIP->Blip2
-class Blip2TextModelOutput(ModelOutput):
+class Blip2TextModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     text_embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)` *optional* returned when model is initialized with `with_projection=True`):
         The text embeddings obtained by applying the projection layer to the pooler_output.
@@ -166,9 +162,8 @@ class Blip2TextModelOutput(ModelOutput):
     Base class for vision model's outputs that also contains image embeddings of the pooling of the last hidden states.
     """
 )
-@dataclass
 # Copied from transformers.models.clip.modeling_clip.CLIPVisionModelOutput with CLIP->Blip2
-class Blip2VisionModelOutput(ModelOutput):
+class Blip2VisionModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     image_embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)` *optional* returned when model is initialized with `with_projection=True`):
         The image embeddings obtained by applying the projection layer to the pooler_output.

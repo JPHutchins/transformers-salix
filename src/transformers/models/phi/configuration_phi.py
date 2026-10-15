@@ -14,15 +14,12 @@
 
 """Phi model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="microsoft/phi-1")
-@strict
 class PhiConfig(PreTrainedConfig):
     r"""
     qk_layernorm (`bool`, *optional*, defaults to `False`):

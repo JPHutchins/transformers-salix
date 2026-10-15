@@ -15,10 +15,10 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 
 from transformers.models.arcee.modeling_arcee import ArceeMLP
@@ -53,8 +53,7 @@ logger = logging.get_logger(__name__)
     each selected feature stage (used when `config.return_class_token=True`).
     """
 )
-@dataclass
-class DINOv3ViTBackboneOutput(BackboneOutput):
+class DINOv3ViTBackboneOutput(BackboneOutput, Struct, frozen=False):
     r"""
     cls_tokens (`tuple(torch.FloatTensor)`, *optional*):
         CLS token from each selected feature stage, each of shape `(batch_size, hidden_size)`.

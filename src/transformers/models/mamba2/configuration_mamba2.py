@@ -15,14 +15,11 @@
 
 import math
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="state-spaces/mamba2-2.8b")
-@strict
 class Mamba2Config(PreTrainedConfig):
     r"""
     layer_norm_epsilon (`float`, *optional*, defaults to 1e-05):

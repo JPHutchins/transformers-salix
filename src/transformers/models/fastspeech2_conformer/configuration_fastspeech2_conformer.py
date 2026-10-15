@@ -13,8 +13,6 @@
 # limitations under the License.
 """FastSpeech2Conformer model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 
@@ -23,7 +21,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="espnet/fastspeech2_conformer")
-@strict
 class FastSpeech2ConformerConfig(PreTrainedConfig):
     r"""
     encoder_num_attention_heads (`int`, *optional*, defaults to 2):
@@ -263,7 +260,6 @@ class FastSpeech2ConformerConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="espnet/fastspeech2_conformer_with_hifigan")
-@strict
 class FastSpeech2ConformerHifiGanConfig(PreTrainedConfig):
     r"""
     model_in_dim (`int`, *optional*, defaults to 80):
@@ -324,7 +320,6 @@ class FastSpeech2ConformerHifiGanConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="espnet/fastspeech2_conformer_with_hifigan")
-@strict
 class FastSpeech2ConformerWithHifiGanConfig(PreTrainedConfig):
     r"""
     model_config ([`FastSpeech2ConformerConfig | dict`], *optional*):

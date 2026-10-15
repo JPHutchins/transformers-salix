@@ -13,14 +13,11 @@
 # limitations under the License.
 """MVP model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="RUCAIBox/mvp")
-@strict
 class MvpConfig(PreTrainedConfig):
     r"""
     use_prompt (`bool`, *optional*, defaults to `False`):

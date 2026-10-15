@@ -19,11 +19,11 @@ import os
 import warnings
 from collections.abc import Callable
 from contextlib import contextmanager
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Optional, cast
 
 import torch
 import torch.distributed as dist
+from salix import Struct
 from torch import nn
 
 from ..cache_utils import (
@@ -165,8 +165,7 @@ MULTIMODAL_INPUTS_TO_DROP_OUTSIDE_PREFILL = (
 )
 
 
-@dataclass
-class GenerateDecoderOnlyOutput(ModelOutput):
+class GenerateDecoderOnlyOutput(ModelOutput, Struct, frozen=False):
     """
     Outputs of decoder-only generation models, when using non-beam methods.
 
@@ -201,8 +200,7 @@ class GenerateDecoderOnlyOutput(ModelOutput):
     past_key_values: Cache | None = None
 
 
-@dataclass
-class GenerateEncoderDecoderOutput(ModelOutput):
+class GenerateEncoderDecoderOutput(ModelOutput, Struct, frozen=False):
     """
     Outputs of encoder-decoder generation models, when using non-beam methods.
 
@@ -249,8 +247,7 @@ class GenerateEncoderDecoderOutput(ModelOutput):
     past_key_values: Cache | None = None
 
 
-@dataclass
-class GenerateBeamDecoderOnlyOutput(ModelOutput):
+class GenerateBeamDecoderOnlyOutput(ModelOutput, Struct, frozen=False):
     """
     Outputs of decoder-only generation models, when using beam methods.
 
@@ -293,8 +290,7 @@ class GenerateBeamDecoderOnlyOutput(ModelOutput):
     past_key_values: Cache | None = None
 
 
-@dataclass
-class GenerateBeamEncoderDecoderOutput(ModelOutput):
+class GenerateBeamEncoderDecoderOutput(ModelOutput, Struct, frozen=False):
     """
     Outputs of encoder-decoder generation models, when using beam methods.
 

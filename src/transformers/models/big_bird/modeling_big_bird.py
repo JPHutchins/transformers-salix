@@ -14,10 +14,10 @@
 """PyTorch BigBird model."""
 
 import math
-from dataclasses import dataclass
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
@@ -1419,8 +1419,7 @@ class BigBirdPreTrainedModel(PreTrainedModel):
     Output type of [`BigBirdForPreTraining`].
     """
 )
-@dataclass
-class BigBirdForPreTrainingOutput(ModelOutput):
+class BigBirdForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the masked language modeling loss and the next sequence prediction
@@ -1444,8 +1443,7 @@ class BigBirdForPreTrainingOutput(ModelOutput):
     Base class for outputs of question answering models.
     """
 )
-@dataclass
-class BigBirdForQuestionAnsweringModelOutput(ModelOutput):
+class BigBirdForQuestionAnsweringModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Total span extraction loss is the sum of a Cross-Entropy for the start and end positions.

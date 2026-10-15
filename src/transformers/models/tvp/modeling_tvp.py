@@ -14,9 +14,9 @@
 """PyTorch TVP Model"""
 
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -34,8 +34,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class TvpVideoGroundingOutput(ModelOutput):
+class TvpVideoGroundingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Temporal-Distance IoU loss for video grounding.

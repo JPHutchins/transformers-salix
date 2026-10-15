@@ -17,7 +17,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -28,7 +27,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="meta-models/Muse-Glimmer-30B")
-@strict
 class MuseGlimmerVisionConfig(PreTrainedConfig):
     r"""
     pos_emb_height (`int`, *optional*):
@@ -69,7 +67,6 @@ class MuseGlimmerVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="meta-models/Muse-Glimmer-30B")
-@strict
 class MuseGlimmerTextConfig(PreTrainedConfig):
     r"""
     final_logit_softcapping (`float`, *optional*, defaults to 20.0):
@@ -163,7 +160,6 @@ class MuseGlimmerTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="meta-models/Muse-Glimmer-30B")
-@strict
 class MuseGlimmerConfig(PreTrainedConfig):
     r"""
     out_hidden_size (`int`, *optional*, defaults to 6144):

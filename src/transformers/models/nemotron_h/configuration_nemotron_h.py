@@ -13,8 +13,6 @@
 # limitations under the License.
 """NemotronH model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig, remap_legacy_layer_types
 from ...utils import auto_docstring, logging
 
@@ -23,7 +21,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16")
-@strict
 class NemotronHConfig(PreTrainedConfig):
     r"""
     layers_block_type (`list`, *optional*):

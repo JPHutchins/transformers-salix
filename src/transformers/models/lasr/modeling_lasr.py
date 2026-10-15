@@ -19,9 +19,9 @@
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ...activations import ACT2FN
@@ -456,8 +456,7 @@ class LasrPreTrainedModel(PreTrainedModel):
     is not preserved in the model's forward.
     """
 )
-@dataclass
-class LasrEncoderModelOutput(BaseModelOutputWithPooling):
+class LasrEncoderModelOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     attention_mask (`torch.Tensor` of shape `(batch_size, sequence_length)`, *optional*):
         Mask to avoid performing attention on padding token indices after sequence compression. Returned because the
@@ -574,8 +573,7 @@ class LasrEncoder(LasrPreTrainedModel):
         )
 
 
-@dataclass
-class LasrCTCGenerateOutput(ModelOutput):
+class LasrCTCGenerateOutput(ModelOutput, Struct, frozen=False):
     """
     Outputs of Lasr CTC model generation.
 

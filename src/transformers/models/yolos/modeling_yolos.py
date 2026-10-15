@@ -15,9 +15,9 @@
 
 import collections.abc
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ...activations import ACT2FN
@@ -39,8 +39,7 @@ logger = logging.get_logger(__name__)
     Output type of [`YolosForObjectDetection`].
     """
 )
-@dataclass
-class YolosObjectDetectionOutput(ModelOutput):
+class YolosObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

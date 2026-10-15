@@ -12,10 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 
 import torch
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 from typing_extensions import Unpack
 
@@ -40,8 +39,7 @@ from ..zoedepth.modeling_zoedepth import (
 
 
 @auto_docstring
-@dataclass
-class Tipsv2DptDensePredictorOutput(ModelOutput):
+class Tipsv2DptDensePredictorOutput(ModelOutput, Struct, frozen=False):
     r"""
     normals (`torch.FloatTensor` of shape `(batch_size, 3, height, width)`):
         Raw normal map predictions (unnormalized).
@@ -193,7 +191,6 @@ class Tipsv2DptImageProcessor(Tipsv2ImageProcessor):
 
 
 @auto_docstring(checkpoint="google/tipsv2-b14-dpt")
-@strict
 class Tipsv2DptConfig(PreTrainedConfig):
     r"""
     neck_hidden_sizes (`list[int]`, *optional*, defaults to `[96, 192, 384, 768]`):

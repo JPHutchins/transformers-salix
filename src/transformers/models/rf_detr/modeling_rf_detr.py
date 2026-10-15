@@ -21,11 +21,11 @@ import collections.abc
 import math
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -1163,8 +1163,7 @@ class RfDetrPreTrainedModel(PreTrainedModel):
     Base class for outputs of the RfDetr backbone-decoder model.
     """
 )
-@dataclass
-class RfDetrModelOutput(ModelOutput):
+class RfDetrModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     init_reference_points (`torch.FloatTensor` of shape  `(batch_size, num_queries, 4)`):
         Initial reference points sent through the Transformer decoder.
@@ -1202,8 +1201,7 @@ class RfDetrModelOutput(ModelOutput):
     - a stacked tensor of intermediate reference points.
     """
 )
-@dataclass
-class RfDetrDecoderOutput(BaseModelOutputWithCrossAttentions):
+class RfDetrDecoderOutput(BaseModelOutputWithCrossAttentions, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(config.decoder_layers, batch_size, num_queries, hidden_size)`, *optional*, returned when `config.auxiliary_loss=True`):
         Intermediate decoder activations, i.e. the output of each decoder layer, each of them gone through a
@@ -1670,8 +1668,7 @@ class RfDetrModel(RfDetrPreTrainedModel):
     Output type of [`RfDetrForObjectDetection`].
     """
 )
-@dataclass
-class RfDetrObjectDetectionOutput(ModelOutput):
+class RfDetrObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a
@@ -1881,8 +1878,7 @@ class RfDetrForObjectDetection(RfDetrPreTrainedModel):
     Output type of [`RfDetrForInstanceSegmentation`].
     """
 )
-@dataclass
-class RfDetrInstanceSegmentationOutput(ModelOutput):
+class RfDetrInstanceSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

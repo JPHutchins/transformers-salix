@@ -14,9 +14,9 @@
 """PyTorch Longformer model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
@@ -37,8 +37,7 @@ logger = logging.get_logger(__name__)
     Base class for Longformer's outputs, with potential hidden states, local and global attentions.
     """
 )
-@dataclass
-class LongformerBaseModelOutput(ModelOutput):
+class LongformerBaseModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     attentions (`tuple(torch.FloatTensor)`, *optional*, returned when `output_attentions=True` is passed or when `config.output_attentions=True`):
         Tuple of `torch.FloatTensor` (one for each layer) of shape `(batch_size, num_heads, sequence_length, x +
@@ -75,8 +74,7 @@ class LongformerBaseModelOutput(ModelOutput):
     Base class for Longformer's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
-class LongformerBaseModelOutputWithPooling(ModelOutput):
+class LongformerBaseModelOutputWithPooling(ModelOutput, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, hidden_size)`):
         Last layer hidden-state of the first token of the sequence (classification token) further processed by a
@@ -118,8 +116,7 @@ class LongformerBaseModelOutputWithPooling(ModelOutput):
     Base class for masked language models outputs.
     """
 )
-@dataclass
-class LongformerMaskedLMOutput(ModelOutput):
+class LongformerMaskedLMOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Masked language modeling (MLM) loss.
@@ -161,8 +158,7 @@ class LongformerMaskedLMOutput(ModelOutput):
     Base class for outputs of question answering Longformer models.
     """
 )
-@dataclass
-class LongformerQuestionAnsweringModelOutput(ModelOutput):
+class LongformerQuestionAnsweringModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Total span extraction loss is the sum of a Cross-Entropy for the start and end positions.
@@ -203,8 +199,7 @@ class LongformerQuestionAnsweringModelOutput(ModelOutput):
     Base class for outputs of sentence classification models.
     """
 )
-@dataclass
-class LongformerSequenceClassifierOutput(ModelOutput):
+class LongformerSequenceClassifierOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification (or regression if config.num_labels==1) loss.
@@ -246,8 +241,7 @@ class LongformerSequenceClassifierOutput(ModelOutput):
     Base class for outputs of multiple choice Longformer models.
     """
 )
-@dataclass
-class LongformerMultipleChoiceModelOutput(ModelOutput):
+class LongformerMultipleChoiceModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape *(1,)*, *optional*, returned when `labels` is provided):
         Classification loss.
@@ -291,8 +285,7 @@ class LongformerMultipleChoiceModelOutput(ModelOutput):
     Base class for outputs of token classification models.
     """
 )
-@dataclass
-class LongformerTokenClassifierOutput(ModelOutput):
+class LongformerTokenClassifierOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification loss.

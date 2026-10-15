@@ -21,10 +21,10 @@
 
 import collections.abc
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -167,8 +167,7 @@ class InternVLVisionAttention(nn.Module):
     Class for outputs of [`InternVLVisionModel`].
     """
 )
-@dataclass
-class InternVLVisionModelOutputWithPooling(BaseModelOutputWithPooling):
+class InternVLVisionModelOutputWithPooling(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, hidden_size)`):
         Average of the last layer hidden states of the patch tokens (excluding the *[CLS]* token) if
@@ -505,8 +504,7 @@ class InternVLMultiModalProjector(nn.Module):
     Base class for InternVL outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class InternVLModelOutputWithPast(BaseModelOutputWithPast):
+class InternVLModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance. For more details, see our [kv cache guide](https://huggingface.co/docs/transformers/en/kv_cache).
@@ -700,8 +698,7 @@ class InternVLModel(InternVLPreTrainedModel):
     Base class for InternVL causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class InternVLCausalLMOutputWithPast(ModelOutput):
+class InternVLCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

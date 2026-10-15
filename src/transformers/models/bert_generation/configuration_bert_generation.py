@@ -13,14 +13,11 @@
 # limitations under the License.
 """BertGeneration model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="google/bert_for_seq_generation_L-24_bbc_encoder")
-@strict
 class BertGenerationConfig(PreTrainedConfig):
     r"""
     Examples:

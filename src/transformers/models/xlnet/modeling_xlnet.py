@@ -17,9 +17,9 @@ PyTorch XLNet model.
 """
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
@@ -657,8 +657,7 @@ class XLNetPreTrainedModel(PreTrainedModel):
     Output type of [`XLNetModel`].
     """
 )
-@dataclass
-class XLNetModelOutput(ModelOutput):
+class XLNetModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_predict, hidden_size)`):
         Sequence of hidden-states at the last layer of the model.
@@ -682,8 +681,7 @@ class XLNetModelOutput(ModelOutput):
     Output type of [`XLNetLMHeadModel`].
     """
 )
-@dataclass
-class XLNetLMHeadModelOutput(ModelOutput):
+class XLNetLMHeadModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape *(1,)*, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).
@@ -710,8 +708,7 @@ class XLNetLMHeadModelOutput(ModelOutput):
     Output type of [`XLNetForSequenceClassification`].
     """
 )
-@dataclass
-class XLNetForSequenceClassificationOutput(ModelOutput):
+class XLNetForSequenceClassificationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `label` is provided):
         Classification (or regression if config.num_labels==1) loss.
@@ -735,8 +732,7 @@ class XLNetForSequenceClassificationOutput(ModelOutput):
     Output type of [`XLNetForTokenClassificationOutput`].
     """
 )
-@dataclass
-class XLNetForTokenClassificationOutput(ModelOutput):
+class XLNetForTokenClassificationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification loss.
@@ -760,8 +756,7 @@ class XLNetForTokenClassificationOutput(ModelOutput):
     Output type of [`XLNetForMultipleChoice`].
     """
 )
-@dataclass
-class XLNetForMultipleChoiceOutput(ModelOutput):
+class XLNetForMultipleChoiceOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape *(1,)*, *optional*, returned when `labels` is provided):
         Classification loss.
@@ -787,8 +782,7 @@ class XLNetForMultipleChoiceOutput(ModelOutput):
     Output type of [`XLNetForQuestionAnsweringSimple`].
     """
 )
-@dataclass
-class XLNetForQuestionAnsweringSimpleOutput(ModelOutput):
+class XLNetForQuestionAnsweringSimpleOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Total span extraction loss is the sum of a Cross-Entropy for the start and end positions.
@@ -815,8 +809,7 @@ class XLNetForQuestionAnsweringSimpleOutput(ModelOutput):
     Output type of [`XLNetForQuestionAnswering`].
     """
 )
-@dataclass
-class XLNetForQuestionAnsweringOutput(ModelOutput):
+class XLNetForQuestionAnsweringOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned if both `start_positions` and `end_positions` are provided):
         Classification loss as the sum of start token, end token (and is_impossible if provided) classification

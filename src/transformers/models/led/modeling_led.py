@@ -14,9 +14,9 @@
 """PyTorch LED model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import CrossEntropyLoss
 
@@ -1078,9 +1078,8 @@ class LEDPreTrainedModel(PreTrainedModel):
     Base class for LEDEncoder's outputs, with potential hidden states, local and global attentions.
     """
 )
-@dataclass
 # Copied from transformers.models.longformer.modeling_longformer.LongformerBaseModelOutput with Longformer->LEDEncoder
-class LEDEncoderBaseModelOutput(ModelOutput):
+class LEDEncoderBaseModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     attentions (`tuple(torch.FloatTensor)`, *optional*, returned when `output_attentions=True` is passed or when `config.output_attentions=True`):
         Tuple of `torch.FloatTensor` (one for each layer) of shape `(batch_size, num_heads, sequence_length, x +
@@ -1118,8 +1117,7 @@ class LEDEncoderBaseModelOutput(ModelOutput):
     decoding.
     """
 )
-@dataclass
-class LEDSeq2SeqModelOutput(ModelOutput):
+class LEDSeq2SeqModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the decoder of the model.
@@ -1156,8 +1154,7 @@ class LEDSeq2SeqModelOutput(ModelOutput):
     Base class for sequence-to-sequence language models outputs.
     """
 )
-@dataclass
-class LEDSeq2SeqLMOutput(ModelOutput):
+class LEDSeq2SeqLMOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss.
@@ -1194,8 +1191,7 @@ class LEDSeq2SeqLMOutput(ModelOutput):
     Base class for outputs of sequence-to-sequence sentence classification models.
     """
 )
-@dataclass
-class LEDSeq2SeqSequenceClassifierOutput(ModelOutput):
+class LEDSeq2SeqSequenceClassifierOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `label` is provided):
         Classification (or regression if config.num_labels==1) loss.
@@ -1232,8 +1228,7 @@ class LEDSeq2SeqSequenceClassifierOutput(ModelOutput):
     Base class for outputs of sequence-to-sequence question answering models.
     """
 )
-@dataclass
-class LEDSeq2SeqQuestionAnsweringModelOutput(ModelOutput):
+class LEDSeq2SeqQuestionAnsweringModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Total span extraction loss is the sum of a Cross-Entropy for the start and end positions.

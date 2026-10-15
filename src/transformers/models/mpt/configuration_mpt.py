@@ -15,14 +15,11 @@
 
 from typing import Literal
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="mosaicml/mpt-7b")
-@strict
 class MptAttentionConfig(PreTrainedConfig):
     r"""
     attn_type (`str`, *optional*, defaults to `"multihead_attention"`):
@@ -67,7 +64,6 @@ class MptAttentionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="mosaicml/mpt-7b")
-@strict
 class MptConfig(PreTrainedConfig):
     r"""
     expansion_ratio (`int`, *optional*, defaults to 4):

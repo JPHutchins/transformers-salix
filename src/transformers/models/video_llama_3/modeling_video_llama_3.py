@@ -18,11 +18,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
+from salix import Struct
 from torch.nn import LayerNorm
 
 from ... import initialization as init
@@ -470,8 +470,7 @@ class VideoLlama3Projector(nn.Module):
     Base class for VideoLLaMA3 outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class VideoLlama3ModelOutputWithPast(ModelOutput):
+class VideoLlama3ModelOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         Tuple of `tuple(torch.FloatTensor)` of length `config.n_layers`, with each tuple having 2 tensors of shape
@@ -682,8 +681,7 @@ class VideoLlama3Model(VideoLlama3PreTrainedModel):
     Base class for VideoLLaMA3 causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class VideoLlama3CausalLMOutputWithPast(ModelOutput):
+class VideoLlama3CausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

@@ -15,8 +15,6 @@
 
 from typing import Any
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 
@@ -25,7 +23,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="facebook/flava-full")
-@strict
 class FlavaImageConfig(PreTrainedConfig):
     r"""
     mask_token (`bool`, *optional*, defaults to `True`):
@@ -67,7 +64,6 @@ class FlavaImageConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/flava-full")
-@strict
 class FlavaTextConfig(PreTrainedConfig):
     r"""
     Example:
@@ -105,7 +101,6 @@ class FlavaTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/flava-full")
-@strict
 class FlavaMultimodalConfig(PreTrainedConfig):
     r"""
     use_cls_token (`bool`, *optional*, defaults to `True`):
@@ -143,7 +138,6 @@ class FlavaMultimodalConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/flava-full")
-@strict
 class FlavaImageCodebookConfig(PreTrainedConfig):
     r"""
     num_groups (`int`, *optional*, defaults to 4):
@@ -179,7 +173,6 @@ class FlavaImageCodebookConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/flava-full")
-@strict
 class FlavaConfig(PreTrainedConfig):
     r"""
     image_config (`dict`, *optional*):

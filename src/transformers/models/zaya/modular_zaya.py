@@ -20,7 +20,6 @@ from typing import Any, Literal
 import torch
 import torch.nn.functional as F
 import torch.utils.checkpoint
-from huggingface_hub.dataclasses import strict
 from torch import nn
 from torch.nn import init
 
@@ -49,7 +48,6 @@ from ..qwen3_moe.modeling_qwen3_moe import Qwen3MoeExperts, Qwen3MoeRMSNorm
 
 
 @auto_docstring(checkpoint="Zyphra/ZAYA1-8B")
-@strict
 class ZayaConfig(LagunaConfig):
     r"""
     lm_head_bias (`bool`, *optional*, defaults to `False`):

@@ -13,14 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="CohereLabs/command-a-plus-05-2026")
-@strict
 class Cohere2MoeConfig(PreTrainedConfig):
     r"""
     logit_scale (`float`, *optional*, defaults to 0.0625):

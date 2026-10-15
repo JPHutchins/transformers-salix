@@ -15,15 +15,12 @@
 
 from typing import ClassVar
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import BackboneConfigMixin
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="microsoft/resnet-50")
-@strict
 class ResNetConfig(BackboneConfigMixin, PreTrainedConfig):
     r"""
     layer_type (`str`, *optional*, defaults to `"bottleneck"`):

@@ -21,11 +21,11 @@
 import collections
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -85,8 +85,7 @@ class PPFormulaNetPreTrainedModel(PreTrainedModel):
 
 
 # overrider for PPFormulaNetModel's encoder output
-@dataclass
-class PPFormulaNetVisionEncoderOutput(BaseModelOutputWithPooling):
+class PPFormulaNetVisionEncoderOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     pass
 
 

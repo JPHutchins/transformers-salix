@@ -22,10 +22,10 @@ import os
 import re
 import unicodedata
 from collections.abc import Callable, Generator
-from dataclasses import dataclass
 from typing import Union
 
 import numpy as np
+from salix import Struct
 
 from ...tokenization_python import PreTrainedTokenizer, Trie, _is_control, _is_punctuation, _is_whitespace
 from ...tokenization_utils_base import (
@@ -60,21 +60,18 @@ class TapasTruncationStrategy(ExplicitEnum):
 TableValue = collections.namedtuple("TokenValue", ["token", "column_id", "row_id"])
 
 
-@dataclass(frozen=True)
-class TokenCoordinates:
+class TokenCoordinates(Struct, frozen=True):
     column_index: int
     row_index: int
     token_index: int
 
 
-@dataclass
-class TokenizedTable:
+class TokenizedTable(Struct, frozen=False):
     rows: list[list[list[str]]]
     selected_tokens: list[TokenCoordinates]
 
 
-@dataclass(frozen=True)
-class SerializedExample:
+class SerializedExample(Struct, frozen=True):
     tokens: list[str]
     column_ids: list[int]
     row_ids: list[int]
@@ -2221,34 +2218,29 @@ class Relation(enum.Enum):
     GT = 9  # Annotation value is greater than cell value
 
 
-@dataclass
-class Date:
+class Date(Struct, frozen=False):
     year: int | None = None
     month: int | None = None
     day: int | None = None
 
 
-@dataclass
-class NumericValue:
+class NumericValue(Struct, frozen=False):
     float_value: float | None = None
     date: Date | None = None
 
 
-@dataclass
-class NumericValueSpan:
+class NumericValueSpan(Struct, frozen=False):
     begin_index: int | None = None
     end_index: int | None = None
     values: list[NumericValue] = None
 
 
-@dataclass
-class Cell:
+class Cell(Struct, frozen=False):
     text: str
     numeric_value: NumericValue | None = None
 
 
-@dataclass
-class Question:
+class Question(Struct, frozen=False):
     original_text: str  # The original raw question string.
     text: str  # The question string after normalization.
     numeric_spans: list[NumericValueSpan] | None = None

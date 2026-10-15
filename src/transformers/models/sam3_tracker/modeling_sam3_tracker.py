@@ -20,12 +20,12 @@
 
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor
 
 from ... import initialization as init
@@ -45,8 +45,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(custom_intro="Base class for the Sam3Tracker model's output.")
-@dataclass
-class Sam3TrackerImageSegmentationOutput(ModelOutput):
+class Sam3TrackerImageSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     iou_scores (`torch.FloatTensor` of shape `(batch_size, point_batch_size, num_masks)`):
         The Intersection over Union (IoU) scores of the predicted masks.
@@ -746,8 +745,7 @@ class Sam3TrackerMaskDecoder(nn.Module):
 
 
 @auto_docstring(custom_intro="Base class for the vision encoder's outputs.")
-@dataclass
-class Sam3TrackerVisionEncoderOutput(BaseModelOutputWithPooling):
+class Sam3TrackerVisionEncoderOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, height, width, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.

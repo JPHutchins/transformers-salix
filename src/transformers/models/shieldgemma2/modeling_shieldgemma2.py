@@ -12,9 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 
 from ...cache_utils import Cache
 from ...modeling_outputs import ImageClassifierOutputWithNoAttention
@@ -31,8 +31,7 @@ from .configuration_shieldgemma2 import ShieldGemma2Config
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class ShieldGemma2ImageClassifierOutputWithNoAttention(ImageClassifierOutputWithNoAttention):
+class ShieldGemma2ImageClassifierOutputWithNoAttention(ImageClassifierOutputWithNoAttention, Struct, frozen=False):
     """ShieldGemma2 classifies images as violative or not relative to a specific policy
     Args:
     """

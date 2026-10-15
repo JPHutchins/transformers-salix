@@ -16,11 +16,10 @@
 
 import math
 import re
-from dataclasses import dataclass
 
 import numpy as np
 import torch
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 from torch.nn import functional as F
 
@@ -214,8 +213,7 @@ def get_audio_cu_seqlens(
 
 
 @auto_docstring
-@dataclass
-class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling):
+class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     deepstack_features (`List[torch.FloatTensor]`, *optional*):
         List of hidden-states (feature maps) from deepstack layers.
@@ -225,7 +223,6 @@ class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeAudioEncoderConfig(Qwen2_5OmniAudioEncoderConfig):
     r"""
     max_source_positions (`int`, *optional*, defaults to 1500):
@@ -249,13 +246,11 @@ class Qwen3OmniMoeAudioEncoderConfig(Qwen2_5OmniAudioEncoderConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeVisionEncoderConfig(Qwen3VLMoeVisionConfig):
     pass
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeTextConfig(PreTrainedConfig):
     r"""
     decoder_sparse_step (`int`, *optional*, defaults to 1):
@@ -335,7 +330,6 @@ class Qwen3OmniMoeTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeThinkerConfig(Qwen2_5OmniThinkerConfig):
     r"""
     position_id_per_seconds (`int`, *optional*, defaults to 25):
@@ -376,7 +370,6 @@ class Qwen3OmniMoeThinkerConfig(Qwen2_5OmniThinkerConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeTalkerCodePredictorConfig(Qwen3Config):
     r"""
     num_code_groups (`int`, *optional*, defaults to 32):
@@ -399,7 +392,6 @@ class Qwen3OmniMoeTalkerCodePredictorConfig(Qwen3Config):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeTalkerTextConfig(Qwen3MoeConfig):
     base_model_ep_plan = {
         "layers.*.mlp.gate": "ep_router",
@@ -424,7 +416,6 @@ class Qwen3OmniMoeTalkerTextConfig(Qwen3MoeConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeTalkerConfig(PreTrainedConfig):
     r"""
     code_predictor_config (`dict`, *optional*):
@@ -519,7 +510,6 @@ class Qwen3OmniMoeTalkerConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeCode2WavConfig(PreTrainedConfig):
     r"""
     num_quantizers (`int`, *optional*, defaults to 16):
@@ -575,7 +565,6 @@ class Qwen3OmniMoeCode2WavConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-Omni-30B-A3B-Instruct")
-@strict
 class Qwen3OmniMoeConfig(PreTrainedConfig):
     r"""
     thinker_config (`dict`, *optional*):
@@ -1182,8 +1171,7 @@ class Qwen3OmniMoeThinkerTextModel(Qwen3VLMoeTextModel):
 
 
 @auto_docstring
-@dataclass
-class Qwen3OmniMoeThinkerCausalLMOutputWithPast(MoeCausalLMOutputWithPast):
+class Qwen3OmniMoeThinkerCausalLMOutputWithPast(MoeCausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -1426,8 +1414,7 @@ class Qwen3OmniMoeTalkerResizeMLP(nn.Module):
         return self.linear_fc2(self.act_fn(self.linear_fc1(hidden_state)))
 
 
-@dataclass
-class Qwen3OmniMoeTalkerCodePredictorOutputWithPast(CausalLMOutputWithPast):
+class Qwen3OmniMoeTalkerCodePredictorOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     generation_steps (`int`, *optional*)
         Current generation step of code predictor model.
@@ -1613,8 +1600,7 @@ class Qwen3OmniMoeTalkerCodePredictorModelForConditionalGeneration(Qwen3ForCausa
         return model_kwargs
 
 
-@dataclass
-class Qwen3OmniMoeTalkerOutputWithPast(MoeCausalLMOutputWithPast):
+class Qwen3OmniMoeTalkerOutputWithPast(MoeCausalLMOutputWithPast, Struct, frozen=False):
     r"""
     generation_step (`int`, *optional*):
         Current generation step, used to track which `trailing_text_hidden` should be used.

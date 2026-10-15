@@ -16,13 +16,13 @@
 import abc
 import math
 from collections.abc import Callable, Mapping
-from dataclasses import dataclass
 from functools import reduce
 from operator import __add__
 from typing import Any, Optional
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
@@ -49,8 +49,7 @@ logger = logging.get_logger(__name__)
     Base class for Perceiver base model's outputs, with potential hidden states, attentions and cross-attentions.
     """
 )
-@dataclass
-class PerceiverModelOutput(ModelOutput):
+class PerceiverModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, num_labels)`):
         Classification (or regression if config.num_labels==1) scores (before SoftMax).
@@ -68,8 +67,7 @@ class PerceiverModelOutput(ModelOutput):
     Base class for Perceiver decoder outputs, with potential cross-attentions.
     """
 )
-@dataclass
-class PerceiverDecoderOutput(ModelOutput):
+class PerceiverDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, num_labels)`):
         Output of the basic decoder.
@@ -84,8 +82,7 @@ class PerceiverDecoderOutput(ModelOutput):
     Base class for Perceiver's masked language model outputs.
     """
 )
-@dataclass
-class PerceiverMaskedLMOutput(ModelOutput):
+class PerceiverMaskedLMOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Masked language modeling (MLM) loss.
@@ -106,8 +103,7 @@ class PerceiverMaskedLMOutput(ModelOutput):
     autoencoding.
     """
 )
-@dataclass
-class PerceiverClassifierOutput(ModelOutput):
+class PerceiverClassifierOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification (or regression if config.num_labels==1) loss.

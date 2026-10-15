@@ -14,7 +14,6 @@
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -41,7 +40,6 @@ from ..voxtral.modeling_voxtral import VoxtralMultiModalProjector
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-ASR-1.7B-hf")
-@strict
 class Qwen3ASREncoderConfig(Qwen3OmniMoeAudioEncoderConfig):
     r"""
     n_window (`int`, *optional*, defaults to 50):
@@ -67,7 +65,6 @@ class Qwen3ASREncoderConfig(Qwen3OmniMoeAudioEncoderConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-ASR-1.7B-hf")
-@strict
 class Qwen3ASRConfig(PreTrainedConfig):
     r"""
     audio_token_id (`int`, *optional*, defaults to 151676):

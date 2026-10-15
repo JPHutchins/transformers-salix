@@ -16,11 +16,11 @@
 import collections
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -113,9 +113,8 @@ def contrastive_loss(logits: torch.Tensor) -> torch.Tensor:
     Base class for text model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
 # Copied from transformers.models.clip.modeling_clip.CLIPTextModelOutput with CLIP->Clap
-class ClapTextModelOutput(ModelOutput):
+class ClapTextModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     text_embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)` *optional* returned when model is initialized with `with_projection=True`):
         The text embeddings obtained by applying the projection layer to the pooler_output.
@@ -132,8 +131,7 @@ class ClapTextModelOutput(ModelOutput):
     ClapAudio model output to mimic the output of the original implementation.
     """
 )
-@dataclass
-class ClapAudioModelOutput(ModelOutput):
+class ClapAudioModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     audio_embeds (`torch.FloatTensor` of shape `(batch_size, hidden_size)`):
         The Audio embeddings obtained by applying the projection layer to the pooler_output.
@@ -146,9 +144,8 @@ class ClapAudioModelOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
 # Copied from transformers.models.clip.modeling_clip.CLIPOutput with CLIP->Clap, vision->audio, Vision->Audio, image->audio
-class ClapOutput(ModelOutput):
+class ClapOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for audio-text similarity.

@@ -20,11 +20,11 @@
 
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ...activations import ACT2FN
 from ...backbone_utils import load_backbone
@@ -360,8 +360,7 @@ class PPOCRV5MobileRecHead(nn.Module):
 
 
 @auto_docstring
-@dataclass
-class PPOCRV5MobileRecForTextRecognitionOutput(BaseModelOutputWithNoAttention):
+class PPOCRV5MobileRecForTextRecognitionOutput(BaseModelOutputWithNoAttention, Struct, frozen=False):
     r"""
     head_hidden_states (`tuple(torch.FloatTensor)`, *optional*, returned when `output_hidden_states=True` is passed or when `config.output_hidden_states=True`):
         Hidden-states of the PPOCRV5MobileRecHead at the output of each layer plus the optional initial embedding outputs.

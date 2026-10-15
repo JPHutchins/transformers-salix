@@ -21,11 +21,11 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -54,8 +54,7 @@ from .configuration_inkling import InklingAudioConfig, InklingConfig, InklingTex
     Base class for Inkling outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class InklingModelOutputWithPast(BaseModelOutputWithPast):
+class InklingModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     image_hidden_states (`torch.FloatTensor`, *optional*):
         A `torch.FloatTensor` of size `(batch_size, num_images, sequence_length, hidden_size)`.
@@ -70,8 +69,7 @@ class InklingModelOutputWithPast(BaseModelOutputWithPast):
     Base class for Inkling causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class InklingCausalLMOutputWithPast(ModelOutput):
+class InklingCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

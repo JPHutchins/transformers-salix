@@ -13,14 +13,11 @@
 # limitations under the License.
 """DeBERTa-v2 model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="microsoft/deberta-v2-xlarge")
-@strict
 class DebertaV2Config(PreTrainedConfig):
     r"""
     relative_attention (`bool`, *optional*, defaults to `True`):

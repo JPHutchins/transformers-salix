@@ -1,8 +1,8 @@
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -78,8 +78,7 @@ def eager_attention_forward(
     Output type of [`Wav2Vec2ConformerForPreTraining`], with potential hidden states and attentions.
     """
 )
-@dataclass
-class Wav2Vec2ConformerForPreTrainingOutput(ModelOutput):
+class Wav2Vec2ConformerForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `sample_negative_indices` are passed, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the contrastive loss (L_m) and the diversity loss (L_d) as stated in the [official

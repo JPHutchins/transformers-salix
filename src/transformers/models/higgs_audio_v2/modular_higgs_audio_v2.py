@@ -15,7 +15,6 @@
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...cache_utils import Cache, DynamicCache
@@ -40,7 +39,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="bosonai/higgs-audio-v2-generation-3B-base")
-@strict
 class HiggsAudioV2Config(LlamaConfig):
     r"""
     audio_bos_token_id (`int`, *optional*, defaults to 128013):

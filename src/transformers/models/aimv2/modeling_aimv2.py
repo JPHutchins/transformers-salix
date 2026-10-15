@@ -21,11 +21,11 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -43,8 +43,7 @@ from .configuration_aimv2 import Aimv2Config, Aimv2TextConfig, Aimv2VisionConfig
 
 
 @auto_docstring
-@dataclass
-class Aimv2Output(ModelOutput):
+class Aimv2Output(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for image-text similarity.

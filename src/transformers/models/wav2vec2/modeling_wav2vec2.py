@@ -16,11 +16,11 @@
 import math
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 from safetensors.torch import load_file as safe_load_file
+from salix import Struct
 from torch import nn
 from torch.nn import CrossEntropyLoss
 
@@ -71,8 +71,7 @@ _HIDDEN_STATES_START_POSITION = 2
     Output type of [`Wav2Vec2ForPreTraining`], with potential hidden states and attentions.
     """
 )
-@dataclass
-class Wav2Vec2ForPreTrainingOutput(ModelOutput):
+class Wav2Vec2ForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `sample_negative_indices` are passed, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the contrastive loss (L_m) and the diversity loss (L_d) as stated in the [official

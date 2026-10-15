@@ -15,7 +15,6 @@
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -50,7 +49,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="tencent/Hy3-preview")
-@strict
 class HYV3Config(PreTrainedConfig):
     r"""
     router_scaling_factor (*float*):

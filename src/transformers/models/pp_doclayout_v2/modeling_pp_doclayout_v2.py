@@ -21,10 +21,10 @@
 import math
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -887,8 +887,7 @@ class PPDocLayoutV2ReadingOrder(PPDocLayoutV2PreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class PPDocLayoutV2ForObjectDetectionOutput(ModelOutput):
+class PPDocLayoutV2ForObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, num_queries, num_classes + 1)`):
         Classification logits (including no-object) for all queries.
@@ -955,8 +954,7 @@ class PPDocLayoutV2ForObjectDetectionOutput(ModelOutput):
     Base class for outputs of the PP-DocLayoutV2 encoder-decoder model.
     """
 )
-@dataclass
-class PPDocLayoutV2ModelOutput(ModelOutput):
+class PPDocLayoutV2ModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_queries, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the decoder of the model.
@@ -1035,8 +1033,7 @@ class PPDocLayoutV2MLPPredictionHead(nn.Module):
     - a stacked tensor of intermediate reference points.
     """
 )
-@dataclass
-class PPDocLayoutV2DecoderOutput(ModelOutput):
+class PPDocLayoutV2DecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(batch_size, config.decoder_layers, num_queries, hidden_size)`):
         Stacked intermediate hidden states (output of each layer of the decoder).

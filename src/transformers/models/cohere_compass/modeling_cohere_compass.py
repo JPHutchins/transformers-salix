@@ -21,11 +21,11 @@
 import itertools
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -632,8 +632,7 @@ class CohereCompassForCausalLM(CohereCompassPreTrainedModel, GenerationMixin):
 
 
 @auto_docstring
-@dataclass
-class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling):
+class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     deepstack_features (`List[torch.FloatTensor]`, *optional*):
         List of hidden-states (feature maps) from deepstack layers.
@@ -954,8 +953,7 @@ class CohereCompassVisionModel(CohereCompassPreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class CohereCompassModelOutputWithPast(BaseModelOutputWithPast):
+class CohereCompassModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.

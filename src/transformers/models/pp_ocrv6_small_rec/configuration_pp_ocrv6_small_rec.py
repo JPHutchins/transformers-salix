@@ -18,7 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...backbone_utils import consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
@@ -27,7 +26,6 @@ from ..auto import AutoConfig
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-OCRv6_small_rec_safetensors")
-@strict
 class PPOCRV6SmallRecConfig(PreTrainedConfig):
     r"""
     head_out_channels (`int`, *optional*, defaults to 18714):

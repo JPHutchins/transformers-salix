@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 from typing import Any, Optional
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ...generation import (
     GenerateDecoderOnlyOutput,
@@ -160,8 +160,7 @@ class HiggsAudioV2DelayPatternLogitsProcessor(LogitsProcessor):
         return scores.reshape(-1, self.codebook_size)
 
 
-@dataclass
-class HiggsAudioV2GenerationOutput(GenerateDecoderOnlyOutput):
+class HiggsAudioV2GenerationOutput(GenerateDecoderOnlyOutput, Struct, frozen=False):
     """
     Outputs of HiggsAudioV2 generation models, when using non-beam methods.
 

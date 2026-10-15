@@ -13,9 +13,9 @@
 # limitations under the License.
 """PyTorch Llava model."""
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ...activations import ACT2FN
@@ -38,8 +38,7 @@ logger = logging.get_logger(__name__)
     Base class for Llava outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class LlavaModelOutputWithPast(BaseModelOutputWithPast):
+class LlavaModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance. For more details, see our [kv cache guide](https://huggingface.co/docs/transformers/en/kv_cache).
@@ -59,8 +58,7 @@ class LlavaModelOutputWithPast(BaseModelOutputWithPast):
     Base class for Llava causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class LlavaCausalLMOutputWithPast(ModelOutput):
+class LlavaCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

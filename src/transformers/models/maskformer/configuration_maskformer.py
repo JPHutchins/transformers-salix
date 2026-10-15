@@ -17,7 +17,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...backbone_utils import consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
@@ -29,7 +28,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="facebook/maskformer-swin-base-ade")
-@strict
 class MaskFormerDetrConfig(PreTrainedConfig):
     r"""
     num_queries (`int`, *optional*, defaults to 100):
@@ -119,7 +117,6 @@ class MaskFormerDetrConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/maskformer-swin-base-ade")
-@strict
 class MaskFormerConfig(PreTrainedConfig):
     r"""
     fpn_feature_size (`int`, *optional*, defaults to 256):

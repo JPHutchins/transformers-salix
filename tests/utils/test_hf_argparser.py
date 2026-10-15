@@ -19,13 +19,13 @@ import sys
 import tempfile
 import unittest
 from argparse import Namespace
-from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
-from typing import Literal, Union, get_args, get_origin
+from typing import Annotated, Literal, Union, get_args, get_origin
 from unittest.mock import patch
 
 import yaml
+from salix import Struct, fields
 
 from transformers import HfArgumentParser, TrainingArguments
 from transformers.hf_argparser import make_choice_type_function, string_to_bool
@@ -37,26 +37,19 @@ from transformers.testing_utils import require_torch
 is_python_no_less_than_3_10 = sys.version_info >= (3, 10)
 
 
-def list_field(default=None, metadata=None):
-    return field(default_factory=lambda: default, metadata=metadata)
-
-
-@dataclass
-class BasicExample:
+class BasicExample(Struct, frozen=False):
     foo: int
     bar: float
     baz: str
     flag: bool
 
 
-@dataclass
-class WithDefaultExample:
+class WithDefaultExample(Struct, frozen=False):
     foo: int = 42
-    baz: str = field(default="toto", metadata={"help": "help message"})
+    baz: Annotated[str, {"help": "help message"}] = "toto"
 
 
-@dataclass
-class WithDefaultBoolExample:
+class WithDefaultBoolExample(Struct, frozen=False):
     foo: bool = False
     baz: bool = True
     opt: bool | None = None
@@ -73,73 +66,65 @@ class MixedTypeEnum(Enum):
     fourtytwo = 42
 
 
-@dataclass
-class EnumExample:
+class EnumExample(Struct, frozen=False):
     foo: BasicEnum = "toto"
 
     def __post_init__(self):
         self.foo = BasicEnum(self.foo)
 
 
-@dataclass
-class MixedTypeEnumExample:
+class MixedTypeEnumExample(Struct, frozen=False):
     foo: MixedTypeEnum = "toto"
 
     def __post_init__(self):
         self.foo = MixedTypeEnum(self.foo)
 
 
-@dataclass
-class OptionalExample:
+class OptionalExample(Struct, frozen=False):
     foo: int | None = None
-    bar: float | None = field(default=None, metadata={"help": "help message"})
+    bar: Annotated[float | None, {"help": "help message"}] = None
     baz: str | None = None
-    ces: list[str] | None = list_field(default=[])
-    des: list[int] | None = list_field(default=[])
+    ces: list[str] | None = []
+    des: list[int] | None = []
 
 
-@dataclass
-class ListExample:
-    foo_int: list[int] = list_field(default=[])
-    bar_int: list[int] = list_field(default=[1, 2, 3])
-    foo_str: list[str] = list_field(default=["Hallo", "Bonjour", "Hello"])
-    foo_float: list[float] = list_field(default=[0.1, 0.2, 0.3])
+class ListExample(Struct, frozen=False):
+    foo_int: list[int] = []
+    bar_int: list[int] = [1, 2, 3]
+    foo_str: list[str] = ["Hallo", "Bonjour", "Hello"]
+    foo_float: list[float] = [0.1, 0.2, 0.3]
 
 
-@dataclass
-class RequiredExample:
-    required_list: list[int] = field()
-    required_str: str = field()
-    required_enum: BasicEnum = field()
+class RequiredExample(Struct, frozen=False):
+    required_list: list[int]
+    required_str: str
+    required_enum: BasicEnum
 
     def __post_init__(self):
         self.required_enum = BasicEnum(self.required_enum)
 
 
-@dataclass
-class StringLiteralAnnotationExample:
+class StringLiteralAnnotationExample(Struct, frozen=False):
     foo: int
-    required_enum: "BasicEnum" = field()
+    required_enum: "BasicEnum"
     opt: "bool | None" = None
-    baz: "str" = field(default="toto", metadata={"help": "help message"})
-    foo_str: "list[str]" = list_field(default=["Hallo", "Bonjour", "Hello"])
+    baz: Annotated["str", {"help": "help message"}] = "toto"
+    foo_str: "list[str]" = ["Hallo", "Bonjour", "Hello"]
 
 
 if is_python_no_less_than_3_10:
 
-    @dataclass
-    class WithDefaultBoolExamplePep604:
+    class WithDefaultBoolExamplePep604(Struct, frozen=False):
         foo: bool = False
         baz: bool = True
         opt: bool | None = None
 
-    @dataclass
-    class OptionalExamplePep604:
+    class OptionalExamplePep604(Struct, frozen=False):
         foo: int | None = None
-        bar: float | None = field(default=None, metadata={"help": "help message"})
+        bar: Annotated[float | None, {"help": "help message"}] = None
         baz: str | None = None
-        ces: list[str] | None = list_field(default=[])
-        des: list[int] | None = list_field(default=[])
+        ces: list[str] | None = []
+        des: list[int] | None = []
 
 
 class HfArgumentParserTest(unittest.TestCase):
@@ -246,8 +231,7 @@ class HfArgumentParserTest(unittest.TestCase):
         self.assertEqual(enum_ex.foo, MixedTypeEnum.fourtytwo)
 
     def test_04_with_literal(self):
-        @dataclass
-        class LiteralExample:
+        class LiteralExample(Struct, frozen=False):
             foo: Literal["titi", "toto", 42] = "toto"
 
         parser = HfArgumentParser(LiteralExample)
@@ -424,12 +408,12 @@ class HfArgumentParserTest(unittest.TestCase):
         args = TrainingArguments
 
         # First find any annotations that contain `dict`
-        fields = args.__dataclass_fields__
+        args_fields = fields(args)
 
         raw_dict_fields = []
         optional_dict_fields = []
 
-        for field_ in fields.values():
+        for field_ in args_fields:
             # First verify raw dict
             if field_.type is dict:
                 raw_dict_fields.append(field_)

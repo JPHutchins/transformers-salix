@@ -17,7 +17,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
+from typing import Annotated
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -27,7 +27,6 @@ from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="rhymes-ai/Aria")
-@strict
 class AriaTextConfig(PreTrainedConfig):
     r"""
     moe_num_experts (`int`, *optional*, defaults to 8):
@@ -64,7 +63,7 @@ class AriaTextConfig(PreTrainedConfig):
     num_key_value_heads: int | None = None
     hidden_act: str = "silu"
     max_position_embeddings: int = 2048
-    initializer_range: float = interval(min=0.0, max=1.0)(default=0.02)
+    initializer_range: Annotated[float, interval(min=0.0, max=1.0)] = 0.02
     rms_norm_eps: float = 1e-6
     use_cache: bool = True
     pad_token_id: int | None = 2
@@ -100,7 +99,6 @@ class AriaTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="rhymes-ai/Aria")
-@strict
 class AriaConfig(PreTrainedConfig):
     r"""
     projector_patch_to_query_dict (`dict`, *optional*):

@@ -20,10 +20,10 @@
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from math import pi
 
 import torch.nn as nn
+from salix import Struct
 from torch import Tensor, broadcast_tensors
 
 from ... import initialization as init
@@ -144,8 +144,7 @@ class MusicFlamingoPreTrainedModel(PreTrainedModel):
             init.copy_(module.position_angles, buffer_value)
 
 
-@dataclass
-class MusicFlamingoModelOutputWithPast(BaseModelOutputWithPast):
+class MusicFlamingoModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     audio_hidden_states (`torch.FloatTensor`, *optional*):
         Projected audio hidden states.
@@ -375,8 +374,7 @@ class MusicFlamingoModel(MusicFlamingoPreTrainedModel):
     Base class for MusicFlamingo causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class MusicFlamingoCausalLMOutputWithPast(ModelOutput):
+class MusicFlamingoCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

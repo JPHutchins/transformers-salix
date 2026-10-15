@@ -11,12 +11,11 @@
 # limitations under the License.
 
 from collections.abc import Callable, Iterable
-from dataclasses import dataclass
 from typing import Union
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 from torchvision.transforms.v2 import functional as tvF
 
@@ -75,8 +74,7 @@ logger = logging.get_logger(__name__)
     each selected feature stage (used when `config.return_class_token=True`).
     """
 )
-@dataclass
-class Sapiens2BackboneOutput(DINOv3ViTBackboneOutput):
+class Sapiens2BackboneOutput(DINOv3ViTBackboneOutput, Struct, frozen=False):
     pass
 
 
@@ -85,8 +83,7 @@ class Sapiens2BackboneOutput(DINOv3ViTBackboneOutput):
     Class for outputs of pose estimation models.
     """
 )
-@dataclass
-class Sapiens2PoseEstimatorOutput(VitPoseEstimatorOutput):
+class Sapiens2PoseEstimatorOutput(VitPoseEstimatorOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Pose estimation loss.
@@ -104,8 +101,7 @@ class Sapiens2PoseEstimatorOutput(VitPoseEstimatorOutput):
     Class for outputs of normal estimation models.
     """
 )
-@dataclass
-class Sapiens2NormalEstimatorOutput(ModelOutput):
+class Sapiens2NormalEstimatorOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Normal estimation loss.
@@ -131,8 +127,7 @@ class Sapiens2NormalEstimatorOutput(ModelOutput):
     Class for outputs of pointmap estimation models.
     """
 )
-@dataclass
-class Sapiens2PointmapEstimatorOutput(ModelOutput):
+class Sapiens2PointmapEstimatorOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Pointmap estimation loss.
@@ -161,8 +156,7 @@ class Sapiens2PointmapEstimatorOutput(ModelOutput):
     Class for outputs of image matting models.
     """
 )
-@dataclass
-class Sapiens2ImageMattingOutput(ImageMattingOutput):
+class Sapiens2ImageMattingOutput(ImageMattingOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Loss.
@@ -966,7 +960,6 @@ class Sapiens2ImageProcessor(BeitImageProcessor):
 
 
 @auto_docstring(checkpoint="facebook/sapiens2-seg-0.4b")
-@strict
 class Sapiens2HeadConfig(PreTrainedConfig):
     r"""
     upsample_out_channels (`list[int]`, *optional*):
@@ -1054,7 +1047,6 @@ class Sapiens2HeadConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/sapiens2-pretrain-0.4b")
-@strict
 class Sapiens2Config(DINOv3ViTConfig):
     r"""
     rope_theta (`float`, *optional*, defaults to 100.0):

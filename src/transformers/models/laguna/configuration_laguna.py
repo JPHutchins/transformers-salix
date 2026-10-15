@@ -19,15 +19,12 @@
 # limitations under the License.
 from typing import Any, Literal
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="poolside/laguna-XS.2")
-@strict
 class LagunaConfig(PreTrainedConfig):
     r"""
     gating (`bool` or `str`, *optional*, defaults to `True`):

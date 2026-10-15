@@ -20,11 +20,11 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -1021,8 +1021,7 @@ class EomtDinov3Loss(nn.Module):
     [`~EomtDinov3ImageProcessor] for details regarding usage.
     """
 )
-@dataclass
-class EomtDinov3ForUniversalSegmentationOutput(ModelOutput):
+class EomtDinov3ForUniversalSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.Tensor`, *optional*):
         The computed loss, returned when labels are present.

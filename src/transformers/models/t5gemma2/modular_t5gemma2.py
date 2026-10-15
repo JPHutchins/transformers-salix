@@ -18,7 +18,6 @@ from typing import Any
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...cache_utils import DynamicCache, EncoderDecoderCache, StaticCache
@@ -74,7 +73,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="google/t5gemma-2-270m-270m")
-@strict
 class T5Gemma2TextConfig(Gemma3TextConfig, PreTrainedConfig):
     r"""
     query_pre_attn_scalar (`float`, *optional*, defaults to 256):
@@ -101,7 +99,6 @@ class T5Gemma2TextConfig(Gemma3TextConfig, PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/t5gemma-2-270m-270m")
-@strict
 class T5Gemma2EncoderConfig(Gemma3Config):
     model_type = "t5gemma2_encoder"
 
@@ -112,7 +109,6 @@ class T5Gemma2EncoderConfig(Gemma3Config):
 
 
 @auto_docstring(checkpoint="google/t5gemma-2-270m-270m")
-@strict
 class T5Gemma2DecoderConfig(Gemma3TextConfig, PreTrainedConfig):
     r"""
     query_pre_attn_scalar (`float`, *optional*, defaults to 256):
@@ -139,7 +135,6 @@ class T5Gemma2DecoderConfig(Gemma3TextConfig, PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/t5gemma-2-270m-270m")
-@strict
 class T5Gemma2Config(PreTrainedConfig):
     r"""
     encoder (`Union[T5Gemma2EncoderConfig, dict]`, optional, *optional*):

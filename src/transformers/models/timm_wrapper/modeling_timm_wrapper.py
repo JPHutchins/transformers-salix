@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import Tensor
 
 from ...modeling_outputs import ImageClassifierOutput, ModelOutput
@@ -36,8 +36,7 @@ logger = logging.get_logger(__name__)
     and optional hidden states.
     """
 )
-@dataclass
-class TimmWrapperModelOutput(ModelOutput):
+class TimmWrapperModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor`):
         The last hidden state of the model, output before applying the classification head.

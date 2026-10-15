@@ -14,7 +14,6 @@
 
 
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ...utils import auto_docstring, can_return_tuple
 from ..llama.configuration_llama import LlamaConfig
@@ -28,7 +27,6 @@ from ..nemotron.modeling_nemotron import NemotronMLP
 
 
 @auto_docstring(checkpoint="inceptionai/Jais-2-8B-Chat")
-@strict
 class Jais2Config(LlamaConfig):
     base_model_tp_plan = {
         "layers.*.self_attn.q_proj": "colwise",

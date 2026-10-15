@@ -15,7 +15,6 @@
 from collections.abc import Callable
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ...activations import ACT2CLS
@@ -44,7 +43,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="swiss-ai/Apertus-8B-Instruct-2509")
-@strict
 class ApertusConfig(PreTrainedConfig):
     r"""
     ```python

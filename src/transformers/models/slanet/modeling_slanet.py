@@ -20,11 +20,11 @@
 
 
 import math
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2CLS, ACT2FN
@@ -75,8 +75,7 @@ class SLANetPreTrainedModel(PreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class SLANetForTableRecognitionOutput(BaseModelOutputWithNoAttention):
+class SLANetForTableRecognitionOutput(BaseModelOutputWithNoAttention, Struct, frozen=False):
     r"""
     head_hidden_states (`tuple(torch.FloatTensor)`, *optional*, returned when `output_hidden_states=True` is passed or when `config.output_hidden_states=True`):
         Hidden-states of the SLANetSLAHead at each prediction step, varies up to max `self.config.max_text_length` states (depending on early exits).

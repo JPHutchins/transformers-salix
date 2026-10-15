@@ -20,9 +20,9 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -42,8 +42,7 @@ from .configuration_ovis2 import Ovis2Config, Ovis2VisionConfig
 
 
 @auto_docstring
-@dataclass
-class BaseModelOutputWithVisualIndicatorFeatures(BaseModelOutputWithPooling):
+class BaseModelOutputWithVisualIndicatorFeatures(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     visual_indicator_features (`torch.FloatTensor` of shape `(batch_size, visual_indicator_size)`):
         Visual indicator features extracted from the model, which can be used for auxiliary tasks or further processing.
@@ -57,8 +56,7 @@ class BaseModelOutputWithVisualIndicatorFeatures(BaseModelOutputWithPooling):
     Base class for Llava outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class Ovis2ModelOutputWithPast(BaseModelOutputWithPast):
+class Ovis2ModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance. For more details, see our [kv cache guide](https://huggingface.co/docs/transformers/en/kv_cache).
@@ -78,8 +76,7 @@ class Ovis2ModelOutputWithPast(BaseModelOutputWithPast):
     Base class for Ovis2 causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class Ovis2CausalLMOutputWithPast(ModelOutput):
+class Ovis2CausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

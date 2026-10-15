@@ -19,8 +19,6 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 from ..auto import CONFIG_MAPPING, AutoConfig
@@ -30,7 +28,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="deepseek-community/deepseek-vl-1.3b-chat")
-@strict
 class DeepseekVLConfig(PreTrainedConfig):
     r"""
     Example:

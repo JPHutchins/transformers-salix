@@ -17,7 +17,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -25,7 +24,6 @@ from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="zai-org/GLM-4.5")
-@strict
 class Glm4MoeConfig(PreTrainedConfig):
     r"""
     n_group (`int`, *optional*, defaults to 1):

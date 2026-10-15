@@ -13,14 +13,11 @@
 # limitations under the License.
 """DBRX model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
-@strict
 @auto_docstring(
     custom_intro="This config is used to instantiate attention layers.",
     checkpoint="transformers-community/dbrx-instruct",
@@ -42,7 +39,6 @@ class DbrxAttentionConfig(PreTrainedConfig):
     kv_n_heads: int = 1
 
 
-@strict
 @auto_docstring(
     custom_intro="This config is used to instantiate feedforward layers.",
     checkpoint="transformers-community/dbrx-instruct",
@@ -100,7 +96,6 @@ class DbrxFFNConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="transformers-community/dbrx-instruct")
-@strict
 class DbrxConfig(PreTrainedConfig):
     r"""
     max_seq_len (`int`, *optional*, defaults to 2048):

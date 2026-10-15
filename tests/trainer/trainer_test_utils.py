@@ -14,7 +14,6 @@
 
 """Shared test infrastructure for the Trainer test suite."""
 
-import dataclasses
 import gc
 import json
 import os
@@ -171,7 +170,6 @@ class TorchTracemalloc:
         self.peaked = bytes2megabytes(self.peak - self.begin)
 
 
-@dataclasses.dataclass
 class RegressionTrainingArguments(TrainingArguments):
     a: float = 0.0
     b: float = 0.0

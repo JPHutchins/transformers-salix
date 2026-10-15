@@ -20,9 +20,10 @@ from __future__ import annotations
 
 import threading
 from contextvars import ContextVar
-from dataclasses import dataclass
 from functools import wraps
 from typing import TYPE_CHECKING
+
+from salix import Struct
 
 from .import_utils import is_torchdynamo_compiling, requires
 
@@ -36,9 +37,8 @@ if TYPE_CHECKING:
 _CAN_RECORD_REGISTRY = {}
 
 
-@dataclass
 @requires(backends=("torch",))
-class OutputRecorder:
+class OutputRecorder(Struct, frozen=False):
     """
     Configuration for recording outputs from a model via hooks.
 

@@ -19,11 +19,11 @@
 # limitations under the License.
 
 import itertools
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ...cache_utils import Cache
 from ...generation import GenerationMixin
@@ -84,8 +84,7 @@ class Cosmos3OmniPreTrainedModel(PreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling):
+class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     deepstack_features (`List[torch.FloatTensor]`, *optional*):
         List of hidden-states (feature maps) from deepstack layers.
@@ -95,8 +94,7 @@ class BaseModelOutputWithDeepstackFeatures(BaseModelOutputWithPooling):
 
 
 @auto_docstring
-@dataclass
-class Cosmos3OmniModelOutputWithPast(BaseModelOutputWithPast):
+class Cosmos3OmniModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -490,8 +488,7 @@ class Cosmos3OmniModel(Cosmos3OmniPreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class Cosmos3OmniCausalLMOutputWithPast(CausalLMOutputWithPast):
+class Cosmos3OmniCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.

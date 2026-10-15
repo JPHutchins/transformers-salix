@@ -20,11 +20,11 @@
 import math
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor
 
 from ... import initialization as init
@@ -54,8 +54,7 @@ from .configuration_deformable_detr import DeformableDetrConfig
     gone through a layernorm. This is useful when training the model with auxiliary decoding losses.
     """
 )
-@dataclass
-class DeformableDetrDecoderOutput(BaseModelOutputWithCrossAttentions):
+class DeformableDetrDecoderOutput(BaseModelOutputWithCrossAttentions, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(config.decoder_layers, batch_size, num_queries, hidden_size)`, *optional*, returned when `config.auxiliary_loss=True`):
         Intermediate decoder activations, i.e. the output of each decoder layer, each of them gone through a
@@ -74,8 +73,7 @@ class DeformableDetrDecoderOutput(BaseModelOutputWithCrossAttentions):
     Base class for outputs of the Deformable DETR encoder-decoder model.
     """
 )
-@dataclass
-class DeformableDetrModelOutput(ModelOutput):
+class DeformableDetrModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     init_reference_points (`torch.FloatTensor` of shape  `(batch_size, num_queries, 4)`):
         Initial reference points sent through the Transformer decoder.
@@ -112,8 +110,7 @@ class DeformableDetrModelOutput(ModelOutput):
     Output type of [`DeformableDetrForObjectDetection`].
     """
 )
-@dataclass
-class DeformableDetrObjectDetectionOutput(ModelOutput):
+class DeformableDetrObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

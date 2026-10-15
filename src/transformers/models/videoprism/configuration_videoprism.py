@@ -19,8 +19,6 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 
@@ -29,7 +27,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="google/videoprism-base-f16r288")
-@strict
 class VideoPrismVisionConfig(PreTrainedConfig):
     r"""
     num_frames (`int`, *optional*, defaults to 16):
@@ -71,7 +68,6 @@ class VideoPrismVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/videoprism-lvt-base-f16r288")
-@strict
 class VideoPrismTextConfig(PreTrainedConfig):
     r"""
     apply_l2norm (`bool`, *optional*, defaults to `True`):
@@ -104,7 +100,6 @@ class VideoPrismTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/videoprism-lvt-base-f16r288")
-@strict
 class VideoPrismConfig(PreTrainedConfig):
     r"""
     Example:

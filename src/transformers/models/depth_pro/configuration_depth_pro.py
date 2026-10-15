@@ -15,8 +15,6 @@
 
 from copy import deepcopy
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 from ..auto.configuration_auto import CONFIG_MAPPING, AutoConfig
@@ -26,7 +24,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="apple/DepthPro")
-@strict
 class DepthProConfig(PreTrainedConfig):
     r"""
     fusion_hidden_size (`int`, *optional*, defaults to 256):

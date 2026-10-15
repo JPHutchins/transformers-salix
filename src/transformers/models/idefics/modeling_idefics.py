@@ -19,11 +19,11 @@
 """PyTorch Idefics model."""
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -51,8 +51,7 @@ logger = logging.get_logger(__name__)
     Base class for Idefics model's outputs that may also contain a past key/values (to speed up sequential decoding).
     """
 )
-@dataclass
-class IdeficsBaseModelOutputWithPast(ModelOutput):
+class IdeficsBaseModelOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.
@@ -78,8 +77,7 @@ class IdeficsBaseModelOutputWithPast(ModelOutput):
     Base class for Idefics causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class IdeficsCausalLMOutputWithPast(ModelOutput):
+class IdeficsCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

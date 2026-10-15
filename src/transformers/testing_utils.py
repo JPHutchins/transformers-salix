@@ -39,7 +39,6 @@ import unittest
 from collections import UserDict, defaultdict
 from collections.abc import Callable, Generator, Iterable, Iterator, Mapping
 from contextlib import contextmanager
-from dataclasses import MISSING, fields
 from functools import cache, wraps
 from io import StringIO
 from pathlib import Path
@@ -50,6 +49,7 @@ from unittest.mock import patch
 import httpx
 from huggingface_hub import create_repo, delete_repo
 from packaging import version
+from salix import MISSING, fields
 
 from transformers import logging as transformers_logging
 

@@ -15,7 +15,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...cache_utils import Cache, DynamicCache
@@ -57,7 +56,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="zai-org/GLM-4.5V")
-@strict
 class Glm4vMoeTextConfig(Glm4MoeConfig):
     r"""
     n_group (`int`, *optional*, defaults to 1):
@@ -113,7 +111,6 @@ class Glm4vMoeTextConfig(Glm4MoeConfig):
 
 
 @auto_docstring(checkpoint="zai-org/GLM-4.5V")
-@strict
 class Glm4vMoeConfig(Glm4vConfig):
     r"""
     image_start_token_id (`int`, *optional*, defaults to 151339):

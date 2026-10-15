@@ -13,14 +13,11 @@
 # limitations under the License.
 """DeiT model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/deit-base-distilled-patch16-224")
-@strict
 class DeiTConfig(PreTrainedConfig):
     r"""
     encoder_stride (`int`, *optional*, defaults to 16):

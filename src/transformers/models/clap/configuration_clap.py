@@ -13,8 +13,6 @@
 # limitations under the License.
 """CLAP model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 
@@ -23,7 +21,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="laion/clap-htsat-fused")
-@strict
 class ClapTextConfig(PreTrainedConfig):
     r"""
     Examples:
@@ -64,7 +61,6 @@ class ClapTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="laion/clap-htsat-fused")
-@strict
 class ClapAudioConfig(PreTrainedConfig):
     r"""
     window_size (`int`, *optional*, defaults to 8):
@@ -141,7 +137,6 @@ class ClapAudioConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="laion/clap-htsat-fused")
-@strict
 class ClapConfig(PreTrainedConfig):
     r"""
     Example:

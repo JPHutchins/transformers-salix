@@ -17,7 +17,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...backbone_utils import BackboneConfigMixin
 from ...configuration_utils import PreTrainedConfig
@@ -25,7 +24,6 @@ from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/pixio-huge")
-@strict
 class PixioConfig(BackboneConfigMixin, PreTrainedConfig):
     r"""
     apply_layernorm (`bool`, *optional*, defaults to `True`):

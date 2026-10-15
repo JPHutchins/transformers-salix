@@ -14,15 +14,12 @@
 
 """Configuration for Backbone models"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import BackboneConfigMixin
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="")
-@strict
 class TimmBackboneConfig(BackboneConfigMixin, PreTrainedConfig):
     r"""
     backbone (`str`, *optional*):

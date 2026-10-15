@@ -13,8 +13,6 @@
 # limitations under the License.
 """Moshi model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
@@ -22,7 +20,6 @@ from ..auto.configuration_auto import AutoConfig
 
 
 @auto_docstring(checkpoint="kmhf/hf-moshiko")
-@strict
 class MoshiDepthConfig(PreTrainedConfig):
     r"""
     input_size (`int`, *optional*, defaults to 4096):
@@ -89,7 +86,6 @@ class MoshiDepthConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="kmhf/hf-moshiko")
-@strict
 class MoshiConfig(PreTrainedConfig):
     r"""
     audio_vocab_size (`int`, *optional*):

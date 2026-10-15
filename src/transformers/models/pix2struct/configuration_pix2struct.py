@@ -13,8 +13,6 @@
 # limitations under the License.
 """Pix2Struct model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 
@@ -23,7 +21,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="google/pix2struct-base")
-@strict
 class Pix2StructTextConfig(PreTrainedConfig):
     r"""
     relative_attention_num_buckets (`int`, *optional*, defaults to 32):
@@ -83,7 +80,6 @@ class Pix2StructTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/pix2struct-base")
-@strict
 class Pix2StructVisionConfig(PreTrainedConfig):
     r"""
     patch_embed_hidden_size (`int`, *optional*, defaults to 768):
@@ -138,7 +134,6 @@ class Pix2StructVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/pix2struct-base")
-@strict
 class Pix2StructConfig(PreTrainedConfig):
     r"""
     is_vqa (`bool`, *optional*, defaults to `False`):

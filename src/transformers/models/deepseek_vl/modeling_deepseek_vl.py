@@ -19,10 +19,10 @@
 # limitations under the License.
 
 
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ...cache_utils import Cache
 from ...generation import GenerationMixin
@@ -39,8 +39,7 @@ from .configuration_deepseek_vl import DeepseekVLConfig
     Base class for DeepseekVL model's outputs that may also contain a past key/values (to speed up sequential decoding).
     """
 )
-@dataclass
-class DeepseekVLBaseModelOutputWithPast(ModelOutput):
+class DeepseekVLBaseModelOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.
@@ -66,8 +65,7 @@ class DeepseekVLBaseModelOutputWithPast(ModelOutput):
     Base class for DeepseekVL causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class DeepseekVLCausalLMOutputWithPast(ModelOutput):
+class DeepseekVLCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

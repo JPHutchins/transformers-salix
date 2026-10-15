@@ -26,10 +26,10 @@
 import itertools
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -954,8 +954,7 @@ class PaddleOCRVisionModel(PaddleOCRVLPreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class PaddleOCRVLModelOutputWithPast(BaseModelOutputWithPast):
+class PaddleOCRVLModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -966,8 +965,7 @@ class PaddleOCRVLModelOutputWithPast(BaseModelOutputWithPast):
 
 
 @auto_docstring
-@dataclass
-class PaddleOCRVLCausalLMOutputWithPast(CausalLMOutputWithPast):
+class PaddleOCRVLCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.

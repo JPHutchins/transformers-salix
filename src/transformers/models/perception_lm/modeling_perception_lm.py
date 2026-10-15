@@ -18,10 +18,10 @@
 # limitations under the License.
 
 import math
-from dataclasses import dataclass
 
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import nn
 
 from ...cache_utils import Cache
@@ -106,8 +106,7 @@ class PerceptionLMPreTrainedModel(PreTrainedModel):
     Base class for PerceptionLM outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class PerceptionLMModelOutputWithPast(BaseModelOutputWithPast):
+class PerceptionLMModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance. For more details, see our [kv cache guide](https://huggingface.co/docs/transformers/en/kv_cache).
@@ -132,8 +131,7 @@ class PerceptionLMModelOutputWithPast(BaseModelOutputWithPast):
     Base class for PerceptionLM causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class PerceptionLMCausalLMOutputWithPast(ModelOutput):
+class PerceptionLMCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

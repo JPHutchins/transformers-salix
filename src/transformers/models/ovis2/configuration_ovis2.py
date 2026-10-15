@@ -13,15 +13,12 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="thisisiron/Ovis2-1B-hf")
-@strict
 class Ovis2VisionConfig(PreTrainedConfig):
     r"""
     hidden_stride (`int`, *optional*, defaults to 1):
@@ -54,7 +51,6 @@ class Ovis2VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="thisisiron/Ovis2-1B-hf")
-@strict
 class Ovis2Config(PreTrainedConfig):
     r"""
     visual_indicator_token_ids (`List[int]`, *optional*, defaults to `[151666, 151667, 151668, 151669, 151670]`):

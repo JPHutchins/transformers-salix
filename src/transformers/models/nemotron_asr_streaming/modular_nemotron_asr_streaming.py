@@ -14,11 +14,10 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 
 from ...cache_utils import Cache, DynamicCache
@@ -68,7 +67,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="nvidia/nemotron-speech-streaming-en-0.6b")
-@strict
 class NemotronAsrStreamingEncoderConfig(ParakeetEncoderConfig):
     r"""
     convolution_bias (`bool`, *optional*, defaults to `True`):
@@ -128,7 +126,6 @@ class NemotronAsrStreamingEncoderConfig(ParakeetEncoderConfig):
 
 
 @auto_docstring(checkpoint="nvidia/nemotron-speech-streaming-en-0.6b")
-@strict
 class NemotronAsrStreamingConfig(ParakeetRNNTConfig):
     r"""
     decoder_hidden_size (`int`, *optional*, defaults to 640):
@@ -464,8 +461,7 @@ class NemotronAsrStreamingEncoderCausalConv2D(nn.Conv2d):
     cache-aware models when `use_cache=True`.
     """
 )
-@dataclass
-class NemotronAsrStreamingEncoderModelOutput(BaseModelOutputWithPooling):
+class NemotronAsrStreamingEncoderModelOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     attention_mask (`torch.Tensor` of shape `(batch_size, sequence_length)`, *optional*):
         Mask to avoid performing attention on padding token indices after sequence compression. Returned because the
@@ -945,8 +941,7 @@ class NemotronAsrStreamingEncoder(ParakeetEncoder):
         return left_context, num_lookahead_tokens
 
 
-@dataclass
-class NemotronAsrStreamingRNNTOutput(ParakeetRNNTOutput):
+class NemotronAsrStreamingRNNTOutput(ParakeetRNNTOutput, Struct, frozen=False):
     r"""
     encoder_past_key_values (`Cache`, *optional*):
         Updated encoder attention K/V sliding-window cache, returned when encoding audio with `use_cache=True`

@@ -25,15 +25,12 @@
 
 import inspect
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PaddleOCR-VL")
-@strict
 class PaddleOCRVisionConfig(PreTrainedConfig):
     r"""
     Example:
@@ -69,7 +66,6 @@ class PaddleOCRVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PaddleOCR-VL")
-@strict
 class PaddleOCRTextConfig(PreTrainedConfig):
     r"""
     use_bias (`bool`, *optional*, defaults to `False`):
@@ -137,7 +133,6 @@ class PaddleOCRTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PaddleOCR-VL")
-@strict
 class PaddleOCRVLConfig(PreTrainedConfig):
     r"""
     Example:

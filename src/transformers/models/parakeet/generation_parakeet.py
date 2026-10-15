@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 
 from ...generation import GenerationMixin, StoppingCriteria
 from ...utils import ModelOutput
@@ -86,8 +86,7 @@ class ParakeetRNNTDecoderCache:
 class ParakeetTDTDecoderCache(ParakeetRNNTDecoderCache): ...
 
 
-@dataclass
-class ParakeetRNNTGenerateOutput(ModelOutput):
+class ParakeetRNNTGenerateOutput(ModelOutput, Struct, frozen=False):
     """
     Outputs of Parakeet transducer (RNN-T / TDT) generation.
 

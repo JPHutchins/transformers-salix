@@ -19,10 +19,10 @@
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -40,8 +40,7 @@ from .configuration_chinese_clip import ChineseCLIPConfig, ChineseCLIPTextConfig
 
 
 @auto_docstring
-@dataclass
-class ChineseCLIPOutput(ModelOutput):
+class ChineseCLIPOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `return_loss` is `True`):
         Contrastive loss for image-text similarity.

@@ -19,11 +19,11 @@
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -1224,8 +1224,7 @@ class MiniMaxM3VLMultiModalProjector(nn.Module):
     Base class for MiniMaxM3VL outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class MiniMaxM3VLModelOutputWithPast(BaseModelOutputWithPast):
+class MiniMaxM3VLModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance. For more details, see our [kv cache guide](https://huggingface.co/docs/transformers/en/kv_cache).
@@ -1250,8 +1249,7 @@ class MiniMaxM3VLModelOutputWithPast(BaseModelOutputWithPast):
     Base class for MiniMaxM3VL causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class MiniMaxM3VLCausalLMOutputWithPast(ModelOutput):
+class MiniMaxM3VLCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

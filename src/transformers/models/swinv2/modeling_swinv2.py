@@ -15,9 +15,9 @@
 
 import collections.abc
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -42,9 +42,8 @@ logger = logging.get_logger(__name__)
     Swinv2 encoder's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
 # Copied from transformers.models.swin.modeling_swin.SwinEncoderOutput with Swin->Swinv2
-class Swinv2EncoderOutput(ModelOutput):
+class Swinv2EncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     reshaped_hidden_states (`tuple(torch.FloatTensor)`, *optional*, returned when `output_hidden_states=True` is passed or when `config.output_hidden_states=True`):
         Tuple of `torch.FloatTensor` (one for the output of the embeddings + one for the output of each stage) of
@@ -65,9 +64,8 @@ class Swinv2EncoderOutput(ModelOutput):
     Swinv2 model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
 # Copied from transformers.models.swin.modeling_swin.SwinModelOutput with Swin->Swinv2
-class Swinv2ModelOutput(ModelOutput):
+class Swinv2ModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, hidden_size)`, *optional*, returned when `add_pooling_layer=True` is passed):
         Average pooling of the last layer hidden-state.
@@ -91,9 +89,8 @@ class Swinv2ModelOutput(ModelOutput):
     Swinv2 masked image model outputs.
     """
 )
-@dataclass
 # Copied from transformers.models.swin.modeling_swin.SwinMaskedImageModelingOutput with Swin->Swinv2
-class Swinv2MaskedImageModelingOutput(ModelOutput):
+class Swinv2MaskedImageModelingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `bool_masked_pos` is provided):
         Masked image modeling (MLM) loss.
@@ -119,9 +116,8 @@ class Swinv2MaskedImageModelingOutput(ModelOutput):
     Swinv2 outputs for image classification.
     """
 )
-@dataclass
 # Copied from transformers.models.swin.modeling_swin.SwinImageClassifierOutput with Swin->Swinv2
-class Swinv2ImageClassifierOutput(ModelOutput):
+class Swinv2ImageClassifierOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification (or regression if config.num_labels==1) loss.

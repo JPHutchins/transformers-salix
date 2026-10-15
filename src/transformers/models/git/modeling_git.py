@@ -16,9 +16,9 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -56,9 +56,8 @@ logger = logging.get_logger(__name__)
     Base class for vision model's outputs that also contains image embeddings of the pooling of the last hidden states.
     """
 )
-@dataclass
 # Copied from transformers.models.clip.modeling_clip.CLIPVisionModelOutput with CLIP->Git
-class GitVisionModelOutput(ModelOutput):
+class GitVisionModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     image_embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)` *optional* returned when model is initialized with `with_projection=True`):
         The image embeddings obtained by applying the projection layer to the pooler_output.

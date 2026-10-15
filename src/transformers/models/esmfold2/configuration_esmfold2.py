@@ -13,8 +13,6 @@
 # limitations under the License.
 """ESMFold2 model configuration."""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 from ..auto import CONFIG_MAPPING, AutoConfig
@@ -31,7 +29,6 @@ logger = logging.get_logger(__name__)
     and once for the diffusion denoiser (`EsmFold2Config.structure_head.diffusion_module.atom_encoder`).
     """
 )
-@strict
 class EsmFold2AtomEncoderConfig(PreTrainedConfig):
     r"""
     hidden_size (`int`, *optional*, defaults to 128):
@@ -87,7 +84,6 @@ class EsmFold2AtomEncoderConfig(PreTrainedConfig):
     custom_intro="Configuration for the diffusion denoiser: an atom encoder/decoder around a token "
     "transformer with pair bias."
 )
-@strict
 class EsmFold2DiffusionModuleConfig(PreTrainedConfig):
     r"""
     sigma_data (`float`, *optional*, defaults to 16.0):
@@ -148,7 +144,6 @@ class EsmFold2DiffusionModuleConfig(PreTrainedConfig):
     custom_intro="Configuration for the structure-prediction head: the distogram output plus the "
     "diffusion sampler's noise schedule."
 )
-@strict
 class EsmFold2StructureHeadConfig(PreTrainedConfig):
     r"""
     diffusion_module (`EsmFold2DiffusionModuleConfig`, *optional*):
@@ -210,7 +205,6 @@ class EsmFold2StructureHeadConfig(PreTrainedConfig):
     custom_intro="Configuration for the confidence head, which predicts pLDDT, PAE, PDE, resolved-atom "
     "probability and the pTM/ipTM summaries."
 )
-@strict
 class EsmFold2ConfidenceHeadConfig(PreTrainedConfig):
     r"""
     num_hidden_layers (`int`, *optional*, defaults to 4):
@@ -245,7 +239,6 @@ class EsmFold2ConfidenceHeadConfig(PreTrainedConfig):
     custom_intro="Configuration for the MSA encoder: outer-product-mean into the pair stream, "
     "pair-weighted averaging back into the MSA stream, and the triangle updates."
 )
-@strict
 class EsmFold2MsaEncoderConfig(PreTrainedConfig):
     r"""
     hidden_size (`int`, *optional*, defaults to 128):
@@ -276,7 +269,6 @@ class EsmFold2MsaEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(custom_intro="Configuration for the language-model (ESMC) hidden-state encoder folded into the trunk.")
-@strict
 class EsmFold2LmEncoderConfig(PreTrainedConfig):
     r"""
     num_hidden_layers (`int`, *optional*, defaults to 4):
@@ -293,7 +285,6 @@ class EsmFold2LmEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="biohub/ESMFold2-hf")
-@strict
 class EsmFold2Config(PreTrainedConfig):
     r"""
     hidden_size (`int`, *optional*, defaults to 384):

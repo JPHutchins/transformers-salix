@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ... import initialization as init
 from ...masking_utils import create_bidirectional_mask
@@ -343,8 +343,7 @@ class PeAudioVideoPreTrainedModel(PreTrainedModel):
     Class for outputs of [`PeAudioVideoEncoder`].
     """
 )
-@dataclass
-class PeAudioVideoEncoderOutput(BaseModelOutputWithPooling):
+class PeAudioVideoEncoderOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     audio_model_output (`BaseModelOutputWithPooling`, *optional*):
         Output of the audio encoder, containing the last hidden state, pooled output, and optional hidden states
@@ -448,8 +447,7 @@ class PeAudioVideoEncoder(PeAudioVideoPreTrainedModel):
     Class for outputs of [`PeAudioVideoModel`] when using text, audio, and/or video.
     """
 )
-@dataclass
-class PeAudioVideoOutput(ModelOutput):
+class PeAudioVideoOutput(ModelOutput, Struct, frozen=False):
     r"""
     audio_embeds (`torch.FloatTensor`, *optional*):
         Audio modality embeddings. Shape `(batch_size, sequence_length, hidden_size)`.
@@ -540,8 +538,7 @@ class PeAudioVideoOutput(ModelOutput):
         return tuple(self[k] if not k.endswith("model_output") else getattr(self, k).to_tuple() for k in self.keys())
 
 
-@dataclass
-class AudioVideoEmbeddings(ModelOutput):
+class AudioVideoEmbeddings(ModelOutput, Struct, frozen=False):
     audio_embeds: torch.FloatTensor | None = None
     video_embeds: torch.FloatTensor | None = None
     audio_video_embeds: torch.FloatTensor | None = None

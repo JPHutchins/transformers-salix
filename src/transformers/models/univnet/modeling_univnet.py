@@ -13,9 +13,9 @@
 # limitations under the License.
 """PyTorch UnivNetModel model."""
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ...modeling_outputs import ModelOutput
@@ -33,8 +33,7 @@ logger = logging.get_logger(__name__)
     lengths of those waveforms (so that the padding can be removed by [`UnivNetModel.batch_decode`]).
     """
 )
-@dataclass
-class UnivNetModelOutput(ModelOutput):
+class UnivNetModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     waveforms (`torch.FloatTensor` of shape `(batch_size, sequence_length)`):
         Batched 1D (mono-channel) output audio waveforms.

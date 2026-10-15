@@ -14,18 +14,18 @@
 # limitations under the License.
 
 import csv
-import dataclasses
 import json
-from dataclasses import dataclass
+
+from salix import Struct
 
 from ...utils import is_torch_available, logging
+from ...utils.generic import asdict
 
 
 logger = logging.get_logger(__name__)
 
 
-@dataclass
-class InputExample:
+class InputExample(Struct, frozen=False):
     """
     A single training/test example for simple sequence classification.
 
@@ -46,11 +46,10 @@ class InputExample:
 
     def to_json_string(self):
         """Serializes this instance to a JSON string."""
-        return json.dumps(dataclasses.asdict(self), indent=2) + "\n"
+        return json.dumps(asdict(self), indent=2) + "\n"
 
 
-@dataclass(frozen=True)
-class InputFeatures:
+class InputFeatures(Struct, frozen=True):
     """
     A single set of features of data. Property names are the same names as the corresponding inputs to a model.
 
@@ -72,7 +71,7 @@ class InputFeatures:
 
     def to_json_string(self):
         """Serializes this instance to a JSON string."""
-        return json.dumps(dataclasses.asdict(self)) + "\n"
+        return json.dumps(asdict(self)) + "\n"
 
 
 class DataProcessor:

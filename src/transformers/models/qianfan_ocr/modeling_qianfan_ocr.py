@@ -20,10 +20,10 @@
 
 import collections.abc
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -505,8 +505,7 @@ class QianfanOCRPreTrainedModel(PreTrainedModel):
     Base class for QianfanOCR outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class QianfanOCRModelOutputWithPast(BaseModelOutputWithPast):
+class QianfanOCRModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     image_hidden_states (`torch.FloatTensor`, *optional*):
         A `torch.FloatTensor` of size `(batch_size, num_images, sequence_length, hidden_size)`.
@@ -695,8 +694,7 @@ class QianfanOCRModel(QianfanOCRPreTrainedModel):
     Base class for QianfanOCR causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class QianfanOCRCausalLMOutputWithPast(ModelOutput):
+class QianfanOCRCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

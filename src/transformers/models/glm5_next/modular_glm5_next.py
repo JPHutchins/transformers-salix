@@ -19,7 +19,6 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from torchvision.transforms.v2 import functional as tvF
 
 from ... import initialization as init
@@ -88,7 +87,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="zai-org/GLM-5.3-Flash")
-@strict
 class Glm5NextTextConfig(GlmMoeDsaConfig):
     r"""
     n_group (`int`, *optional*, defaults to 1):
@@ -244,7 +242,6 @@ class Glm5NextTextConfig(GlmMoeDsaConfig):
 
 
 @auto_docstring(checkpoint="zai-org/GLM-5.3-Flash")
-@strict
 class Glm5NextVisionConfig(GlmOcrVisionConfig):
     r"""
     out_hidden_size (`int`, *optional*, defaults to 1536):
@@ -261,7 +258,6 @@ class Glm5NextVisionConfig(GlmOcrVisionConfig):
 
 
 @auto_docstring(checkpoint="zai-org/GLM-5.3-Flash")
-@strict
 class Glm5NextConfig(PreTrainedConfig):
     r"""
     image_token_id (`int`, *optional*, defaults to 154854):

@@ -465,9 +465,9 @@ class KyutaiSpeechToTextForConditionalGeneration(LlamaForCausalLM, GenerationMix
         prefix = "codec_"
         prefix_len = len(prefix)
         codec_model_attrs = {
-            attr[prefix_len:]: value
-            for attr, value in vars(model.generation_config).items()
-            if attr.startswith(prefix)
+            attribute[prefix_len:]: value
+            for attribute, value in vars(model.generation_config).items()
+            if attribute.startswith(prefix)
         }
 
         vars(model.codec_model.generation_config).update({"_from_model_config": False, **codec_model_attrs})

@@ -15,9 +15,9 @@
 
 import collections.abc
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -37,8 +37,7 @@ logger = logging.get_logger(__name__)
     Swin2SR encoder's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class Swin2SREncoderOutput(ModelOutput):
+class Swin2SREncoderOutput(ModelOutput, Struct, frozen=False):
     last_hidden_state: torch.FloatTensor | None = None
     hidden_states: tuple[torch.FloatTensor] | None = None
     attentions: tuple[torch.FloatTensor] | None = None

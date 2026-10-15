@@ -21,11 +21,11 @@
 import itertools
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
+from salix import Struct
 from torch.nn import LayerNorm
 
 from ... import initialization as init
@@ -345,8 +345,7 @@ class GlmOcrPreTrainedModel(PreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class GlmOcrModelOutputWithPast(BaseModelOutputWithPast):
+class GlmOcrModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -1157,8 +1156,7 @@ class GlmOcrModel(GlmOcrPreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class GlmOcrCausalLMOutputWithPast(CausalLMOutputWithPast):
+class GlmOcrCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.

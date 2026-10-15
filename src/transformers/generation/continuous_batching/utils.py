@@ -13,11 +13,11 @@
 # limitations under the License.
 import queue
 from contextlib import contextmanager
-from dataclasses import dataclass
 from math import ceil, log2
 from typing import Any
 
 import torch
+from salix import Struct
 
 from transformers.configuration_utils import PretrainedConfig
 
@@ -42,8 +42,7 @@ class CudaGraphBuffer:
         self._storage[key] = graph
 
 
-@dataclass
-class WorkloadHints:
+class WorkloadHints(Struct, frozen=False):
     """A tiny dataclass containing hints to help choose good continuous batching defaults"""
 
     max_prompt_length: int = 0

@@ -16,7 +16,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...cache_utils import Cache, DynamicCache
@@ -43,7 +42,6 @@ from ..olmo2.modeling_olmo2 import (
 
 
 @auto_docstring(checkpoint="allenai/Olmo-3-7B-Instruct")
-@strict
 class Olmo3Config(Olmo2Config):
     r"""
     Example:

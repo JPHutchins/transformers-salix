@@ -13,14 +13,11 @@
 # limitations under the License.
 """RoFormer model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="junnyu/roformer_chinese_base")
-@strict
 class RoFormerConfig(PreTrainedConfig):
     r"""
     rotary_value (`bool`, *optional*, defaults to `False`):

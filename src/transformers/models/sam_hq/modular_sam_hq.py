@@ -12,10 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from dataclasses import dataclass
 
 import torch
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 
 from ...processing_utils import Unpack
@@ -42,19 +41,16 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="syscv-community/sam-hq-vit-base")
-@strict
 class SamHQPromptEncoderConfig(SamPromptEncoderConfig):
     pass
 
 
 @auto_docstring(checkpoint="syscv-community/sam-hq-vit-base")
-@strict
 class SamHQVisionConfig(SamVisionConfig):
     pass
 
 
 @auto_docstring(checkpoint="syscv-community/sam-hq-vit-base")
-@strict
 class SamHQMaskDecoderConfig(SamMaskDecoderConfig):
     r"""
     mlp_dim (`int`, *optional*, defaults to 2048):
@@ -75,7 +71,6 @@ class SamHQMaskDecoderConfig(SamMaskDecoderConfig):
 
 
 @auto_docstring(checkpoint="syscv-community/sam-hq-vit-base")
-@strict
 class SamHQConfig(SamConfig):
     r"""
     prompt_encoder_config (Union[`dict`, `SamHQPromptEncoderConfig`], *optional*):
@@ -98,8 +93,7 @@ class SamHQVisionEncoderOutput(SamVisionEncoderOutput):
     intermediate_embeddings: list[torch.FloatTensor] | None = None
 
 
-@dataclass
-class SamHQMMaskDecoderOutputs(ModelOutput):
+class SamHQMMaskDecoderOutputs(ModelOutput, Struct, frozen=False):
     r"""
     masks (`torch.FloatTensor` of shape `(batch_size, num_prompts, num_masks, height, width)`):
         The predicted masks for the input image. The masks are of shape `(batch_size, num_prompts, num_masks, height, width)`.

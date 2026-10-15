@@ -12,10 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import math
-from dataclasses import dataclass
 
 import torch
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 
 from ...cache_utils import Cache
@@ -40,7 +39,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="microsoft/VibeVoice-ASR-HF")
-@strict
 class VibeVoiceAsrConfig(PreTrainedConfig):
     r"""
     acoustic_tokenizer_encoder_config (`Union[VibeVoiceAcousticTokenizerConfig, dict]`, *optional*):
@@ -196,8 +194,7 @@ class VibeVoiceAsrPreTrainedModel(VibeVoiceAcousticTokenizerPreTrainedModel):
     Base class for VibeVoice ASR outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class VibeVoiceAsrModelOutputWithPast(BaseModelOutputWithPast):
+class VibeVoiceAsrModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance.
@@ -213,8 +210,7 @@ class VibeVoiceAsrModelOutputWithPast(BaseModelOutputWithPast):
     Base class for VibeVoice ASR causal language model outputs.
     """
 )
-@dataclass
-class VibeVoiceAsrCausalLMOutputWithPast(ModelOutput):
+class VibeVoiceAsrCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss.

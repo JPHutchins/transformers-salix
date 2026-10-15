@@ -2,8 +2,6 @@ from collections.abc import Callable, Sequence
 from functools import partial
 from typing import Any, Union, cast
 
-from huggingface_hub.dataclasses import as_validated_field
-
 from ..tokenization_utils_base import PaddingStrategy, TruncationStrategy
 from ..video_utils import VideoMetadataType
 from .generic import TensorType
@@ -132,7 +130,6 @@ def tensor_type_validator(value: str | TensorType | None = None):
         raise ValueError(f"The tensor type should be one of {possible_names} but got tensor_type={value}")
 
 
-@as_validated_field
 def label_to_id_validation(value: str | TensorType | None = None):
     possible_names = ["pt", "np", "mlx"]
     if value is None:
@@ -179,7 +176,6 @@ def interval(
     min = min or float("-inf")
     max = max or float("inf")
 
-    @as_validated_field
     def _inner(value: int | float):
         min_valid = min <= value if not exclude_min else min < value
         max_valid = value <= max if not exclude_max else value < max
@@ -189,7 +185,6 @@ def interval(
     return _inner
 
 
-@as_validated_field
 def probability(value: float):
     """Ensures that `value` is a valid probability number, i.e. [0,1]."""
     if not 0 <= value <= 1:
@@ -197,7 +192,6 @@ def probability(value: float):
 
 
 def is_divisible_by(divisor: int | float):
-    @as_validated_field
     def _inner(value: int | float):
         if value % divisor != 0:
             raise ValueError(f"Value has to be divisible by {divisor} but got value={value}")
@@ -205,7 +199,6 @@ def is_divisible_by(divisor: int | float):
     return _inner
 
 
-@as_validated_field
 def activation_fn_key(value: str):
     """Ensures that `value` is a string corresponding to an activation function."""
     # TODO (joao): in python 3.11+, we can build a Literal type from the keys of ACT2FN
@@ -218,7 +211,6 @@ def activation_fn_key(value: str):
 
 
 def tensor_shape(shape: tuple[int | str], length: int | None = None):
-    @as_validated_field
     def validator(value: Union[Sequence["torch.Tensor"], "torch.Tensor"]):
         if value is None:
             return

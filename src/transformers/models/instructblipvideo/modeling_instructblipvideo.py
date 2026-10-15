@@ -20,10 +20,10 @@
 
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -811,8 +811,7 @@ class InstructBlipVideoQFormerModel(InstructBlipVideoPreTrainedModel):
     Class defining the outputs of [`InstructBlipVideoForConditionalGeneration`].
     """
 )
-@dataclass
-class InstructBlipVideoForConditionalGenerationModelOutput(ModelOutput):
+class InstructBlipVideoForConditionalGenerationModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor`, *optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Language modeling loss from the language model.
@@ -1017,8 +1016,7 @@ class InstructBlipVideoModel(InstructBlipVideoPreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class BaseModelOutputWithVisionQformerOutputs(BaseModelOutputWithPooling):
+class BaseModelOutputWithVisionQformerOutputs(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     vision_outputs (`BaseModelOutputWithPooling`):
         Outputs of the vision encoder.

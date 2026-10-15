@@ -20,8 +20,6 @@
 # limitations under the License.
 from typing import Any
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 from ..siglip import SiglipVisionConfig
@@ -31,7 +29,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="google/gemma-3-4b-it")
-@strict
 class Gemma3TextConfig(PreTrainedConfig):
     r"""
     query_pre_attn_scalar (`float`, *optional*, defaults to 256):
@@ -164,7 +161,6 @@ class Gemma3TextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/gemma-3-4b-it")
-@strict
 class Gemma3Config(PreTrainedConfig):
     r"""
     mm_tokens_per_image (`int`, *optional*, defaults to 256):

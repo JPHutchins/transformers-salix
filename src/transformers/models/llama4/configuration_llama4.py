@@ -14,8 +14,6 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring, logging
@@ -25,7 +23,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="meta-llama/Llama-4-Scout-17B-16E")
-@strict
 class Llama4VisionConfig(PreTrainedConfig):
     r"""
     vision_output_dim (`int`, *optional*, defaults to 7680):
@@ -75,7 +72,6 @@ class Llama4VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="meta-llama/Llama-4-Scout-17B-16E")
-@strict
 class Llama4TextConfig(PreTrainedConfig):
     r"""
     intermediate_size_mlp (`int`, *optional*, defaults to 16384):
@@ -204,7 +200,6 @@ class Llama4TextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="meta-llama/Llama-4-Scout-17B-16E")
-@strict
 class Llama4Config(PreTrainedConfig):
     r"""
     boi_token_index (`int`, *optional*, defaults to 200080):

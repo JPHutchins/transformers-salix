@@ -14,8 +14,6 @@
 # limitations under the License.
 """XLNet configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 
@@ -24,7 +22,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="xlnet/xlnet-large-cased")
-@strict
 class XLNetConfig(PreTrainedConfig):
     r"""
     ff_activation (`str` or `Callable`, *optional*, defaults to `"gelu"`):

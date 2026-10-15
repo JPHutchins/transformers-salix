@@ -14,7 +14,6 @@
 """PyTorch Pixio model."""
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ...backbone_utils import BackboneMixin, filter_output_hidden_states
@@ -31,7 +30,6 @@ from ..vit.modeling_vit import ViTAttention, ViTLayer, ViTPatchEmbeddings, ViTPr
 
 
 @auto_docstring(checkpoint="facebook/pixio-huge")
-@strict
 class PixioConfig(Dinov2Config):
     r"""
     apply_layernorm (`bool`, *optional*, defaults to `True`):

@@ -13,8 +13,6 @@
 # limitations under the License.
 """GroupViT model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 
@@ -23,7 +21,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="nvidia/groupvit-gcc-yfcc")
-@strict
 class GroupViTTextConfig(PreTrainedConfig):
     r"""
     Example:
@@ -61,7 +58,6 @@ class GroupViTTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="nvidia/groupvit-gcc-yfcc")
-@strict
 class GroupViTVisionConfig(PreTrainedConfig):
     r"""
     depths (`list[int]`, *optional*, defaults to [6, 3, 3]):
@@ -121,7 +117,6 @@ class GroupViTVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="nvidia/groupvit-gcc-yfcc")
-@strict
 class GroupViTConfig(PreTrainedConfig):
     r"""
     projection_intermediate_dim (`int`, *optional*, defaults to 4096):

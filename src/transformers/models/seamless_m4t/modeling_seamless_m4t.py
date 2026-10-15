@@ -16,9 +16,9 @@
 import copy
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import Tensor, nn
 from torch.nn import CrossEntropyLoss
 
@@ -117,8 +117,7 @@ SEAMLESS_M4T_COMMON_CUSTOM_ARGS = r"""
     [`SeamlessM4TForTextToSpeech`], [`SeamlessM4TForSpeechToSpeech`] and [`SeamlessM4TForTextToSpeech`].
     """
 )
-@dataclass
-class SeamlessM4TGenerationOutput(ModelOutput):
+class SeamlessM4TGenerationOutput(ModelOutput, Struct, frozen=False):
     r"""
     waveform (`torch.FloatTensor` of shape `(batch_size, sequence_length)`):
         The final audio waveform predicted by the model.

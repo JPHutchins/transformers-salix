@@ -13,10 +13,10 @@
 # limitations under the License.
 """PyTorch Funnel Transformer model."""
 
-from dataclasses import dataclass
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
@@ -717,8 +717,7 @@ class FunnelClassificationHead(nn.Module):
     Output type of [`FunnelForPreTraining`].
     """
 )
-@dataclass
-class FunnelForPreTrainingOutput(ModelOutput):
+class FunnelForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss of the ELECTRA-style objective.

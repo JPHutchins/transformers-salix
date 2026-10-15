@@ -14,9 +14,9 @@
 """PyTorch Dilated Neighborhood Attention Transformer model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ...activations import ACT2FN
@@ -50,8 +50,7 @@ else:
     Dinat encoder's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class DinatEncoderOutput(ModelOutput):
+class DinatEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     reshaped_hidden_states (`tuple(torch.FloatTensor)`, *optional*, returned when `output_hidden_states=True` is passed or when `config.output_hidden_states=True`):
         Tuple of `torch.FloatTensor` (one for the output of the embeddings + one for the output of each stage) of
@@ -72,8 +71,7 @@ class DinatEncoderOutput(ModelOutput):
     Dinat model's outputs that also contains a pooling of the last hidden states.
     """
 )
-@dataclass
-class DinatModelOutput(ModelOutput):
+class DinatModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, hidden_size)`, *optional*, returned when `add_pooling_layer=True` is passed):
         Average pooling of the last layer hidden-state.
@@ -97,8 +95,7 @@ class DinatModelOutput(ModelOutput):
     Dinat outputs for image classification.
     """
 )
-@dataclass
-class DinatImageClassifierOutput(ModelOutput):
+class DinatImageClassifierOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Classification (or regression if config.num_labels==1) loss.

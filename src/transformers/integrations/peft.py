@@ -14,10 +14,10 @@
 import inspect
 import json
 import os
-from dataclasses import replace
 from typing import TYPE_CHECKING, Any, Literal, Optional
 
 from safetensors import safe_open
+from salix import fields, replace
 
 from .._typing import PeftConfigLike
 from ..conversion_mapping import get_model_conversion_mapping
@@ -161,7 +161,11 @@ class PeftAdapterMixin:
 
         if local_files_only:
             kwargs["local_files_only"] = True
-        base_load_config = load_config.__dict__ if load_config is not None else {}
+        base_load_config = (
+            {field.name: getattr(load_config, field.name) for field in fields(load_config)}
+            if load_config is not None
+            else {}
+        )
         base_load_config.update(kwargs)
         base_load_config.setdefault("pretrained_model_name_or_path", None)
         load_config = LoadStateDictConfig(**base_load_config)

@@ -13,9 +13,9 @@
 # limitations under the License.
 """PyTorch ColPali model"""
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from transformers import AutoModel
@@ -47,8 +47,7 @@ class ColPaliPreTrainedModel(PreTrainedModel):
     Base class for ColPali embeddings output.
     """
 )
-@dataclass
-class ColPaliForRetrievalOutput(ModelOutput):
+class ColPaliForRetrievalOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

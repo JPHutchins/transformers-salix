@@ -14,7 +14,6 @@
 
 import numpy as np
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ...cache_utils import Cache
@@ -39,7 +38,6 @@ from ..pixtral.image_processing_pixtral import get_resize_output_image_size
 
 
 @auto_docstring(checkpoint="lightonai/LightOnOCR-1B-1025")
-@strict
 class LightOnOcrConfig(PreTrainedConfig):
     r"""
     Example:

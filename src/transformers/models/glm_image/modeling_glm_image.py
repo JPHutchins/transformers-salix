@@ -20,12 +20,12 @@
 
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ...activations import ACT2FN
 from ...cache_utils import Cache, DynamicCache
@@ -439,8 +439,7 @@ class GlmImagePreTrainedModel(PreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class GlmImageModelOutputWithPast(BaseModelOutputWithPast):
+class GlmImageModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -503,8 +502,7 @@ class GlmImageVQVAEVectorQuantizer(nn.Module):
 
 
 @auto_docstring
-@dataclass
-class GlmImageVQVAEModelOutput(BaseModelOutputWithPooling):
+class GlmImageVQVAEModelOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     quantized_last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_channels, image_size, image_size)`):
         Quantized last hidden state from the VQ-VAE model.
@@ -1349,8 +1347,7 @@ class GlmImageModel(GlmImagePreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class GlmImageCausalLMOutputWithPast(CausalLMOutputWithPast):
+class GlmImageCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.

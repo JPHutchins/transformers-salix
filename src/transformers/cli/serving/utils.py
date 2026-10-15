@@ -23,9 +23,10 @@ import threading
 from abc import ABC, abstractmethod
 from collections.abc import Callable
 from concurrent.futures import Future
-from dataclasses import dataclass
 from queue import Queue
 from typing import TYPE_CHECKING
+
+from salix import Struct
 
 from transformers.utils import logging
 from transformers.utils.chat_parsing import ResponseParser
@@ -194,8 +195,7 @@ _RESPONSE_TEMPLATE_FALLBACKS = {
 }
 
 
-@dataclass
-class ToolCall:
+class ToolCall(Struct, frozen=False):
     """A parsed tool call surfaced through the stream queue when the parser
     closes a `tool_calls` region. ``arguments`` is always a JSON string."""
 

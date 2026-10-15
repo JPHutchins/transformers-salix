@@ -13,15 +13,12 @@
 # limitations under the License.
 """SeedOss model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="ByteDance-Seed/Seed-OSS-36B-Instruct")
-@strict
 class SeedOssConfig(PreTrainedConfig):
     r"""
     attention_out_bias (`bool`, *optional*, defaults to `False`):

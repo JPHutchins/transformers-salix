@@ -13,9 +13,9 @@
 # limitations under the License.
 
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ...activations import ACT2FN
@@ -135,8 +135,7 @@ class VoxtralMultiModalProjector(nn.Module):
     Base class for Voxtral outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class VoxtralModelOutputWithPast(BaseModelOutputWithPast):
+class VoxtralModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     audio_hidden_states (`torch.FloatTensor`, *optional*):
         Projected audio hidden states.

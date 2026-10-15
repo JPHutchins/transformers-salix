@@ -13,8 +13,6 @@
 # limitations under the License.
 """Blip model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 
@@ -23,7 +21,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="Salesforce/blip-vqa-base")
-@strict
 class BlipTextConfig(PreTrainedConfig):
     r"""
     label_smoothing (float, *optional*):
@@ -73,7 +70,6 @@ class BlipTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Salesforce/blip-vqa-base")
-@strict
 class BlipVisionConfig(PreTrainedConfig):
     r"""
     Example:
@@ -108,7 +104,6 @@ class BlipVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Salesforce/blip-vqa-base")
-@strict
 class BlipConfig(PreTrainedConfig):
     r"""
     image_text_hidden_size (`int`, *optional*, defaults to 256):

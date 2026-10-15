@@ -18,12 +18,12 @@ Speech processor class for Wav2Vec2
 import os
 from collections.abc import Iterable
 from contextlib import nullcontext
-from dataclasses import dataclass
 from multiprocessing import get_context, get_start_method
 from multiprocessing.pool import Pool
 from typing import TYPE_CHECKING
 
 import numpy as np
+from salix import Struct
 
 from ...processing_utils import ProcessorMixin
 from ...utils import ModelOutput, auto_docstring, logging, requires_backends
@@ -42,8 +42,7 @@ if TYPE_CHECKING:
 ListOfDict = list[dict[str, int | str]]
 
 
-@dataclass
-class Wav2Vec2DecoderWithLMOutput(ModelOutput):
+class Wav2Vec2DecoderWithLMOutput(ModelOutput, Struct, frozen=False):
     """
     Output type of [`Wav2Vec2DecoderWithLM`], with transcription.
 

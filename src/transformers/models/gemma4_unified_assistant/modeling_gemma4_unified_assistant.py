@@ -18,10 +18,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ... import initialization as init
 from ...generation import GenerationMixin
@@ -35,8 +35,7 @@ from .configuration_gemma4_unified_assistant import Gemma4UnifiedAssistantConfig
 
 
 @auto_docstring
-@dataclass
-class Gemma4UnifiedAssistantOutput(BaseModelOutput):
+class Gemma4UnifiedAssistantOutput(BaseModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, sequence_length, config.vocab_size)`):
         Prediction scores of the language modeling head (scores for each vocabulary token before SoftMax).

@@ -19,10 +19,10 @@
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
+from salix import Struct
 from torch import Tensor
 
 from ...activations import ACT2FN
@@ -53,8 +53,7 @@ from .configuration_moonshine_streaming import MoonshineStreamingConfig, Moonshi
     Extends [~modeling_outputs.BaseModelOutput] to include the output attention mask since sequence length is not preserved in the model's forward.
     """
 )
-@dataclass
-class MoonshineStreamingEncoderModelOutput(BaseModelOutput):
+class MoonshineStreamingEncoderModelOutput(BaseModelOutput, Struct, frozen=False):
     r"""
     attention_mask (`torch.Tensor` of shape `(batch_size, sequence_length)`, *optional*):
         Mask to avoid performing attention on padding token indices after sequence compression. Returned because the

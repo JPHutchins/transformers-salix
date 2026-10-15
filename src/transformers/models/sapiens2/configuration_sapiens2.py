@@ -16,7 +16,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...backbone_utils import BackboneConfigMixin
 from ...configuration_utils import PreTrainedConfig
@@ -24,7 +23,6 @@ from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/sapiens2-seg-0.4b")
-@strict
 class Sapiens2HeadConfig(PreTrainedConfig):
     r"""
     upsample_out_channels (`list[int]`, *optional*):
@@ -112,7 +110,6 @@ class Sapiens2HeadConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/sapiens2-pretrain-0.4b")
-@strict
 class Sapiens2Config(BackboneConfigMixin, PreTrainedConfig):
     r"""
     rope_theta (`float`, *optional*, defaults to 100.0):

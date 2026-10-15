@@ -20,13 +20,13 @@
 
 
 import math
-from dataclasses import dataclass
 from functools import lru_cache
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchaudio
+from salix import Struct
 
 from ... import initialization as init
 from ...audio_utils import conv1d_output_length
@@ -210,8 +210,7 @@ class HiggsAudioV2TokenizerVectorQuantization(nn.Module):
         return quantize
 
 
-@dataclass
-class HiggsAudioV2TokenizerOutput(ModelOutput):
+class HiggsAudioV2TokenizerOutput(ModelOutput, Struct, frozen=False):
     """
     Args:
         audio_codes (`torch.LongTensor`  of shape `(batch_size, num_quantizers, codes_length)`, *optional*):
@@ -224,8 +223,7 @@ class HiggsAudioV2TokenizerOutput(ModelOutput):
     audio_values: torch.FloatTensor | None = None
 
 
-@dataclass
-class HiggsAudioV2TokenizerEncoderOutput(ModelOutput):
+class HiggsAudioV2TokenizerEncoderOutput(ModelOutput, Struct, frozen=False):
     """
     Args:
         audio_codes (`torch.LongTensor`  of shape `(batch_size, num_quantizers, codes_length)`, *optional*):
@@ -235,8 +233,7 @@ class HiggsAudioV2TokenizerEncoderOutput(ModelOutput):
     audio_codes: torch.LongTensor | None = None
 
 
-@dataclass
-class HiggsAudioV2TokenizerDecoderOutput(ModelOutput):
+class HiggsAudioV2TokenizerDecoderOutput(ModelOutput, Struct, frozen=False):
     """
     Args:
         audio_values (`torch.FloatTensor`  of shape `(batch_size, channels, num_samples)`, *optional*):

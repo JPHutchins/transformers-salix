@@ -16,7 +16,6 @@ import math
 from typing import Literal
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from transformers.models.llava_next.modeling_llava_next import (
@@ -44,7 +43,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="llava-hf/LLaVA-NeXT-Video-7B-hf")
-@strict
 class LlavaNextVideoConfig(PreTrainedConfig):
     r"""
     image_grid_pinpoints (`List`, *optional*, defaults to `[[336, 672], [672, 336], [672, 672], [1008, 336], [336, 1008]]`):

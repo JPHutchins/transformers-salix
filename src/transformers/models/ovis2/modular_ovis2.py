@@ -13,9 +13,9 @@
 # limitations under the License.
 
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -47,8 +47,7 @@ def hard_softmax(logits: torch.Tensor, dim: int):
 
 
 @auto_docstring
-@dataclass
-class BaseModelOutputWithVisualIndicatorFeatures(BaseModelOutputWithPooling):
+class BaseModelOutputWithVisualIndicatorFeatures(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     visual_indicator_features (`torch.FloatTensor` of shape `(batch_size, visual_indicator_size)`):
         Visual indicator features extracted from the model, which can be used for auxiliary tasks or further processing.

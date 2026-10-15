@@ -13,8 +13,6 @@
 # limitations under the License.
 """UperNet model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...backbone_utils import consolidate_backbone_kwargs_to_config
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -22,7 +20,6 @@ from ..auto.configuration_auto import AutoConfig
 
 
 @auto_docstring(checkpoint="openmmlab/upernet-convnext-tiny")
-@strict
 class UperNetConfig(PreTrainedConfig):
     r"""
     pool_scales (`tuple[int]`, *optional*, defaults to `[1, 2, 3, 6]`):

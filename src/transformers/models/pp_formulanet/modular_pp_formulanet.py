@@ -13,11 +13,10 @@
 # limitations under the License.
 
 import re
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ... import initialization as init
 from ...cache_utils import Cache
@@ -62,7 +61,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-FormulaNet_plus-L_safetensors")
-@strict
 class PPFormulaNetVisionConfig(SLANeXtVisionConfig):
     r"""
     output_channels (`int`, *optional*, defaults to 256):
@@ -90,7 +88,6 @@ class PPFormulaNetVisionConfig(SLANeXtVisionConfig):
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-FormulaNet_plus-L_safetensors")
-@strict
 class PPFormulaNetTextConfig(MBartConfig):
     base_config_key = "text_config"
     vocab_size: int = 50000
@@ -109,7 +106,6 @@ class PPFormulaNetTextConfig(MBartConfig):
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-FormulaNet_plus-L_safetensors")
-@strict
 class PPFormulaNetConfig(PreTrainedConfig):
     model_type = "pp_formulanet"
     sub_configs = {"text_config": PPFormulaNetTextConfig, "vision_config": PPFormulaNetVisionConfig}
@@ -292,8 +288,7 @@ class PPFormulaNetPreTrainedModel(SLANeXtPreTrainedModel):
 
 
 # overrider for PPFormulaNetModel's encoder output
-@dataclass
-class PPFormulaNetVisionEncoderOutput(BaseModelOutputWithPooling):
+class PPFormulaNetVisionEncoderOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     pass
 
 

@@ -18,14 +18,11 @@
 # limitations under the License.
 """Idefics model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="HuggingFaceM4/idefics-9b")
-@strict
 class IdeficsVisionConfig(PreTrainedConfig):
     model_type = "idefics_vision"
     attribute_map = {"hidden_size": "embed_dim"}
@@ -45,7 +42,6 @@ class IdeficsVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="HuggingFaceM4/idefics-9b")
-@strict
 class IdeficsPerceiverConfig(PreTrainedConfig):
     r"""
     use_resampler (`bool`, *optional*, defaults to `False`):
@@ -73,7 +69,6 @@ class IdeficsPerceiverConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="HuggingFaceM4/idefics-9b")
-@strict
 class IdeficsConfig(PreTrainedConfig):
     r"""
     additional_vocab_size (`int`, *optional*, defaults to 0):

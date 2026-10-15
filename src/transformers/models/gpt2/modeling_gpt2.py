@@ -16,9 +16,9 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
@@ -455,8 +455,7 @@ class GPT2PreTrainedModel(PreTrainedModel):
     Base class for outputs of models predicting if two sentences are consecutive or not.
     """
 )
-@dataclass
-class GPT2DoubleHeadsModelOutput(ModelOutput):
+class GPT2DoubleHeadsModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss.

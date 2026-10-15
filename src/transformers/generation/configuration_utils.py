@@ -19,8 +19,9 @@ import os
 import warnings
 from abc import ABC, abstractmethod
 from collections.abc import Callable
-from dataclasses import dataclass, is_dataclass
 from typing import TYPE_CHECKING, Any, Optional, Union
+
+from salix import Struct
 
 from .. import __version__
 from ..utils import (
@@ -33,6 +34,7 @@ from ..utils import (
     is_torch_available,
     logging,
 )
+from ..utils.generic import StructABCMeta, WithInstanceDict, instance_attributes
 
 
 if TYPE_CHECKING:
@@ -1176,7 +1178,7 @@ class GenerationConfig(PushToHubMixin):
         Returns:
             `dict[str, Any]`: Dictionary of all the attributes that make up this configuration instance.
         """
-        output = copy.deepcopy(self.__dict__)
+        output = copy.deepcopy(instance_attributes(self))
 
         # Fields to ignore at serialization time
         if "_commit_hash" in output:
@@ -1232,7 +1234,7 @@ class GenerationConfig(PushToHubMixin):
         def convert_dataclass_to_dict(obj):
             if isinstance(obj, dict):
                 return {key: convert_dataclass_to_dict(value) for key, value in obj.items()}
-            elif is_dataclass(obj):
+            elif isinstance(obj, Struct):
                 # Some of our dataclasses have a custom `to_dict()` method, and we prefer it
                 if hasattr(obj, "to_dict"):
                     return obj.to_dict()
@@ -1349,8 +1351,7 @@ class GenerationConfig(PushToHubMixin):
         return unused_kwargs
 
 
-@dataclass
-class BaseWatermarkingConfig(ABC):
+class BaseWatermarkingConfig(ABC, WithInstanceDict, Struct, frozen=False, metaclass=StructABCMeta):
     """Generic watermarking config"""
 
     @classmethod
@@ -1395,11 +1396,11 @@ class BaseWatermarkingConfig(ABC):
         Returns:
             dict[str, Any]: Dictionary of all the attributes that make up this configuration instance.
         """
-        output = copy.deepcopy(self.__dict__)
+        output = copy.deepcopy(instance_attributes(self))
         return output
 
     def __iter__(self):
-        yield from copy.deepcopy(self.__dict__).items()
+        yield from copy.deepcopy(instance_attributes(self)).items()
 
     def __repr__(self):
         return f"{self.__class__.__name__} {self.to_json_string()}"
@@ -1411,7 +1412,7 @@ class BaseWatermarkingConfig(ABC):
         Returns:
             str: JSON formatted string representing the configuration instance.
         """
-        return json.dumps(self.__dict__, indent=2) + "\n"
+        return json.dumps(instance_attributes(self), indent=2) + "\n"
 
     def update(self, **kwargs):
         """
@@ -1431,8 +1432,7 @@ class BaseWatermarkingConfig(ABC):
     def construct_processor(self, vocab_size): ...
 
 
-@dataclass
-class WatermarkingConfig(BaseWatermarkingConfig):
+class WatermarkingConfig(BaseWatermarkingConfig, Struct, frozen=False, metaclass=StructABCMeta):
     """
     Class that holds arguments for watermark generation and should be passed into `GenerationConfig` during `generate`.
     See [this paper](https://huggingface.co/papers/2306.04634) for more details on the arguments.
@@ -1509,8 +1509,7 @@ class WatermarkingConfig(BaseWatermarkingConfig):
         )
 
 
-@dataclass
-class SynthIDTextWatermarkingConfig(BaseWatermarkingConfig):
+class SynthIDTextWatermarkingConfig(BaseWatermarkingConfig, Struct, frozen=False, metaclass=StructABCMeta):
     """
     Class that holds arguments for watermark generation and should be passed into `GenerationConfig` during `generate`.
     See [this paper](https://www.nature.com/articles/s41586-024-08025-4) for more details on the arguments.
@@ -1599,8 +1598,7 @@ class SynthIDTextWatermarkingConfig(BaseWatermarkingConfig):
         )
 
 
-@dataclass
-class CompileConfig:
+class CompileConfig(Struct, frozen=False):
     """
     Class that holds arguments relative to `torch.compile` behavior, when using automatic compilation in `generate`.
     See [`torch.compile`](https://pytorch.org/docs/stable/generated/torch.compile.html) for more details on the arguments.
@@ -1648,12 +1646,13 @@ class CompileConfig:
 
     def to_dict(self) -> dict[str, Any]:
         """Serializes this instance to a Python dictionary."""
-        return copy.deepcopy({key: value for key, value in self.__dict__.items() if key != "_compile_all_devices"})
+        return copy.deepcopy(
+            {key: value for key, value in instance_attributes(self).items() if key != "_compile_all_devices"}
+        )
 
 
 # TODO: add the @strict decorator to prevent attributes passed as args rather than kwargs
-@dataclass
-class ContinuousBatchingConfig:
+class ContinuousBatchingConfig(Struct, frozen=False):
     """
     Class that holds arguments relative to continuous batching, when using continuous batching through the
     `generate_batch` method or the `continuous_batching_context_manager` context manager.

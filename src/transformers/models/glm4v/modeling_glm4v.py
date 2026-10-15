@@ -20,12 +20,12 @@
 import itertools
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 from torch.nn import LayerNorm
 
 from ... import initialization as init
@@ -635,8 +635,7 @@ class Glm4vTextDecoderLayer(GradientCheckpointingLayer):
 
 
 @auto_docstring
-@dataclass
-class Glm4vModelOutputWithPast(BaseModelOutputWithPast):
+class Glm4vModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.
@@ -1237,8 +1236,7 @@ class Glm4vModel(Glm4vPreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class Glm4vCausalLMOutputWithPast(CausalLMOutputWithPast):
+class Glm4vCausalLMOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     rope_deltas (`torch.LongTensor` of shape `(batch_size, )`, *optional*):
         The rope index difference between sequence length and multimodal rope.

@@ -16,13 +16,13 @@ import os
 import warnings
 from collections.abc import Callable, Iterable, Mapping
 from contextlib import redirect_stdout
-from dataclasses import dataclass, fields
 from io import BytesIO
 from typing import NewType, Union
 from urllib.parse import urlparse
 
 import httpx
 import numpy as np
+from salix import Struct, fields
 
 from .image_transforms import PaddingMode, to_channel_dimension_format
 from .image_utils import ChannelDimension, infer_channel_dimension_format, is_valid_image
@@ -41,6 +41,7 @@ from .utils import (
     logging,
     requires_backends,
 )
+from .utils.generic import StructABCMeta
 
 
 if is_vision_available():
@@ -76,8 +77,7 @@ VideoInput = Union[
 ]
 
 
-@dataclass
-class VideoMetadata(Mapping):
+class VideoMetadata(Mapping, Struct, frozen=False, metaclass=StructABCMeta):
     total_num_frames: int
     fps: float | None = None
     width: int | None = None

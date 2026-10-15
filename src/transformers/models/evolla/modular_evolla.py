@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -338,8 +338,7 @@ class EvollaSequenceCompressorResampler(nn.Module):
 
 
 @auto_docstring
-@dataclass
-class EvollaProteinEncoderModelOutput(ModelOutput):
+class EvollaProteinEncoderModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     sequence_compressor_output (`torch.FloatTensor` of shape `(batch_size, compressed_seq_len, hidden_size)`, *optional*):
         Compressed sequence representation produced by the sequence compressor module. The sequence length is

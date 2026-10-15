@@ -21,9 +21,9 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ...activations import ACT2FN
@@ -259,8 +259,7 @@ class AudioFlamingo3PreTrainedModel(PreTrainedModel):
     _supports_attention_backend = True
 
 
-@dataclass
-class AudioFlamingo3ModelOutputWithPast(BaseModelOutputWithPast):
+class AudioFlamingo3ModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     audio_hidden_states (`torch.FloatTensor`, *optional*):
         Projected audio hidden states.
@@ -274,8 +273,7 @@ class AudioFlamingo3ModelOutputWithPast(BaseModelOutputWithPast):
     Base class for AudioFlamingo3 causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class AudioFlamingo3CausalLMOutputWithPast(ModelOutput):
+class AudioFlamingo3CausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

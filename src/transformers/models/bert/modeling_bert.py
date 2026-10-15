@@ -15,9 +15,9 @@
 """PyTorch BERT model."""
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
@@ -559,8 +559,7 @@ class BertPreTrainedModel(PreTrainedModel):
     Output type of [`BertForPreTraining`].
     """
 )
-@dataclass
-class BertForPreTrainingOutput(ModelOutput):
+class BertForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the masked language modeling loss and the next sequence prediction

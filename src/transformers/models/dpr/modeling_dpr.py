@@ -13,9 +13,9 @@
 # limitations under the License.
 """PyTorch DPR model for Open Domain Question Answering."""
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import Tensor, nn
 
 from ...modeling_outputs import BaseModelOutputWithPooling
@@ -42,8 +42,7 @@ logger = logging.get_logger(__name__)
     Class for outputs of [`DPRQuestionEncoder`].
     """
 )
-@dataclass
-class DPRContextEncoderOutput(ModelOutput):
+class DPRContextEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, embeddings_size)`):
         The DPR encoder outputs the *pooler_output* that corresponds to the context representation. Last layer
@@ -61,8 +60,7 @@ class DPRContextEncoderOutput(ModelOutput):
     Class for outputs of [`DPRQuestionEncoder`].
     """
 )
-@dataclass
-class DPRQuestionEncoderOutput(ModelOutput):
+class DPRQuestionEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     pooler_output (`torch.FloatTensor` of shape `(batch_size, embeddings_size)`):
         The DPR encoder outputs the *pooler_output* that corresponds to the question representation. Last layer
@@ -80,8 +78,7 @@ class DPRQuestionEncoderOutput(ModelOutput):
     Class for outputs of [`DPRQuestionEncoder`].
     """
 )
-@dataclass
-class DPRReaderOutput(ModelOutput):
+class DPRReaderOutput(ModelOutput, Struct, frozen=False):
     r"""
     start_logits (`torch.FloatTensor` of shape `(n_passages, sequence_length)`):
         Logits of the start index of the span for each passage.

@@ -19,9 +19,9 @@
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -827,8 +827,7 @@ class AriaTextForCausalLM(AriaTextPreTrainedModel, GenerationMixin):
     Base class for Aria causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class AriaCausalLMOutputWithPast(ModelOutput):
+class AriaCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).
@@ -857,8 +856,7 @@ class AriaCausalLMOutputWithPast(ModelOutput):
     Base class for Aria outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class AriaModelOutputWithPast(BaseModelOutputWithPast):
+class AriaModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance. For more details, see our [kv cache guide](https://huggingface.co/docs/transformers/en/kv_cache).

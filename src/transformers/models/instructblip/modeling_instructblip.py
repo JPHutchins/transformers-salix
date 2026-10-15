@@ -14,10 +14,10 @@
 """PyTorch InstructBLIP model."""
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -48,8 +48,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class BaseModelOutputWithVisionQformerOutputs(BaseModelOutputWithPooling):
+class BaseModelOutputWithVisionQformerOutputs(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     vision_outputs (`BaseModelOutputWithPooling`):
         Outputs of the vision encoder.
@@ -66,9 +65,8 @@ class BaseModelOutputWithVisionQformerOutputs(BaseModelOutputWithPooling):
     Class defining the outputs of [`InstructBlipForConditionalGeneration`].
     """
 )
-@dataclass
 # Copied from transformers.models.blip_2.modeling_blip_2.Blip2ForConditionalGenerationModelOutput with Blip2->InstructBlip
-class InstructBlipForConditionalGenerationModelOutput(ModelOutput):
+class InstructBlipForConditionalGenerationModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor`, *optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Language modeling loss from the language model.

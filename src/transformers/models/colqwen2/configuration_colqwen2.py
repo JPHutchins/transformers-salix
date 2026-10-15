@@ -13,8 +13,6 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
 from ..auto import CONFIG_MAPPING
@@ -24,7 +22,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="vidore/colqwen2-v1.0-hf")
-@strict
 class ColQwen2Config(PreTrainedConfig):
     r"""
     Example:

@@ -13,12 +13,11 @@
 # limitations under the License.
 """PyTorch MaskFormer model."""
 
-from dataclasses import dataclass
 from numbers import Number
 
 import numpy as np
 import torch
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -51,13 +50,11 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="facebook/maskformer-swin-base-ade")
-@strict
 class MaskFormerDetrConfig(DetrConfig):
     model_type = "detr"
 
 
 @auto_docstring(checkpoint="facebook/maskformer-swin-base-ade")
-@strict
 class MaskFormerConfig(PreTrainedConfig):
     r"""
     fpn_feature_size (`int`, *optional*, defaults to 256):
@@ -175,8 +172,7 @@ class DetrDecoderOutput(DetrDecoderOutput):
     as **pixel embeddings**
     """
 )
-@dataclass
-class MaskFormerPixelLevelModuleOutput(ModelOutput):
+class MaskFormerPixelLevelModuleOutput(ModelOutput, Struct, frozen=False):
     r"""
     encoder_last_hidden_state (`torch.FloatTensor` of shape`(batch_size, num_channels, height, width)`):
         Last hidden states (final feature map) of the last stage of the encoder.
@@ -204,8 +200,7 @@ class MaskFormerPixelLevelModuleOutput(ModelOutput):
     and (optionally) the hidden states.
     """
 )
-@dataclass
-class MaskFormerPixelDecoderOutput(ModelOutput):
+class MaskFormerPixelDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_channels, height, width)`):
         Last hidden states (final feature map) of the last stage of the model.
@@ -221,8 +216,7 @@ class MaskFormerPixelDecoderOutput(ModelOutput):
     Class for outputs of [`MaskFormerModel`]. This class returns all the needed hidden states to compute the logits.
     """
 )
-@dataclass
-class MaskFormerModelOutput(ModelOutput):
+class MaskFormerModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     encoder_last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_channels, height, width)`):
         Last hidden states (final feature map) of the last stage of the encoder model (backbone).
@@ -267,8 +261,7 @@ class MaskFormerModelOutput(ModelOutput):
     [`~MaskFormerImageProcessor] for details regarding usage.
     """
 )
-@dataclass
-class MaskFormerForInstanceSegmentationOutput(ModelOutput):
+class MaskFormerForInstanceSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.Tensor`, *optional*):
         The computed loss, returned when labels are present.

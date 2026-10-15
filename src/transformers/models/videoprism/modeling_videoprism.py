@@ -20,12 +20,12 @@
 
 
 from collections.abc import Callable, Iterable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -41,8 +41,7 @@ from .configuration_videoprism import VideoPrismConfig, VideoPrismTextConfig, Vi
 
 
 @auto_docstring(custom_intro="""Base class for model outputs that include spatial and temporal states.""")
-@dataclass
-class BaseModelOutputWithSpatialAndTemporalStates(BaseModelOutput):
+class BaseModelOutputWithSpatialAndTemporalStates(BaseModelOutput, Struct, frozen=False):
     r"""
     last_temporal_hidden_state (`torch.FloatTensor`, *optional*):
         The last hidden state of the temporal encoder, typically of shape
@@ -59,8 +58,7 @@ class BaseModelOutputWithSpatialAndTemporalStates(BaseModelOutput):
 @auto_docstring(
     custom_intro="""Base class for VideoPrismClipModel outputs.""",
 )
-@dataclass
-class VideoPrismClipOutput(ModelOutput):
+class VideoPrismClipOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits_per_video (`torch.FloatTensor` of shape `(video_batch_size, text_batch_size)`):
         The scaled dot product scores between `video_embeds` and `text_embeds`. This represents the video-text

@@ -13,8 +13,6 @@
 # limitations under the License.
 """BLIP-2 model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...models.auto.modeling_auto import MODEL_FOR_CAUSAL_LM_MAPPING_NAMES
 from ...utils import auto_docstring, logging
@@ -25,7 +23,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="Salesforce/blip2-opt-2.7b")
-@strict
 class Blip2VisionConfig(PreTrainedConfig):
     r"""
     Example:
@@ -60,7 +57,6 @@ class Blip2VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Salesforce/blip2-opt-2.7b")
-@strict
 class Blip2QFormerConfig(PreTrainedConfig):
     r"""
     cross_attention_frequency (`int`, *optional*, defaults to 2):
@@ -103,7 +99,6 @@ class Blip2QFormerConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Salesforce/blip2-opt-2.7b")
-@strict
 class Blip2Config(PreTrainedConfig):
     r"""
     qformer_config (`dict`, *optional*):

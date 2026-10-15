@@ -1,13 +1,13 @@
 import unittest
 import warnings
-from dataclasses import dataclass
+
+from salix import Struct
 
 from transformers.convert_slow_tokenizer import SpmConverter
 from transformers.testing_utils import get_tests_dir
 
 
-@dataclass
-class FakeOriginalTokenizer:
+class FakeOriginalTokenizer(Struct):
     vocab_file: str
 
 

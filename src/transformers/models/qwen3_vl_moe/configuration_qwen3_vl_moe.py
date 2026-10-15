@@ -17,7 +17,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -25,7 +24,6 @@ from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-VL-30B-A3B-Instruct")
-@strict
 class Qwen3VLMoeTextConfig(PreTrainedConfig):
     r"""
     decoder_sparse_step (`int`, *optional*, defaults to 1):
@@ -117,7 +115,6 @@ class Qwen3VLMoeTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-VL-30B-A3B-Instruct")
-@strict
 class Qwen3VLMoeVisionConfig(PreTrainedConfig):
     r"""
     out_hidden_size (`int`, *optional*, defaults to 3584):
@@ -147,7 +144,6 @@ class Qwen3VLMoeVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="Qwen/Qwen3-VL-30B-A3B-Instruct")
-@strict
 class Qwen3VLMoeConfig(PreTrainedConfig):
     r"""
     Example:

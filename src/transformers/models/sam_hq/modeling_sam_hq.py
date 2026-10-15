@@ -20,11 +20,11 @@
 # limitations under the License.
 import collections
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import numpy as np
 import torch
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -48,8 +48,7 @@ logger = logging.get_logger(__name__)
     layer to the pooler_output.
     """
 )
-@dataclass
-class SamHQVisionEncoderOutput(ModelOutput):
+class SamHQVisionEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     image_embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)` *optional* returned when model is initialized with `with_projection=True`):
         The image embeddings obtained by applying the projection layer to the pooler_output.
@@ -67,8 +66,7 @@ class SamHQVisionEncoderOutput(ModelOutput):
     intermediate_embeddings: list[torch.FloatTensor] | None = None
 
 
-@dataclass
-class SamHQMMaskDecoderOutputs(ModelOutput):
+class SamHQMMaskDecoderOutputs(ModelOutput, Struct, frozen=False):
     r"""
     masks (`torch.FloatTensor` of shape `(batch_size, num_prompts, num_masks, height, width)`):
         The predicted masks for the input image. The masks are of shape `(batch_size, num_prompts, num_masks, height, width)`.
@@ -89,8 +87,7 @@ class SamHQMMaskDecoderOutputs(ModelOutput):
     Base class for Segment-Anything model's output
     """
 )
-@dataclass
-class SamHQImageSegmentationOutput(ModelOutput):
+class SamHQImageSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     iou_scores (`torch.FloatTensor` of shape `(batch_size, num_masks)`):
         The iou scores of the predicted masks.

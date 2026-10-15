@@ -20,11 +20,11 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 from numbers import Number
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import Tensor, nn
 
 from ... import initialization as init
@@ -65,8 +65,7 @@ if is_scipy_available():
     gone through a layernorm. This is useful when training the model with auxiliary decoding losses.
     """
 )
-@dataclass
-class DetrDecoderOutput(BaseModelOutputWithCrossAttentions):
+class DetrDecoderOutput(BaseModelOutputWithCrossAttentions, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(config.decoder_layers, batch_size, num_queries, hidden_size)`, *optional*, returned when `config.auxiliary_loss=True`):
         Intermediate decoder activations, i.e. the output of each decoder layer, each of them gone through a
@@ -86,8 +85,7 @@ class DetrDecoderOutput(BaseModelOutputWithCrossAttentions):
     as **pixel embeddings**
     """
 )
-@dataclass
-class MaskFormerPixelLevelModuleOutput(ModelOutput):
+class MaskFormerPixelLevelModuleOutput(ModelOutput, Struct, frozen=False):
     r"""
     encoder_last_hidden_state (`torch.FloatTensor` of shape`(batch_size, num_channels, height, width)`):
         Last hidden states (final feature map) of the last stage of the encoder.
@@ -115,8 +113,7 @@ class MaskFormerPixelLevelModuleOutput(ModelOutput):
     and (optionally) the hidden states.
     """
 )
-@dataclass
-class MaskFormerPixelDecoderOutput(ModelOutput):
+class MaskFormerPixelDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_channels, height, width)`):
         Last hidden states (final feature map) of the last stage of the model.
@@ -132,8 +129,7 @@ class MaskFormerPixelDecoderOutput(ModelOutput):
     Class for outputs of [`MaskFormerModel`]. This class returns all the needed hidden states to compute the logits.
     """
 )
-@dataclass
-class MaskFormerModelOutput(ModelOutput):
+class MaskFormerModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     encoder_last_hidden_state (`torch.FloatTensor` of shape `(batch_size, num_channels, height, width)`):
         Last hidden states (final feature map) of the last stage of the encoder model (backbone).
@@ -178,8 +174,7 @@ class MaskFormerModelOutput(ModelOutput):
     [`~MaskFormerImageProcessor] for details regarding usage.
     """
 )
-@dataclass
-class MaskFormerForInstanceSegmentationOutput(ModelOutput):
+class MaskFormerForInstanceSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.Tensor`, *optional*):
         The computed loss, returned when labels are present.
@@ -235,8 +230,7 @@ class MaskFormerForInstanceSegmentationOutput(ModelOutput):
     gone through a layernorm. This is useful when training the model with auxiliary decoding losses.
     """
 )
-@dataclass
-class MaskFormerDetrDecoderOutput(BaseModelOutputWithCrossAttentions):
+class MaskFormerDetrDecoderOutput(BaseModelOutputWithCrossAttentions, Struct, frozen=False):
     r"""
     intermediate_hidden_states (`torch.FloatTensor` of shape `(config.decoder_layers, batch_size, num_queries, hidden_size)`, *optional*, returned when `config.auxiliary_loss=True`):
         Intermediate decoder activations, i.e. the output of each decoder layer, each of them gone through a

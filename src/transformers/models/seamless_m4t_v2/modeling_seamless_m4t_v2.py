@@ -16,9 +16,9 @@
 import copy
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import Tensor, nn
 from torch.nn import CrossEntropyLoss
 
@@ -117,9 +117,8 @@ SEAMLESS_M4T_V2_COMMON_CUSTOM_ARGS = r"""
     [`SeamlessM4Tv2ForTextToSpeech`], [`SeamlessM4Tv2ForSpeechToSpeech`] and [`SeamlessM4Tv2ForTextToSpeech`].
     """
 )
-@dataclass
 # Copied from transformers.models.seamless_m4t.modeling_seamless_m4t.SeamlessM4TGenerationOutput with SeamlessM4T->SeamlessM4Tv2
-class SeamlessM4Tv2GenerationOutput(ModelOutput):
+class SeamlessM4Tv2GenerationOutput(ModelOutput, Struct, frozen=False):
     r"""
     waveform (`torch.FloatTensor` of shape `(batch_size, sequence_length)`):
         The final audio waveform predicted by the model.
@@ -146,8 +145,7 @@ class SeamlessM4Tv2GenerationOutput(ModelOutput):
     Class defining the outputs from [`SeamlessM4Tv2TextToUnitDecoder`].
     """
 )
-@dataclass
-class SeamlessM4Tv2TextToUnitDecoderOutput(ModelOutput):
+class SeamlessM4Tv2TextToUnitDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     padding_mask (`torch.Tensor` of shape `(batch_size, sequence_length)`, *optional*):
         Indicates which inputs are to be ignored due to padding, where elements are either 1 for *not masked* or 0
@@ -166,8 +164,7 @@ class SeamlessM4Tv2TextToUnitDecoderOutput(ModelOutput):
         [`SeamlessM4Tv2TextToUnitModel`].
     """
 )
-@dataclass
-class SeamlessM4Tv2TextToUnitOutput(ModelOutput):
+class SeamlessM4Tv2TextToUnitOutput(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the decoder of the model.

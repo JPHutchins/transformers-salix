@@ -14,14 +14,11 @@
 # limitations under the License.
 """OpenAI GPT configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="openai-community/openai-gpt")
-@strict
 class OpenAIGPTConfig(PreTrainedConfig):
     r"""
     afn (`str` or `Callable`, *optional*, defaults to `"gelu"`):

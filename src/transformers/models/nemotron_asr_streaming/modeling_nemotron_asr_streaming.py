@@ -20,10 +20,10 @@
 
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 from functools import cached_property
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -322,8 +322,7 @@ class NemotronAsrStreamingEncoderCausalConv2D(nn.Conv2d):
     cache-aware models when `use_cache=True`.
     """
 )
-@dataclass
-class NemotronAsrStreamingEncoderModelOutput(BaseModelOutputWithPooling):
+class NemotronAsrStreamingEncoderModelOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     attention_mask (`torch.Tensor` of shape `(batch_size, sequence_length)`, *optional*):
         Mask to avoid performing attention on padding token indices after sequence compression. Returned because the
@@ -1047,8 +1046,7 @@ class NemotronAsrStreamingEncoder(NemotronAsrStreamingPreTrainedModel):
         return left_context, num_lookahead_tokens
 
 
-@dataclass
-class NemotronAsrStreamingRNNTOutput(BaseModelOutputWithPooling):
+class NemotronAsrStreamingRNNTOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     encoder_past_key_values (`Cache`, *optional*):
         Updated encoder attention K/V sliding-window cache, returned when encoding audio with `use_cache=True`

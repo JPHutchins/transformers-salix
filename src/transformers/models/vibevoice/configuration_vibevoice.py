@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -20,7 +19,6 @@ from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="vibevoice/VibeVoice-1.5B-hf")
-@strict
 class VibeVoiceDiffusionHeadConfig(PreTrainedConfig):
     r"""
     latent_size (`int`, *optional*, defaults to 64):
@@ -43,7 +41,6 @@ class VibeVoiceDiffusionHeadConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="vibevoice/VibeVoice-1.5B-hf")
-@strict
 class VibeVoiceConfig(PreTrainedConfig):
     r"""
     semantic_model_config (`Union[AutoConfig, dict]`, *optional*):

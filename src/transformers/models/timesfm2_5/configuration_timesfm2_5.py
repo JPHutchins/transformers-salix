@@ -18,7 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -26,7 +25,6 @@ from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="google/timesfm-2.5-200m-transformers")
-@strict
 class TimesFm2_5Config(PreTrainedConfig):
     r"""
     patch_length (`int`, *optional*, defaults to 32):
@@ -63,7 +61,7 @@ class TimesFm2_5Config(PreTrainedConfig):
 
     model_type = "timesfm2_5"
     keys_to_ignore_at_inference = []
-    is_encoder_decoder = False
+    is_encoder_decoder: bool = False
 
     patch_length: int = 32
 

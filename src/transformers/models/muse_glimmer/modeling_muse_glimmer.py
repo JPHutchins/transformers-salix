@@ -19,10 +19,10 @@
 # limitations under the License.
 import warnings
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ...activations import ACT2FN
 from ...cache_utils import Cache, DynamicCache
@@ -59,8 +59,7 @@ from .configuration_muse_glimmer import MuseGlimmerConfig, MuseGlimmerTextConfig
     Base class for MuseGlimmer outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class MuseGlimmerModelOutputWithPast(BaseModelOutputWithPast):
+class MuseGlimmerModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     image_hidden_states (`torch.FloatTensor`, *optional*):
         A `torch.FloatTensor` of size `(batch_size, num_images, sequence_length, hidden_size)`.
@@ -75,8 +74,7 @@ class MuseGlimmerModelOutputWithPast(BaseModelOutputWithPast):
     Base class for MuseGlimmer causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class MuseGlimmerCausalLMOutputWithPast(ModelOutput):
+class MuseGlimmerCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

@@ -19,9 +19,9 @@
 # limitations under the License.
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -1439,8 +1439,7 @@ class DiffusionGemmaDecoderModel(DiffusionGemmaPreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class DiffusionGemmaModelOutputWithPast(BaseModelOutputWithPast):
+class DiffusionGemmaModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     encoder_last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`, *optional*):
         Sequence of hidden states at the output of the last layer of the encoder. Only set when `input_ids` is
@@ -1451,8 +1450,7 @@ class DiffusionGemmaModelOutputWithPast(BaseModelOutputWithPast):
 
 
 @auto_docstring
-@dataclass
-class DiffusionGemmaBlockDiffusionOutputWithPast(CausalLMOutputWithPast):
+class DiffusionGemmaBlockDiffusionOutputWithPast(CausalLMOutputWithPast, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*):
         Language modeling loss.

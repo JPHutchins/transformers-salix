@@ -12,10 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 
 import torch
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 
 from ...file_utils import ModelOutput
@@ -38,7 +37,6 @@ from ..eomt.modeling_eomt import (
 
 
 @auto_docstring(checkpoint="tue-mps/videomt-dinov2-small-ytvis2019")
-@strict
 class VideomtConfig(EomtConfig):
     model_type = "videomt"
 
@@ -115,8 +113,7 @@ class VideomtLayerScale(EomtLayerScale):
     [`~VideomtVideoProcessor`] for details regarding usage.
     """
 )
-@dataclass
-class VideomtForUniversalSegmentationOutput(ModelOutput):
+class VideomtForUniversalSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.Tensor`, *optional*):
         The computed loss, returned when labels are present.

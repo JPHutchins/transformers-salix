@@ -16,7 +16,6 @@ from collections.abc import Callable
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...cache_utils import Cache
@@ -87,7 +86,6 @@ __all__ = [
 
 
 @auto_docstring(checkpoint="stepfun-ai/Step-3.7-Flash")
-@strict
 class Step3p7VisionConfig(SiglipVisionConfig):
     model_type = "step3p5_vision"
     base_config_key = "vision_config"
@@ -117,7 +115,6 @@ class Step3p7VisionConfig(SiglipVisionConfig):
 
 
 @auto_docstring(checkpoint="stepfun-ai/Step-3.7-Flash")
-@strict
 class Step3p7TextConfig(MiniMaxM3VLTextConfig):
     r"""
     mlp_layer_types (`list[str]`, *optional*):
@@ -315,7 +312,6 @@ class Step3p7TextConfig(MiniMaxM3VLTextConfig):
 
 
 @auto_docstring(checkpoint="stepfun-ai/Step-3.7-Flash")
-@strict
 class Step3p7Config(PreTrainedConfig):
     model_type = "step3p7"
     sub_configs = {"vision_config": Step3p7VisionConfig, "text_config": Step3p7TextConfig}

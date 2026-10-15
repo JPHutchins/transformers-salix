@@ -13,8 +13,6 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
@@ -22,7 +20,6 @@ from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="facebook/pe-av-large")
-@strict
 class PeAudioEncoderConfig(PreTrainedConfig):
     r"""
     dac_config (`Union[PreTrainedConfig, dict]`, *optional*):
@@ -86,7 +83,6 @@ class PeAudioEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/pe-av-large")
-@strict
 class PeAudioConfig(PreTrainedConfig):
     r"""
     Example:

@@ -28,7 +28,6 @@ import copy
 from collections.abc import Callable
 
 import torch
-from huggingface_hub.dataclasses import strict
 from torch import nn
 from torch.nn import functional as F
 from torch.nn import init
@@ -56,7 +55,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="ibm-granite/granite-swash-2b")
-@strict
 class GraniteSWAConfig(GraniteConfig):
     r"""
     sliding_window (`int`, *optional*, defaults to 128):

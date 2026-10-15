@@ -18,7 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
@@ -26,7 +25,6 @@ from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="deepseek-community/DeepSeek-OCR-2")
-@strict
 class DeepseekOcr2SamVisionConfig(PreTrainedConfig):
     r"""
     output_channels (`int`, *optional*, defaults to 256):
@@ -74,7 +72,6 @@ class DeepseekOcr2SamVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="deepseek-community/DeepSeek-OCR-2")
-@strict
 class DeepseekOcr2VisionEncoderConfig(PreTrainedConfig):
     r"""
     Example:
@@ -146,7 +143,6 @@ class DeepseekOcr2VisionEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="deepseek-community/DeepSeek-OCR-2")
-@strict
 class DeepseekOcr2VisionConfig(PreTrainedConfig):
     r"""
     sam_config (`dict` or `DeepseekOcr2SamVisionConfig`, *optional*):
@@ -180,7 +176,6 @@ class DeepseekOcr2VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="deepseek-community/DeepSeek-OCR-2")
-@strict
 class DeepseekOcr2TextConfig(PreTrainedConfig):
     r"""
     n_group (`int`, *optional*):
@@ -274,7 +269,6 @@ class DeepseekOcr2TextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="deepseek-community/DeepSeek-OCR-2")
-@strict
 class DeepseekOcr2Config(PreTrainedConfig):
     r"""
     vision_config (`dict` or `DeepseekOcr2VisionConfig`, *optional*):

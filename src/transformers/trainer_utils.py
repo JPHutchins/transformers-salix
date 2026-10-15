@@ -30,7 +30,7 @@ import time
 from collections.abc import Callable, Sized
 from functools import partial
 from pathlib import Path
-from typing import Any, NamedTuple, TypeGuard
+from typing import Any, TypeGuard
 
 import numpy as np
 
@@ -53,6 +53,7 @@ from .utils import (
     logging,
     requires_backends,
 )
+from .utils.generic import TupleStruct
 
 
 logger = logging.get_logger(__name__)
@@ -244,20 +245,20 @@ class EvalPrediction:
         return self.elements[idx]
 
 
-class EvalLoopOutput(NamedTuple):
+class EvalLoopOutput(TupleStruct):
     predictions: np.ndarray | tuple[np.ndarray]
     label_ids: np.ndarray | tuple[np.ndarray] | None
     metrics: dict[str, float] | None
     num_samples: int | None
 
 
-class PredictionOutput(NamedTuple):
+class PredictionOutput(TupleStruct):
     predictions: np.ndarray | tuple[np.ndarray]
     label_ids: np.ndarray | tuple[np.ndarray] | None
     metrics: dict[str, float] | None
 
 
-class TrainOutput(NamedTuple):
+class TrainOutput(TupleStruct):
     global_step: int
     training_loss: float
     metrics: dict[str, float]
@@ -406,7 +407,7 @@ class HubStrategy(ExplicitEnum):
     ALL_CHECKPOINTS = "all_checkpoints"
 
 
-class BestRun(NamedTuple):
+class BestRun(TupleStruct):
     """
     The best run found by a hyperparameter search (see [`~Trainer.hyperparameter_search`]).
 
@@ -1073,7 +1074,7 @@ def load_sharded_checkpoint(model, folder, strict=True, prefer_safe=True):
             safetensors files will be loaded. Otherwise, PyTorch files are always loaded when possible.
 
     Returns:
-        `NamedTuple`: A named tuple with `missing_keys` and `unexpected_keys` fields
+        `named tuple`: A named tuple with `missing_keys` and `unexpected_keys` fields
             - `missing_keys` is a list of str containing the missing keys
             - `unexpected_keys` is a list of str containing the unexpected keys
     """

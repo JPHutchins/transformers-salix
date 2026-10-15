@@ -13,11 +13,10 @@
 # limitations under the License.
 import math
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -57,7 +56,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="AnnaZhang/lwdetr_small_60e_coco")
-@strict
 class LwDetrViTConfig(VitDetConfig):
     r"""
     pretrain_image_size (`int`, *optional*, defaults to 224):
@@ -115,7 +113,6 @@ class LwDetrViTConfig(VitDetConfig):
 
 
 @auto_docstring(checkpoint="AnnaZhang/lwdetr_small_60e_coco")
-@strict
 class LwDetrConfig(PreTrainedConfig):
     r"""
     projector_scale_factors (`list[float]`, *optional*, defaults to `[]`):
@@ -818,8 +815,7 @@ def refine_bboxes(reference_points, deltas):
     - a stacked tensor of intermediate reference points.
     """
 )
-@dataclass
-class LwDetrDecoderOutput(DeformableDetrDecoderOutput):
+class LwDetrDecoderOutput(DeformableDetrDecoderOutput, Struct, frozen=False):
     pass
 
 
@@ -924,8 +920,7 @@ class LwDetrDecoder(LwDetrPreTrainedModel):
     Base class for outputs of the LwDetr backbone-decoder model.
     """
 )
-@dataclass
-class LwDetrModelOutput(ModelOutput):
+class LwDetrModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     init_reference_points (`torch.FloatTensor` of shape  `(batch_size, num_queries, 4)`):
         Initial reference points sent through the Transformer decoder.
@@ -1207,8 +1202,7 @@ class LwDetrMLPPredictionHead(DeformableDetrMLPPredictionHead):
     Output type of [`LwDetrForObjectDetection`].
     """
 )
-@dataclass
-class LwDetrObjectDetectionOutput(ModelOutput):
+class LwDetrObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

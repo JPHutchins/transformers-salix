@@ -13,10 +13,9 @@
 # limitations under the License.
 
 import math
-from dataclasses import dataclass
 
 import torch
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -59,7 +58,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-DocLayoutV2_safetensors")
-@strict
 class PPDocLayoutV2ReadingOrderConfig(PreTrainedConfig):
     r"""
     has_relative_attention_bias (`bool`, *optional*, defaults to `True`):
@@ -135,7 +133,6 @@ class PPDocLayoutV2ReadingOrderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="PaddlePaddle/PP-DocLayoutV2_safetensors")
-@strict
 class PPDocLayoutV2Config(PreTrainedConfig):
     r"""
     initializer_bias_prior_prob (`float`, *optional*):
@@ -728,8 +725,7 @@ class PPDocLayoutV2ReadingOrder(PPDocLayoutV2PreTrainedModel):
 
 
 @auto_docstring
-@dataclass
-class PPDocLayoutV2ForObjectDetectionOutput(ModelOutput):
+class PPDocLayoutV2ForObjectDetectionOutput(ModelOutput, Struct, frozen=False):
     r"""
     logits (`torch.FloatTensor` of shape `(batch_size, num_queries, num_classes + 1)`):
         Classification logits (including no-object) for all queries.
@@ -796,8 +792,7 @@ class PPDocLayoutV2ForObjectDetectionOutput(ModelOutput):
     Base class for outputs of the PP-DocLayoutV2 encoder-decoder model.
     """
 )
-@dataclass
-class PPDocLayoutV2ModelOutput(RTDetrModelOutput):
+class PPDocLayoutV2ModelOutput(RTDetrModelOutput, Struct, frozen=False):
     pass
 
 

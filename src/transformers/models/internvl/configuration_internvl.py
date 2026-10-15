@@ -13,15 +13,12 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="OpenGVLab/InternVL3-1B-hf")
-@strict
 class InternVLVisionConfig(PreTrainedConfig):
     r"""
     projection_dropout (`float`, *optional*, defaults to 0.0):
@@ -84,7 +81,6 @@ class InternVLVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="OpenGVLab/InternVL3-1B-hf")
-@strict
 class InternVLConfig(PreTrainedConfig):
     r"""
     downsample_ratio (`float`, *optional*, defaults to 0.5):

@@ -14,12 +14,12 @@
 """Transformers Xcodec model."""
 
 import math
-from dataclasses import dataclass
 from functools import lru_cache
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...audio_utils import conv1d_output_length
@@ -35,8 +35,7 @@ from ..auto import AutoModel
 from .configuration_xcodec import XcodecConfig
 
 
-@dataclass
-class XcodecOutput(ModelOutput):
+class XcodecOutput(ModelOutput, Struct, frozen=False):
     """
     Args:
         audio_codes (`torch.LongTensor`  of shape `(batch_size, num_quantizers, codes_length)`, *optional*):
@@ -49,8 +48,7 @@ class XcodecOutput(ModelOutput):
     audio_values: torch.FloatTensor | None = None
 
 
-@dataclass
-class XcodecEncoderOutput(ModelOutput):
+class XcodecEncoderOutput(ModelOutput, Struct, frozen=False):
     """
     Args:
         audio_codes (`torch.LongTensor`  of shape `(batch_size, num_quantizers, codes_length)`, *optional*):
@@ -60,8 +58,7 @@ class XcodecEncoderOutput(ModelOutput):
     audio_codes: torch.LongTensor | None = None
 
 
-@dataclass
-class XcodecDecoderOutput(ModelOutput):
+class XcodecDecoderOutput(ModelOutput, Struct, frozen=False):
     """
     Args:
         audio_values (`torch.FloatTensor`  of shape `(batch_size, channels, num_samples)`, *optional*):

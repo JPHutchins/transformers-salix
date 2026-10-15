@@ -15,7 +15,6 @@
 
 import torch
 import torch.nn as nn
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...cache_utils import Cache
@@ -45,7 +44,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="facebook/sam-vit-huge")
-@strict
 class GotOcr2VisionConfig(PreTrainedConfig):
     r"""
     output_channels (`int`, *optional*, defaults to 256):
@@ -83,7 +81,6 @@ class GotOcr2VisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/sam-vit-huge")
-@strict
 class GotOcr2Config(PreTrainedConfig):
     r"""
     Example:

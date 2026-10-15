@@ -22,10 +22,10 @@ from __future__ import annotations
 
 import importlib.metadata
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 from packaging import version
+from salix import Struct
 
 from ..utils import logging
 from ..utils.import_utils import is_kernels_available, maybe_import_error
@@ -90,8 +90,7 @@ def is_sonicmoe_loadable(raise_error: bool = False) -> bool:
     return True
 
 
-@dataclass(frozen=True)
-class SonicMoE:
+class SonicMoE(Struct, frozen=True):
     """Entry points exposed by the `kernels-community/sonic-moe` kernel."""
 
     activation_type_enum: type

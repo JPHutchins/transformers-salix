@@ -14,9 +14,9 @@
 """PyTorch CvT model."""
 
 import collections.abc
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
@@ -35,8 +35,7 @@ logger = logging.get_logger(__name__)
     Base class for model's outputs, with potential hidden states and attentions.
     """
 )
-@dataclass
-class BaseModelOutputWithCLSToken(ModelOutput):
+class BaseModelOutputWithCLSToken(ModelOutput, Struct, frozen=False):
     r"""
     cls_token_value (`torch.FloatTensor` of shape `(batch_size, 1, hidden_size)`):
         Classification token at the output of the last layer of the model.

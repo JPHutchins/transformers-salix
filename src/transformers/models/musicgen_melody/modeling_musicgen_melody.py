@@ -17,11 +17,11 @@ import inspect
 import math
 import random
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Optional
 
 import torch
 import torch.nn as nn
+from salix import Struct
 from torch.nn import CrossEntropyLoss
 
 from ... import initialization as init
@@ -62,8 +62,7 @@ logger = logging.get_logger(__name__)
     Base class for Musicgen Melody autoregressive outputs.
     """
 )
-@dataclass
-class MusicgenMelodyOutputWithPast(ModelOutput):
+class MusicgenMelodyOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

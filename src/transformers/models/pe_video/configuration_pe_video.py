@@ -13,8 +13,6 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
@@ -23,7 +21,6 @@ from ..timm_wrapper import TimmWrapperConfig
 
 
 @auto_docstring(checkpoint="facebook/pe-av-large")
-@strict
 class PeVideoEncoderConfig(PreTrainedConfig):
     r"""
     Example:
@@ -87,7 +84,6 @@ class PeVideoEncoderConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="facebook/pe-av-large")
-@strict
 class PeVideoConfig(PreTrainedConfig):
     r"""
     video_config (`dict` or `PreTrainedConfig`, *optional*):

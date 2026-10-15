@@ -19,14 +19,11 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="PaddlePaddle/SLANeXt_wired_safetensors")
-@strict
 class SLANeXtVisionConfig(PreTrainedConfig):
     r"""
     output_channels (`int`, *optional*, defaults to 256):
@@ -64,7 +61,6 @@ class SLANeXtVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="PaddlePaddle/SLANeXt_wired_safetensors")
-@strict
 class SLANeXtConfig(PreTrainedConfig):
     r"""
     vision_config (`dict` or [`SLANeXtVisionConfig`], *optional*):

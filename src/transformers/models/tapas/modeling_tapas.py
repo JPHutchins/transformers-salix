@@ -15,9 +15,9 @@
 
 import enum
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 
@@ -45,8 +45,7 @@ CLOSE_ENOUGH_TO_LOG_ZERO = -10000.0
     Output type of [`TapasForQuestionAnswering`].
     """
 )
-@dataclass
-class TableQuestionAnsweringOutput(ModelOutput):
+class TableQuestionAnsweringOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` (and possibly `answer`, `aggregation_labels`, `numeric_values` and `numeric_values_scale` are provided)):
         Total loss as the sum of the hierarchical cell selection log-likelihood loss and (optionally) the

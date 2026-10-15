@@ -21,9 +21,9 @@
 
 
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ...activations import ACT2FN
@@ -375,8 +375,7 @@ class SmolVLMVisionTransformer(SmolVLMPreTrainedModel):
     Base class for SmolVLM model's outputs that may also contain a past key/values (to speed up sequential decoding).
     """
 )
-@dataclass
-class SmolVLMBaseModelOutputWithPast(ModelOutput):
+class SmolVLMBaseModelOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.
@@ -646,8 +645,7 @@ class SmolVLMModel(SmolVLMPreTrainedModel):
     Base class for Idefics causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class SmolVLMCausalLMOutputWithPast(ModelOutput):
+class SmolVLMCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

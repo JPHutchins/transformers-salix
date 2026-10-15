@@ -21,11 +21,11 @@
 import math
 from collections import UserDict
 from collections.abc import Callable, Sequence
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -57,8 +57,7 @@ if is_accelerate_available():
 
 
 @auto_docstring
-@dataclass
-class Gemma3nAudioEncoderModelOutput(BaseModelOutputWithPooling):
+class Gemma3nAudioEncoderModelOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     audio_mel_mask (`torch.BoolTensor`, *optional*):
         A torch.BoolTensor of shape `(batch_size, num_frames)`
@@ -72,8 +71,7 @@ class Gemma3nAudioEncoderModelOutput(BaseModelOutputWithPooling):
     Base class for Gemma3n outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class Gemma3nModelOutputWithPast(BaseModelOutputWithPast):
+class Gemma3nModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance. For more details, see our [kv cache guide](https://huggingface.co/docs/transformers/en/kv_cache).
@@ -98,8 +96,7 @@ class Gemma3nModelOutputWithPast(BaseModelOutputWithPast):
     Base class for Gemma3n causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class Gemma3nCausalLMOutputWithPast(ModelOutput):
+class Gemma3nCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

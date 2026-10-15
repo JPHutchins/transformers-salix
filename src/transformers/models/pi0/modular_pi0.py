@@ -19,7 +19,6 @@ from collections.abc import Callable
 import numpy as np
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -195,7 +194,6 @@ class PI0Processor(ProcessorMixin):
 
 
 @auto_docstring(checkpoint="lerobot/pi0_base")
-@strict
 class PI0Config(PreTrainedConfig):
     r"""
     vlm_config (`dict`, *optional*):

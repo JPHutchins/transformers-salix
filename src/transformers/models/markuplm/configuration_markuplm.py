@@ -13,14 +13,11 @@
 # limitations under the License.
 """MarkupLM model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="microsoft/markuplm-base")
-@strict
 class MarkupLMConfig(PreTrainedConfig):
     r"""
     max_xpath_tag_unit_embeddings (`int`, *optional*, defaults to 256):

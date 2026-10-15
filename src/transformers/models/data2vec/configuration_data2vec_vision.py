@@ -13,14 +13,11 @@
 # limitations under the License.
 """Data2VecVision model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/data2vec-vision-base")
-@strict
 class Data2VecVisionConfig(PreTrainedConfig):
     r"""
     use_mask_token (`bool`, *optional*, defaults to `False`):

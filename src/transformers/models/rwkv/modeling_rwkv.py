@@ -15,9 +15,9 @@
 """PyTorch RWKV model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -445,8 +445,7 @@ class RwkvPreTrainedModel(PreTrainedModel):
     Class for the RWKV model outputs.
     """
 )
-@dataclass
-class RwkvOutput(ModelOutput):
+class RwkvOutput(ModelOutput, Struct, frozen=False):
     r"""
     state (list of five `torch.FloatTensor` of shape `(batch_size, hidden_size, num_hidden_layers)`):
         The state of the model at the last time step. Can be used in a forward method with the next `input_ids` to
@@ -464,8 +463,7 @@ class RwkvOutput(ModelOutput):
     Base class for causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class RwkvCausalLMOutput(ModelOutput):
+class RwkvCausalLMOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

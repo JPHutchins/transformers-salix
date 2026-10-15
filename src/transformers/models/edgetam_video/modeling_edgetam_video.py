@@ -21,13 +21,13 @@
 import math
 from collections import OrderedDict
 from collections.abc import Callable, Iterator
-from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor
 from tqdm import tqdm
 
@@ -117,8 +117,7 @@ class EdgeTamVideoMemoryFuserCXBlock(GradientCheckpointingLayer):
 
 
 @auto_docstring(custom_intro="Base class for the vision encoder's outputs.")
-@dataclass
-class EdgeTamVideoVisionEncoderOutput(BaseModelOutputWithPooling):
+class EdgeTamVideoVisionEncoderOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, height, width, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model.
@@ -1559,8 +1558,7 @@ class EdgeTamVideoPerceiverResampler(nn.Module):
 
 
 @auto_docstring(custom_intro="Base class for the EdgeTamVideo model's output.")
-@dataclass
-class EdgeTamVideoImageSegmentationOutput(ModelOutput):
+class EdgeTamVideoImageSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     iou_scores (`torch.FloatTensor` of shape `(batch_size, point_batch_size, num_masks)`):
         The Intersection over Union (IoU) scores of the predicted masks.
@@ -1600,8 +1598,7 @@ class EdgeTamVideoImageSegmentationOutput(ModelOutput):
 
 
 @auto_docstring(custom_intro="Base class for the Sam2 model's output.")
-@dataclass
-class EdgeTamVideoSegmentationOutput(ModelOutput):
+class EdgeTamVideoSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     object_ids (`list[int]`, *optional*):
         List of object IDs being tracked in the current frame.

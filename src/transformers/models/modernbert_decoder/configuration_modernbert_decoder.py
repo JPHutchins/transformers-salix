@@ -20,14 +20,11 @@
 # limitations under the License.
 from typing import Literal
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="blab-jhu/test-32m-dec")
-@strict
 class ModernBertDecoderConfig(PreTrainedConfig):
     r"""
     initializer_cutoff_factor (`float`, *optional*, defaults to 2.0):

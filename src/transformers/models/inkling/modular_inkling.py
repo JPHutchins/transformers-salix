@@ -19,7 +19,6 @@ from collections.abc import Callable
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -58,7 +57,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="thinkingmachines/Inkling")
-@strict
 class InklingTextConfig(PreTrainedConfig):
     r"""
     unpadded_vocab_size (`int`, *optional*, defaults to `None`):
@@ -229,7 +227,6 @@ class InklingTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="thinkingmachines/Inkling")
-@strict
 class InklingAudioConfig(PreTrainedConfig):
     r"""
     n_mel_bins (`int`, *optional*, defaults to 80):
@@ -256,7 +253,6 @@ class InklingAudioConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="thinkingmachines/Inkling")
-@strict
 class InklingVisionConfig(PreTrainedConfig):
     r"""
     text_hidden_size (`int`, *optional*, defaults to 6144):
@@ -282,7 +278,6 @@ class InklingVisionConfig(PreTrainedConfig):
     checkpoint="thinkingmachines/Inkling",
     custom_intro="Top-level multimodal config (`InklingMMConfig` in the SGLang source).",
 )
-@strict
 class InklingConfig(PreTrainedConfig):
     r"""
     image_bos_token_id (`int`, *optional*, defaults to 200005):

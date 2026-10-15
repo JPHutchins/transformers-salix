@@ -19,10 +19,10 @@
 # limitations under the License.
 
 import math
-from dataclasses import dataclass
 
 import numpy as np
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -48,8 +48,7 @@ logger = logging.get_logger(__name__)
     Base class for Llava outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class LlavaNextVideoModelOutputWithPast(BaseModelOutputWithPast):
+class LlavaNextVideoModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance. For more details, see our [kv cache guide](https://huggingface.co/docs/transformers/en/kv_cache).
@@ -74,8 +73,7 @@ class LlavaNextVideoModelOutputWithPast(BaseModelOutputWithPast):
     Base class for LlavaNextVideo causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class LlavaNextVideoCausalLMOutputWithPast(ModelOutput):
+class LlavaNextVideoCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

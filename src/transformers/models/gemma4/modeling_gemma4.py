@@ -21,10 +21,10 @@
 import math
 from collections import UserDict
 from collections.abc import Callable
-from dataclasses import dataclass
 from functools import cached_property
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import functional as F
 
@@ -74,8 +74,7 @@ if is_accelerate_available():
     Base class for Gemma4 outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class Gemma4ModelOutputWithPast(BaseModelOutputWithPast):
+class Gemma4ModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance. For more details, see our [kv cache guide](https://huggingface.co/docs/transformers/en/kv_cache).
@@ -105,8 +104,7 @@ class Gemma4ModelOutputWithPast(BaseModelOutputWithPast):
     Base class for Gemma4 causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class Gemma4CausalLMOutputWithPast(ModelOutput):
+class Gemma4CausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).
@@ -140,8 +138,7 @@ class Gemma4CausalLMOutputWithPast(ModelOutput):
     shared_kv_states: dict[str, tuple[torch.Tensor, torch.Tensor]] | None = None
 
 
-@dataclass
-class Gemma4TextModelOutputWithPast(BaseModelOutputWithPast):
+class Gemma4TextModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     """
     BaseModelOutputWithPast extended with shared_kv_states for KV sharing.
 
@@ -155,8 +152,7 @@ class Gemma4TextModelOutputWithPast(BaseModelOutputWithPast):
 
 
 @auto_docstring
-@dataclass
-class Gemma4AudioModelOutput(BaseModelOutputWithPooling):
+class Gemma4AudioModelOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     attention_mask (`torch.BoolTensor`, *optional*):
         A torch.BoolTensor of shape `(batch_size, num_frames)`. True for valid positions, False for padding.

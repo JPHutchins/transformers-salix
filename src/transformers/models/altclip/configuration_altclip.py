@@ -16,7 +16,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring, logging
@@ -26,7 +25,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="BAAI/AltCLIP")
-@strict
 class AltCLIPTextConfig(PreTrainedConfig):
     r"""
     project_dim (`int`, *optional*, defaults to 768):
@@ -78,7 +76,6 @@ class AltCLIPTextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="BAAI/AltCLIP")
-@strict
 class AltCLIPVisionConfig(PreTrainedConfig):
     r"""
     Example:
@@ -123,7 +120,6 @@ class AltCLIPVisionConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="BAAI/AltCLIP")
-@strict
 class AltCLIPConfig(PreTrainedConfig):
     r"""
     Example:

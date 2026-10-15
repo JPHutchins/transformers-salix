@@ -15,11 +15,11 @@
 
 import json
 import os
-from dataclasses import dataclass
 from itertools import groupby
 from typing import TYPE_CHECKING, Any, Union
 
 import numpy as np
+from salix import Struct
 
 from ...tokenization_python import PreTrainedTokenizer
 from ...tokenization_utils_base import AddedToken
@@ -50,8 +50,7 @@ VOCAB_FILES_NAMES = {
 ListOfDict = list[dict[str, int | str]]
 
 
-@dataclass
-class Wav2Vec2PhonemeCTCTokenizerOutput(ModelOutput):
+class Wav2Vec2PhonemeCTCTokenizerOutput(ModelOutput, Struct, frozen=False):
     """
     Output type of [` Wav2Vec2PhonemeCTCTokenizer`], with transcription.
 

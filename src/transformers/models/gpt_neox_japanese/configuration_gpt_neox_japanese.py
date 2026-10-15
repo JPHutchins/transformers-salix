@@ -13,15 +13,12 @@
 # limitations under the License.
 """GPTNeoX Japanese model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...modeling_rope_utils import RopeParameters
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="abeja/gpt-neox-japanese-2.7b")
-@strict
 class GPTNeoXJapaneseConfig(PreTrainedConfig):
     r"""
     intermediate_multiple_size (`int`, *optional*, defaults to 4):

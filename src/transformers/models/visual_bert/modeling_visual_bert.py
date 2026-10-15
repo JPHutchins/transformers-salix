@@ -14,9 +14,9 @@
 """PyTorch VisualBERT model."""
 
 import math
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 from torch.nn import CrossEntropyLoss, KLDivLoss, LogSoftmax
 
@@ -462,8 +462,7 @@ class VisualBertPreTrainedModel(PreTrainedModel):
     Output type of [`VisualBertForPreTraining`].
     """
 )
-@dataclass
-class VisualBertForPreTrainingOutput(ModelOutput):
+class VisualBertForPreTrainingOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (*optional*, returned when `labels` is provided, `torch.FloatTensor` of shape `(1,)`):
         Total loss as the sum of the masked language modeling loss and the sentence-image prediction

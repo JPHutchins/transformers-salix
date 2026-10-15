@@ -12,11 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 from typing import Optional, Union
 
 import torch
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 
 from ...configuration_utils import PreTrainedConfig
 from ...feature_extraction_utils import BatchFeature
@@ -37,7 +36,6 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring(checkpoint="ModernVBERT/colmodernvbert-merged")
-@strict
 class ColModernVBertConfig(ColQwen2Config):
     r"""
     Example:
@@ -321,8 +319,7 @@ class ColModernVBertPreTrainedModel(ColPaliPreTrainedModel):
     Base class for ColModernVBert embeddings output.
     """
 )
-@dataclass
-class ColModernVBertForRetrievalOutput(ModelOutput):
+class ColModernVBertForRetrievalOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

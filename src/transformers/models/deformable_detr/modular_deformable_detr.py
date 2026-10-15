@@ -13,11 +13,11 @@
 # limitations under the License.
 import math
 import warnings
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 from torch import Tensor
 
 from ... import initialization as init
@@ -219,8 +219,7 @@ class DeformableDetrDecoderOutput(DetrDecoderOutput):
     Base class for outputs of the Deformable DETR encoder-decoder model.
     """
 )
-@dataclass
-class DeformableDetrModelOutput(ModelOutput):
+class DeformableDetrModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     init_reference_points (`torch.FloatTensor` of shape  `(batch_size, num_queries, 4)`):
         Initial reference points sent through the Transformer decoder.

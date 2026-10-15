@@ -13,9 +13,9 @@
 # limitations under the License.
 """PyTorch VideoLlava model."""
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from ... import initialization as init
@@ -40,8 +40,7 @@ logger = logging.get_logger(__name__)
     Base class for VideoLlava base model outputs.
     """
 )
-@dataclass
-class VideoLlavaModelOutputWithPast(ModelOutput):
+class VideoLlavaModelOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance. For more details, see our [kv cache guide](https://huggingface.co/docs/transformers/en/kv_cache).
@@ -69,8 +68,7 @@ class VideoLlavaModelOutputWithPast(ModelOutput):
     Base class for VideoLlava causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class VideoLlavaCausalLMOutputWithPast(ModelOutput):
+class VideoLlavaCausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).

@@ -18,7 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from huggingface_hub.dataclasses import strict
 
 from ...backbone_utils import BackboneConfigMixin
 from ...configuration_utils import PreTrainedConfig
@@ -26,7 +25,6 @@ from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="google/tipsv2-b14")
-@strict
 class Tipsv2VisionConfig(BackboneConfigMixin, PreTrainedConfig):
     r"""
     layerscale_value (`float`, *optional*, defaults to `1.0`):
@@ -88,7 +86,6 @@ class Tipsv2VisionConfig(BackboneConfigMixin, PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/tipsv2-b14")
-@strict
 class Tipsv2TextConfig(PreTrainedConfig):
     r"""
     scale_sqrt_depth (`bool`, *optional*, defaults to `True`):
@@ -137,7 +134,6 @@ class Tipsv2TextConfig(PreTrainedConfig):
 
 
 @auto_docstring(checkpoint="google/tipsv2-b14")
-@strict
 class Tipsv2Config(PreTrainedConfig):
     r"""
     text_config (`dict`, *optional*):

@@ -20,11 +20,11 @@
 
 
 import collections
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -304,8 +304,7 @@ class GotOcr2PreTrainedModel(PreTrainedModel):
     layer to the pooler_output.
     """
 )
-@dataclass
-class GotOcr2VisionEncoderOutput(ModelOutput):
+class GotOcr2VisionEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     image_embeds (`torch.FloatTensor` of shape `(batch_size, output_dim)` *optional* returned when model is initialized with `with_projection=True`):
         The image embeddings obtained by applying the projection layer to the pooler_output.
@@ -481,8 +480,7 @@ class GotOcr2MultiModalProjector(nn.Module):
     Base class for GotOcr2 causal language model (or autoregressive) outputs.
     """
 )
-@dataclass
-class GotOcr2CausalLMOutputWithPast(ModelOutput):
+class GotOcr2CausalLMOutputWithPast(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Language modeling loss (for next-token prediction).
@@ -511,8 +509,7 @@ class GotOcr2CausalLMOutputWithPast(ModelOutput):
     Base class for GotOcr2 outputs, with hidden states and attentions.
     """
 )
-@dataclass
-class GotOcr2ModelOutputWithPast(BaseModelOutputWithPast):
+class GotOcr2ModelOutputWithPast(BaseModelOutputWithPast, Struct, frozen=False):
     r"""
     past_key_values (`Cache`, *optional*, returned when `use_cache=True` is passed or when `config.use_cache=True`):
         It is a [`~cache_utils.Cache`] instance. For more details, see our [kv cache guide](https://huggingface.co/docs/transformers/en/kv_cache).

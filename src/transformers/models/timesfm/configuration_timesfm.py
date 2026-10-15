@@ -13,14 +13,11 @@
 # limitations under the License.
 """TimesFM model configuration"""
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="google/timesfm-2.0-500m-pytorch")
-@strict
 class TimesFmConfig(PreTrainedConfig):
     r"""
     patch_length (`int`, *optional*, defaults to 32):
@@ -51,7 +48,7 @@ class TimesFmConfig(PreTrainedConfig):
 
     model_type = "timesfm"
     keys_to_ignore_at_inference = []
-    is_encoder_decoder = False
+    is_encoder_decoder: bool = False
 
     patch_length: int = 32
     context_length: int = 512

@@ -18,7 +18,6 @@ from typing import Any
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
 from torch import nn
 
 from ... import initialization as init
@@ -50,7 +49,6 @@ from ..siglip.modeling_siglip import SiglipEncoder, SiglipEncoderLayer, SiglipML
 
 
 @auto_docstring(checkpoint="openbmb/MiniCPM-V-4.6")
-@strict
 class MiniCPMV4_6VisionConfig(SiglipVisionConfig):
     r"""
     insert_layer_id (`int`, *optional*, defaults to 6):
@@ -73,7 +71,6 @@ class MiniCPMV4_6VisionConfig(SiglipVisionConfig):
 
 
 @auto_docstring(checkpoint="openbmb/MiniCPM-V-4.6")
-@strict
 class MiniCPMV4_6Config(PreTrainedConfig):
     r"""
     insert_layer_id (`int`, *optional*, defaults to 6):

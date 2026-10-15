@@ -12,12 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import pathlib
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn.functional as F
-from huggingface_hub.dataclasses import strict
+from salix import Struct
 from torch import Tensor, nn
 from torchvision.transforms.v2 import functional as tvF
 
@@ -386,7 +385,6 @@ class RfDetrImageProcessor(DetrImageProcessor):
 
 
 @auto_docstring(checkpoint="Roboflow/rf-detr-base")
-@strict
 class RfDetrDinov2Config(Dinov2Config):
     r"""
     layerscale_value (`float`, *optional*, defaults to 1.0):
@@ -437,7 +435,6 @@ class RfDetrDinov2Config(Dinov2Config):
 
 
 @auto_docstring(checkpoint="Roboflow/rf-detr-base")
-@strict
 class RfDetrConfig(LwDetrConfig):
     r"""
     hidden_expansion (`float`, *optional*, defaults to 0.5):
@@ -886,8 +883,7 @@ class RfDetrPreTrainedModel(LwDetrPreTrainedModel):
     Base class for outputs of the RfDetr backbone-decoder model.
     """
 )
-@dataclass
-class RfDetrModelOutput(ModelOutput):
+class RfDetrModelOutput(ModelOutput, Struct, frozen=False):
     r"""
     init_reference_points (`torch.FloatTensor` of shape  `(batch_size, num_queries, 4)`):
         Initial reference points sent through the Transformer decoder.
@@ -1274,8 +1270,7 @@ class RfDetrForObjectDetection(LwDetrForObjectDetection):
     Output type of [`RfDetrForInstanceSegmentation`].
     """
 )
-@dataclass
-class RfDetrInstanceSegmentationOutput(ModelOutput):
+class RfDetrInstanceSegmentationOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` are provided)):
         Total loss as a linear combination of a negative log-likelihood (cross-entropy) for class prediction and a

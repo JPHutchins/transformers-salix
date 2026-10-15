@@ -19,7 +19,8 @@
 # limitations under the License.
 
 import math
-from dataclasses import dataclass
+
+from salix import Struct
 
 from ...activations import ACT2FN
 from ...cache_utils import Cache
@@ -42,8 +43,7 @@ logger = logging.get_logger(__name__)
 
 
 @auto_docstring
-@dataclass
-class Nemotron3_5AsrRNNTOutput(BaseModelOutputWithPooling):
+class Nemotron3_5AsrRNNTOutput(BaseModelOutputWithPooling, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor`, *optional*, returned when `labels` is provided):
         RNN-T transducer loss.

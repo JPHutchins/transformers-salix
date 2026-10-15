@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
@@ -19,7 +18,6 @@ from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="nvidia/nemotron-3.5-asr-streaming-0.6b")
-@strict
 class Nemotron3_5AsrConfig(PreTrainedConfig):
     r"""
     vocab_size (`int`, *optional*, defaults to 13088):

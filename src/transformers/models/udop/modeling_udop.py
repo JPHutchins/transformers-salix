@@ -20,10 +20,10 @@ import random
 from abc import ABC, abstractmethod
 from collections.abc import Callable, Sequence
 from copy import deepcopy
-from dataclasses import dataclass
 from typing import Any
 
 import torch
+from salix import Struct
 from torch import Tensor, nn
 from torch.nn import CrossEntropyLoss
 
@@ -93,8 +93,7 @@ def eager_attention_forward(
     an additional attention mask.
     """
 )
-@dataclass
-class BaseModelOutputWithAttentionMask(ModelOutput):
+class BaseModelOutputWithAttentionMask(ModelOutput, Struct, frozen=False):
     r"""
     last_hidden_state (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Sequence of hidden-states at the output of the last layer of the model. If `past_key_values` is used only

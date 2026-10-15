@@ -18,11 +18,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 from typing import Optional
 
 import torch
 import torch.nn as nn
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -38,8 +38,7 @@ from .configuration_vibevoice_acoustic_tokenizer import (
 
 
 @auto_docstring
-@dataclass
-class VibeVoiceAcousticTokenizerOutput(ModelOutput):
+class VibeVoiceAcousticTokenizerOutput(ModelOutput, Struct, frozen=False):
     r"""
     audio (`torch.FloatTensor` of shape `(batch_size, channels, sequence_length)`):
         Decoded audio.
@@ -56,8 +55,7 @@ class VibeVoiceAcousticTokenizerOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class VibeVoiceAcousticTokenizerEncoderOutput(ModelOutput):
+class VibeVoiceAcousticTokenizerEncoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     latents (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
         Projected latents (continuous representations for acoustic tokens) at the output of the encoder.
@@ -71,8 +69,7 @@ class VibeVoiceAcousticTokenizerEncoderOutput(ModelOutput):
 
 
 @auto_docstring
-@dataclass
-class VibeVoiceAcousticTokenizerDecoderOutput(ModelOutput):
+class VibeVoiceAcousticTokenizerDecoderOutput(ModelOutput, Struct, frozen=False):
     r"""
     audio (`torch.FloatTensor` of shape `(batch_size, channels, sequence_length)`):
         Decoded audio.

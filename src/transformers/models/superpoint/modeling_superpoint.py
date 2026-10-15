@@ -13,9 +13,9 @@
 # limitations under the License.
 """PyTorch SuperPoint model."""
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import nn
 
 from transformers import PreTrainedModel
@@ -79,8 +79,7 @@ def simple_nms(scores: torch.Tensor, nms_radius: int) -> torch.Tensor:
     and which are padding.
     """
 )
-@dataclass
-class SuperPointKeypointDescriptionOutput(ModelOutput):
+class SuperPointKeypointDescriptionOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*):
         Loss computed during training.

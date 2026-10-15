@@ -16,14 +16,12 @@
 import math
 
 import numpy as np
-from huggingface_hub.dataclasses import strict
 
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 
 
 @auto_docstring(checkpoint="facebook/encodec_24khz")
-@strict
 class EncodecConfig(PreTrainedConfig):
     r"""
     target_bandwidths (`list[float]`, *optional*, defaults to `[1.5, 3.0, 6.0, 12.0, 24.0]`):

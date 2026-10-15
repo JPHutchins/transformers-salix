@@ -18,12 +18,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Any
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from salix import Struct
 
 from ... import initialization as init
 from ...activations import ACT2FN
@@ -49,8 +49,7 @@ from .configuration_pe_video import PeVideoConfig, PeVideoEncoderConfig
     Class for outputs of [`PeVideoModel`].
     """
 )
-@dataclass
-class PeVideoOutput(ModelOutput):
+class PeVideoOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*):
         Contrastive loss computed between video and text representations.

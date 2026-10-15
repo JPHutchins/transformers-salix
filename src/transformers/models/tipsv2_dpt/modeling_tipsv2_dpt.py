@@ -18,9 +18,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
 
 import torch
+from salix import Struct
 from torch import Tensor, nn
 from typing_extensions import Unpack
 
@@ -34,8 +34,7 @@ from .configuration_tipsv2_dpt import Tipsv2DptConfig
 
 
 @auto_docstring
-@dataclass
-class Tipsv2DptDensePredictorOutput(ModelOutput):
+class Tipsv2DptDensePredictorOutput(ModelOutput, Struct, frozen=False):
     r"""
     normals (`torch.FloatTensor` of shape `(batch_size, 3, height, width)`):
         Raw normal map predictions (unnormalized).
@@ -60,8 +59,7 @@ class Tipsv2DptDensePredictorOutput(ModelOutput):
     Class for outputs of normal estimation models.
     """
 )
-@dataclass
-class Tipsv2DptNormalEstimatorOutput(ModelOutput):
+class Tipsv2DptNormalEstimatorOutput(ModelOutput, Struct, frozen=False):
     r"""
     loss (`torch.FloatTensor` of shape `(1,)`, *optional*, returned when `labels` is provided):
         Normal estimation loss.

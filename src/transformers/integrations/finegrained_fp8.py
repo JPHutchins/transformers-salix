@@ -16,10 +16,10 @@ from __future__ import annotations
 import functools
 import os
 from collections.abc import Callable
-from dataclasses import dataclass
 
 import torch
 import torch.nn as nn
+from salix import Struct
 from torch.nn import functional as F
 
 from ..activations import ACT2FN
@@ -69,8 +69,7 @@ def _first_attr(obj, *names):
     raise AttributeError(f"{type(obj).__name__} has none of: {names}")
 
 
-@dataclass(frozen=True)
-class FineGrainedFP8:
+class FineGrainedFP8(Struct, frozen=True):
     """Entry points exposed by the `kernels-community/finegrained-fp8` Triton kernel."""
 
     matmul: Callable

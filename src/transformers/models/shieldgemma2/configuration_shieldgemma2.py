@@ -14,15 +14,12 @@
 # limitations under the License.
 
 
-from huggingface_hub.dataclasses import strict
-
 from ...configuration_utils import PreTrainedConfig
 from ...utils import auto_docstring
 from ..auto import CONFIG_MAPPING, AutoConfig
 
 
 @auto_docstring(checkpoint="google/shieldgemma-2-4b-it")
-@strict
 class ShieldGemma2Config(PreTrainedConfig):
     r"""
     tie_word_embeddings (`bool`, *optional*):
