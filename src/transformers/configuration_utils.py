@@ -24,7 +24,7 @@ from typing import TYPE_CHECKING, Any, Literal, TypeVar, Union
 from huggingface_hub.dataclasses import type_validator
 from huggingface_hub.errors import StrictDataclassClassValidationError, StrictDataclassFieldValidationError
 from packaging import version
-from salix import Field, fields
+from salix import Field, fields, to_dict
 
 from . import __version__
 from .dynamic_module_utils import custom_object_save
@@ -995,15 +995,10 @@ class PreTrainedConfig(
 
     def _attributes(self) -> dict[str, Any]:
         attribute_map = self.attribute_map
-        values = {}
-        for name in type(self).__struct_fields__:
-            if attribute_map.get(name, name) != name:
-                continue
-            try:
-                values[name] = object.__getattribute__(self, name)
-            except AttributeError:
-                continue
-        return {**values, **self.__dict__}
+        return {
+            **{name: value for name, value in to_dict(self).items() if attribute_map.get(name, name) == name},
+            **self.__dict__,
+        }
 
     def __eq__(self, other):
         return isinstance(other, PreTrainedConfig) and (self._attributes() == other._attributes())
